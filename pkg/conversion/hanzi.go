@@ -1,6 +1,8 @@
 package conversion
 
-import "strconv"
+import (
+	"strconv"
+)
 
 func ToHanzi(s string) (string, error) {
 	if len(s) != 6 {
@@ -8,4 +10,9 @@ func ToHanzi(s string) (string, error) {
 	}
 	r, err := strconv.ParseInt(s[2:], 16, 32)
 	return string(rune(r)), err
+}
+
+// U+2FF0 - U+2FFF
+func IsIdeographicDescriptionCharacter(char rune) bool {
+	return 12272 <= char && char <= 12287
 }

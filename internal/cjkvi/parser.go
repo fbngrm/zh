@@ -5,12 +5,14 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/fgrimme/zh/pkg/conversion"
 )
 
 type Decomposition struct {
 	Codepoint string
 	Hanzi     string
-	IDS       []string
+	IDS       []IdeographicDescriptionSequence
 }
 
 type IDSParser struct {
@@ -38,13 +40,34 @@ func (p *IDSParser) Parse() (map[string]Decomposition, error) {
 		dict[parts[0]] = Decomposition{
 			Codepoint: parts[0],
 			Hanzi:     parts[1],
-			IDS:       parts[2:],
+			IDS:       parseIDS(parts[2:]),
 		}
 	}
 	return dict, scanner.Err()
 }
 
-type IDS struct {
-	IDC    string
-	Kangxi []map[string]string
+type IdeographicDescriptionSequence struct {
+	Sequence string
+	Kangxi   []string
+}
+
+func parseIDS(sequences []string) []IdeographicDescriptionSequence {
+	parsed := make([]IdeographicDescriptionSequence, 0)
+	for _, sequence := range sequences {
+		kangxi := make([]string, 0)
+		for _, char := range sequence {
+			if conversion.IsIdeographicDescriptionCharacter(char) {
+				continue
+			}
+			if char == ' ' {
+				continue
+			}
+			kangxi = append(kangxi, string(char))
+		}
+		parsed = append(parsed, IdeographicDescriptionSequence{
+			Sequence: sequence,
+			Kangxi:   kangxi,
+		})
+	}
+	return parsed
 }

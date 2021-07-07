@@ -20,11 +20,11 @@ func main() {
 	// fmt.Print(hanziDict)
 
 	idsParser := cjkvi.IDSParser{Src: idsSrc}
-	idsDict, err := idsParser.Parse()
+	// idsDict, err := idsParser.Parse()
+	_, err := idsParser.Parse()
 	if err != nil {
 		fmt.Printf("could not parse ids: %v", err)
 		os.Exit(1)
 	}
-	fmt.Print(idsDict)
 
 }
