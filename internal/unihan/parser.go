@@ -4,21 +4,26 @@ import (
 	"bufio"
 	"os"
 	"strings"
+
+	"github.com/fgrimme/zh/pkg/conversion"
 )
 
-type HanziParser struct {
+type Parser struct {
 	Src string
 }
 
-func (p *HanziParser) parse() (map[string]map[string]string, error) {
+type ReadingsByMapping map[string]Readings
+type Readings map[string]string
+
+func (p *Parser) Parse() (ReadingsByMapping, error) {
 	file, err := os.Open(p.Src)
 	if err != nil {
-		return nil, err
+		return ReadingsByMapping{}, err
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	dict := make(map[string]map[string]string)
+	dict := ReadingsByMapping{}
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] == '#' {
@@ -28,30 +33,23 @@ func (p *HanziParser) parse() (map[string]map[string]string, error) {
 		if len(line) < 3 {
 			continue
 		}
-		codepoint := parts[0]
-		key := strings.Title(parts[1])
-		value := parts[2]
-		if _, ok := dict[codepoint]; !ok {
-			dict[codepoint] = make(map[string]string)
+		mapping := strings.ToUpper(parts[0])
+		key := parts[1]
+		value := strings.Join(parts[2:], " ")
+		if _, ok := dict[mapping]; !ok {
+			dict[mapping] = make(map[string]string)
 		}
-		dict[codepoint][key] = value
+		dict[mapping][key] = value
+	}
+
+	// add hanzi
+	for mapping := range dict {
+		ideograph, err := conversion.ToCJKIdeograph(mapping)
+		if err != nil {
+			return ReadingsByMapping{}, err
+		}
+		dict[mapping][CJKVIdeograph] = ideograph
 	}
 
 	return dict, scanner.Err()
-}
-
-func (p *HanziParser) Parse() (map[string]Hanzi, error) {
-	lookupTable, err := p.parse()
-	if err != nil {
-		return nil, err
-	}
-	dict := make(map[string]Hanzi)
-	for codepoint, table := range lookupTable {
-		var hanzi Hanzi
-		if err := hanzi.SetFields(table); err != nil {
-			return nil, err
-		}
-		dict[codepoint] = hanzi
-	}
-	return dict, nil
 }

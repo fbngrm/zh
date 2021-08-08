@@ -1,6 +1,8 @@
 package unihan
 
-import "github.com/fgrimme/zh/pkg/reflection"
+import (
+	"github.com/fgrimme/zh/pkg/reflection"
+)
 
 const (
 	KDefinition  string = "kDefinition"
@@ -15,9 +17,12 @@ const (
 	KJapaneseKun string = "kJapaneseKun"
 	KTang        string = "kTang"
 	KKorean      string = "kKorean"
+	KTGHZ2013    string = "KTGHZ2013"
+
+	CJKVIdeograph string = "cjkvIdeograph"
 )
 
-type Hanzi struct {
+type HanziReading struct {
 	KDefinition  string
 	KMandarin    string
 	KCantonese   string
@@ -30,9 +35,10 @@ type Hanzi struct {
 	KJapaneseKun string
 	KTang        string
 	KKorean      string
+	KTGHZ2013    string
 }
 
-func (h *Hanzi) SetFields(m map[string]string) error {
+func (h *HanziReading) SetFields(m map[string]string) error {
 	for k, v := range m {
 		err := reflection.SetField(h, k, v)
 		if err != nil {

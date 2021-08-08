@@ -6,21 +6,30 @@ import (
 	"os"
 	"strings"
 
+	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 )
 
-type Decomposition struct {
-	Codepoint string
-	Hanzi     string
-	IDS       []IdeographicDescriptionSequence
+type IdeographicDescriptionSequence struct {
+	Sequence string            `json:"sequence"`
+	Readings []unihan.Readings `json:"readings"`
 }
+
+type Decomposition struct {
+	Mapping   string                           `json:"mapping"`
+	Ideograph string                           `json:"cjkvIdeograph"`
+	IDS       []IdeographicDescriptionSequence `json:"ids"`
+}
+
+type Decompositions map[string]Decomposition
 
 type IDSParser struct {
-	Src string
+	IDSSourceFile string
+	Readings      unihan.ReadingsByMapping
 }
 
-func (p *IDSParser) Parse() (map[string]Decomposition, error) {
-	file, err := os.Open(p.Src)
+func (p *IDSParser) Parse() (Decompositions, error) {
+	file, err := os.Open(p.IDSSourceFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,36 +47,34 @@ func (p *IDSParser) Parse() (map[string]Decomposition, error) {
 			continue
 		}
 		dict[parts[0]] = Decomposition{
-			Codepoint: parts[0],
-			Hanzi:     parts[1],
-			IDS:       parseIDS(parts[2:]),
+			Mapping:   parts[0],
+			Ideograph: parts[1],
+			IDS:       p.parseIDS(parts[2:]),
 		}
 	}
 	return dict, scanner.Err()
 }
 
-type IdeographicDescriptionSequence struct {
-	Sequence string
-	Kangxi   []string
-}
-
-func parseIDS(sequences []string) []IdeographicDescriptionSequence {
-	parsed := make([]IdeographicDescriptionSequence, 0)
-	for _, sequence := range sequences {
-		kangxi := make([]string, 0)
-		for _, char := range sequence {
-			if conversion.IsIdeographicDescriptionCharacter(char) {
+func (p *IDSParser) parseIDS(ideographicDescriptionSequences []string) []IdeographicDescriptionSequence {
+	parsedSequences := make([]IdeographicDescriptionSequence, 0)
+	for _, ideographicDescriptionSequence := range ideographicDescriptionSequences {
+		ideographs := make([]unihan.Readings, 0)
+		for _, ideographicDescriptionCharacter := range ideographicDescriptionSequence {
+			if conversion.IsIdeographicDescriptionCharacter(ideographicDescriptionCharacter) {
 				continue
 			}
-			if char == ' ' {
+			if ideographicDescriptionCharacter == ' ' {
 				continue
 			}
-			kangxi = append(kangxi, string(char))
+			mapping := conversion.ToMapping(ideographicDescriptionCharacter)
+			if reading, ok := p.Readings[mapping]; ok {
+				ideographs = append(ideographs, reading)
+			}
 		}
-		parsed = append(parsed, IdeographicDescriptionSequence{
-			Sequence: sequence,
-			Kangxi:   kangxi,
+		parsedSequences = append(parsedSequences, IdeographicDescriptionSequence{
+			Sequence: ideographicDescriptionSequence,
+			Readings: ideographs,
 		})
 	}
-	return parsed
+	return parsedSequences
 }
