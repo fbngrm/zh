@@ -12,9 +12,17 @@ import (
 )
 
 const (
-	dir      = "./gen/unihan"
+	genDir   = "./gen/unihan"
 	filename = "%s.json"
 )
+
+type Decomposition struct {
+	Mapping    string                                 `json:"mapping"`
+	Ideograph  string                                 `json:"cjkvIdeograph"`
+	Definition string                                 `json:"definition"`
+	Readings   map[string]string                      `json:"readings"`
+	IDS        []cjkvi.IdeographicDescriptionSequence `json:"ids"`
+}
 
 type Decomposer struct {
 	Readings       unihan.ReadingsByMapping
@@ -22,17 +30,10 @@ type Decomposer struct {
 }
 
 func (d *Decomposer) Decompose() error {
-	if err := os.MkdirAll(dir, os.ModePerm); err != nil {
+	if err := os.MkdirAll(genDir, os.ModePerm); err != nil {
 		return err
 	}
 	for codepoint, readings := range d.Readings {
-		// filteredReadings := make(map[string]string)
-		// for k, v := range readings {
-		// 	if k == "hanzi" || k == "kDefinition" {
-		// 		continue
-		// 	}
-		// 	filteredReadings[k] = v
-		// }
 		ideograph := readings[unihan.CJKVIdeograph]
 		definition := readings[unihan.KDefinition]
 
@@ -54,19 +55,10 @@ func (d *Decomposer) Decompose() error {
 	return nil
 }
 
-type Decomposition struct {
-	Mapping    string                                 `json:"mapping"`
-	Ideograph  string                                 `json:"cjkvIdeograph"`
-	Definition string                                 `json:"definition"`
-	Readings   map[string]string                      `json:"readings"`
-	IDS        []cjkvi.IdeographicDescriptionSequence `json:"ids"`
-}
-
 func (d *Decomposition) export(name string) error {
-	bytes, err := json.Marshal(d)
+	bytes, err := json.MarshalIndent(d, "", "  ")
 	if err != nil {
 		return err
 	}
-	storagePath := fmt.Sprintf(filepath.Join(dir, filename), name)
-	return ioutil.WriteFile(storagePath, bytes, 0644)
+	return ioutil.WriteFile(fmt.Sprintf(filepath.Join(genDir, filename), name), bytes, 0644)
 }
