@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"unicode/utf8"
 
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/unihan"
@@ -19,6 +20,7 @@ const (
 type Decomposition struct {
 	Mapping    string                                 `json:"mapping"`
 	Ideograph  string                                 `json:"cjkvIdeograph"`
+	Decimal    int32                                  `json:"decimal"`
 	Definition string                                 `json:"definition"`
 	Readings   map[string]string                      `json:"readings"`
 	IDS        []cjkvi.IdeographicDescriptionSequence `json:"ids"`
@@ -41,8 +43,10 @@ func (d *Decomposer) Decompose() error {
 		if decomposition, ok := d.Decompositions[codepoint]; ok {
 			ids = decomposition.IDS
 		}
+		r, _ := utf8.DecodeRuneInString(ideograph)
 		d := &Decomposition{
 			Mapping:    codepoint,
+			Decimal:    int32(r),
 			Ideograph:  ideograph,
 			Definition: definition,
 			Readings:   readings,

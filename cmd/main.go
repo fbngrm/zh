@@ -23,9 +23,8 @@ func main() {
 		os.Exit(0)
 	}
 
-	fmt.Println(len(d))
 	f := zh.NewFinder(d)
-	f.Find("lumber")
+	zh.InteractiveSearch(f)
 
 }
 

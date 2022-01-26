@@ -32,3 +32,26 @@ func ToMapping(r rune) string {
 		return "U+" + strings.ToUpper(strconv.FormatInt(int64(r), 16))
 	}
 }
+
+type RuneType int
+
+const (
+	RuneType_UnihanHanzi = iota
+	RuneType_Pinyin
+	RuneType_Ascii
+
+	firstUnihanHanzi int32 = 13312
+	lastAscii        int32 = 128
+)
+
+func DetectRuneType(r rune) RuneType {
+	switch {
+	case (r >= firstUnihanHanzi):
+		return RuneType_UnihanHanzi
+	case (r > lastAscii):
+		return RuneType_Pinyin
+	default:
+		return RuneType_Ascii
+	}
+
+}
