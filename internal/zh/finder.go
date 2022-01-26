@@ -1,6 +1,7 @@
 package zh
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/fgrimme/zh/internal/unihan"
@@ -49,9 +50,11 @@ func (f *Finder) Len() int {
 	return len(f.dict)
 }
 
-// we assume if a pinyin character is detected, it's a pinyin search
+// assumptions:
+// intially, it's a plain text search
+// if a pinyin character is detected, it's a pinyin search
 // if a hanzi is detected, it is a hanzi search
-// in all other cases it's a plain text search
+// we downgrade search mode only if flag is supplied
 func (f *Finder) SetMode(r rune, downgradeMode bool) {
 	var mode searchMode
 	runeType := conversion.DetectRuneType(r)
@@ -79,17 +82,12 @@ func (f *Finder) GetMode() int {
 	return int(f.mode)
 }
 
+// FIXME: why called so often?
 func (f *Finder) lookup(i int) string {
 	switch f.mode {
 	case searchMode_codepoint:
 		return f.dict[i].Mapping
 	case searchMode_hanzi:
-		// r, _ := utf8.DecodeRuneInString(f.dict[i].Ideograph)
-		// FIXME: why so often?
-		// if r == '旒' { fmt.Println(r)
-		// 	fmt.Println(int32(r))
-		// }
-		// return fmt.Sprint(int32(r))
 		return f.dict[i].Ideograph
 	case searchMode_pinyin:
 		return f.dict[i].Readings[string(unihan.KHanyuPinyin)] // TODO: support all readings
@@ -98,4 +96,22 @@ func (f *Finder) lookup(i int) string {
 	default:
 		return unknown
 	}
+}
+
+func (f *Finder) FormatResult(i int) string {
+	var result string
+
+	result += f.dict[i].Ideograph
+	result += "		"
+	result += f.dict[i].Definition
+
+	return result
+}
+
+func (f *Finder) FormatDetails(i int) (string, error) {
+	b, err := json.MarshalIndent(f.dict[i], "", "  ")
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }

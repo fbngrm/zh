@@ -3,7 +3,6 @@ package zh
 import (
 	"fmt"
 	"log"
-	"strconv"
 
 	"io/ioutil"
 	"strings"
@@ -19,6 +18,8 @@ var err error
 
 var g *gocui.Gui
 var f *Finder
+
+var matches fuzzy.Matches
 
 func InteractiveSearch(finder *Finder) {
 	f = finder
@@ -78,7 +79,18 @@ func cursorDown(g *gocui.Gui, v *gocui.View) error {
 				return err
 			}
 		}
-		fmt.Fprintln(detailView, "c: ", cy+1)
+
+		resultsViewRowOffset := 5
+		if cy+1 >= resultsViewRowOffset { // cursor is in reulsts list
+			// check range
+			matchIndex := cy + 1 - resultsViewRowOffset
+			finderIndex := matches[matchIndex].Index
+			details, err := f.FormatDetails(finderIndex)
+			if err != nil {
+				//handle
+			}
+			fmt.Fprintln(detailView, details)
+		}
 	}
 	return nil
 }
@@ -175,12 +187,11 @@ func finder(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
 			// we only downgrade mode if this is a new search
 			downgradeMode := len(v.ViewBuffer()) == 0
 			f.SetMode(ch, downgradeMode)
-			fmt.Fprintln(resultsView, f.GetMode(), ch, string(ch), strconv.QuoteRune(ch))
 
-			matches := fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
-			// matches := fuzzy.FindFrom(fmt.Sprint(ch), f)
+			matches = fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
 			elapsed := time.Since(t)
-			fmt.Fprintf(resultsView, "found %v matches in %v\n", len(matches), elapsed)
+			fmt.Fprintf(resultsView, "found %v matches in %v\n\n", len(matches), elapsed)
+
 			for _, match := range matches {
 				// for i := 0; i < len(match.Str); i++ {
 				// 	if contains(i, match.MatchedIndexes) {
@@ -190,7 +201,7 @@ func finder(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
 				// 	}
 				// }
 				// fmt.Fprintln(resultsView, "")
-				fmt.Fprintln(resultsView, f.dict[match.Index].Definition)
+				fmt.Fprintln(resultsView, f.FormatResult(match.Index))
 			}
 			return nil
 		})
