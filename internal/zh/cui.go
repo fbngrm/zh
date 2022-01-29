@@ -1,13 +1,9 @@
 package zh
 
 import (
+	"errors"
 	"fmt"
 	"log"
-
-	"io/ioutil"
-	"strings"
-
-	"time"
 
 	"github.com/jroimartin/gocui"
 	"github.com/sahilm/fuzzy"
@@ -15,18 +11,12 @@ import (
 
 var filenamesBytes []byte
 var err error
-
 var g *gocui.Gui
 var f *Finder
-
 var matches fuzzy.Matches
 
 func InteractiveSearch(finder *Finder) {
 	f = finder
-	filenamesBytes, err = ioutil.ReadFile("./testdata/ue4_filenames.txt")
-	if err != nil {
-		panic(err)
-	}
 
 	g, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
@@ -35,7 +25,7 @@ func InteractiveSearch(finder *Finder) {
 	defer g.Close()
 
 	g.Cursor = true
-	g.Mouse = false
+	g.Mouse = true
 
 	g.SetManagerFunc(layout)
 
@@ -43,18 +33,24 @@ func InteractiveSearch(finder *Finder) {
 		log.Panicln(err)
 	}
 
-	if err := g.SetKeybinding("finder", gocui.KeyArrowRight, gocui.ModNone, switchToMainView); err != nil {
+	if err := g.SetKeybinding("searchView", gocui.KeyArrowRight, gocui.ModNone, switchToDetailView); err != nil {
+		log.Panicln(err)
+	}
+	if err := g.SetKeybinding("searchView", gocui.KeyArrowDown, gocui.ModNone, switchToResultsView); err != nil {
 		log.Panicln(err)
 	}
 
-	if err := g.SetKeybinding("detail", gocui.KeyArrowLeft, gocui.ModNone, switchToSideView); err != nil {
+	if err := g.SetKeybinding("detailView", gocui.KeyArrowLeft, gocui.ModNone, switchToSearchView); err != nil {
 		log.Panicln(err)
 	}
 
-	if err := g.SetKeybinding("", gocui.KeyArrowDown, gocui.ModNone, cursorDown); err != nil {
+	if err := g.SetKeybinding("resultsView", gocui.KeyArrowRight, gocui.ModNone, switchToDetailView); err != nil {
 		log.Panicln(err)
 	}
-	if err := g.SetKeybinding("", gocui.KeyArrowUp, gocui.ModNone, cursorUp); err != nil {
+	if err := g.SetKeybinding("resultsView", gocui.KeyArrowDown, gocui.ModNone, cursorDownResultsView); err != nil {
+		log.Panicln(err)
+	}
+	if err := g.SetKeybinding("resultsView", gocui.KeyArrowUp, gocui.ModNone, cursorUpResultsView); err != nil {
 		log.Panicln(err)
 	}
 
@@ -63,39 +59,45 @@ func InteractiveSearch(finder *Finder) {
 	}
 }
 
-func cursorDown(g *gocui.Gui, v *gocui.View) error {
-	detailView, err := g.View("detail")
-	if err != nil {
-		// handle error
+func cursorDownResultsView(g *gocui.Gui, v *gocui.View) error {
+	// detailView, err := g.View("detailView")
+	// if err != nil {
+	// 	return err
+	// }
+	// detailView.Clear()
+	if v == nil {
+		return errors.New("view is nil")
 	}
-	detailView.Clear()
-	if v != nil {
-		cx, cy := v.Cursor()
-		if err := v.SetCursor(cx, cy+1); err != nil {
-			fmt.Fprintln(detailView, err)
-			ox, oy := v.Origin()
-			if err := v.SetOrigin(ox, oy+1); err != nil {
-				fmt.Fprintln(detailView, "o: ", oy+1)
-				return err
-			}
-		}
 
-		resultsViewRowOffset := 5
-		if cy+1 >= resultsViewRowOffset { // cursor is in reulsts list
-			// check range
-			matchIndex := cy + 1 - resultsViewRowOffset
-			finderIndex := matches[matchIndex].Index
-			details, err := f.FormatDetails(finderIndex)
-			if err != nil {
-				//handle
-			}
-			fmt.Fprintln(detailView, details)
+	cx, cy := v.Cursor()
+	fmt.Println(cx, cy)
+	if err := v.SetCursor(cx, cy+1); err != nil {
+		ox, oy := v.Origin()
+		fmt.Println(ox, oy)
+		if err := v.SetOrigin(ox, oy+1); err != nil {
+			return err
 		}
 	}
+
+	// resultsViewRowOffset := 5
+	// if cy+1 >= resultsViewRowOffset { // cursor is in reulsts list
+	// 	// check range
+	// 	matchIndex := cy + 1 - resultsViewRowOffset
+	// 	finderIndex := matches[matchIndex].Index
+	// 	details, err := f.FormatDetails(finderIndex)
+	// 	if err != nil {
+	// 		return err
+	// 	}
+	// 	fmt.Fprintln(detailView, details)
+	// }
 	return nil
 }
 
-func cursorUp(g *gocui.Gui, v *gocui.View) error {
+func cursorUpResultsView(g *gocui.Gui, v *gocui.View) error {
+	// resultsView, err := g.View("resultsView")
+	// if err != nil {
+	// 	return err
+	// }
 	if v != nil {
 		ox, oy := v.Origin()
 		cx, cy := v.Cursor()
@@ -108,15 +110,22 @@ func cursorUp(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-func switchToSideView(g *gocui.Gui, view *gocui.View) error {
-	if _, err := g.SetCurrentView("finder"); err != nil {
+func switchToSearchView(g *gocui.Gui, view *gocui.View) error {
+	if _, err := g.SetCurrentView("searchView"); err != nil {
 		return err
 	}
 	return nil
 }
 
-func switchToMainView(g *gocui.Gui, view *gocui.View) error {
-	if _, err := g.SetCurrentView("detail"); err != nil {
+func switchToDetailView(g *gocui.Gui, view *gocui.View) error {
+	if _, err := g.SetCurrentView("detailView"); err != nil {
+		return err
+	}
+	return nil
+}
+
+func switchToResultsView(g *gocui.Gui, view *gocui.View) error {
+	if _, err := g.SetCurrentView("resultsView"); err != nil {
 		return err
 	}
 	return nil
@@ -124,39 +133,39 @@ func switchToMainView(g *gocui.Gui, view *gocui.View) error {
 
 func layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
-	if v, err := g.SetView("finder", -1, 0, 80, maxY-1); err != nil {
+	if v, err := g.SetView("searchView", 0, 0, maxX/2-1, 2); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
 		v.Wrap = true
 		v.Editable = true
 		v.Frame = true
-		v.Title = "Type pattern here. Press -> or <- to switch between panes"
-		if _, err := g.SetCurrentView("finder"); err != nil {
+		v.Title = "Search"
+		if _, err := g.SetCurrentView("searchView"); err != nil {
 			return err
 		}
 		v.Editor = gocui.EditorFunc(finder)
 	}
-	if v, err := g.SetView("detail", 79, 0, maxX, maxY-1); err != nil {
+
+	if v, err := g.SetView("resultsView", 0, 3, maxX/2-1, maxY-1); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
+		v.Editable = false
+		v.Wrap = true
+		v.Frame = true
+		v.Title = "Results"
+		v.Autoscroll = true
+	}
 
-		fmt.Fprintf(v, "%s", filenamesBytes)
+	if v, err := g.SetView("detailView", maxX/2, 0, maxX-1, maxY-1); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
 		v.Editable = false
 		v.Wrap = true
 		v.Frame = true
 		v.Title = "Data"
-	}
-
-	if v, err := g.SetView("results", -1, 3, 79, maxY-1); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		v.Editable = false
-		v.Wrap = true
-		v.Frame = true
-		v.Title = "Search Results"
 	}
 
 	return nil
@@ -167,107 +176,107 @@ func quit(g *gocui.Gui, v *gocui.View) error {
 }
 
 func finder(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
-	switch {
-	case ch != 0 && mod == 0:
-		v.EditWrite(ch)
-		g.Update(func(gui *gocui.Gui) error {
-			resultsView, err := g.View("results")
-			if err != nil {
-				// handle error
-			}
-			resultsView.Clear()
-			detailView, err := g.View("detail")
-			if err != nil {
-				// handle error
-			}
-			detailView.Clear()
+	// switch {
+	// case ch != 0 && mod == 0:
+	// 	v.EditWrite(ch)
+	// 	g.Update(func(gui *gocui.Gui) error {
+	// 		resultsView, err := g.View("resultsView")
+	// 		if err != nil {
+	// 			// handle error
+	// 		}
+	// 		resultsView.Clear()
+	// 		detailView, err := g.View("detailView")
+	// 		if err != nil {
+	// 			// handle error
+	// 		}
+	// 		detailView.Clear()
 
-			t := time.Now()
+	// 		t := time.Now()
 
-			// we only downgrade mode if this is a new search
-			downgradeMode := len(v.ViewBuffer()) == 0
-			f.SetMode(ch, downgradeMode)
+	// 		// we only downgrade mode if this is a new search
+	// 		downgradeMode := len(v.ViewBuffer()) == 0
+	// 		f.SetMode(ch, downgradeMode)
 
-			matches = fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
-			elapsed := time.Since(t)
-			fmt.Fprintf(resultsView, "found %v matches in %v\n\n", len(matches), elapsed)
+	// 		matches = fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
+	// 		elapsed := time.Since(t)
+	// 		fmt.Fprintf(resultsView, "found %v matches in %v\n\n", len(matches), elapsed)
 
-			for _, match := range matches {
-				// for i := 0; i < len(match.Str); i++ {
-				// 	if contains(i, match.MatchedIndexes) {
-				// 		fmt.Fprintf(resultsView, f.dict[i].Definition)
-				// 	} else {
-				// 		fmt.Fprintf(resultsView, f.dict[i].Definition)
-				// 	}
-				// }
-				// fmt.Fprintln(resultsView, "")
-				fmt.Fprintln(resultsView, f.FormatResult(match.Index))
-			}
-			return nil
-		})
-	case key == gocui.KeySpace:
-		v.EditWrite(' ')
-	case key == gocui.KeyBackspace || key == gocui.KeyBackspace2:
-		v.EditDelete(true)
-		g.Update(func(gui *gocui.Gui) error {
-			resultsView, err := g.View("results")
-			if err != nil {
-				// handle error
-			}
-			resultsView.Clear()
-			detailView, err := g.View("detail")
-			if err != nil {
-				// handle error
-			}
-			detailView.Clear()
-			t := time.Now()
-			matches := fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
-			elapsed := time.Since(t)
-			fmt.Fprintf(resultsView, "found %v matches in %v\n", len(matches), elapsed)
-			for _, match := range matches {
-				for i := 0; i < len(match.Str); i++ {
-					if contains(i, match.MatchedIndexes) {
-						fmt.Fprintf(resultsView, f.dict[i].Definition)
-					} else {
-						fmt.Fprintf(resultsView, f.dict[i].Definition)
-					}
-				}
-				fmt.Fprintln(resultsView, "")
-			}
-			return nil
-		})
-	case key == gocui.KeyDelete:
-		v.EditDelete(false)
-		g.Update(func(gui *gocui.Gui) error {
-			resultsView, err := g.View("results")
-			if err != nil {
-				// handle error
-			}
-			resultsView.Clear()
-			detailView, err := g.View("detail")
-			if err != nil {
-				// handle error
-			}
-			detailView.Clear()
-			t := time.Now()
-			matches := fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
-			elapsed := time.Since(t)
-			fmt.Fprintf(resultsView, "found %v matches in %v\n", len(matches), elapsed)
-			for _, match := range matches {
-				for i := 0; i < len(match.Str); i++ {
-					if contains(i, match.MatchedIndexes) {
-						fmt.Fprintf(resultsView, f.dict[i].Definition)
-					} else {
-						fmt.Fprintf(resultsView, f.dict[i].Definition)
-					}
-				}
-				fmt.Fprintln(resultsView, "")
-			}
-			return nil
-		})
-	case key == gocui.KeyInsert:
-		v.Overwrite = !v.Overwrite
-	}
+	// 		for _, match := range matches {
+	// 			// for i := 0; i < len(match.Str); i++ {
+	// 			// 	if contains(i, match.MatchedIndexes) {
+	// 			// 		fmt.Fprintf(resultsView, f.dict[i].Definition)
+	// 			// 	} else {
+	// 			// 		fmt.Fprintf(resultsView, f.dict[i].Definition)
+	// 			// 	}
+	// 			// }
+	// 			// fmt.Fprintln(resultsView, "")
+	// 			fmt.Fprintln(resultsView, f.FormatResult(match.Index))
+	// 		}
+	// 		return nil
+	// 	})
+	// case key == gocui.KeySpace:
+	// 	v.EditWrite(' ')
+	// case key == gocui.KeyBackspace || key == gocui.KeyBackspace2:
+	// 	v.EditDelete(true)
+	// 	g.Update(func(gui *gocui.Gui) error {
+	// 		resultsView, err := g.View("resultsView")
+	// 		if err != nil {
+	// 			// handle error
+	// 		}
+	// 		resultsView.Clear()
+	// 		detailView, err := g.View("detailView")
+	// 		if err != nil {
+	// 			// handle error
+	// 		}
+	// 		detailView.Clear()
+	// 		t := time.Now()
+	// 		matches := fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
+	// 		elapsed := time.Since(t)
+	// 		fmt.Fprintf(resultsView, "found %v matches in %v\n", len(matches), elapsed)
+	// 		for _, match := range matches {
+	// 			for i := 0; i < len(match.Str); i++ {
+	// 				if contains(i, match.MatchedIndexes) {
+	// 					fmt.Fprintf(resultsView, f.dict[i].Definition)
+	// 				} else {
+	// 					fmt.Fprintf(resultsView, f.dict[i].Definition)
+	// 				}
+	// 			}
+	// 			fmt.Fprintln(resultsView, "")
+	// 		}
+	// 		return nil
+	// 	})
+	// case key == gocui.KeyDelete:
+	// 	v.EditDelete(false)
+	// 	g.Update(func(gui *gocui.Gui) error {
+	// 		resultsView, err := g.View("resultsView")
+	// 		if err != nil {
+	// 			// handle error
+	// 		}
+	// 		resultsView.Clear()
+	// 		detailView, err := g.View("detailView")
+	// 		if err != nil {
+	// 			// handle error
+	// 		}
+	// 		detailView.Clear()
+	// 		t := time.Now()
+	// 		matches := fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
+	// 		elapsed := time.Since(t)
+	// 		fmt.Fprintf(resultsView, "found %v matches in %v\n", len(matches), elapsed)
+	// 		for _, match := range matches {
+	// 			for i := 0; i < len(match.Str); i++ {
+	// 				if contains(i, match.MatchedIndexes) {
+	// 					fmt.Fprintf(resultsView, f.dict[i].Definition)
+	// 				} else {
+	// 					fmt.Fprintf(resultsView, f.dict[i].Definition)
+	// 				}
+	// 			}
+	// 			fmt.Fprintln(resultsView, "")
+	// 		}
+	// 		return nil
+	// 	})
+	// case key == gocui.KeyInsert:
+	// 	v.Overwrite = !v.Overwrite
+	// }
 }
 
 func contains(needle int, haystack []int) bool {
