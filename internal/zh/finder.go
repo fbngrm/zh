@@ -67,9 +67,6 @@ func (f *Finder) SetMode(r rune, downgradeMode bool) {
 		mode = searchMode_ascii
 	}
 
-	fmt.Println()
-	fmt.Println("mode", mode)
-	fmt.Println("f.mode", f.mode)
 	if mode > f.mode {
 		f.mode = mode
 	}
