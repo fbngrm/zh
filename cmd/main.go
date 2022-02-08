@@ -25,7 +25,6 @@ func main() {
 
 	f := zh.NewFinder(d)
 	zh.InteractiveSearch(f)
-
 }
 
 func export() {

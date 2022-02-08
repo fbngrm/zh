@@ -3,7 +3,9 @@ package zh
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 	"time"
 
@@ -15,6 +17,7 @@ var filenamesBytes []byte
 var err error
 var g *gocui.Gui
 var f *Finder
+var matchIndex int
 var matches fuzzy.Matches
 
 func InteractiveSearch(finder *Finder) {
@@ -45,6 +48,9 @@ func InteractiveSearch(finder *Finder) {
 	if err := g.SetKeybinding("detailView", gocui.KeyArrowLeft, gocui.ModNone, switchToSearchView); err != nil {
 		log.Panicln(err)
 	}
+	if err := g.SetKeybinding("detailView", gocui.KeyEnter, gocui.ModNone, export); err != nil {
+		log.Panicln(err)
+	}
 
 	if err := g.SetKeybinding("resultsView", gocui.KeyArrowRight, gocui.ModNone, switchToDetailView); err != nil {
 		log.Panicln(err)
@@ -59,6 +65,14 @@ func InteractiveSearch(finder *Finder) {
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
 	}
+}
+
+func export(g *gocui.Gui, v *gocui.View) error {
+	details, err := f.FormatDetails(matches[matchIndex].Index)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile("./output.json", []byte(details), os.ModePerm)
 }
 
 func printResults(i int, resultsView *gocui.View) {
@@ -86,6 +100,7 @@ func printDetails(i int) error {
 		return err
 	}
 	fmt.Fprintln(detailView, details)
+	matchIndex = i
 
 	return nil
 }
