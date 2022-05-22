@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/internal/zh"
@@ -11,13 +12,22 @@ import (
 
 const idsSrc = "./lib/cjkvi/ids.txt"
 const hanziSrc = "./lib/unihan/Unihan_Readings.txt"
+const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 
 var fields = []string{
 	"cjkvIdeograph", "definition", "readings.kMandarin", "ids.0.readings.0.kMandarin",
 }
 
 func main() {
-	d, errs, err := zh.NewLookupDict()
+
+	cparser := cedict.CEDICTParser{Src: cedictSrc}
+	cdict, err := cparser.Parse()
+	if err != nil {
+		fmt.Printf("could not parse cedict: %v", err)
+		os.Exit(1)
+	}
+
+	d, errs, err := zh.NewLookupDict(cdict)
 	if err != nil {
 		fmt.Printf("could not build lookup dicts: %v", err)
 		os.Exit(1)

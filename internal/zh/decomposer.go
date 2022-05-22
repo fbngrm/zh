@@ -20,12 +20,12 @@ const (
 )
 
 type Decomposition struct {
-	Mapping    string                                 `json:"mapping"`
-	Ideograph  string                                 `json:"cjkvIdeograph"`
-	Decimal    int32                                  `json:"decimal"`
-	Definition string                                 `json:"definition"`
-	Readings   map[string]string                      `json:"readings"`
-	IDS        []cjkvi.IdeographicDescriptionSequence `json:"ids"`
+	Mapping    string                                 `json:"mapping,omitempty"`
+	Ideograph  string                                 `json:"cjkvIdeograph,omitempty"`
+	Decimal    int32                                  `json:"decimal,omitempty"`
+	Definition string                                 `json:"definition,omitempty"`
+	Readings   map[string]string                      `json:"readings,omitempty"`
+	IDS        []cjkvi.IdeographicDescriptionSequence `json:"ids,omitempty"`
 }
 
 type Decomposer struct {
