@@ -21,7 +21,7 @@ func buildIndex() (LookupDict, error, []error) {
 	if err != nil {
 		return nil, err, nil
 	}
-	l := make(LookupDict, 0)
+	dict := make(LookupDict, 0)
 	errs := make([]error, 0)
 	for _, f := range files {
 		bytes, err := ioutil.ReadFile(filepath.Join(genDir, f.Name()))
@@ -35,7 +35,7 @@ func buildIndex() (LookupDict, error, []error) {
 			errs = append(errs, err)
 			continue
 		}
-		l = append(l, d)
+		dict = append(dict, d)
 	}
-	return l, nil, errs
+	return dict, nil, errs
 }

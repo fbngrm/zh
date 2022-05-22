@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 	"unicode/utf8"
 
 	"github.com/fgrimme/zh/internal/cjkvi"
@@ -65,4 +67,69 @@ func (d *Decomposition) export(name string) error {
 		return err
 	}
 	return ioutil.WriteFile(fmt.Sprintf(filepath.Join(genDir, filename), name), bytes, 0644)
+}
+
+func (d *Decomposition) GetFields(keySequences []string) (map[string]string, error) {
+	fields := make(map[string]string)
+	for _, sequence := range keySequences {
+		keys := strings.Split(sequence, ".")
+		if len(keys) == 0 {
+			return fields, nil
+		}
+
+		switch keys[0] {
+		case "mapping":
+			fields["mapping"] = d.Mapping
+		case "cjkvIdeograph":
+			fields["cjkvIdeograph"] = d.Ideograph
+		case "decimal":
+			fields["decimal"] = string(d.Decimal)
+		case "definition":
+			fields["definition"] = d.Definition
+		case "readings":
+			if len(keys) < 2 {
+				return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
+			}
+			if len(keys) > 2 {
+				return nil, fmt.Errorf("cannot find %s in readings, invalid key length", sequence)
+			}
+			field, _ := d.Readings[keys[1]]
+			fields[sequence] = field
+		case "ids":
+			if len(keys) < 2 {
+				return nil, fmt.Errorf("getting all ids is not supported for key: %s", sequence)
+			}
+
+			idsIndex, err := strconv.ParseInt(keys[1], 10, 64)
+			if err != nil {
+				return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[1], sequence)
+			}
+			if len(d.IDS) < int(idsIndex) {
+				return nil, fmt.Errorf("index out of range %d for key: %s", idsIndex, sequence)
+			}
+			if len(keys) < 3 {
+				return nil, fmt.Errorf("getting entire ids is not supported for key: %s", sequence)
+			}
+
+			if keys[2] == "sequence" {
+				fields[sequence] = d.IDS[idsIndex].Sequence
+			}
+
+			if keys[2] == "readings" {
+				if len(keys) < 4 {
+					return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
+				}
+				readingsIndex, err := strconv.ParseInt(keys[3], 10, 64)
+				if err != nil {
+					return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[3], sequence)
+				}
+				if len(d.IDS[idsIndex].Readings) < int(readingsIndex) {
+					return nil, fmt.Errorf("index out of range %d for key: %s", readingsIndex, sequence)
+				}
+				field, _ := d.IDS[idsIndex].Readings[readingsIndex][keys[3]]
+				fields[sequence] = field
+			}
+		}
+	}
+	return fields, nil
 }

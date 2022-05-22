@@ -12,6 +12,10 @@ import (
 const idsSrc = "./lib/cjkvi/ids.txt"
 const hanziSrc = "./lib/unihan/Unihan_Readings.txt"
 
+var fields = []string{
+	"cjkvIdeograph", "definition", "readings.kMandarin", "ids.0.readings.0.kMandarin",
+}
+
 func main() {
 	d, errs, err := zh.NewLookupDict()
 	if err != nil {
@@ -24,10 +28,16 @@ func main() {
 	}
 
 	f := zh.NewFinder(d)
-	zh.InteractiveSearch(f)
+	decomposition, err := zh.InteractiveSearch(f)
+	if err != nil {
+		fmt.Printf("could not search: %v", err)
+		os.Exit(1)
+	}
+
+	fmt.Println(decomposition.GetFields(fields))
 }
 
-func export() {
+func generateDatabase() {
 	hanziParser := unihan.Parser{Src: hanziSrc}
 	hanziDict, err := hanziParser.Parse()
 	if err != nil {
