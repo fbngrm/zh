@@ -47,9 +47,10 @@ func buildIndex() (LookupDict, error, []error) {
 func addCEDICT(d LookupDict, c cedict.CEDICT) LookupDict {
 	for _, entry := range c {
 		d = append(d, &Decomposition{
-			Ideograph:  entry.Simplified,
-			Definition: strings.TrimSpace(strings.Join(entry.Definition, ", ")),
-			Readings:   map[string]string{"readings": strings.Join(entry.Readings, ", ")},
+			IdeographsSimplified:  entry.Simplified,
+			IdeographsTraditional: entry.Traditional,
+			Definition:            strings.TrimSpace(strings.Join(entry.Definition, ", ")),
+			Readings:              map[string]string{"readings": strings.Join(entry.Readings, ", ")},
 		})
 	}
 	return d

@@ -121,9 +121,12 @@ func printResults() error {
 		return err
 	}
 	resultsView.Clear()
-	resultsView.Clear()
 	for i := 0; i < len(matches); i++ {
-		fmt.Fprintln(resultsView, f.FormatResult(matches[i].Index))
+		result := f.FormatResult(matches[i].Index)
+		_, err := fmt.Fprintln(resultsView, result)
+		if err != nil {
+			panic(err)
+		}
 	}
 	return printDetails(0)
 }
@@ -142,7 +145,10 @@ func printDetails(i int) error {
 	if err != nil {
 		return err
 	}
-	fmt.Fprintln(detailView, details)
+	_, err = fmt.Fprintln(detailView, details)
+	if err != nil {
+		panic(err)
+	}
 	result = f.dict[matches[i].Index]
 	matchIndex = i
 
@@ -312,8 +318,10 @@ func finder(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
 
 			// we only downgrade mode if this is a new search
 			downgradeMode := len(v.ViewBuffer()) == 0
-			f.SetMode(ch, downgradeMode)
-
+			if downgradeMode {
+				f.ResetMode()
+			}
+			f.SetModeFromRune(ch)
 			matches = fuzzy.FindFrom(strings.TrimSpace(v.ViewBuffer()), f)
 			return printResults()
 		})

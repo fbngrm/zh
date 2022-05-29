@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 
@@ -19,6 +20,10 @@ var fields = []string{
 }
 
 func main() {
+	query := flag.String("q", "", "query")
+	interactive := flag.Bool("i", false, "interactive search")
+	results := flag.Int("r", 1, "number of results")
+	flag.Parse()
 
 	cparser := cedict.CEDICTParser{Src: cedictSrc}
 	cdict, err := cparser.Parse()
@@ -38,13 +43,25 @@ func main() {
 	}
 
 	f := zh.NewFinder(d)
-	decomposition, err := zh.InteractiveSearch(f)
-	if err != nil {
-		fmt.Printf("could not search: %v", err)
-		os.Exit(1)
+
+	if *interactive {
+		decomposition, err := zh.InteractiveSearch(f)
+		if err != nil {
+			fmt.Printf("could not search: %v", err)
+			os.Exit(1)
+		}
+		fmt.Println(decomposition)
+		os.Exit(0)
 	}
 
-	fmt.Println(decomposition.GetFields(fields))
+	matches := f.Find(*query)
+	for i := 0; i < *results; i++ {
+		if i >= len(matches) {
+			break
+		}
+		fmt.Println(matches[i])
+	}
+
 }
 
 func generateDatabase() {

@@ -45,9 +45,14 @@ func (p *CEDICTParser) Parse() (CEDICT, error) {
 			),
 			"/",
 		)
+		traditional := ideographs[0]
+		simplified := ""
+		if len(ideographs) > 1 {
+			simplified = ideographs[1]
+		}
 		dict[parts[1]] = CEDICTEntry{
-			Traditional: ideographs[0],
-			Simplified:  ideographs[1],
+			Traditional: traditional,
+			Simplified:  simplified,
 			Readings:    readings,
 			Definition:  definition,
 		}
