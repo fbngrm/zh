@@ -20,6 +20,7 @@ const (
 )
 
 type Decomposition struct {
+	Source                string                                 `json:"source,omitempty"`
 	Mapping               string                                 `json:"mapping,omitempty"`
 	Ideograph             string                                 `json:"cjkvIdeograph,omitempty"`
 	IdeographsSimplified  string                                 `json:"cjkvIdeographsSimplified,omitempty"`
@@ -49,6 +50,7 @@ func (d *Decomposer) Decompose() error {
 		}
 		r, _ := utf8.DecodeRuneInString(ideograph)
 		d := &Decomposition{
+			Source:     "unihan",
 			Mapping:    codepoint,
 			Decimal:    int32(r),
 			Ideograph:  ideograph,
@@ -132,7 +134,11 @@ func (d *Decomposition) GetFields(keySequences []string) (map[string]string, err
 				if len(d.IDS[idsIndex].Readings) < int(readingsIndex) {
 					return nil, fmt.Errorf("index out of range %d for key: %s", readingsIndex, sequence)
 				}
-				field, _ := d.IDS[idsIndex].Readings[readingsIndex][keys[3]]
+				field, ok := d.IDS[idsIndex].Readings[readingsIndex][keys[4]]
+				if !ok {
+					return nil, fmt.Errorf("cannot find field %s for key %s", keys[4], sequence)
+				}
+				fmt.Println(keys[3])
 				fields[sequence] = field
 			}
 		}

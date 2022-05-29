@@ -69,7 +69,8 @@ func main() {
 		Format:       zh.OutputFormat(format),
 	}
 
-	matches := zh.NewFinder(dict).Find(query)
+	limit := results + 20
+	matches := zh.NewFinder(dict).FindSorted(query, limit)
 	for i := 0; i < results; i++ {
 		if i >= len(matches) {
 			break

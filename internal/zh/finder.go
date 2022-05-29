@@ -1,6 +1,8 @@
 package zh
 
 import (
+	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/fgrimme/zh/internal/unihan"
@@ -34,6 +36,49 @@ func NewFinder(d LookupDict) *Finder {
 	}
 }
 
+type Match struct {
+	meaning string
+	match   fuzzy.Match
+}
+
+type Matches []Match
+
+func (m Matches) Len() int { return len(m) }
+func (m Matches) Less(i, j int) bool {
+	return fmt.Sprintf(
+		"%d %s",
+		m[i].match.Score,
+		m[i].meaning,
+	) > fmt.Sprintf(
+		"%d %s",
+		m[j].match.Score,
+		m[j].meaning,
+	)
+}
+func (m Matches) Swap(i, j int) { m[i], m[j] = m[j], m[i] }
+
+func (f *Finder) FindSorted(query string, limit int) fuzzy.Matches {
+	f.SetModeFromString(query)
+	matches := fuzzy.FindFrom(strings.TrimSpace(query), f)
+	if len(matches) < limit {
+		limit = len(matches)
+	}
+	matches = matches[:limit]
+	unsortedMatches := make(Matches, len(matches))
+	for i, m := range matches {
+		unsortedMatches[i] = Match{
+			meaning: f.dict[m.Index].Definition,
+			match:   m,
+		}
+	}
+	sort.Sort(unsortedMatches)
+	sortedMatches := make(fuzzy.Matches, len(unsortedMatches))
+	for i, m := range unsortedMatches {
+		sortedMatches[i] = m.match
+	}
+	return sortedMatches
+}
+
 func (f *Finder) Find(query string) fuzzy.Matches {
 	f.SetModeFromString(query)
 	return fuzzy.FindFrom(strings.TrimSpace(query), f)
@@ -55,7 +100,8 @@ func (f *Finder) SetModeFromString(s string) {
 		return
 	}
 	// string is one hanzi rune only
-	if len(s) < 4 {
+	fmt.Println(len(s))
+	if len(s) < 5 {
 		return
 	}
 	f.mode = searchMode_hanzi_word
