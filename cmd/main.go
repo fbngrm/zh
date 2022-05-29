@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -22,6 +21,8 @@ var interactive bool
 var results int
 var jsonOut bool
 var yamlOut bool
+
+// "cjkvIdeograph, definition, readings.kMandarin, ids.0.readings.0.kMandarin"
 var fields string
 
 func main() {
@@ -35,7 +36,7 @@ func main() {
 
 	if fields != "" {
 		if !jsonOut && !yamlOut {
-			errors.New("can use field filter only with json or yaml")
+			fmt.Println("can use field filter only with json or yaml")
 			os.Exit(1)
 		}
 	}
@@ -63,7 +64,6 @@ func main() {
 	} else if yamlOut {
 		format = zh.Format_YAML
 	}
-	// e.g. "cjkvIdeograph, definition, readings.kMandarin, ids.0.readings.0.kMandarin"
 	var filterFields []string
 	if len(fields) > 0 {
 		filterFields = strings.Split(fields, ",")
