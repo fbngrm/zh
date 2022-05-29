@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -25,12 +26,19 @@ var fields string
 
 func main() {
 	flag.StringVar(&query, "q", "", "query")
-	flag.StringVar(&fields, "f", "", "filter json fields")
+	flag.StringVar(&fields, "f", "", "filter fields")
 	flag.BoolVar(&interactive, "i", false, "interactive search")
 	flag.BoolVar(&jsonOut, "j", false, "output in json format")
 	flag.BoolVar(&yamlOut, "y", false, "output in yaml format")
 	flag.IntVar(&results, "r", 1, "number of results")
 	flag.Parse()
+
+	if fields != "" {
+		if !jsonOut && !yamlOut {
+			errors.New("can use field filter only with json or yaml")
+			os.Exit(1)
+		}
+	}
 
 	cparser := cedict.CEDICTParser{Src: cedictSrc}
 	cdict, err := cparser.Parse()
