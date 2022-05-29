@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
@@ -15,14 +16,20 @@ const idsSrc = "./lib/cjkvi/ids.txt"
 const hanziSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 
-var fields = []string{
-	"cjkvIdeograph", "definition", "readings.kMandarin", "ids.0.readings.0.kMandarin",
-}
+var query string
+var interactive bool
+var results int
+var jsonOut bool
+var yamlOut bool
+var fields string
 
 func main() {
-	query := flag.String("q", "", "query")
-	interactive := flag.Bool("i", false, "interactive search")
-	results := flag.Int("r", 1, "number of results")
+	flag.StringVar(&query, "q", "", "query")
+	flag.StringVar(&fields, "f", "", "filter json fields")
+	flag.BoolVar(&interactive, "i", false, "interactive search")
+	flag.BoolVar(&jsonOut, "j", false, "output in json format")
+	flag.BoolVar(&yamlOut, "y", false, "output in yaml format")
+	flag.IntVar(&results, "r", 1, "number of results")
 	flag.Parse()
 
 	cparser := cedict.CEDICTParser{Src: cedictSrc}
@@ -32,7 +39,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	d, errs, err := zh.NewLookupDict(cdict)
+	dict, errs, err := zh.NewLookupDict(cdict)
 	if err != nil {
 		fmt.Printf("could not build lookup dicts: %v", err)
 		os.Exit(1)
@@ -42,26 +49,47 @@ func main() {
 		os.Exit(0)
 	}
 
-	f := zh.NewFinder(d)
-
-	if *interactive {
-		decomposition, err := zh.InteractiveSearch(f)
-		if err != nil {
-			fmt.Printf("could not search: %v", err)
-			os.Exit(1)
-		}
-		fmt.Println(decomposition)
-		os.Exit(0)
+	format := zh.Format_plain
+	if jsonOut {
+		format = zh.Format_JSON
+	} else if yamlOut {
+		format = zh.Format_YAML
+	}
+	// e.g. "cjkvIdeograph, definition, readings.kMandarin, ids.0.readings.0.kMandarin"
+	var filterFields []string
+	if len(fields) > 0 {
+		filterFields = strings.Split(fields, ",")
+	}
+	for i, field := range filterFields {
+		filterFields[i] = strings.TrimSpace(field)
+	}
+	formatter := zh.Formatter{
+		Dict:         dict,
+		FilterFields: filterFields,
+		Format:       zh.OutputFormat(format),
 	}
 
-	matches := f.Find(*query)
-	for i := 0; i < *results; i++ {
+	matches := zh.NewFinder(dict).Find(query)
+	for i := 0; i < results; i++ {
 		if i >= len(matches) {
 			break
 		}
-		fmt.Println(matches[i])
+		s, err := formatter.Print(matches[i].Index)
+		if err != nil {
+			fmt.Printf("could not parse format: %v", err)
+			os.Exit(1)
+		}
+		fmt.Println(s)
 	}
+}
 
+func export() error {
+	// details, err := f.FormatDetails(matches[matchIndex].Index)
+	// if err != nil {
+	// 	return err
+	// }
+	// return ioutil.WriteFile("./output.json", []byte(details), os.ModePerm)
+	return nil
 }
 
 func generateDatabase() {

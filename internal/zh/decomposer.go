@@ -74,9 +74,13 @@ func (d *Decomposition) export(name string) error {
 func (d *Decomposition) GetFields(keySequences []string) (map[string]string, error) {
 	fields := make(map[string]string)
 	for _, sequence := range keySequences {
-		keys := strings.Split(sequence, ".")
-		if len(keys) == 0 {
+		rawKeys := strings.Split(strings.TrimSpace(sequence), ".")
+		if len(rawKeys) == 0 {
 			return fields, nil
+		}
+		keys := make([]string, len(rawKeys))
+		for i, key := range rawKeys {
+			keys[i] = strings.TrimSpace(key)
 		}
 
 		switch keys[0] {

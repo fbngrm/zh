@@ -1,7 +1,6 @@
 package zh
 
 import (
-	"encoding/json"
 	"strings"
 
 	"github.com/fgrimme/zh/internal/unihan"
@@ -35,14 +34,9 @@ func NewFinder(d LookupDict) *Finder {
 	}
 }
 
-func (f *Finder) Find(query string) []string {
+func (f *Finder) Find(query string) fuzzy.Matches {
 	f.SetModeFromString(query)
-	matches := fuzzy.FindFrom(strings.TrimSpace(query), f)
-	results := make([]string, len(matches))
-	for i, m := range matches {
-		results[i] = f.FormatResult(m.Index)
-	}
-	return results
+	return fuzzy.FindFrom(strings.TrimSpace(query), f)
 }
 
 func (f *Finder) String(i int) string {
@@ -112,25 +106,4 @@ func (f *Finder) lookup(i int) string {
 	default:
 		return unknown
 	}
-}
-
-func (f *Finder) FormatResult(i int) string {
-	var result string
-	if f.mode == searchMode_hanzi_char {
-		result += f.dict[i].Ideograph
-	}
-	if f.mode == searchMode_hanzi_word {
-		result += f.dict[i].IdeographsSimplified
-	}
-	result += "		"
-	result += f.dict[i].Definition
-	return result
-}
-
-func (f *Finder) FormatDetails(i int) (string, error) {
-	b, err := json.MarshalIndent(f.dict[i], "", "  ")
-	if err != nil {
-		return "", err
-	}
-	return string(b), nil
 }
