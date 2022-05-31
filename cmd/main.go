@@ -19,6 +19,7 @@ const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 var query string
 var interactive bool
 var results int
+var depth int
 var jsonOut bool
 var yamlOut bool
 
@@ -32,6 +33,7 @@ func main() {
 	flag.BoolVar(&jsonOut, "j", false, "output in json format")
 	flag.BoolVar(&yamlOut, "y", false, "output in yaml format")
 	flag.IntVar(&results, "r", 1, "number of results")
+	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
 
 	if fields != "" {
