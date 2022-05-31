@@ -22,6 +22,7 @@ var results int
 var depth int
 var jsonOut bool
 var yamlOut bool
+var unihanSearch bool
 
 // "ideograph, definition, readings.kMandarin, ids.0.readings.0.kMandarin"
 var fields string
@@ -32,6 +33,7 @@ func main() {
 	flag.BoolVar(&interactive, "i", false, "interactive search")
 	flag.BoolVar(&jsonOut, "j", false, "output in json format")
 	flag.BoolVar(&yamlOut, "y", false, "output in yaml format")
+	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.IntVar(&results, "r", 1, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
