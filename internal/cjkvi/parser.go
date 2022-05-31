@@ -11,14 +11,14 @@ import (
 )
 
 type IdeographicDescriptionSequence struct {
-	Sequence string            `json:"sequence"`
-	Readings []unihan.Readings `json:"readings"`
+	Sequence string            `yaml:"sequence,omitempty" json:"sequence,omitempty"`
+	Readings []unihan.Readings `yaml:"readings,omitempty" json:"readings,omitempty"`
 }
 
 type Decomposition struct {
-	Mapping   string                           `json:"mapping"`
-	Ideograph string                           `json:"cjkvIdeograph"`
-	IDS       []IdeographicDescriptionSequence `json:"ids"`
+	Mapping   string                           `yaml:"mapping,omitempty" json:"mapping,omitempty"`
+	Ideograph string                           `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
+	IDS       []IdeographicDescriptionSequence `yaml:"ids,omitempty" json:"ids,omitempty"`
 }
 
 type Decompositions map[string]Decomposition

@@ -22,7 +22,7 @@ var results int
 var jsonOut bool
 var yamlOut bool
 
-// "cjkvIdeograph, definition, readings.kMandarin, ids.0.readings.0.kMandarin"
+// "ideograph, definition, readings.kMandarin, ids.0.readings.0.kMandarin"
 var fields string
 
 func main() {
@@ -44,17 +44,17 @@ func main() {
 	cparser := cedict.CEDICTParser{Src: cedictSrc}
 	cdict, err := cparser.Parse()
 	if err != nil {
-		fmt.Printf("could not parse cedict: %v", err)
+		fmt.Printf("could not parse cedict: %v\n", err)
 		os.Exit(1)
 	}
 
 	dict, errs, err := zh.NewLookupDict(cdict)
 	if err != nil {
-		fmt.Printf("could not build lookup dicts: %v", err)
+		fmt.Printf("could not build lookup dicts: %v\n", err)
 		os.Exit(1)
 	}
 	if len(errs) > 0 {
-		fmt.Printf("errors building lookup dicts: %v", errs)
+		fmt.Printf("errors building lookup dicts: %v\n", errs)
 		os.Exit(0)
 	}
 
@@ -64,16 +64,10 @@ func main() {
 	} else if yamlOut {
 		format = zh.Format_YAML
 	}
-	var filterFields []string
-	if len(fields) > 0 {
-		filterFields = strings.Split(fields, ",")
-	}
-	for i, field := range filterFields {
-		filterFields[i] = strings.TrimSpace(field)
-	}
+
 	formatter := zh.Formatter{
 		Dict:         dict,
-		FilterFields: filterFields,
+		FilterFields: prepareFilter(fields),
 		Format:       zh.OutputFormat(format),
 	}
 
@@ -85,7 +79,7 @@ func main() {
 		}
 		s, err := formatter.Print(matches[i].Index)
 		if err != nil {
-			fmt.Printf("could not parse format: %v", err)
+			fmt.Printf("could not format: %v\n", err)
 			os.Exit(1)
 		}
 		fmt.Println(s)
@@ -128,4 +122,15 @@ func generateDatabase() {
 		fmt.Printf("could not decompose hanzi: %v", err)
 		os.Exit(1)
 	}
+}
+
+func prepareFilter(fields string) []string {
+	var filterFields []string
+	if len(fields) > 0 {
+		filterFields = strings.Split(fields, ",")
+	}
+	for i, field := range filterFields {
+		filterFields[i] = strings.TrimSpace(field)
+	}
+	return filterFields
 }

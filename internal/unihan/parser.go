@@ -49,9 +49,6 @@ func (p *Parser) Parse() (ReadingsByMapping, error) {
 			return ReadingsByMapping{}, err
 		}
 		dict[mapping][CJKVIdeograph] = ideograph
-		// if mapping == "U+2A0BE" {
-		// 	fmt.Printf("%+v", dict[mapping])
-		// }
 	}
 
 	return dict, scanner.Err()

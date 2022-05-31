@@ -20,15 +20,15 @@ const (
 )
 
 type Decomposition struct {
-	Source                string                                 `json:"source,omitempty"`
-	Mapping               string                                 `json:"mapping,omitempty"`
-	Ideograph             string                                 `json:"cjkvIdeograph,omitempty"`
-	IdeographsSimplified  string                                 `json:"cjkvIdeographsSimplified,omitempty"`
-	IdeographsTraditional string                                 `json:"cjkvIdeographTraditional,omitempty"`
-	Decimal               int32                                  `json:"decimal,omitempty"`
-	Definition            string                                 `json:"definition,omitempty"`
-	Readings              map[string]string                      `json:"readings,omitempty"`
-	IDS                   []cjkvi.IdeographicDescriptionSequence `json:"ids,omitempty"`
+	Source                string                                 `yaml:"source,omitempty" json:"source,omitempty"`
+	Mapping               string                                 `yaml:"mapping,omitempty" json:"mapping,omitempty"`
+	Ideograph             string                                 `yaml:"ideograph",omitempty" json:"ideograph,omitempty"`
+	IdeographsSimplified  string                                 `yaml:"simplified,omitempty" json:"simplified,omitempty"`
+	IdeographsTraditional string                                 `yaml:"traditional,omitempty" json:"traditional,omitempty"`
+	Decimal               int32                                  `yaml:"decimal,omitempty" json:"decimal,omitempty"`
+	Definition            string                                 `yaml:"definition,omitempty" json:"definition,omitempty"`
+	Readings              map[string]string                      `yaml:"readings,omitempty" json:"readings,omitempty"`
+	IDS                   []cjkvi.IdeographicDescriptionSequence `yaml:"ids,omitempty" json:"ids,omitempty"`
 }
 
 type Decomposer struct {
@@ -85,11 +85,18 @@ func (d *Decomposition) GetFields(keySequences []string) (map[string]string, err
 			keys[i] = strings.TrimSpace(key)
 		}
 
+		// keys should match struct tags
 		switch keys[0] {
+		case "source":
+			fields["source"] = d.Source
 		case "mapping":
 			fields["mapping"] = d.Mapping
-		case "cjkvIdeograph":
-			fields["cjkvIdeograph"] = d.Ideograph
+		case "ideograph":
+			fields["ideograph"] = d.Ideograph
+		case "simplified":
+			fields["simplified"] = d.IdeographsSimplified
+		case "traditional":
+			fields["traditional"] = d.IdeographsTraditional
 		case "decimal":
 			fields["decimal"] = string(d.Decimal)
 		case "definition":
@@ -112,8 +119,8 @@ func (d *Decomposition) GetFields(keySequences []string) (map[string]string, err
 			if err != nil {
 				return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[1], sequence)
 			}
-			if len(d.IDS) < int(idsIndex) {
-				return nil, fmt.Errorf("index out of range %d for key: %s", idsIndex, sequence)
+			if len(d.IDS) <= int(idsIndex) {
+				return nil, fmt.Errorf("index %d out of range for key: %s", idsIndex, sequence)
 			}
 			if len(keys) < 3 {
 				return nil, fmt.Errorf("getting entire ids is not supported for key: %s", sequence)
@@ -132,7 +139,7 @@ func (d *Decomposition) GetFields(keySequences []string) (map[string]string, err
 					return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[3], sequence)
 				}
 				if len(d.IDS[idsIndex].Readings) < int(readingsIndex) {
-					return nil, fmt.Errorf("index out of range %d for key: %s", readingsIndex, sequence)
+					return nil, fmt.Errorf("index %d out of range for key: %s", readingsIndex, sequence)
 				}
 				field, ok := d.IDS[idsIndex].Readings[readingsIndex][keys[4]]
 				if !ok {

@@ -31,7 +31,7 @@ func (f *Formatter) Print(index int) (string, error) {
 		var err error
 		data, err = f.Dict[index].GetFields(f.FilterFields)
 		if err != nil {
-			return "", fmt.Errorf("could not apply filter for fields [%q]: %w", f.FilterFields, err)
+			return "", fmt.Errorf("could not filter fields: %w", err)
 		}
 	} else {
 		data = f.Dict[index]
