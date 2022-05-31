@@ -100,7 +100,6 @@ func (f *Finder) SetModeFromString(s string) {
 		return
 	}
 	// string is one hanzi rune only
-	fmt.Println(len(s))
 	if len(s) < 5 {
 		return
 	}

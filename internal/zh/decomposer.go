@@ -145,7 +145,6 @@ func (d *Decomposition) GetFields(keySequences []string) (map[string]string, err
 				if !ok {
 					return nil, fmt.Errorf("cannot find field %s for key %s", keys[4], sequence)
 				}
-				fmt.Println(keys[3])
 				fields[sequence] = field
 			}
 		}
