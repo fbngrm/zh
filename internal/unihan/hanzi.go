@@ -19,7 +19,7 @@ const (
 	KKorean      string = "kKorean"
 	KTGHZ2013    string = "KTGHZ2013"
 
-	CJKVIdeograph string = "cjkvIdeograph"
+	CJKVIdeograph string = "ideograph"
 )
 
 type HanziReading struct {

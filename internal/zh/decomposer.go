@@ -22,7 +22,7 @@ const (
 type Decomposition struct {
 	Source                string                                 `yaml:"source,omitempty" json:"source,omitempty"`
 	Mapping               string                                 `yaml:"mapping,omitempty" json:"mapping,omitempty"`
-	Ideograph             string                                 `yaml:"ideograph",omitempty" json:"ideograph,omitempty"`
+	Ideograph             string                                 `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
 	IdeographsSimplified  string                                 `yaml:"simplified,omitempty" json:"simplified,omitempty"`
 	IdeographsTraditional string                                 `yaml:"traditional,omitempty" json:"traditional,omitempty"`
 	Decimal               int32                                  `yaml:"decimal,omitempty" json:"decimal,omitempty"`

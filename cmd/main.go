@@ -45,21 +45,27 @@ func main() {
 		}
 	}
 
-	cparser := cedict.CEDICTParser{Src: cedictSrc}
-	cdict, err := cparser.Parse()
-	if err != nil {
-		fmt.Printf("could not parse cedict: %v\n", err)
-		os.Exit(1)
-	}
-
-	dict, errs, err := zh.NewLookupDict(cdict)
-	if err != nil {
-		fmt.Printf("could not build lookup dicts: %v\n", err)
-		os.Exit(1)
-	}
-	if len(errs) > 0 {
-		fmt.Printf("errors building lookup dicts: %v\n", errs)
-		os.Exit(0)
+	var dict zh.LookupDict
+	if unihanSearch {
+		var err error
+		var errs []error
+		dict, errs, err = zh.NewUnihanLookupDict()
+		if err != nil {
+			fmt.Printf("could not build lookup dicts: %v\n", err)
+			os.Exit(1)
+		}
+		if len(errs) > 0 {
+			fmt.Printf("errors building lookup dict: %v\n", errs)
+			os.Exit(0)
+		}
+	} else {
+		cparser := cedict.CEDICTParser{Src: cedictSrc}
+		cdict, err := cparser.Parse()
+		if err != nil {
+			fmt.Printf("could not parse cedict: %v\n", err)
+			os.Exit(1)
+		}
+		dict = zh.NewCEDICTLookupDict(cdict)
 	}
 
 	format := zh.Format_plain

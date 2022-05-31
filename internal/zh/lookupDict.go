@@ -11,16 +11,19 @@ import (
 
 type LookupDict []*Decomposition
 
-func NewLookupDict(c cedict.CEDICT) (LookupDict, []error, error) {
-	d, err, errs := buildIndex()
+func NewCEDICTLookupDict(c cedict.CEDICT) LookupDict {
+	return buildCEDICTLookupDict(c)
+}
+
+func NewUnihanLookupDict() (LookupDict, []error, error) {
+	d, err, errs := buildUnihanLookupDict()
 	if err != nil {
 		return nil, nil, err
 	}
-	d = addCEDICT(d, c)
 	return d, errs, nil
 }
 
-func buildIndex() (LookupDict, error, []error) {
+func buildUnihanLookupDict() (LookupDict, error, []error) {
 	files, err := ioutil.ReadDir(genDir)
 	if err != nil {
 		return nil, err, nil
@@ -44,16 +47,19 @@ func buildIndex() (LookupDict, error, []error) {
 	return dict, nil, errs
 }
 
-func addCEDICT(d LookupDict, c cedict.CEDICT) LookupDict {
+func buildCEDICTLookupDict(c cedict.CEDICT) LookupDict {
+	dict := make(LookupDict, len(c))
+	var i int
 	for _, entry := range c {
-		d = append(d, &Decomposition{
+		dict[i] = &Decomposition{
 			Source:                "cedict",
 			Ideograph:             entry.Simplified,
 			IdeographsSimplified:  entry.Simplified,
 			IdeographsTraditional: entry.Traditional,
 			Definition:            strings.TrimSpace(strings.Join(entry.Definition, ", ")),
 			Readings:              map[string]string{"kMandarin": strings.Join(entry.Readings, ", ")},
-		})
+		}
+		i++
 	}
-	return d
+	return dict
 }

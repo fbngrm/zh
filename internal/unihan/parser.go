@@ -34,7 +34,8 @@ func (p *Parser) Parse() (ReadingsByMapping, error) {
 			continue
 		}
 		mapping := strings.ToUpper(parts[0])
-		key := parts[1]
+		key := parts[1][1:]
+		key = strings.ToLower(string(key[0])) + key[1:]
 		value := strings.Join(parts[2:], " ")
 		if _, ok := dict[mapping]; !ok {
 			dict[mapping] = make(map[string]string)

@@ -59,6 +59,7 @@ func (m Matches) Swap(i, j int) { m[i], m[j] = m[j], m[i] }
 
 func (f *Finder) FindSorted(query string, limit int) fuzzy.Matches {
 	f.SetModeFromString(query)
+	fmt.Println(f.GetMode())
 	matches := fuzzy.FindFrom(strings.TrimSpace(query), f)
 	if len(matches) < limit {
 		limit = len(matches)
