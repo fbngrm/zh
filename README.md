@@ -5,7 +5,8 @@ Lookup hanzi from cmd-line
 
 - [x] Omit empty yaml
 - [x] Filter fields name mapping
-- [ ] Depth flag for decomposition
-- [ ] Decompose words
+- [x] Depth flag for decomposition
+- [x] Force unihan search for hanzi
+- [ ] Make ids recursive
 - [ ] Do not decompose unihan hanzi by default
-- [ ] Flag to force unihan search for hanzi
+- [ ] Decompose words

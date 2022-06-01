@@ -2,41 +2,36 @@ package cjkvi
 
 import (
 	"bufio"
-	"log"
+	"fmt"
 	"os"
 	"strings"
 
-	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 )
 
-type IdeographicDescriptionSequence struct {
-	Sequence string            `yaml:"sequence,omitempty" json:"sequence,omitempty"`
-	Readings []unihan.Readings `yaml:"readings,omitempty" json:"readings,omitempty"`
-}
-
 type Decomposition struct {
-	Mapping   string                           `yaml:"mapping,omitempty" json:"mapping,omitempty"`
-	Ideograph string                           `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
-	IDS       []IdeographicDescriptionSequence `yaml:"ids,omitempty" json:"ids,omitempty"`
+	Mapping                        string          `yaml:"mapping,omitempty" json:"mapping,omitempty"`
+	Ideograph                      string          `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
+	IdeographicDescriptionSequence string          `yaml:"ids,omitempty" json:"ids,omitempty"`
+	Decompositions                 []Decomposition `yaml:"decomposition,omitempty" json:"decomposition,omitempty"`
 }
 
 type Decompositions map[string]Decomposition
 
-type IDSParser struct {
-	IDSSourceFile string
-	Readings      unihan.ReadingsByMapping
+type IDSDecomposer struct {
+	sourceFilePath string
+	decompositions Decompositions
 }
 
-func (p *IDSParser) Parse() (Decompositions, error) {
-	file, err := os.Open(p.IDSSourceFile)
+func NewIDSDecomposer(sourceFilePath string) (*IDSDecomposer, error) {
+	file, err := os.Open(sourceFilePath)
 	if err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not open ids source file: %w", err)
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	dict := make(map[string]Decomposition)
+	decompositions := make(map[string]Decomposition)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] == '#' {
@@ -46,35 +41,55 @@ func (p *IDSParser) Parse() (Decompositions, error) {
 		if len(line) < 3 {
 			continue
 		}
-		dict[parts[0]] = Decomposition{
-			Mapping:   parts[0],
-			Ideograph: parts[1],
-			IDS:       p.parseIDS(parts[2:]),
+		decompositions[parts[1]] = Decomposition{
+			Mapping:                        parts[0],
+			Ideograph:                      parts[1],
+			IdeographicDescriptionSequence: parts[2],
 		}
 	}
-	return dict, scanner.Err()
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+	return &IDSDecomposer{
+		sourceFilePath: sourceFilePath,
+		decompositions: decompositions,
+	}, nil
 }
 
-func (p *IDSParser) parseIDS(ideographicDescriptionSequences []string) []IdeographicDescriptionSequence {
-	parsedSequences := make([]IdeographicDescriptionSequence, 0)
-	for _, ideographicDescriptionSequence := range ideographicDescriptionSequences {
-		ideographs := make([]unihan.Readings, 0)
-		for _, ideographicDescriptionCharacter := range ideographicDescriptionSequence {
-			if conversion.IsIdeographicDescriptionCharacter(ideographicDescriptionCharacter) {
-				continue
-			}
-			if ideographicDescriptionCharacter == ' ' {
-				continue
-			}
-			mapping := conversion.ToMapping(ideographicDescriptionCharacter)
-			if reading, ok := p.Readings[mapping]; ok {
-				ideographs = append(ideographs, reading)
-			}
+// ideograph could be a hanzi or kangxi
+func (i *IDSDecomposer) Decompose(ideographToDecompose string, depth int) Decomposition {
+	var d Decomposition
+	for _, decomposition := range i.decompositions {
+		if ideographToDecompose == decomposition.Ideograph {
+			d = decomposition
 		}
-		parsedSequences = append(parsedSequences, IdeographicDescriptionSequence{
-			Sequence: ideographicDescriptionSequence,
-			Readings: ideographs,
-		})
 	}
-	return parsedSequences
+	return i.decompose(d, depth)
+}
+
+func (i *IDSDecomposer) decompose(d Decomposition, depth int) Decomposition {
+	if depth == 0 {
+		return d
+	}
+	d.Decompositions = make([]Decomposition, 0)
+	for _, ideograph := range d.IdeographicDescriptionSequence {
+		// we skip the ids character
+		if conversion.IsIdeographicDescriptionCharacter(ideograph) {
+			continue
+		}
+		if ideograph == ' ' {
+			continue
+		}
+		if ideograph == '鼻' {
+			continue
+		}
+		if string(ideograph) == d.Ideograph {
+			continue
+		}
+		d.Decompositions = append(
+			d.Decompositions,
+			i.Decompose(string(ideograph), depth-1),
+		)
+	}
+	return d
 }
