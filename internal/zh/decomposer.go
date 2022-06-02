@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"strings"
 
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/unihan"
@@ -15,16 +16,17 @@ const (
 	filename = "%s.json"
 )
 
-type Decomposition struct {
+type Hanzi struct {
+	Ideograph             string            `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
 	Source                string            `yaml:"source,omitempty" json:"source,omitempty"`
 	Mapping               string            `yaml:"mapping,omitempty" json:"mapping,omitempty"`
-	Ideograph             string            `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
 	IdeographsSimplified  string            `yaml:"simplified,omitempty" json:"simplified,omitempty"`
 	IdeographsTraditional string            `yaml:"traditional,omitempty" json:"traditional,omitempty"`
 	Decimal               int32             `yaml:"decimal,omitempty" json:"decimal,omitempty"`
 	Definition            string            `yaml:"definition,omitempty" json:"definition,omitempty"`
 	Readings              map[string]string `yaml:"readings,omitempty" json:"readings,omitempty"`
-	// IDS                   []cjkvi.IdeographicDescriptionSequence `yaml:"ids,omitempty" json:"ids,omitempty"`
+	IDS                   string            `yaml:"ids,omitempty" json:"ids,omitempty"`
+	Decompositions        []*Hanzi          `yaml:"decompositions,omitempty" json:"decompositions,omitempty"`
 }
 
 type Decomposer struct {
@@ -61,7 +63,7 @@ type Decomposer struct {
 // 	return nil
 // }
 
-func (d *Decomposition) export(name string) error {
+func (d *Hanzi) export(name string) error {
 	bytes, err := json.MarshalIndent(d, "", "  ")
 	if err != nil {
 		return err
@@ -69,81 +71,81 @@ func (d *Decomposition) export(name string) error {
 	return ioutil.WriteFile(fmt.Sprintf(filepath.Join(genDir, filename), name), bytes, 0644)
 }
 
-// func (d *Decomposition) GetFields(keySequences []string) (map[string]string, error) {
-// 	fields := make(map[string]string)
-// 	for _, sequence := range keySequences {
-// 		rawKeys := strings.Split(strings.TrimSpace(sequence), ".")
-// 		if len(rawKeys) == 0 {
-// 			return fields, nil
-// 		}
-// 		keys := make([]string, len(rawKeys))
-// 		for i, key := range rawKeys {
-// 			keys[i] = strings.TrimSpace(key)
-// 		}
+func (d *Hanzi) GetFields(keySequences []string) (map[string]string, error) {
+	fields := make(map[string]string)
+	for _, sequence := range keySequences {
+		rawKeys := strings.Split(strings.TrimSpace(sequence), ".")
+		if len(rawKeys) == 0 {
+			return fields, nil
+		}
+		keys := make([]string, len(rawKeys))
+		for i, key := range rawKeys {
+			keys[i] = strings.TrimSpace(key)
+		}
 
-// 		// keys should match struct tags
-// 		switch keys[0] {
-// 		case "source":
-// 			fields["source"] = d.Source
-// 		case "mapping":
-// 			fields["mapping"] = d.Mapping
-// 		case "ideograph":
-// 			fields["ideograph"] = d.Ideograph
-// 		case "simplified":
-// 			fields["simplified"] = d.IdeographsSimplified
-// 		case "traditional":
-// 			fields["traditional"] = d.IdeographsTraditional
-// 		case "decimal":
-// 			fields["decimal"] = string(d.Decimal)
-// 		case "definition":
-// 			fields["definition"] = d.Definition
-// 		case "readings":
-// 			if len(keys) < 2 {
-// 				return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
-// 			}
-// 			if len(keys) > 2 {
-// 				return nil, fmt.Errorf("cannot find %s in readings, invalid key length", sequence)
-// 			}
-// 			field, _ := d.Readings[keys[1]]
-// 			fields[sequence] = field
-// 		case "ids":
-// 			if len(keys) < 2 {
-// 				return nil, fmt.Errorf("getting all ids is not supported for key: %s", sequence)
-// 			}
+		// keys should match struct tags
+		switch keys[0] {
+		case "source":
+			fields["source"] = d.Source
+		case "mapping":
+			fields["mapping"] = d.Mapping
+		case "ideograph":
+			fields["ideograph"] = d.Ideograph
+		case "simplified":
+			fields["simplified"] = d.IdeographsSimplified
+		case "traditional":
+			fields["traditional"] = d.IdeographsTraditional
+		case "decimal":
+			fields["decimal"] = string(d.Decimal)
+		case "definition":
+			fields["definition"] = d.Definition
+		case "readings":
+			if len(keys) < 2 {
+				return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
+			}
+			if len(keys) > 2 {
+				return nil, fmt.Errorf("cannot find %s in readings, invalid key length", sequence)
+			}
+			field, _ := d.Readings[keys[1]]
+			fields[sequence] = field
+		case "ids":
+			if len(keys) < 2 {
+				return nil, fmt.Errorf("getting all ids is not supported for key: %s", sequence)
+			}
 
-// 			idsIndex, err := strconv.ParseInt(keys[1], 10, 64)
-// 			if err != nil {
-// 				return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[1], sequence)
-// 			}
-// 			if len(d.IDS) <= int(idsIndex) {
-// 				return nil, fmt.Errorf("index %d out of range for key: %s", idsIndex, sequence)
-// 			}
-// 			if len(keys) < 3 {
-// 				return nil, fmt.Errorf("getting entire ids is not supported for key: %s", sequence)
-// 			}
+			// idsIndex, err := strconv.ParseInt(keys[1], 10, 64)
+			// if err != nil {
+			// 	return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[1], sequence)
+			// }
+			// if len(d.IDS) <= int(idsIndex) {
+			// 	return nil, fmt.Errorf("index %d out of range for key: %s", idsIndex, sequence)
+			// }
+			// if len(keys) < 3 {
+			// 	return nil, fmt.Errorf("getting entire ids is not supported for key: %s", sequence)
+			// }
 
-// 			if keys[2] == "sequence" {
-// 				fields[sequence] = d.IDS[idsIndex].Sequence
-// 			}
+			// if keys[2] == "sequence" {
+			// 	fields[sequence] = d.IDS[idsIndex].IdeographicDescriptionSequence
+			// }
 
-// 			if keys[2] == "readings" {
-// 				if len(keys) < 4 {
-// 					return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
-// 				}
-// 				readingsIndex, err := strconv.ParseInt(keys[3], 10, 64)
-// 				if err != nil {
-// 					return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[3], sequence)
-// 				}
-// 				if len(d.IDS[idsIndex].Readings) < int(readingsIndex) {
-// 					return nil, fmt.Errorf("index %d out of range for key: %s", readingsIndex, sequence)
-// 				}
-// 				field, ok := d.IDS[idsIndex].Readings[readingsIndex][keys[4]]
-// 				if !ok {
-// 					return nil, fmt.Errorf("cannot find field %s for key %s", keys[4], sequence)
-// 				}
-// 				fields[sequence] = field
-// 			}
-// 		}
-// 	}
-// 	return fields, nil
-// }
+			// if keys[2] == "readings" {
+			// 	if len(keys) < 4 {
+			// 		return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
+			// 	}
+			// 	decompIndex, err := strconv.ParseInt(keys[3], 10, 64)
+			// 	if err != nil {
+			// 		return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[3], sequence)
+			// 	}
+			// 	if len(d.IDS[idsIndex].Decompositions) < int(decompIndex) {
+			// 		return nil, fmt.Errorf("index %d out of range for key: %s", decompIndex, sequence)
+			// 	}
+			// field, ok := d.IDS[idsIndex].Decompositions[decompIndex][keys[4]]
+			// if !ok {
+			// 	return nil, fmt.Errorf("cannot find field %s for key %s", keys[4], sequence)
+			// }
+			// fields[sequence] = field
+			// }
+		}
+	}
+	return fields, nil
+}

@@ -7,28 +7,24 @@ import (
 	"strings"
 )
 
-type CEDICTEntry struct {
+type Entry struct {
 	Traditional string
 	Simplified  string
 	Readings    []string
 	Definition  []string
 }
 
-type CEDICT map[string]CEDICTEntry
+type Dict map[string]Entry
 
-type CEDICTParser struct {
-	Src string
-}
-
-func (p *CEDICTParser) Parse() (CEDICT, error) {
-	file, err := os.Open(p.Src)
+func NewDict(cedictSrcPath string) (Dict, error) {
+	file, err := os.Open(cedictSrcPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	dict := make(CEDICT)
+	dict := make(Dict)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] == '#' {
@@ -50,7 +46,7 @@ func (p *CEDICTParser) Parse() (CEDICT, error) {
 		if len(ideographs) > 1 {
 			simplified = ideographs[1]
 		}
-		dict[parts[1]] = CEDICTEntry{
+		dict[parts[1]] = Entry{
 			Traditional: traditional,
 			Simplified:  simplified,
 			Readings:    readings,

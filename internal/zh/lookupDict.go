@@ -9,10 +9,23 @@ import (
 	"github.com/fgrimme/zh/internal/cedict"
 )
 
-type LookupDict []*Decomposition
+type LookupDict []*Hanzi
 
-func NewCEDICTLookupDict(c cedict.CEDICT) LookupDict {
-	return buildCEDICTLookupDict(c)
+func NewCEDICTLookupDict(c cedict.Dict) LookupDict {
+	dict := make(LookupDict, len(c))
+	var i int
+	for _, entry := range c {
+		dict[i] = &Hanzi{
+			Source:                "cedict",
+			Ideograph:             entry.Simplified,
+			IdeographsSimplified:  entry.Simplified,
+			IdeographsTraditional: entry.Traditional,
+			Definition:            strings.TrimSpace(strings.Join(entry.Definition, ", ")),
+			Readings:              map[string]string{"mandarin": strings.Join(entry.Readings, ", ")},
+		}
+		i++
+	}
+	return dict
 }
 
 func NewUnihanLookupDict() (LookupDict, []error, error) {
@@ -37,7 +50,7 @@ func buildUnihanLookupDict() (LookupDict, error, []error) {
 			continue
 		}
 
-		d := &Decomposition{}
+		d := &Hanzi{}
 		if err := json.Unmarshal(bytes, d); err != nil {
 			errs = append(errs, err)
 			continue
@@ -45,21 +58,4 @@ func buildUnihanLookupDict() (LookupDict, error, []error) {
 		dict = append(dict, d)
 	}
 	return dict, nil, errs
-}
-
-func buildCEDICTLookupDict(c cedict.CEDICT) LookupDict {
-	dict := make(LookupDict, len(c))
-	var i int
-	for _, entry := range c {
-		dict[i] = &Decomposition{
-			Source:                "cedict",
-			Ideograph:             entry.Simplified,
-			IdeographsSimplified:  entry.Simplified,
-			IdeographsTraditional: entry.Traditional,
-			Definition:            strings.TrimSpace(strings.Join(entry.Definition, ", ")),
-			Readings:              map[string]string{"mandarin": strings.Join(entry.Readings, ", ")},
-		}
-		i++
-	}
-	return dict
 }

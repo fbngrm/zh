@@ -6,7 +6,9 @@ import (
 	"os"
 	"strings"
 
+	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
+	"github.com/fgrimme/zh/internal/zh"
 	"gopkg.in/yaml.v3"
 )
 
@@ -43,18 +45,6 @@ func main() {
 		}
 	}
 
-	idsDecomposer, err := cjkvi.NewIDSDecomposer(idsSrc)
-	if err != nil {
-		fmt.Printf("could not initialize ids decompose: %v\n", err)
-		os.Exit(1)
-	}
-	d := idsDecomposer.Decompose(query, depth)
-	b, err := yaml.Marshal(d)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(b))
-
 	// var dict zh.LookupDict
 	// if unihanSearch {
 	// 	var err error
@@ -69,14 +59,27 @@ func main() {
 	// 		os.Exit(0)
 	// 	}
 	// } else {
-	// 	cparser := cedict.CEDICTParser{Src: cedictSrc}
-	// 	cdict, err := cparser.Parse()
-	// 	if err != nil {
-	// 		fmt.Printf("could not parse cedict: %v\n", err)
-	// 		os.Exit(1)
-	// 	}
-	// 	dict = zh.NewCEDICTLookupDict(cdict)
 	// }
+
+	cdict, err := cedict.NewDict(cedictSrc)
+	if err != nil {
+		fmt.Printf("could not init cedict: %v\n", err)
+		os.Exit(1)
+	}
+	dict := zh.NewCEDICTLookupDict(cdict)
+
+	idsDecomposer, err := cjkvi.NewIDSDecomposer(idsSrc)
+	if err != nil {
+		fmt.Printf("could not initialize ids decompose: %v\n", err)
+		os.Exit(1)
+	}
+	hanzi := buildHanzi(query, dict, idsDecomposer, depth)
+
+	b, err := yaml.Marshal(hanzi)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(b))
 
 	// format := zh.Format_plain
 	// if jsonOut {
@@ -84,26 +87,67 @@ func main() {
 	// } else if yamlOut {
 	// 	format = zh.Format_YAML
 	// }
-
 	// formatter := zh.Formatter{
 	// 	Dict:         dict,
 	// 	FilterFields: prepareFilter(fields),
 	// 	Format:       zh.OutputFormat(format),
 	// }
 
-	// limit := results + 20
-	// matches := zh.NewFinder(dict).FindSorted(query, limit)
-	// for i := 0; i < results; i++ {
-	// 	if i >= len(matches) {
-	// 		break
-	// 	}
-	// s, err := formatter.Print(matches[i].Index)
-	// if err != nil {
-	// 	fmt.Printf("could not format: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// fmt.Println(s)
-	// }
+	// fmt.Println(string(b))
+}
+
+func buildHanzi(query string, dict zh.LookupDict, decomposer *cjkvi.IDSDecomposer, depth int) *zh.Hanzi {
+	definition := ""
+	readings := make(map[string]string)
+	simplified := ""
+	traditional := ""
+
+	limit := results + 20
+	matches := zh.NewFinder(dict).FindSorted(query, limit)
+	for i := 0; i < results; i++ {
+		if i >= len(matches) {
+			break
+		}
+		d := dict[matches[i].Index]
+		if len(query) != len(d.Ideograph) {
+			continue
+		}
+		definition += d.Definition
+		readings["mandarin"] += d.Readings["mandarin"]
+		simplified += d.IdeographsSimplified
+		traditional += d.IdeographsTraditional
+		if i < results-2 {
+			definition += "; "
+			readings["mandarin"] += "; "
+			simplified += "; "
+			traditional += "; "
+		}
+	}
+	ids := decomposer.Decompose(query, 1)
+
+	var decompositions []*zh.Hanzi
+	if depth > 0 {
+		decompositions = make([]*zh.Hanzi, len(ids.Decompositions))
+		for i, decomp := range ids.Decompositions {
+			decompositions[i] = buildHanzi(
+				decomp.Ideograph,
+				dict,
+				decomposer,
+				depth-1,
+			)
+		}
+	}
+
+	return &zh.Hanzi{
+		Ideograph:             query,
+		IdeographsSimplified:  simplified,
+		IdeographsTraditional: traditional,
+		Mapping:               ids.Mapping,
+		Definition:            definition,
+		Readings:              readings,
+		IDS:                   ids.IdeographicDescriptionSequence,
+		Decompositions:        decompositions,
+	}
 }
 
 func export() error {
