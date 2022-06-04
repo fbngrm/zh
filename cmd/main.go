@@ -119,25 +119,49 @@ func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjk
 	if len(dict) <= index {
 		return nil, fmt.Errorf("lookup dict index does not exist %d", index)
 	}
-	d := dict[index]
+	dictEntry := dict[index]
+
+	var readingsIndex int
 	decompositions := make([]*zh.Hanzi, 0)
-	for _, hanzi := range query {
+	for _, q := range query {
+		hanzi := buildHanzi(
+			string(q),
+			dict,
+			idsDecomposer,
+			depth-1,
+		)
+
+		if len(dictEntry.Readings) <= readingsIndex {
+			return nil, fmt.Errorf("missing reading for hanzi %s", string(q))
+		}
+		// a hanzi has several readings and we need to find the one that is used
+		// the current search query (dict entry).
+		// FIXME: map reading for sound tone 4 and tone 5
+		entryReadings := make([]string, 0)
+		otherReadings := make([]string, 0)
+		for _, hanziReading := range hanzi.Readings {
+			if hanziReading == dictEntry.Readings[readingsIndex] {
+				entryReadings = append(entryReadings, hanziReading)
+				continue
+			}
+			otherReadings = append(otherReadings, hanziReading)
+		}
+		hanzi.Readings = entryReadings
+		hanzi.OtherReadings = otherReadings
+
 		decompositions = append(
 			decompositions,
-			buildHanzi(
-				string(hanzi),
-				dict,
-				idsDecomposer,
-				depth-1,
-			))
+			hanzi,
+		)
+		readingsIndex++
 	}
-	d.Decompositions = decompositions
-	return d, nil
+	dictEntry.Decompositions = decompositions
+	return dictEntry, nil
 }
 
 func buildHanzi(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomposer, depth int) *zh.Hanzi {
 	definition := ""
-	readings := make(map[string]string)
+	readings := make([]string, 0)
 	simplified := ""
 	traditional := ""
 
@@ -154,12 +178,11 @@ func buildHanzi(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomp
 			continue
 		}
 		definition += d.Definition
-		readings["mandarin"] += d.Readings["mandarin"]
+		readings = append(readings, d.Readings...)
 		simplified += d.IdeographsSimplified
 		traditional += d.IdeographsTraditional
 		if i < results-2 {
 			definition += "; "
-			readings["mandarin"] += "; "
 			simplified += "; "
 			traditional += "; "
 		}

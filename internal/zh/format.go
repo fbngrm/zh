@@ -72,9 +72,9 @@ func (f *Formatter) format(data interface{}) (string, error) {
 		result += d.Ideograph
 	}
 	result += "\t"
-	if r, ok := d.Readings["kMandarin"]; ok {
-		result += r
-	}
+	// if r, ok := d.Readings["kMandarin"]; ok {
+	// 	result += r
+	// }
 	result += "\t"
 	result += d.Definition
 	result += "\t"

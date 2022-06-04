@@ -5,7 +5,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/sahilm/fuzzy"
 )
@@ -144,8 +143,6 @@ func (f *Finder) lookup(i int) string {
 		return f.dict[i].Ideograph
 	case searchMode_hanzi_word: // TODO: support traditional
 		return f.dict[i].IdeographsSimplified
-	case searchMode_pinyin:
-		return f.dict[i].Readings[string(unihan.KHanyuPinyin)] // TODO: support all readings
 	case searchMode_ascii:
 		return f.dict[i].Definition
 	default:

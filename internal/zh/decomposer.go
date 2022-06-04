@@ -17,16 +17,17 @@ const (
 )
 
 type Hanzi struct {
-	Ideograph             string            `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
-	Source                string            `yaml:"source,omitempty" json:"source,omitempty"`
-	Mapping               string            `yaml:"mapping,omitempty" json:"mapping,omitempty"`
-	IdeographsSimplified  string            `yaml:"simplified,omitempty" json:"simplified,omitempty"`
-	IdeographsTraditional string            `yaml:"traditional,omitempty" json:"traditional,omitempty"`
-	Decimal               int32             `yaml:"decimal,omitempty" json:"decimal,omitempty"`
-	Definition            string            `yaml:"definition,omitempty" json:"definition,omitempty"`
-	Readings              map[string]string `yaml:"readings,omitempty" json:"readings,omitempty"`
-	IDS                   string            `yaml:"ids,omitempty" json:"ids,omitempty"`
-	Decompositions        []*Hanzi          `yaml:"decompositions,omitempty" json:"decompositions,omitempty"`
+	Ideograph             string   `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
+	Source                string   `yaml:"source,omitempty" json:"source,omitempty"`
+	Mapping               string   `yaml:"mapping,omitempty" json:"mapping,omitempty"`
+	IdeographsSimplified  string   `yaml:"simplified,omitempty" json:"simplified,omitempty"`
+	IdeographsTraditional string   `yaml:"traditional,omitempty" json:"traditional,omitempty"`
+	Decimal               int32    `yaml:"decimal,omitempty" json:"decimal,omitempty"`
+	Definition            string   `yaml:"definition,omitempty" json:"definition,omitempty"`
+	Readings              []string `yaml:"readings,omitempty" json:"readings,omitempty"`
+	OtherReadings         []string `yaml:"other_readings,omitempty" json:"other_readings,omitempty"`
+	IDS                   string   `yaml:"ids,omitempty" json:"ids,omitempty"`
+	Decompositions        []*Hanzi `yaml:"decompositions,omitempty" json:"decompositions,omitempty"`
 }
 
 type Decomposer struct {
@@ -100,14 +101,14 @@ func (d *Hanzi) GetFields(keySequences []string) (map[string]string, error) {
 		case "definition":
 			fields["definition"] = d.Definition
 		case "readings":
-			if len(keys) < 2 {
-				return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
-			}
-			if len(keys) > 2 {
-				return nil, fmt.Errorf("cannot find %s in readings, invalid key length", sequence)
-			}
-			field, _ := d.Readings[keys[1]]
-			fields[sequence] = field
+			// if len(keys) < 2 {
+			// 	return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
+			// }
+			// if len(keys) > 2 {
+			// 	return nil, fmt.Errorf("cannot find %s in readings, invalid key length", sequence)
+			// }
+			// field, _ := d.Readings[keys[1]]
+			// fields[sequence] = field
 		case "ids":
 			if len(keys) < 2 {
 				return nil, fmt.Errorf("getting all ids is not supported for key: %s", sequence)

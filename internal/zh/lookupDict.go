@@ -21,7 +21,7 @@ func NewCEDICTLookupDict(c cedict.Dict) LookupDict {
 			IdeographsSimplified:  entry.Simplified,
 			IdeographsTraditional: entry.Traditional,
 			Definition:            strings.TrimSpace(strings.Join(entry.Definition, ", ")),
-			Readings:              map[string]string{"mandarin": strings.Join(entry.Readings, ", ")},
+			Readings:              entry.Readings,
 		}
 		i++
 	}
