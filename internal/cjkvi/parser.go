@@ -77,6 +77,9 @@ func (i *IDSDecomposer) decompose(d Decomposition, depth int) Decomposition {
 		if conversion.IsIdeographicDescriptionCharacter(ideograph) {
 			continue
 		}
+		if ideograph == '[' {
+			break
+		}
 		if ideograph == ' ' {
 			continue
 		}

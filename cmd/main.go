@@ -73,8 +73,19 @@ func main() {
 		fmt.Printf("could not initialize ids decompose: %v\n", err)
 		os.Exit(1)
 	}
-	hanzi := buildHanzi(query, dict, idsDecomposer, depth)
 
+	var hanzi *zh.Hanzi
+	isWord := len(query) > 4
+	if isWord {
+		hanzi, err = buildWordDecomposition(query, dict, idsDecomposer, depth)
+		if err != nil {
+			fmt.Printf("could not decompose: %v\n", err)
+			os.Exit(1)
+		}
+	} else {
+		hanzi = buildHanzi(query, dict, idsDecomposer, depth)
+
+	}
 	b, err := yaml.Marshal(hanzi)
 	if err != nil {
 		fmt.Println(err)
@@ -96,12 +107,42 @@ func main() {
 	// fmt.Println(string(b))
 }
 
-func buildHanzi(query string, dict zh.LookupDict, decomposer *cjkvi.IDSDecomposer, depth int) *zh.Hanzi {
+func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomposer, depth int) (*zh.Hanzi, error) {
+	// we add an offset here to catch more matches with an equal
+	// scoring to achieve getting a consitent set of sorted matches
+	limit := results + 20
+	matches := zh.NewFinder(dict).FindSorted(query, limit)
+	if len(matches) < 1 {
+		return nil, fmt.Errorf("no translation found %s", query)
+	}
+	index := matches[0].Index
+	if len(dict) <= index {
+		return nil, fmt.Errorf("lookup dict index does not exist %d", index)
+	}
+	d := dict[index]
+	decompositions := make([]*zh.Hanzi, 0)
+	for _, hanzi := range query {
+		decompositions = append(
+			decompositions,
+			buildHanzi(
+				string(hanzi),
+				dict,
+				idsDecomposer,
+				depth-1,
+			))
+	}
+	d.Decompositions = decompositions
+	return d, nil
+}
+
+func buildHanzi(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomposer, depth int) *zh.Hanzi {
 	definition := ""
 	readings := make(map[string]string)
 	simplified := ""
 	traditional := ""
 
+	// we add an offset here to catch more matches with an equal
+	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + 20
 	matches := zh.NewFinder(dict).FindSorted(query, limit)
 	for i := 0; i < results; i++ {
@@ -123,7 +164,7 @@ func buildHanzi(query string, dict zh.LookupDict, decomposer *cjkvi.IDSDecompose
 			traditional += "; "
 		}
 	}
-	ids := decomposer.Decompose(query, 1)
+	ids := idsDecomposer.Decompose(query, 1)
 
 	var decompositions []*zh.Hanzi
 	if depth > 0 {
@@ -132,7 +173,7 @@ func buildHanzi(query string, dict zh.LookupDict, decomposer *cjkvi.IDSDecompose
 			decompositions[i] = buildHanzi(
 				decomp.Ideograph,
 				dict,
-				decomposer,
+				idsDecomposer,
 				depth-1,
 			)
 		}
