@@ -126,9 +126,6 @@ func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjk
 		if len(dictEntry.Readings) <= readingsIndex {
 			return nil, nil, fmt.Errorf("missing reading for hanzi %s", string(q))
 		}
-		if len(dictEntry.Definitions) <= readingsIndex {
-			return nil, nil, fmt.Errorf("missing definitions for hanzi %s", string(q))
-		}
 		if len(hanzi.Readings) != len(hanzi.Definitions) {
 			return nil, nil, fmt.Errorf(
 				"missing definitions(%d) or readings(%d) for %s",
