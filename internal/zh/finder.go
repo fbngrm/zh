@@ -66,7 +66,7 @@ func (f *Finder) FindSorted(query string, limit int) fuzzy.Matches {
 	unsortedMatches := make(Matches, len(matches))
 	for i, m := range matches {
 		unsortedMatches[i] = Match{
-			meaning: f.dict[m.Index].Definition,
+			meaning: strings.Join(f.dict[m.Index].Definitions, ", "),
 			match:   m,
 		}
 	}
@@ -143,8 +143,8 @@ func (f *Finder) lookup(i int) string {
 		return f.dict[i].Ideograph
 	case searchMode_hanzi_word: // TODO: support traditional
 		return f.dict[i].IdeographsSimplified
-	case searchMode_ascii:
-		return f.dict[i].Definition
+	// case searchMode_ascii:
+	// 	return f.dict[i].Definitions
 	default:
 		return unknown
 	}

@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"path/filepath"
-	"strings"
 
 	"github.com/fgrimme/zh/internal/cedict"
 )
@@ -20,7 +19,7 @@ func NewCEDICTLookupDict(c cedict.Dict) LookupDict {
 			Ideograph:             entry.Simplified,
 			IdeographsSimplified:  entry.Simplified,
 			IdeographsTraditional: entry.Traditional,
-			Definition:            strings.TrimSpace(strings.Join(entry.Definition, ", ")),
+			Definitions:           entry.Definition,
 			Readings:              entry.Readings,
 		}
 		i++

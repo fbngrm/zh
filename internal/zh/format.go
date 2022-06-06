@@ -3,11 +3,12 @@ package zh
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
 
-type OutputFormat int
+type Format int
 
 const (
 	Format_JSON = iota
@@ -16,34 +17,35 @@ const (
 )
 
 type Formatter struct {
-	Dict         LookupDict
-	FilterFields []string
-	Format       OutputFormat
+	format       Format
+	filterFields []string
 }
 
-func (f *Formatter) Print(index int) (string, error) {
-	if index >= len(f.Dict) {
-		return "", fmt.Errorf("could not find match at index %d", index)
+func NewFormatter(f Format, filterFields []string) *Formatter {
+	return &Formatter{
+		format:       f,
+		filterFields: filterFields,
 	}
+}
 
+func (f *Formatter) Format(hanzi *Hanzi) (string, error) {
 	var data interface{}
-	if len(f.FilterFields) != 0 {
+	if len(f.filterFields) != 0 {
 		var err error
-		data, err = f.Dict[index].GetFields(f.FilterFields)
+		data, err = hanzi.GetFields(f.filterFields)
 		if err != nil {
 			return "", fmt.Errorf("could not filter fields: %w", err)
 		}
 	} else {
-		data = f.Dict[index]
+		data = hanzi
 	}
-
-	if f.Format == Format_JSON {
+	if f.format == Format_JSON {
 		return f.formatJSON(data)
 	}
-	if f.Format == Format_YAML {
+	if f.format == Format_YAML {
 		return f.formatYAML(data)
 	}
-	return f.format(data)
+	return f.formatPlain(data)
 }
 
 func (f *Formatter) formatJSON(data interface{}) (string, error) {
@@ -62,7 +64,7 @@ func (f *Formatter) formatYAML(data interface{}) (string, error) {
 	return string(b), nil
 }
 
-func (f *Formatter) format(data interface{}) (string, error) {
+func (f *Formatter) formatPlain(data interface{}) (string, error) {
 	var result string
 	d, ok := data.(*Hanzi)
 	if !ok {
@@ -72,11 +74,9 @@ func (f *Formatter) format(data interface{}) (string, error) {
 		result += d.Ideograph
 	}
 	result += "\t"
-	// if r, ok := d.Readings["kMandarin"]; ok {
-	// 	result += r
-	// }
+	result += strings.Join(d.Readings, ", ")
 	result += "\t"
-	result += d.Definition
+	result += strings.Join(d.Definitions, ", ")
 	result += "\t"
 	result += fmt.Sprintf("source=%s", d.Source)
 	return result, nil

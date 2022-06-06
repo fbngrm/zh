@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"strconv"
 	"strings"
 
+	"github.com/fatih/structs"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/unihan"
 )
@@ -17,17 +19,18 @@ const (
 )
 
 type Hanzi struct {
-	Ideograph             string   `yaml:"ideograph,omitempty" json:"ideograph,omitempty"`
-	Source                string   `yaml:"source,omitempty" json:"source,omitempty"`
-	Mapping               string   `yaml:"mapping,omitempty" json:"mapping,omitempty"`
-	IdeographsSimplified  string   `yaml:"simplified,omitempty" json:"simplified,omitempty"`
-	IdeographsTraditional string   `yaml:"traditional,omitempty" json:"traditional,omitempty"`
-	Decimal               int32    `yaml:"decimal,omitempty" json:"decimal,omitempty"`
-	Definition            string   `yaml:"definition,omitempty" json:"definition,omitempty"`
-	Readings              []string `yaml:"readings,omitempty" json:"readings,omitempty"`
-	OtherReadings         []string `yaml:"other_readings,omitempty" json:"other_readings,omitempty"`
-	IDS                   string   `yaml:"ids,omitempty" json:"ids,omitempty"`
-	Decompositions        []*Hanzi `yaml:"decompositions,omitempty" json:"decompositions,omitempty"`
+	Ideograph             string   `yaml:"ideograph,omitempty" json:"ideograph,omitempty" structs:"ideograph"`
+	Source                string   `yaml:"source,omitempty" json:"source,omitempty" structs:"source"`
+	Mapping               string   `yaml:"mapping,omitempty" json:"mapping,omitempty" structs:"mapping"`
+	IdeographsSimplified  string   `yaml:"simplified,omitempty" json:"simplified,omitempty" structs:"simplified"`
+	IdeographsTraditional string   `yaml:"traditional,omitempty" json:"traditional,omitempty" structs:"traditional"`
+	Decimal               int32    `yaml:"decimal,omitempty" json:"decimal,omitempty" structs:"decimal"`
+	Definitions           []string `yaml:"definitions,omitempty" json:"definitions,omitempty" structs:"definitions"`
+	Readings              []string `yaml:"readings,omitempty" json:"readings,omitempty" structs:"readings"`
+	OtherDefinitions      []string `yaml:"other_definitions,omitempty" json:"other_definitions,omitempty" structs:"other_definitions"`
+	OtherReadings         []string `yaml:"other_readings,omitempty" json:"other_readings,omitempty" structs:"other_readings"`
+	IDS                   string   `yaml:"ids,omitempty" json:"ids,omitempty" structs:"ids"`
+	Decompositions        []*Hanzi `yaml:"decompositions,omitempty" json:"decompositions,omitempty" structs:"decompositions"`
 }
 
 type Decomposer struct {
@@ -72,81 +75,71 @@ func (d *Hanzi) export(name string) error {
 	return ioutil.WriteFile(fmt.Sprintf(filepath.Join(genDir, filename), name), bytes, 0644)
 }
 
-func (d *Hanzi) GetFields(keySequences []string) (map[string]string, error) {
-	fields := make(map[string]string)
+// func (d *Hanzi) groupFields(fields map[string]interface{}) (map[string]interface{}, error) {
+// 	grouped := make(map[string]interface{})
+// 	for keySequence, value := range fields {
+// 		keys := strings.Split(keySequence, ".")
+// 		if len(keys) == 0 {
+// 			return nil, fmt.Errorf("could not split key sequence %s", keySequence)
+// 		}
+// 		if len(keys) == 1 {
+// 			grouped[keys[0]] = value
+// 			continue
+// 		}
+// 		var o interface{}
+// 		// here we know that value is either map or slice
+// 		for _, key := range keys {
+// 			// get key type - if it's an int, we treat value as a slice
+// 			// if it's a string, we treat it as a map
+// 			isInt = true
+// 			index, err := strconv.ParseInt(key, 10, 64)
+// 			if err != nil {
+// 				isInt = false
+// 			}
+
+// 			if group, ok := grouped[key]; !ok {
+// 				grouped[key] = value
+// 			}
+// 		}
+// 		grouped[keys[0]] = o
+// 	}
+// 	return grouped, nil
+// }
+
+func (d *Hanzi) GetFields(keySequences []string) (map[string]interface{}, error) {
+	m := structs.Map(d)
+	fields := make(map[string]interface{})
 	for _, sequence := range keySequences {
 		rawKeys := strings.Split(strings.TrimSpace(sequence), ".")
 		if len(rawKeys) == 0 {
 			return fields, nil
 		}
-		keys := make([]string, len(rawKeys))
-		for i, key := range rawKeys {
-			keys[i] = strings.TrimSpace(key)
-		}
 
-		// keys should match struct tags
-		switch keys[0] {
-		case "source":
-			fields["source"] = d.Source
-		case "mapping":
-			fields["mapping"] = d.Mapping
-		case "ideograph":
-			fields["ideograph"] = d.Ideograph
-		case "simplified":
-			fields["simplified"] = d.IdeographsSimplified
-		case "traditional":
-			fields["traditional"] = d.IdeographsTraditional
-		case "decimal":
-			fields["decimal"] = string(d.Decimal)
-		case "definition":
-			fields["definition"] = d.Definition
-		case "readings":
-			// if len(keys) < 2 {
-			// 	return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
-			// }
-			// if len(keys) > 2 {
-			// 	return nil, fmt.Errorf("cannot find %s in readings, invalid key length", sequence)
-			// }
-			// field, _ := d.Readings[keys[1]]
-			// fields[sequence] = field
-		case "ids":
-			if len(keys) < 2 {
-				return nil, fmt.Errorf("getting all ids is not supported for key: %s", sequence)
+		var i interface{}
+		i = m
+		for _, key := range rawKeys {
+			key = strings.TrimSpace(key)
+			switch i.(type) {
+			case map[string]interface{}:
+				var ok bool
+				i, ok = i.(map[string]interface{})[key]
+				if !ok {
+					return nil, fmt.Errorf("key %s not found for sequence: %s", key, sequence)
+				}
+
+			case []interface{}:
+				index, err := strconv.ParseInt(key, 10, 64)
+				if err != nil {
+					return nil, fmt.Errorf("cannot parse index %s for key: %s", key, sequence)
+				}
+				slice := i.([]interface{})
+				if int(index) >= len(slice) {
+					return nil, fmt.Errorf("index %d out of bounds for sequence: %s", index, sequence)
+				}
+				i = slice[int(index)]
 			}
-
-			// idsIndex, err := strconv.ParseInt(keys[1], 10, 64)
-			// if err != nil {
-			// 	return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[1], sequence)
-			// }
-			// if len(d.IDS) <= int(idsIndex) {
-			// 	return nil, fmt.Errorf("index %d out of range for key: %s", idsIndex, sequence)
-			// }
-			// if len(keys) < 3 {
-			// 	return nil, fmt.Errorf("getting entire ids is not supported for key: %s", sequence)
-			// }
-
-			// if keys[2] == "sequence" {
-			// 	fields[sequence] = d.IDS[idsIndex].IdeographicDescriptionSequence
-			// }
-
-			// if keys[2] == "readings" {
-			// 	if len(keys) < 4 {
-			// 		return nil, fmt.Errorf("getting all readings is not supported for key: %s", sequence)
-			// 	}
-			// 	decompIndex, err := strconv.ParseInt(keys[3], 10, 64)
-			// 	if err != nil {
-			// 		return nil, fmt.Errorf("cannot parse index %s for key: %s", keys[3], sequence)
-			// 	}
-			// 	if len(d.IDS[idsIndex].Decompositions) < int(decompIndex) {
-			// 		return nil, fmt.Errorf("index %d out of range for key: %s", decompIndex, sequence)
-			// 	}
-			// field, ok := d.IDS[idsIndex].Decompositions[decompIndex][keys[4]]
-			// if !ok {
-			// 	return nil, fmt.Errorf("cannot find field %s for key %s", keys[4], sequence)
-			// }
-			// fields[sequence] = field
-			// }
 		}
+		fields[sequence] = i
 	}
 	return fields, nil
 }

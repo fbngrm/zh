@@ -9,7 +9,6 @@ import (
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/zh"
-	"gopkg.in/yaml.v3"
 )
 
 const idsSrc = "./lib/cjkvi/ids.txt"
@@ -34,7 +33,7 @@ func main() {
 	flag.BoolVar(&jsonOut, "j", false, "output in json format")
 	flag.BoolVar(&yamlOut, "y", false, "output in yaml format")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
-	flag.IntVar(&results, "r", 1, "number of results")
+	flag.IntVar(&results, "r", 3, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
 
@@ -44,22 +43,6 @@ func main() {
 			os.Exit(1)
 		}
 	}
-
-	// var dict zh.LookupDict
-	// if unihanSearch {
-	// 	var err error
-	// 	var errs []error
-	// 	dict, errs, err = zh.NewUnihanLookupDict()
-	// 	if err != nil {
-	// 		fmt.Printf("could not build lookup dicts: %v\n", err)
-	// 		os.Exit(1)
-	// 	}
-	// 	if len(errs) > 0 {
-	// 		fmt.Printf("errors building lookup dict: %v\n", errs)
-	// 		os.Exit(0)
-	// 	}
-	// } else {
-	// }
 
 	cdict, err := cedict.NewDict(cedictSrc)
 	if err != nil {
@@ -75,51 +58,57 @@ func main() {
 	}
 
 	var hanzi *zh.Hanzi
+	var errs []error
 	isWord := len(query) > 4
 	if isWord {
-		hanzi, err = buildWordDecomposition(query, dict, idsDecomposer, depth)
+		hanzi, errs, err = buildWordDecomposition(query, dict, idsDecomposer, depth)
 		if err != nil {
 			fmt.Printf("could not decompose: %v\n", err)
 			os.Exit(1)
 		}
 	} else {
 		hanzi = buildHanzi(query, dict, idsDecomposer, depth)
-
 	}
-	b, err := yaml.Marshal(hanzi)
+
+	format := zh.Format_plain
+	if jsonOut {
+		format = zh.Format_JSON
+	} else if yamlOut {
+		format = zh.Format_YAML
+	}
+	formatter := zh.NewFormatter(
+		zh.Format(format),
+		prepareFilter(fields),
+	)
+	formatted, err := formatter.Format(hanzi)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("could not format hanzi: %v\n", err)
+		os.Exit(1)
 	}
-	fmt.Println(string(b))
+	fmt.Print(formatted)
 
-	// format := zh.Format_plain
-	// if jsonOut {
-	// 	format = zh.Format_JSON
-	// } else if yamlOut {
-	// 	format = zh.Format_YAML
-	// }
-	// formatter := zh.Formatter{
-	// 	Dict:         dict,
-	// 	FilterFields: prepareFilter(fields),
-	// 	Format:       zh.OutputFormat(format),
-	// }
-
-	// fmt.Println(string(b))
+	if len(errs) != 0 {
+		for _, e := range errs {
+			os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
+		}
+	}
 }
 
-func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomposer, depth int) (*zh.Hanzi, error) {
+func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomposer, depth int) (*zh.Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + 20
 	matches := zh.NewFinder(dict).FindSorted(query, limit)
 	if len(matches) < 1 {
-		return nil, fmt.Errorf("no translation found %s", query)
+		return nil, nil, fmt.Errorf("no translation found %s", query)
 	}
 	index := matches[0].Index
 	if len(dict) <= index {
-		return nil, fmt.Errorf("lookup dict index does not exist %d", index)
+		return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
 	}
 	dictEntry := dict[index]
+
+	errs := make([]error, 0)
 
 	var readingsIndex int
 	decompositions := make([]*zh.Hanzi, 0)
@@ -131,23 +120,47 @@ func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjk
 			depth-1,
 		)
 
-		if len(dictEntry.Readings) <= readingsIndex {
-			return nil, fmt.Errorf("missing reading for hanzi %s", string(q))
-		}
-		// a hanzi has several readings and we need to find the one that is used
-		// the current search query (dict entry).
+		// a hanzi has several readings and definitions so we need to find the one
+		// that is used the current search query (dict entry).
 		// FIXME: map reading for sound tone 4 and tone 5
+		if len(dictEntry.Readings) <= readingsIndex {
+			return nil, nil, fmt.Errorf("missing reading for hanzi %s", string(q))
+		}
+		if len(dictEntry.Definitions) <= readingsIndex {
+			return nil, nil, fmt.Errorf("missing definitions for hanzi %s", string(q))
+		}
+		if len(hanzi.Readings) != len(hanzi.Definitions) {
+			return nil, nil, fmt.Errorf(
+				"missing definitions(%d) or readings(%d) for %s",
+				len(hanzi.Definitions),
+				len(hanzi.Readings),
+				string(q),
+			)
+		}
 		entryReadings := make([]string, 0)
 		otherReadings := make([]string, 0)
-		for _, hanziReading := range hanzi.Readings {
+		entryDefinitions := make([]string, 0)
+		otherDefinitions := make([]string, 0)
+		for i, hanziReading := range hanzi.Readings {
 			if hanziReading == dictEntry.Readings[readingsIndex] {
 				entryReadings = append(entryReadings, hanziReading)
+				entryDefinitions = append(entryDefinitions, hanzi.Definitions[i])
 				continue
 			}
 			otherReadings = append(otherReadings, hanziReading)
+			otherDefinitions = append(otherDefinitions, hanzi.Definitions[i])
 		}
 		hanzi.Readings = entryReadings
 		hanzi.OtherReadings = otherReadings
+		hanzi.Definitions = entryDefinitions
+		hanzi.OtherDefinitions = otherDefinitions
+
+		if len(entryReadings) == 0 {
+			errs = append(errs, fmt.Errorf("no reading match found for hanzi decomposition %s", string(q)))
+		}
+		if len(entryDefinitions) == 0 {
+			errs = append(errs, fmt.Errorf("no definition match found for hanzi decomposition %s", string(q)))
+		}
 
 		decompositions = append(
 			decompositions,
@@ -156,12 +169,12 @@ func buildWordDecomposition(query string, dict zh.LookupDict, idsDecomposer *cjk
 		readingsIndex++
 	}
 	dictEntry.Decompositions = decompositions
-	return dictEntry, nil
+	return dictEntry, errs, nil
 }
 
 func buildHanzi(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomposer, depth int) *zh.Hanzi {
-	definition := ""
 	readings := make([]string, 0)
+	definitions := make([]string, 0)
 	simplified := ""
 	traditional := ""
 
@@ -177,12 +190,11 @@ func buildHanzi(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomp
 		if len(query) != len(d.Ideograph) {
 			continue
 		}
-		definition += d.Definition
+		definitions = append(definitions, strings.Join(d.Definitions, ", "))
 		readings = append(readings, d.Readings...)
 		simplified += d.IdeographsSimplified
 		traditional += d.IdeographsTraditional
 		if i < results-2 {
-			definition += "; "
 			simplified += "; "
 			traditional += "; "
 		}
@@ -207,7 +219,7 @@ func buildHanzi(query string, dict zh.LookupDict, idsDecomposer *cjkvi.IDSDecomp
 		IdeographsSimplified:  simplified,
 		IdeographsTraditional: traditional,
 		Mapping:               ids.Mapping,
-		Definition:            definition,
+		Definitions:           definitions,
 		Readings:              readings,
 		IDS:                   ids.IdeographicDescriptionSequence,
 		Decompositions:        decompositions,
