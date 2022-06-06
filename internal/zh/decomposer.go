@@ -75,37 +75,6 @@ func (d *Hanzi) export(name string) error {
 	return ioutil.WriteFile(fmt.Sprintf(filepath.Join(genDir, filename), name), bytes, 0644)
 }
 
-// func (d *Hanzi) groupFields(fields map[string]interface{}) (map[string]interface{}, error) {
-// 	grouped := make(map[string]interface{})
-// 	for keySequence, value := range fields {
-// 		keys := strings.Split(keySequence, ".")
-// 		if len(keys) == 0 {
-// 			return nil, fmt.Errorf("could not split key sequence %s", keySequence)
-// 		}
-// 		if len(keys) == 1 {
-// 			grouped[keys[0]] = value
-// 			continue
-// 		}
-// 		var o interface{}
-// 		// here we know that value is either map or slice
-// 		for _, key := range keys {
-// 			// get key type - if it's an int, we treat value as a slice
-// 			// if it's a string, we treat it as a map
-// 			isInt = true
-// 			index, err := strconv.ParseInt(key, 10, 64)
-// 			if err != nil {
-// 				isInt = false
-// 			}
-
-// 			if group, ok := grouped[key]; !ok {
-// 				grouped[key] = value
-// 			}
-// 		}
-// 		grouped[keys[0]] = o
-// 	}
-// 	return grouped, nil
-// }
-
 func (d *Hanzi) GetFields(keySequences []string) (map[string]interface{}, error) {
 	m := structs.Map(d)
 	fields := make(map[string]interface{})
