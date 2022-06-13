@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"html/template"
 	"os"
 	"strings"
 
@@ -70,22 +71,49 @@ func main() {
 		hanzi = buildHanzi(query, dict, idsDecomposer, depth)
 	}
 
-	format := zh.Format_plain
-	if jsonOut {
-		format = zh.Format_JSON
-	} else if yamlOut {
-		format = zh.Format_YAML
-	}
-	formatter := zh.NewFormatter(
-		zh.Format(format),
-		prepareFilter(fields),
+	const (
+		anki = `
+{{range .}}
+model: Chinese
+deck: Default 
+tags:  
+ 
+# Note 
+ 
+## Hanzi
+{{.Ideograph}}
+
+## Pinyin
+{{range .Readings}}{{.}} {{end}}
+ 
+## English
+{{range .Definitions}}{{.}} {{end}}
+
+## Audio
+{{end}}`
 	)
-	formatted, err := formatter.Format(hanzi)
+	tmpl, err := template.New("letter").Parse(anki)
 	if err != nil {
-		fmt.Printf("could not format hanzi: %v\n", err)
-		os.Exit(1)
+		fmt.Println(err.Error())
 	}
-	fmt.Print(formatted)
+	tmpl.Execute(os.Stdout, []*zh.Hanzi{hanzi})
+
+	// format := zh.Format_plain
+	// if jsonOut {
+	// 	format = zh.Format_JSON
+	// } else if yamlOut {
+	// 	format = zh.Format_YAML
+	// }
+	// formatter := zh.NewFormatter(
+	// 	zh.Format(format),
+	// 	prepareFilter(fields),
+	// )
+	// formatted, err := formatter.Format(hanzi)
+	// if err != nil {
+	// 	fmt.Printf("could not format hanzi: %v\n", err)
+	// 	os.Exit(1)
+	// }
+	// fmt.Print(formatted)
 
 	if len(errs) != 0 {
 		for _, e := range errs {
