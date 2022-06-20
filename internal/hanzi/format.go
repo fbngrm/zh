@@ -1,4 +1,4 @@
-package zh
+package hanzi
 
 import (
 	"encoding/json"

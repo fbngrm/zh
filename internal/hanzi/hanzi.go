@@ -1,16 +1,11 @@
-package zh
+package hanzi
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"path/filepath"
 	"strconv"
 	"strings"
 
 	"github.com/fatih/structs"
-	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/fgrimme/zh/internal/unihan"
 )
 
 const (
@@ -31,48 +26,6 @@ type Hanzi struct {
 	OtherReadings         []string `yaml:"other_readings,omitempty" json:"other_readings,omitempty" structs:"other_readings"`
 	IDS                   string   `yaml:"ids,omitempty" json:"ids,omitempty" structs:"ids"`
 	Decompositions        []*Hanzi `yaml:"decompositions,omitempty" json:"decompositions,omitempty" structs:"decompositions"`
-}
-
-type Decomposer struct {
-	Readings       unihan.ReadingsByMapping
-	Decompositions cjkvi.Decompositions
-}
-
-// func (d *Decomposer) DecomposeAll() error {
-// 	if err := os.MkdirAll(genDir, os.ModePerm); err != nil {
-// 		return err
-// 	}
-// 	for codepoint, readings := range d.Readings {
-// 		ideograph := readings[unihan.CJKVIdeograph]
-// 		definition := readings[unihan.KDefinition]
-
-// 		ids := []cjkvi.IdeographicDescriptionSequence{}
-// 		if decomposition, ok := d.Decompositions[codepoint]; ok {
-// 			ids = decomposition.IDS
-// 		}
-// 		r, _ := utf8.DecodeRuneInString(ideograph)
-// 		d := &Decomposition{
-// 			Source:     "unihan",
-// 			Mapping:    codepoint,
-// 			Decimal:    int32(r),
-// 			Ideograph:  ideograph,
-// 			Definition: definition,
-// 			Readings:   readings,
-// 			IDS:        ids,
-// 		}
-// 		if err := d.export(codepoint); err != nil {
-// 			return err
-// 		}
-// 	}
-// 	return nil
-// }
-
-func (d *Hanzi) export(name string) error {
-	bytes, err := json.MarshalIndent(d, "", "  ")
-	if err != nil {
-		return err
-	}
-	return ioutil.WriteFile(fmt.Sprintf(filepath.Join(genDir, filename), name), bytes, 0644)
 }
 
 func (d *Hanzi) GetFields(keySequences []string) (map[string]interface{}, error) {

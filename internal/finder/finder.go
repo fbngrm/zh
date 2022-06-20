@@ -1,4 +1,4 @@
-package zh
+package finder
 
 import (
 	"fmt"
@@ -23,40 +23,28 @@ const (
 	searchMode_init = searchMode_ascii
 )
 
-type Finder struct {
-	mode searchMode
-	dict LookupDict
+type Dict interface {
+	Len() int
+	Definitions(i int) ([]string, error)
+	Mapping(i int) (string, error)
+	Ideograph(i int) (string, error)
+	IdeographsSimplified(i int) (string, error)
 }
 
-func NewFinder(d LookupDict) *Finder {
+type Finder struct {
+	mode searchMode
+	dict Dict
+	err  error
+}
+
+func NewFinder(d Dict) *Finder {
 	return &Finder{
 		mode: searchMode_init,
 		dict: d,
 	}
 }
 
-type Match struct {
-	meaning string
-	match   fuzzy.Match
-}
-
-type Matches []Match
-
-func (m Matches) Len() int { return len(m) }
-func (m Matches) Less(i, j int) bool {
-	return fmt.Sprintf(
-		"%d %s",
-		m[i].match.Score,
-		m[i].meaning,
-	) > fmt.Sprintf(
-		"%d %s",
-		m[j].match.Score,
-		m[j].meaning,
-	)
-}
-func (m Matches) Swap(i, j int) { m[i], m[j] = m[j], m[i] }
-
-func (f *Finder) FindSorted(query string, limit int) fuzzy.Matches {
+func (f *Finder) FindSorted(query string, limit int) (fuzzy.Matches, error) {
 	f.SetModeFromString(query)
 	matches := fuzzy.FindFrom(strings.TrimSpace(query), f)
 	if len(matches) < limit {
@@ -65,8 +53,12 @@ func (f *Finder) FindSorted(query string, limit int) fuzzy.Matches {
 	matches = matches[:limit]
 	unsortedMatches := make(Matches, len(matches))
 	for i, m := range matches {
+		definitions, err := f.dict.Definitions(m.Index)
+		if err != nil {
+			return fuzzy.Matches{}, fmt.Errorf("match index mismatch, index %d does not exist", m.Index)
+		}
 		unsortedMatches[i] = Match{
-			meaning: strings.Join(f.dict[m.Index].Definitions, ", "),
+			meaning: strings.Join(definitions, ", "),
 			match:   m,
 		}
 	}
@@ -75,7 +67,7 @@ func (f *Finder) FindSorted(query string, limit int) fuzzy.Matches {
 	for i, m := range unsortedMatches {
 		sortedMatches[i] = m.match
 	}
-	return sortedMatches
+	return sortedMatches, nil
 }
 
 func (f *Finder) Find(query string) fuzzy.Matches {
@@ -84,11 +76,15 @@ func (f *Finder) Find(query string) fuzzy.Matches {
 }
 
 func (f *Finder) String(i int) string {
-	return f.lookup(i)
+	s, err := f.lookup(i)
+	if err != nil {
+		f.err = err
+	}
+	return s
 }
 
 func (f *Finder) Len() int {
-	return len(f.dict)
+	return f.dict.Len()
 }
 
 func (f *Finder) SetModeFromString(s string) {
@@ -135,17 +131,21 @@ func (f *Finder) GetMode() int {
 	return int(f.mode)
 }
 
-func (f *Finder) lookup(i int) string {
+func (f *Finder) lookup(i int) (string, error) {
 	switch f.mode {
 	case searchMode_codepoint:
-		return f.dict[i].Mapping
+		return f.dict.Mapping(i)
 	case searchMode_hanzi_char:
-		return f.dict[i].Ideograph
+		return f.dict.Ideograph(i)
 	case searchMode_hanzi_word: // TODO: support traditional
-		return f.dict[i].IdeographsSimplified
+		return f.dict.IdeographsSimplified(i)
 	// case searchMode_ascii:
 	// 	return f.dict[i].Definitions
 	default:
-		return unknown
+		return "", fmt.Errorf("mode %v not supported", f.mode)
 	}
+}
+
+func (f *Finder) Error() error {
+	return f.err
 }

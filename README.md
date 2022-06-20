@@ -11,7 +11,8 @@ Lookup hanzi from cmd-line
 - [x] Do not decompose unihan hanzi by default
 - [x] Decompose words
 - [ ] Batch decompose hanzi (from file)
-- [ ] HSK lists
+- [x] HSK lists
+- [ ] HSK example sentences
 - [ ] Filter * for slices
 - [ ] Config file
 - [ ] Batch decompose sentences / split into words

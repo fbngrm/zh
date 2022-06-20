@@ -7,16 +7,16 @@ import (
 	"strings"
 )
 
-type Entry struct {
+type entry struct {
 	Traditional string
 	Simplified  string
 	Readings    []string
 	Definition  []string
 }
 
-type Dict map[string]Entry
+type parsedEntries map[string]entry
 
-func NewDict(cedictSrcPath string) (Dict, error) {
+func parse(cedictSrcPath string) (parsedEntries, error) {
 	file, err := os.Open(cedictSrcPath)
 	if err != nil {
 		log.Fatal(err)
@@ -24,7 +24,7 @@ func NewDict(cedictSrcPath string) (Dict, error) {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	dict := make(Dict)
+	dict := make(parsedEntries)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] == '#' {
@@ -46,7 +46,7 @@ func NewDict(cedictSrcPath string) (Dict, error) {
 		if len(ideographs) > 1 {
 			simplified = ideographs[1]
 		}
-		dict[parts[1]] = Entry{
+		dict[parts[1]] = entry{
 			Traditional: traditional,
 			Simplified:  simplified,
 			Readings:    readings,

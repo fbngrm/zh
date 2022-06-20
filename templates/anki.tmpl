@@ -1,0 +1,18 @@
+{{range .}}
+model: Chinese
+deck: Default
+tags:
+
+# Note
+
+## Hanzi
+{{.Ideograph}}
+
+## Pinyin
+{{range .Readings}}{{.}} {{end}}
+
+## English
+{{range .Definitions}}{{.}} {{end}}
+
+## Audio
+{{end}}
