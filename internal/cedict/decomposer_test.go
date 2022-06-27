@@ -415,6 +415,5 @@ decompositions:
 			t.FailNow()
 		}
 		assert.Equal(t, tc.hanzi, string(b))
-		fmt.Println(string(b))
 	}
 }
