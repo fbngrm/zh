@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strings"
 	"text/template"
 
 	"github.com/fgrimme/zh/internal/cedict"
@@ -60,23 +59,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	decomposer := cedict.NewDecomposer(finder.NewFinder(dict))
-
-	var h *hanzi.Hanzi
-	var errs []error
-	isWord := len(query) > 4
-	if isWord {
-		h, errs, err = decomposer.BuildWordDecomposition(query, dict, idsDecomposer, results, depth)
-		if err != nil {
-			fmt.Printf("could not decompose: %v\n", err)
-			os.Exit(1)
-		}
-	} else {
-		h, err = decomposer.BuildHanzi(query, dict, idsDecomposer, results, depth)
-		if err != nil {
-			fmt.Printf("could not decompose: %v\n", err)
-			os.Exit(1)
-		}
+	h, errs, err := cedict.NewDecomposer(
+		dict,
+		finder.NewFinder(dict),
+		idsDecomposer,
+	).Decompose(query, results, depth)
+	if err != nil {
+		fmt.Printf("could not decompose: %v\n", err)
+		os.Exit(1)
 	}
 
 	// out
@@ -97,7 +87,7 @@ func main() {
 	}
 	formatter := hanzi.NewFormatter(
 		hanzi.Format(format),
-		prepareFilter(fields),
+		fields,
 	)
 	formatted, err := formatter.Format(h)
 	if err != nil {
@@ -107,21 +97,9 @@ func main() {
 	fmt.Println(formatted)
 
 	// errs
-
 	if len(errs) != 0 {
 		for _, e := range errs {
 			os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
 		}
 	}
-}
-
-func prepareFilter(fields string) []string {
-	var filterFields []string
-	if len(fields) > 0 {
-		filterFields = strings.Split(fields, ",")
-	}
-	for i, field := range filterFields {
-		filterFields[i] = strings.TrimSpace(field)
-	}
-	return filterFields
 }

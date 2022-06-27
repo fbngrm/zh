@@ -12,6 +12,7 @@ Lookup hanzi from cmd-line
 - [x] Decompose words
 - [ ] Batch decompose hanzi (from file)
 - [x] HSK lists
+- [ ] Batch decompose files
 - [ ] HSK example sentences
 - [ ] Filter * for slices
 - [ ] Config file

@@ -13,19 +13,36 @@ type Finder interface {
 	FindSorted(query string, limit int) (fuzzy.Matches, error)
 }
 
-type Decomposer struct {
-	finder Finder
-	offset int
+type IDSDecomposer interface {
+	Decompose(query string, depth int) cjkvi.Decomposition
 }
 
-func NewDecomposer(f Finder) *Decomposer {
+type Decomposer struct {
+	dict          []*hanzi.Hanzi
+	finder        Finder
+	idsDecomposer IDSDecomposer
+	offset        int
+}
+
+func NewDecomposer(dict []*hanzi.Hanzi, f Finder, d IDSDecomposer) *Decomposer {
 	return &Decomposer{
-		finder: f,
-		offset: 20,
+		dict:          dict,
+		finder:        f,
+		idsDecomposer: d,
+		offset:        20,
 	}
 }
 
-func (d *Decomposer) BuildWordDecomposition(query string, dict Dict, idsDecomposer *cjkvi.IDSDecomposer, results, depth int) (*hanzi.Hanzi, []error, error) {
+func (d *Decomposer) Decompose(query string, results, depth int) (*hanzi.Hanzi, []error, error) {
+	isWord := len(query) > 4
+	if isWord {
+		return d.BuildWordDecomposition(query, results, depth)
+	}
+	h, err := d.BuildHanzi(query, results, depth)
+	return h, []error{}, err
+}
+
+func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*hanzi.Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + d.offset
@@ -37,10 +54,10 @@ func (d *Decomposer) BuildWordDecomposition(query string, dict Dict, idsDecompos
 		return nil, nil, fmt.Errorf("no translation found %s", query)
 	}
 	index := matches[0].Index
-	if len(dict) <= index {
+	if len(d.dict) <= index {
 		return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
 	}
-	dictEntry := dict[index]
+	dictEntry := d.dict[index]
 
 	errs := make([]error, 0)
 	var readingsIndex int
@@ -48,8 +65,6 @@ func (d *Decomposer) BuildWordDecomposition(query string, dict Dict, idsDecompos
 	for _, q := range query {
 		hanzi, err := d.BuildHanzi(
 			string(q),
-			dict,
-			idsDecomposer,
 			results,
 			depth-1,
 		)
@@ -106,7 +121,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, dict Dict, idsDecompos
 	return dictEntry, errs, nil
 }
 
-func (d *Decomposer) BuildHanzi(query string, dict Dict, idsDecomposer *cjkvi.IDSDecomposer, results, depth int) (*hanzi.Hanzi, error) {
+func (d *Decomposer) BuildHanzi(query string, results, depth int) (*hanzi.Hanzi, error) {
 	readings := make([]string, 0)
 	definitions := make([]string, 0)
 	simplified := ""
@@ -123,7 +138,7 @@ func (d *Decomposer) BuildHanzi(query string, dict Dict, idsDecomposer *cjkvi.ID
 		if i >= len(matches) {
 			break
 		}
-		d := dict[matches[i].Index]
+		d := d.dict[matches[i].Index]
 		if len(query) != len(d.Ideograph) {
 			continue
 		}
@@ -136,7 +151,7 @@ func (d *Decomposer) BuildHanzi(query string, dict Dict, idsDecomposer *cjkvi.ID
 			traditional += "; "
 		}
 	}
-	ids := idsDecomposer.Decompose(query, 1)
+	ids := d.idsDecomposer.Decompose(query, 1)
 
 	var decompositions []*hanzi.Hanzi
 	if depth > 0 {
@@ -144,8 +159,6 @@ func (d *Decomposer) BuildHanzi(query string, dict Dict, idsDecomposer *cjkvi.ID
 		for i, decomp := range ids.Decompositions {
 			decompositions[i], err = d.BuildHanzi(
 				decomp.Ideograph,
-				dict,
-				idsDecomposer,
 				results,
 				depth-1,
 			)

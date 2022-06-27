@@ -21,10 +21,10 @@ type Formatter struct {
 	filterFields []string
 }
 
-func NewFormatter(f Format, filterFields []string) *Formatter {
+func NewFormatter(f Format, fields string) *Formatter {
 	return &Formatter{
 		format:       f,
-		filterFields: filterFields,
+		filterFields: prepareFilter(fields),
 	}
 }
 
@@ -80,4 +80,15 @@ func (f *Formatter) formatPlain(data interface{}) (string, error) {
 	result += "\t"
 	result += fmt.Sprintf("source=%s", d.Source)
 	return result, nil
+}
+
+func prepareFilter(fields string) []string {
+	var filterFields []string
+	if len(fields) > 0 {
+		filterFields = strings.Split(fields, ",")
+	}
+	for i, field := range filterFields {
+		filterFields[i] = strings.TrimSpace(field)
+	}
+	return filterFields
 }
