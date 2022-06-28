@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Part of speech - Chinese Grammar Wiki</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Part_of_speech","wgTitle":"Part of speech","wgCurRevisionId":19486,"wgRevisionId":19486,"wgArticleId":276,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Words","Parts of speech"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Part_of_speech","wgRelevantArticleId":276,"wgRequestId":"fe017283d00239ed308504cc","wgCSPNonce":false,"wgIsProbablyEditable":false,"wgRelevantPageIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgRedirectedFrom":"Parts_of_speech","wgWikiEditorEnabledModules":{"toolbar":false,"dialogs":false,"hidesig":true,"templateEditor":false,"templates":false,"preview":false,"previewDialog":false,"publish":false,"toc":false},"wgInternalRedirectTargetUrl":"/chinese/grammar/Part_of_speech"});mw.loader.state({"site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"ready","user.tokens":"loading","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.toc.styles":"ready","ext.smw.style":"ready","ext.smw.tooltip.styles":"ready"});mw.loader.implement("user.tokens@0tffind",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});
+});RLPAGEMODULES=["mediawiki.action.view.redirect","ext.smw.style","ext.smw.tooltips","site","mediawiki.page.startup","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.ASLExtension","skins.allset"];mw.loader.load(RLPAGEMODULES);});</script>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=ext.smw.style%7Cext.smw.tooltip.styles&amp;only=styles&amp;skin=allset"/>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.toc.styles&amp;only=styles&amp;skin=allset"/>
+<script async="" src="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=startup&amp;only=scripts&amp;skin=allset"></script>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap-store/styles.css?83b94" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap-store/responsive.css?10b44" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap/awesome/css/font-awesome.css?3e78a" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/skin-style.css?ea523" media="screen"/>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=allset"/>
+<meta name="generator" content="MediaWiki 1.33.0"/>
+<meta name="twitter:site" content="@ChineseGrammar"/>
+<link rel="alternate" type="application/rdf+xml" title="Part of speech" href="https://resources.allsetlearning.com/gramwiki/?title=Special:ExportRDF/Part_of_speech&amp;xmlmime=rdf"/>
+<link rel="shortcut icon" href="https://resources.allsetlearning.com/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="https://resources.allsetlearning.com/gramwiki/opensearch_desc.php" title="Chinese Grammar Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://resources.allsetlearning.com/gramwiki/api.php?action=rsd"/>
+<link rel="canonical" href="Part_of_speech"/>
+ <meta property="url" content="http://resources.allsetlearning.com/chinese/grammar/"/>
+
+   <meta property="title" content="A comprehensive, free resource for standard Chinese grammar, organized by part of speech and difficulty level, with clear examples of usage."/>
+
+  <link rel="author" href="https://plus.google.com/104115976790023245464"/>
+<meta property="og:title" content="Part of speech - Chinese Grammar Wiki"/>
+<meta property="og:site_name" content="Chinese Grammar Wiki"/>
+<meta property="og:url" content="https://resources.allsetlearning.com/chinese/grammar/Part_of_speech"/>
+<meta property="og:image" content="Localfile.jpg"/>
+<meta property="article:modified_time" content="2013-11-29T03:42:40Z"/>
+<meta property="article:published_time" content="2013-11-29T03:42:40Z"/>
+<meta property="twitter:title" content="Part of speech - Chinese Grammar Wiki"/>
+<meta property="twitter:image" content="Localfile.jpg"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"article","name":"Part of speech - Chinese Grammar Wiki","headline":"Part of speech - Chinese Grammar Wiki","mainEntityOfPage":"Part of speech","identifier":"https:\/\/resources.allsetlearning.com\/chinese\/grammar\/Part_of_speech","url":"https:\/\/resources.allsetlearning.com\/chinese\/grammar\/Part_of_speech","dateModified":"2013-11-29T03:42:40Z","datePublished":"2013-11-29T03:42:40Z","image":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png"},"author":{"@type":"Organization","name":"Chinese Grammar Wiki","url":"https:\/\/resources.allsetlearning.com","logo":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png","caption":"Chinese Grammar Wiki"}},"publisher":{"@type":"Organization","name":"Chinese Grammar Wiki","url":"https:\/\/resources.allsetlearning.com","logo":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png","caption":"Chinese Grammar Wiki"}},"potentialAction":{"@type":"SearchAction","target":"https:\/\/resources.allsetlearning.com\/gramwiki\/?title=Special:Search&search={search_term}","query-input":"required name=search_term"}}</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/gramwiki/skins/allset/csshover.min.htc")}</style><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if lt IE 9]><script src="/gramwiki/load.php?lang=en&amp;modules=html5shiv&amp;only=scripts&amp;skin=allset&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Part_of_speech rootpage-Part_of_speech skin-allset action-view"><div id="top_page" class="navbar navbar-static-top accounts noprint">
+    <div class="navbar-inner" style="background: white !important;">
+        <header class="Header Header--top">
+            <div class="Header-inner Header-inner--top" data-nc-group="top">
+                <div data-nc-container="top-left">
+                    <a class="Header-branding" href="https://www.allsetlearning.com/" data-nc-element="branding"
+                       data-content-field="site-title">
+                        <img class="Header-branding-logo" alt="AllSet Learning"
+                             src="https://resources.allsetlearning.com/gramwiki/skins/allset/assets/img/AllSet-Primary-Logo_transp_1000w227h.png" />
+                    </a>
+                </div>
+                <div data-nc-container="top-center">
+                </div>
+                <div data-nc-container="top-right">
+                    <nav data-nc-element="primary-nav" data-content-field="navigation"
+                         class="Header-nav Header-nav--primary">
+                        <div class="Header-nav-inner">
+                            <ul>
+                                <li><a class="Header-nav-item" href="https://resources.allsetlearning.com/chinese/" data-test="template-nav">Resources <span class="drop-arrow">▼</span></a>
+                                    <ul>
+                                        <li><a href="index.html">Chinese Grammar
+                                            Wiki</a></li>
+                                        <li><a href="https://resources.allsetlearning.com/chinese/vocabulary/">Chinese Vocabulary
+                                            Wiki</a></li>
+                                        <li><a href="https://resources.allsetlearning.com/chinese/pronunciation/">Chinese
+                                            Pronunciation Wiki</a></li>
+                                        <li><a href="https://www.allsetlearning.com/free-downloads/">Free Downloads</a></li>
+                                        <li><a href="https://www.allsetlearning.com/newsletter/">Product Newsletter</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <a class="Header-nav-item hide-on-mobile" href="https://store.allsetlearning.com/" data-test="template-nav">Store</a><a
+                                class="Header-nav-item hide-on-mobile" href="https://www.allsetlearning.com/products"
+                                data-test="template-nav">Books</a>
+                            <a class="Header-nav-item hide-on-mobile" href="https://www.allsetlearning.com/courses" data-test="template-nav">
+                                Courses <div class="newbadge">NEW</div>
+                            </a>
+                                                        <a class="Header-nav-item" href="https://resources.allsetlearning.com/gramwiki/?title=Special:UserLogin&amp;returnto=Part+of+speech">
+                                <i class="icon-signin"></i> Log in                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+
+
+
+    <!-- Header -->
+    <div id="page-header" class="container signed-out">
+      <section class="span12">
+
+      
+      <ul class="navigation nav nav-pills pull-right searchform-disabled">
+
+      
+      </ul>
+
+    </section>
+    </div>
+        
+    
+    <!-- content -->
+    <section id="content" class="mw-body container user-loggedout not-editable">
+      <div id="top"></div>
+      <div id="mw-js-message" style="display:none;"></div>
+            <!-- bodyContent -->
+      <div id="bodyContent">
+        	<div id="gg-top" class="gg"></div>
+
+<div class="row-fluid wikititle"><a href="Main_Page"><img class="wikititle-spacer" src="https://resources.allsetlearning.com/gramwiki/skins/allset//assets/gramwiki/Wiki-title.png"></a></div>
+<div class="row-fluid noprint">
+   <div class="span2"></div>
+   <div id="menu-tabs" class="span10 tabs">
+      <ul>
+         <li class="menu-spacer"></li>
+                              <li id="ca-view" class="selected"><span><a href="Part_of_speech" >View</a></span></li>
+                     <li id="ca-viewsource"><span><a href="https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+                     <li id="ca-history" class="collapsible"><span><a href="https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">History</a></span></li>
+                           <li>
+           
+<!-- 0 -->
+            <form class="navbar-search" action="https://resources.allsetlearning.com/gramwiki/" id="searchform">
+              <input id="searchInput" class="search-query" type="search" accesskey="f" title="Special:Search" placeholder="Search" name="search" value="">
+              <input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton btn hidden"/>            </form>
+
+          
+<!-- /0 -->
+         </li>
+      </ul>
+   </div>
+</div>
+<div class="row-fluid">
+<div id="mw-panel" class="span2 noprint">
+
+<!-- 0 -->
+         <ul class="sidebar-single">
+                <li><a href="Main_Page" id="n-Main-Page">Main Page</a></li>
+                <li><a href="Learner_FAQ" id="n-Learner-FAQ">Learner FAQ</a></li>
+                <li><a href="Grammar_points_by_level" id="n-Grammar-Points">Grammar Points</a></li>
+                <li><a href="A1_grammar_points" id="n-A1-Grammar-Points">A1 Grammar Points</a></li>
+                <li><a href="A2_grammar_points" id="n-A2-Grammar-Points">A2 Grammar Points</a></li>
+                <li><a href="B1_grammar_points" id="n-B1-Grammar-Points">B1 Grammar Points</a></li>
+                <li><a href="B2_grammar_points" id="n-B2-Grammar-Points">B2 Grammar Points</a></li>
+                <li><a href="HSK_1_grammar_points" id="n-HSK-1-Grammar">HSK 1 Grammar</a></li>
+                <li><a href="HSK_2_grammar_points" id="n-HSK-2-Grammar">HSK 2 Grammar</a></li>
+                <li><a href="HSK_3_grammar_points" id="n-HSK-3-Grammar">HSK 3 Grammar</a></li>
+                <li><a href="Keywords" id="n-Chinese-Keywords">Chinese Keywords</a></li>
+                <li><a href="Translations" id="n-Word-Translations">Word Translations</a></li>
+                <li><a href="Chinese_textbook_grammar_index" id="n-Textbook-Index">Textbook Index</a></li>
+                <li><a href="Forums" id="n-Chinese-Forums">Chinese Forums</a></li>
+                <li><a href="Acknowledgments" id="n-Acknowledgments">Acknowledgments</a></li>
+                <li><a href="Contact" id="n-Contact-Us">Contact Us</a></li>
+               </ul>
+            <li class="sidebar-group">
+               <a><div class="sidebar-caret"></div>Useful Pages</a>
+               <ul>
+                <li><a href="Tools" id="n-Reading-Tools">Reading Tools</a></li>
+                <li><a href="https://resources.allsetlearning.com/chinese/grammar/Special:RecentChanges" id="n-recentchanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+                <li><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Random" id="n-randompage" title="Load a random page [x]" accesskey="x">Random page</a></li>
+                <li><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" id="n-help" title="The place to find out">Help</a></li>
+                <li><a href="http://resources.allsetlearning.com/" id="n-Newsletter" rel="nofollow">Newsletter</a></li>
+               </ul>
+               </ul>
+               </ul>
+               </ul>
+            </li>
+         </ul>
+
+<!-- /LANGUAGES -->
+
+<!-- 0 -->
+
+         <ul class="sidebar-single">
+            <li class="sidebar-group">
+               <a><div class="sidebar-caret"></div>Tools</a>
+               <ul>
+
+                <li id="t-whatlinkshere"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:WhatLinksHere/Part_of_speech" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:RecentChangesLinked/Part_of_speech" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;oldid=19486" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;action=info" title="More information about this page">Page information</a></li><li id="t-smwbrowselink"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Browse/:Part-5Fof-5Fspeech" rel="search">Browse properties</a></li>              </ul>
+
+            </li>
+
+          </ul>
+          
+<!-- /0 -->
+  <div id="gg-mid" class="gg"></div>
+</div>
+
+<div class="span10">
+        <!-- innerbodycontent -->
+                  <div id="innerbodycontent" class="row nolayout"><div class="offset1 span10">
+            <div id="sm-cog-elements" class="noprint"></div>
+            <div class="allset-page-heading"><h1>Part of speech</h1></div>
+            <!-- subtitle -->
+            <div id="contentSub" ><span class="mw-redirectedfrom">(Redirected from <a href="https://resources.allsetlearning.com/gramwiki/?title=Parts_of_speech&amp;redirect=no" class="mw-redirect" title="Parts of speech">Parts of speech</a>)</span></div>
+            <!-- /subtitle -->
+                        <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><p>"Part of speech" (词类 in Mandarin) is a key term in any book about grammar, and even any dictionary, for that matter.  Common examples of a word's part of speech include noun, verb, adjective, and so on.  Many native speakers are not at all clear on the parts of speech of the words they use on a daily basis.  This is not a problem in any language, but if you're a learner that really wants to master Chinese grammar in all its subtle nuances, you'll find that classification by part of speech is a very useful tool.  Part of speech comes in handy not just in instantly knowing the main ways a word can be used, but also in helping you cut to the chase and identify the key <i>exceptions</i> and special properties of a word.  In Mandarin Chinese, you'll frequently encounter words that push the boundaries of their parts of speech, or subcategories of words that act like freak "hybrids" (such as "adjectives acting like verbs").
+</p><p>Part of speech is the tool which will help you start to make sense of what seems like a chaotic mess of words "just doing whatever they want."  Don't worry; it's not as difficult as it sounds!  We'll start by introducing the main concepts related to part of speech.
+</p>
+<div id="toc" class="toc"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2>Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Parts_of_speech#Content_Words_and_Function_Words"><span class="tocnumber">1</span> <span class="toctext">Content Words and Function Words</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Parts_of_speech#Function_Words_.28.E8.99.9A.E8.AF.8D.29"><span class="tocnumber">1.1</span> <span class="toctext">Function Words (虚词)</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Parts_of_speech#Content_Words_.28.E5.AE.9E.E8.AF.8D.29"><span class="tocnumber">1.2</span> <span class="toctext">Content Words (实词)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Parts_of_speech#Parts_of_Speech_in_Mandarin_Chinese"><span class="tocnumber">2</span> <span class="toctext">Parts of Speech in Mandarin Chinese</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Parts_of_speech#Determining_Part_of_Speech"><span class="tocnumber">3</span> <span class="toctext">Determining Part of Speech</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Parts_of_speech#Part_of_Speech_by_Form"><span class="tocnumber">3.1</span> <span class="toctext">Part of Speech by Form</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Parts_of_speech#Part_of_Speech_by_Meaning"><span class="tocnumber">3.2</span> <span class="toctext">Part of Speech by Meaning</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Parts_of_speech#Part_of_Speech_by_Function"><span class="tocnumber">3.3</span> <span class="toctext">Part of Speech by Function</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Parts_of_speech#Sources_and_further_reading"><span class="tocnumber">4</span> <span class="toctext">Sources and further reading</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Content_Words_and_Function_Words">Content Words and Function Words</span></h2>
+<p>Since ancient times, the words of the Chinese language have been grouped into two main categories: <i>xuci</i> (虚词) and <i>shici</i> (实词).  The astute sinophile will notice the very dualistic nature of this classification system.  These two words can be translated in many different ways, but here we'll use the term <i>function words</i> for the former, and <i>content words</i> for the latter.
+</p>
+<h3><span id="Function_Words_(虚词)"></span><span class="mw-headline" id="Function_Words_.28.E8.99.9A.E8.AF.8D.29">Function Words (虚词)</span></h3>
+<p>The character 虚 refers to that which is "false" or "not real," or "empty."  In this case, the words are "empty" in that they don't do anything by themselves.  They serve important grammatical functions by making clear relationships between words, logical connections, or modifications of meaning.  Hence, the Chinese word 虚词 is a bit difficult to translate, and is listed in the ABC Dictionary as all of the following: "function word/form word/cenematic word/empty word/syncategorematic word; functive; particle."
+</p><p>Function words are the "grammar words" of modern Chinese.  They're the 了, the 着, the 于, the 向, the 和, and the 却.  These are the ones that tend to give learners are a hard time.  The good news is that it's not random words that are designated as function words; it's whole <i>categories</i> of words, whole parts of speech.  The parts of speech classified as function words are: <a href="Prepositions" class="mw-redirect" title="Prepositions">prepositions</a>, <a href="Conjunctions" class="mw-redirect" title="Conjunctions">conjunctions</a>, and <a href="Particles" class="mw-redirect" title="Particles">particles</a>.
+</p>
+<h3><span id="Content_Words_(实词)"></span><span class="mw-headline" id="Content_Words_.28.E5.AE.9E.E8.AF.8D.29">Content Words (实词)</span></h3>
+<p>As you might know (or guess), the character 实 means "real," "actual," "true."  Contrary to function words, these content words refer to real objects in the real world, whether solid and palpable, or observable in some other way.  These words refer to objects, actions, concepts, and even emotions, which exist in some real way as more than just grammatical tools.  
+</p><p>The ABC lists all of the following translations for the Chinese word 实词: "notional word/plerematic word; autonomous word/content word/full word/lexical word; contentive; substantive."  The parts of speech classified as content words are: <a href="Noun" title="Noun">nouns</a>, <a href="Pronoun" title="Pronoun">pronouns</a>, <a href="Verb" title="Verb">verbs</a>, <a href="Auxiliary_verb" title="Auxiliary verb">auxiliary verbs</a>, <a href="Adjective" title="Adjective">adjectives</a>, <a href="Adverb" title="Adverb">adverbs</a>, <a href="Number_word" title="Number word">number words</a>, <a href="Measure_word" title="Measure word">measure words</a>, <a href="Interjection" title="Interjection">interjections</a>, and <a href="Onomatopoeia" title="Onomatopoeia">onomatopoeia</a>.
+</p>
+<h2><span class="mw-headline" id="Parts_of_Speech_in_Mandarin_Chinese">Parts of Speech in Mandarin Chinese</span></h2>
+<ul><li><b>Content Words</b>
+<ul><li><a href="Noun" title="Noun">Nouns</a></li>
+<li><a href="Pronoun" title="Pronoun">Pronouns</a></li>
+<li><a href="Verb" title="Verb">Verbs</a></li>
+<li><a href="Auxiliary_verb" title="Auxiliary verb">Auxiliary verbs</a> (AKA "Modal verbs")</li>
+<li><a href="Adjective" title="Adjective">Adjectives</a></li>
+<li><a href="Adverb" title="Adverb">Adverbs</a></li>
+<li><a href="Number_word" title="Number word">Number words</a></li>
+<li><a href="Measure_word" title="Measure word">Measure words</a></li>
+<li><a href="Interjection" title="Interjection">Interjections</a></li>
+<li><a href="Onomatopoeia" title="Onomatopoeia">Onomatopoeias</a></li></ul></li>
+<li><b>Function words</b>
+<ul><li><a href="Conjunction" title="Conjunction">Conjunctions</a></li>
+<li><a href="Preposition" title="Preposition">Prepositions</a></li>
+<li><a href="Particle" title="Particle">Particles</a></li></ul></li></ul>
+<p>(For a more complete list including subcategories, see the full <a href="Parts_of_speech_list" title="Parts of speech list">parts of speech list</a>.)
+</p>
+<h2><span class="mw-headline" id="Determining_Part_of_Speech">Determining Part of Speech</span></h2>
+<p>When you study a European language, part of speech seems very much cut and dry.  Parts of speech seem to have been designated in antiquity, and even have all kinds of telltale features which help the learner to recognize them.  Such is not the case in Mandarin Chinese.  Let's take a look at three key ways for recognizing a word's part of speech (in any language) and see what works best for Mandarin Chinese.
+</p>
+<h3><span class="mw-headline" id="Part_of_Speech_by_Form">Part of Speech by Form</span></h3>
+<p>Some words have certain features (called "morphological features") which help you recognize their parts of speech.  For example, verbs in Spanish end in <i>-ar</i>, <i>-er</i>, or <i>-ir</i>.  Some English verbs end in <i>-ize</i>.  Adjectives in English often end in <i>-al</i> or <i>-y</i>.  Verbs in English often take the endings <i>-ed</i> or <i>-ing</i>.  Both nouns and verbs can take the ending <i>-s</i>.  You get the idea.
+</p><p>This may be a handy shortcut for identifying parts of speech (or at least eliminating possibilities), but it doesn't often work in Mandarin.  This is because Mandarin words rarely have these telltale morphological markers.  Yes there are some, such as <i>-性</i> or <i>-化</i> or <i>-们</i>, but they're not common.  So we'll point them out when they exist, but they're not something you can consistently count on in your studies of modern Mandarin.
+</p>
+<h3><span class="mw-headline" id="Part_of_Speech_by_Meaning">Part of Speech by Meaning</span></h3>
+<p>Often, a part of speech is clear simply by its meaning.  An action is a verb.  A person or a thing is a noun.  Simple right?  Well... <i>sometimes.</i>  But often not.  The issue is that there are many words in Mandarin with very similar meanings, but different parts of speech.  One oft-cited example is 忽然 and 突然.  Both mean "suddenly."  But 突然 can also act as an adjective ("sudden.").  A simple "meaning check" would be misleading for these two words in many contexts.  So while this method is not without value, it's not reliable for tricky cases.
+</p>
+<h3><span class="mw-headline" id="Part_of_Speech_by_Function">Part of Speech by Function</span></h3>
+<p>When we talk about "grammatical function," we're talking about what a word <i>does</i> in a sentence.  What words does it combine with, and in what order?  What words (or classes of words) does it <i>not</i> combine with?  Furthermore, for the other words that any given word can combine with, what role does it play?
+</p><p>This grammatical function test relates not only to other parts of speech, but also to the main <a href="https://resources.allsetlearning.com/gramwiki/?title=Elements_of_a_sentence&amp;action=edit&amp;redlink=1" class="new" title="Elements of a sentence (page does not exist)">elements of a sentence</a> (e.g. <a href="Subject" title="Subject">subject</a>, <a href="Predicate" title="Predicate">predicate</a>, etc.).  It is the most reliable and most useful way of determining a given word's part of speech in Mandarin Chinese, and will therefore be used extensively throughout this resource when discussing part of speech.
+</p><p>One problem with this method is that it does feel difficult to "break in."  If you're determining a word's part of speech by examining its role in common usage and seeing how it combines with other parts of speech, it's difficult if you don't have a full grasp of the functions of <i>any</i> part of speech in Mandarin.  It does feel a little circular.  Don't worry, though; many parts of speech are actually quite simple in function, and breaking into this "exclusive club" and getting to know the "key players" is not as impossible as it feels at first.
+</p>
+<h2><span class="mw-headline" id="Sources_and_further_reading">Sources and further reading</span></h2>
+<ul><li>Blog Entry: <a rel="nofollow" class="external text" href="http://www.sinosplice.com/life/archives/2006/03/20/chinese-parts-of-speech">Chinese Parts of Speech</a></li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20220618050009
+Cache expiry: 1209600
+Dynamic content: false
+[SMW] In‐text annotation parser time: 0.003 seconds
+CPU time usage: 0.035 seconds
+Real time usage: 0.041 seconds
+Preprocessor visited node count: 35/1000000
+Preprocessor generated node count: 40/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key gramwiki:pcache:idhash:276-0!canonical and timestamp 20220618050009 and revision id 19486
+ -->
+</div></div>                <!-- catlinks -->
+        <div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="./Category:Words" title="Category:Words">Words</a></li><li><a href="https://resources.allsetlearning.com/gramwiki/?title=Category:Parts_of_speech&amp;action=edit&amp;redlink=1" class="new" title="Category:Parts of speech (page does not exist)">Parts of speech</a></li></ul></div></div>        <!-- /catlinks -->
+        	<div id="gg-bot" class="gg"></div>
+          </div></div>
+                <!-- /innerbodycontent -->
+</div>
+</div>
+
+                <!-- printfooter -->
+        <div class="printfooter">
+        Retrieved from "<a dir="ltr" href="https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;oldid=19486">https://resources.allsetlearning.com/gramwiki/?title=Part_of_speech&amp;oldid=19486</a>"        </div>
+        <!-- /printfooter -->
+                        <div class="visualClear"></div>
+        <!-- debughtml -->
+                <!-- /debughtml -->
+      </div>
+      <!-- /bodyContent -->
+    </section>
+    <!-- /content -->
+
+      <!-- footer -->
+
+      <div id="footer" class="footer container custom-footer"><div class="row-fluid"><div class="span2"></div><div class="span10"><p>不允许任何以商业为目的或不注明归属 Chinese Grammar Wiki &copy;2011-2022 AllSet Learning 的内容引用。关于合法使用此内容的更多信息，请参阅我们的<a href="./Chinese&#32;Grammar&#32;Wiki:Copyrights" title="Copyrights">知识共享权限条款（Creative Commons license）</a>。</p>
+
+<p>All content on the Chinese Grammar Wiki &copy;2011-2022 AllSet Learning, and may not be used for commercial purposes or without attribution. For more information on how to legally use this content, please see our <a href="./Chinese&#32;Grammar&#32;Wiki:Copyrights" title="Copyrights">Creative Commons license</a> unless otherwise noted.</p></div></div></div>
+      <div id="footer" class="footer container">
+        <div class="row">
+    
+            <ul id="footer-places">
+                              <li id="footer-places-privacy"><a href="https://resources.allsetlearning.com/chinese/grammar/Chinese_Grammar_Wiki:Privacy_policy" title="Chinese Grammar Wiki:Privacy policy">Privacy policy</a></li>
+                              <li id="footer-places-about"><a href="./Chinese_Grammar_Wiki:About" title="Chinese Grammar Wiki:About">About Chinese Grammar Wiki</a></li>
+                              <li id="footer-places-disclaimer"><a href="https://resources.allsetlearning.com/chinese/grammar/Chinese_Grammar_Wiki:General_disclaimer" title="Chinese Grammar Wiki:General disclaimer">Disclaimers</a></li>
+                            <li id="pt-login"><a href="https://resources.allsetlearning.com/gramwiki/?title=Special:UserLogin&amp;returnto=Part+of+speech">Log in</a></li>            </ul>
+                                <ul id="footer-icons" class="noprint">
+                  <li id="footer-poweredbyico">
+                    <a href="https://www.mediawiki.org/"><img src="https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>
+                    <a href="https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki"><img src="data:image/png;base64,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" alt="Powered by Semantic MediaWiki" class="smw-footer" width="88" height="31"/></a>
+                  </li>
+                </ul>
+                  </div>
+      </div>
+      <!-- /footer -->
+
+
+    
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"smw":{"limitreport-intext-parsertime":0.003},"limitreport":{"cputime":"0.035","walltime":"0.041","ppvisitednodes":{"value":35,"limit":1000000},"ppgeneratednodes":{"value":40,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":0,"limit":5000000},"timingprofile":["100.00%    0.000      1 -total"]},"cachereport":{"timestamp":"20220618050009","ttl":1209600,"transientcontent":false}}});});</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-32778107-1");
+pageTracker._trackPageview();
+</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":128});});</script>
+  </body>
+</html>

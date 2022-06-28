@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Comparing "gei" and "wei" - Chinese Grammar Wiki</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Comparing_\"gei\"_and_\"wei\"","wgTitle":"Comparing \"gei\" and \"wei\"","wgCurRevisionId":47906,"wgRevisionId":47906,"wgArticleId":4236,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Grammar comparison","B2 grammar points"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Comparing_\"gei\"_and_\"wei\"","wgRelevantArticleId":4236,"wgRequestId":"1cf56864828c8658b5c5cfe9","wgCSPNonce":false,"wgIsProbablyEditable":false,"wgRelevantPageIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":false,"dialogs":false,"hidesig":true,"templateEditor":false,"templates":false,"preview":false,"previewDialog":false,"publish":false,"toc":false}});mw.loader.state({"site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"ready","user.tokens":"loading","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.toc.styles":"ready","ext.smw.style":"ready","ext.smw.tooltip.styles":"ready"});mw.loader.implement("user.tokens@0tffind",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});
+});RLPAGEMODULES=["ext.smw.style","ext.smw.tooltips","site","mediawiki.page.startup","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.ASLExtension","skins.allset"];mw.loader.load(RLPAGEMODULES);});</script>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=ext.smw.style%7Cext.smw.tooltip.styles&amp;only=styles&amp;skin=allset"/>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.toc.styles&amp;only=styles&amp;skin=allset"/>
+<script async="" src="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=startup&amp;only=scripts&amp;skin=allset"></script>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap-store/styles.css?83b94" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap-store/responsive.css?10b44" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap/awesome/css/font-awesome.css?3e78a" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/skin-style.css?ea523" media="screen"/>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=allset"/>
+<meta name="generator" content="MediaWiki 1.33.0"/>
+<meta name="twitter:site" content="@ChineseGrammar"/>
+<meta name="description" content="This grammar point is used for Expressing purpose in Mandarin Chinese. Get clear explanations and lots of examples here!"/>
+<meta name="keywords" content="为,wèi,wéi,wei,给,gěi,gei,Expressing purpose,, , chinese,grammar,chinese grammar,chinese grammar wiki,grammar wiki,learn chinese"/>
+<link rel="alternate" type="application/rdf+xml" title="Comparing &quot;gei&quot; and &quot;wei&quot;" href="https://resources.allsetlearning.com/gramwiki/?title=Special:ExportRDF/Comparing_%22gei%22_and_%22wei%22&amp;xmlmime=rdf"/>
+<link rel="shortcut icon" href="https://resources.allsetlearning.com/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="https://resources.allsetlearning.com/gramwiki/opensearch_desc.php" title="Chinese Grammar Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://resources.allsetlearning.com/gramwiki/api.php?action=rsd"/>
+ <meta property="url" content="http://resources.allsetlearning.com/chinese/grammar/"/>
+
+   <meta property="title" content="A comprehensive, free resource for standard Chinese grammar, organized by part of speech and difficulty level, with clear examples of usage."/>
+
+  <link rel="author" href="https://plus.google.com/104115976790023245464"/>
+<meta property="og:title" content="Comparing &quot;gei&quot; and &quot;wei&quot; - Chinese Grammar Wiki"/>
+<meta property="og:site_name" content="Chinese Grammar Wiki"/>
+<meta property="og:url" content="https://resources.allsetlearning.com/chinese/grammar/Comparing_%22gei%22_and_%22wei%22"/>
+<meta property="article:author" content="Chinese Grammar Wiki"/>
+<meta property="og:description" content="This grammar point is used for Expressing purpose in Mandarin Chinese. Get clear explanations and lots of examples here!"/>
+<meta property="og:image" content="https://resources.allsetlearning.com/gramwiki/images/3/33/Chinese-grammar-wiki-wei.jpg?version=eff33fc3c91600d456e4920a11dc080a"/>
+<meta property="og:image:width" content="1280"/>
+<meta property="og:image:height" content="1280"/>
+<meta property="article:tag" content="为,wèi,wéi,wei,给,gěi,gei,Expressing purpose,, , chinese,grammar,chinese grammar,chinese grammar wiki,grammar wiki,learn chinese"/>
+<meta property="article:modified_time" content="2020-12-15T09:33:25Z"/>
+<meta property="article:published_time" content="2020-12-15"/>
+<meta property="article:section" content="ignore"/>
+<meta property="og:type" content="article"/>
+<meta property="twitter:title" content="Comparing &quot;gei&quot; and &quot;wei&quot; - Chinese Grammar Wiki"/>
+<meta property="twitter:description" content="This grammar point is used for Expressing purpose in Mandarin Chinese. Get clear explanations and lots of examples here!"/>
+<meta property="twitter:image" content="https://resources.allsetlearning.com/gramwiki/images/3/33/Chinese-grammar-wiki-wei.jpg?version=eff33fc3c91600d456e4920a11dc080a"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"article","name":"Comparing \"gei\" and \"wei\" - Chinese Grammar Wiki","headline":"Comparing \"gei\" and \"wei\" - Chinese Grammar Wiki","mainEntityOfPage":"Comparing \"gei\" and \"wei\"","identifier":"https:\/\/resources.allsetlearning.com\/chinese\/grammar\/Comparing_%22gei%22_and_%22wei%22","url":"https:\/\/resources.allsetlearning.com\/chinese\/grammar\/Comparing_%22gei%22_and_%22wei%22","description":"This grammar point is used for Expressing purpose in Mandarin Chinese. Get clear explanations and lots of examples here!","keywords":"\u4e3a,w\u00e8i,w\u00e9i,wei,\u7ed9,g\u011bi,gei,Expressing purpose,, , chinese,grammar,chinese grammar,chinese grammar wiki,grammar wiki,learn chinese","dateModified":"2020-12-15T09:33:25Z","datePublished":"2020-12-15","articleSection":"ignore","image":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/images\/3\/33\/Chinese-grammar-wiki-wei.jpg?version=eff33fc3c91600d456e4920a11dc080a","width":1280,"height":1280},"author":{"@type":"Organization","name":"Chinese Grammar Wiki","url":"https:\/\/resources.allsetlearning.com","logo":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png","caption":"Chinese Grammar Wiki"}},"publisher":{"@type":"Organization","name":"Chinese Grammar Wiki","url":"https:\/\/resources.allsetlearning.com","logo":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png","caption":"Chinese Grammar Wiki"}},"potentialAction":{"@type":"SearchAction","target":"https:\/\/resources.allsetlearning.com\/gramwiki\/?title=Special:Search&search={search_term}","query-input":"required name=search_term"}}</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/gramwiki/skins/allset/csshover.min.htc")}</style><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if lt IE 9]><script src="/gramwiki/load.php?lang=en&amp;modules=html5shiv&amp;only=scripts&amp;skin=allset&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Comparing_gei_and_wei rootpage-Comparing_gei_and_wei skin-allset action-view"><div id="top_page" class="navbar navbar-static-top accounts noprint">
+    <div class="navbar-inner" style="background: white !important;">
+        <header class="Header Header--top">
+            <div class="Header-inner Header-inner--top" data-nc-group="top">
+                <div data-nc-container="top-left">
+                    <a class="Header-branding" href="https://www.allsetlearning.com/" data-nc-element="branding"
+                       data-content-field="site-title">
+                        <img class="Header-branding-logo" alt="AllSet Learning"
+                             src="https://resources.allsetlearning.com/gramwiki/skins/allset/assets/img/AllSet-Primary-Logo_transp_1000w227h.png" />
+                    </a>
+                </div>
+                <div data-nc-container="top-center">
+                </div>
+                <div data-nc-container="top-right">
+                    <nav data-nc-element="primary-nav" data-content-field="navigation"
+                         class="Header-nav Header-nav--primary">
+                        <div class="Header-nav-inner">
+                            <ul>
+                                <li><a class="Header-nav-item" href="https://resources.allsetlearning.com/chinese/" data-test="template-nav">Resources <span class="drop-arrow">▼</span></a>
+                                    <ul>
+                                        <li><a href="index.html">Chinese Grammar
+                                            Wiki</a></li>
+                                        <li><a href="https://resources.allsetlearning.com/chinese/vocabulary/">Chinese Vocabulary
+                                            Wiki</a></li>
+                                        <li><a href="https://resources.allsetlearning.com/chinese/pronunciation/">Chinese
+                                            Pronunciation Wiki</a></li>
+                                        <li><a href="https://www.allsetlearning.com/free-downloads/">Free Downloads</a></li>
+                                        <li><a href="https://www.allsetlearning.com/newsletter/">Product Newsletter</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <a class="Header-nav-item hide-on-mobile" href="https://store.allsetlearning.com/" data-test="template-nav">Store</a><a
+                                class="Header-nav-item hide-on-mobile" href="https://www.allsetlearning.com/products"
+                                data-test="template-nav">Books</a>
+                            <a class="Header-nav-item hide-on-mobile" href="https://www.allsetlearning.com/courses" data-test="template-nav">
+                                Courses <div class="newbadge">NEW</div>
+                            </a>
+                                                        <a class="Header-nav-item" href="https://resources.allsetlearning.com/gramwiki/?title=Special:UserLogin&amp;returnto=Comparing+%22gei%22+and+%22wei%22">
+                                <i class="icon-signin"></i> Log in                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+
+
+
+    <!-- Header -->
+    <div id="page-header" class="container signed-out">
+      <section class="span12">
+
+      
+      <ul class="navigation nav nav-pills pull-right searchform-disabled">
+
+      
+      </ul>
+
+    </section>
+    </div>
+        
+    
+    <!-- content -->
+    <section id="content" class="mw-body container user-loggedout not-editable">
+      <div id="top"></div>
+      <div id="mw-js-message" style="display:none;"></div>
+            <!-- bodyContent -->
+      <div id="bodyContent">
+        	<div id="gg-top" class="gg"></div>
+
+<div class="row-fluid wikititle"><a href="Main_Page"><img class="wikititle-spacer" src="https://resources.allsetlearning.com/gramwiki/skins/allset//assets/gramwiki/Wiki-title.png"></a></div>
+<div class="row-fluid noprint">
+   <div class="span2"></div>
+   <div id="menu-tabs" class="span10 tabs">
+      <ul>
+         <li class="menu-spacer"></li>
+                              <li id="ca-view" class="selected"><span><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;" >View</a></span></li>
+                     <li id="ca-viewsource"><span><a href="https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+                     <li id="ca-history" class="collapsible"><span><a href="https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">History</a></span></li>
+                           <li>
+           
+<!-- 0 -->
+            <form class="navbar-search" action="https://resources.allsetlearning.com/gramwiki/" id="searchform">
+              <input id="searchInput" class="search-query" type="search" accesskey="f" title="Special:Search" placeholder="Search" name="search" value="">
+              <input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton btn hidden"/>            </form>
+
+          
+<!-- /0 -->
+         </li>
+      </ul>
+   </div>
+</div>
+<div class="row-fluid">
+<div id="mw-panel" class="span2 noprint">
+
+<!-- 0 -->
+         <ul class="sidebar-single">
+                <li><a href="Main_Page" id="n-Main-Page">Main Page</a></li>
+                <li><a href="Learner_FAQ" id="n-Learner-FAQ">Learner FAQ</a></li>
+                <li><a href="Grammar_points_by_level" id="n-Grammar-Points">Grammar Points</a></li>
+                <li><a href="A1_grammar_points" id="n-A1-Grammar-Points">A1 Grammar Points</a></li>
+                <li><a href="A2_grammar_points" id="n-A2-Grammar-Points">A2 Grammar Points</a></li>
+                <li><a href="B1_grammar_points" id="n-B1-Grammar-Points">B1 Grammar Points</a></li>
+                <li><a href="B2_grammar_points" id="n-B2-Grammar-Points">B2 Grammar Points</a></li>
+                <li><a href="HSK_1_grammar_points" id="n-HSK-1-Grammar">HSK 1 Grammar</a></li>
+                <li><a href="HSK_2_grammar_points" id="n-HSK-2-Grammar">HSK 2 Grammar</a></li>
+                <li><a href="HSK_3_grammar_points" id="n-HSK-3-Grammar">HSK 3 Grammar</a></li>
+                <li><a href="Keywords" id="n-Chinese-Keywords">Chinese Keywords</a></li>
+                <li><a href="Translations" id="n-Word-Translations">Word Translations</a></li>
+                <li><a href="Chinese_textbook_grammar_index" id="n-Textbook-Index">Textbook Index</a></li>
+                <li><a href="Forums" id="n-Chinese-Forums">Chinese Forums</a></li>
+                <li><a href="Acknowledgments" id="n-Acknowledgments">Acknowledgments</a></li>
+                <li><a href="Contact" id="n-Contact-Us">Contact Us</a></li>
+               </ul>
+            <li class="sidebar-group">
+               <a><div class="sidebar-caret"></div>Useful Pages</a>
+               <ul>
+                <li><a href="Tools" id="n-Reading-Tools">Reading Tools</a></li>
+                <li><a href="https://resources.allsetlearning.com/chinese/grammar/Special:RecentChanges" id="n-recentchanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+                <li><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Random" id="n-randompage" title="Load a random page [x]" accesskey="x">Random page</a></li>
+                <li><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" id="n-help" title="The place to find out">Help</a></li>
+                <li><a href="http://resources.allsetlearning.com/" id="n-Newsletter" rel="nofollow">Newsletter</a></li>
+               </ul>
+               </ul>
+               </ul>
+               </ul>
+            </li>
+         </ul>
+
+<!-- /LANGUAGES -->
+
+<!-- 0 -->
+
+         <ul class="sidebar-single">
+            <li class="sidebar-group">
+               <a><div class="sidebar-caret"></div>Tools</a>
+               <ul>
+
+                <li id="t-whatlinkshere"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:WhatLinksHere/Comparing_%22gei%22_and_%22wei%22" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:RecentChangesLinked/Comparing_%22gei%22_and_%22wei%22" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;oldid=47906" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;action=info" title="More information about this page">Page information</a></li><li id="t-smwbrowselink"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Browse/:Comparing-5F%22gei%22-5Fand-5F%22wei%22" rel="search">Browse properties</a></li>              </ul>
+
+            </li>
+
+          </ul>
+          
+<!-- /0 -->
+  <div id="gg-mid" class="gg"></div>
+</div>
+
+<div class="span10">
+        <!-- innerbodycontent -->
+                  <div id="innerbodycontent" class="row nolayout"><div class="offset1 span10">
+            <div id="sm-cog-elements" class="noprint"></div>
+            <div class="allset-page-heading"><h1>Comparing "gei" and "wei"</h1></div>
+            <!-- subtitle -->
+            <div id="contentSub" ></div>
+            <!-- /subtitle -->
+                        <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><div id="ibox" class="toc">
+	<div class="ibox-link"><span class="plainlinks"><a href="ASG863DE" class="mw-redirect" title="ASG863DE"><img src="https&#58;//resources.allsetlearning.com/gramwiki/images/silk/link.png" /></a></span></div>
+	<ul class="ibox-list">
+               <li class="ibox-level-cefr-hsk clearfix">
+                        
+			<div class="ibox-label">Level</div>
+			<div class="ibox-info"><span style="font-size: 1.4em;"><a href="B2_grammar_points" title="B2 grammar points"> B2</a></span> / <span style="font-size:0.75em;"><a href="HSK5_grammar_points" class="mw-redirect" title="HSK5 grammar points">HSK5</a></span></div>
+		</li>
+		<li class="ibox-level clearfix" style="display:none">
+			<div class="ibox-label">Level</div>
+			<div class="ibox-info"><a href="B2_grammar_points" title="B2 grammar points"> B2</a></div>
+		</li>
+		<li class="ibox-level-hsk clearfix" style="display:none;">
+			<div class="ibox-label">Level</div>
+			<div class="ibox-info"><a href="HSK5_grammar_points" class="mw-redirect" title="HSK5 grammar points"> HSK5</a></div>
+		</li>
+		<li class="ibox-similarto clearfix">
+			<div class="ibox-label">Similar to</div>
+			<div class="ibox-info"><ul class="smw-format ul-format"><li class="smw-row"><span class="smw-field"><span class="smw-value"><a href="Expressing_&quot;for&quot;_with_&quot;gei&quot;" title="Expressing &quot;for&quot; with &quot;gei&quot;">Expressing "for" with "gei"</a></span></span> (<span class="smw-field"><span class="smw-value">B1</span></span>)</li><li class="smw-row"><span class="smw-field"><span class="smw-value"><a href="Expressing_&quot;for&quot;_with_&quot;wei&quot;" title="Expressing &quot;for&quot; with &quot;wei&quot;">Expressing "for" with "wei"</a></span></span> (<span class="smw-field"><span class="smw-value">B1</span></span>)</li></ul></div>
+		</li>
+		<li class="ibox-similarto-hsk clearfix" style="display:none;">
+			<div class="ibox-label">Similar to</div>
+			<div class="ibox-info"><ul class="smw-format ul-format"><li class="smw-row"><span class="smw-field"><span class="smw-value"><a href="Expressing_&quot;for&quot;_with_&quot;gei&quot;" title="Expressing &quot;for&quot; with &quot;gei&quot;">Expressing "for" with "gei"</a></span></span> (<span class="smw-field"><span class="smw-value">HSK2</span></span>)</li><li class="smw-row"><span class="smw-field"><span class="smw-value"><a href="Expressing_&quot;for&quot;_with_&quot;wei&quot;" title="Expressing &quot;for&quot; with &quot;wei&quot;">Expressing "for" with "wei"</a></span></span> (<span class="smw-field"><span class="smw-value">HSK5</span></span>)</li></ul></div>
+		</li>
+		<li class="ibox-usedfor clearfix">
+			<div class="ibox-label">Used for</div>
+			<div class="ibox-info"><a href="Expressing_purpose" title="Expressing purpose">Expressing purpose</a> </div>
+		</li>
+		<li class="ibox-keywords clearfix">
+			<div class="ibox-label">Keywords</div>
+			<div class="ibox-info"><a href="为" title="为">为</a>, <a href="给" title="给">给</a></div>
+		</li>
+		
+	</ul>
+	<div class="ibox-image"><a href="./File:Chinese-grammar-wiki-wei.jpg" class="image"><img alt="Chinese-grammar-wiki-wei.jpg" src="https://resources.allsetlearning.com/gramwiki/images/thumb/3/33/Chinese-grammar-wiki-wei.jpg/300px-Chinese-grammar-wiki-wei.jpg" decoding="async" width="300" height="300" srcset="https://resources.allsetlearning.com/gramwiki/images/thumb/3/33/Chinese-grammar-wiki-wei.jpg/450px-Chinese-grammar-wiki-wei.jpg 1.5x, https://resources.allsetlearning.com/gramwiki/images/thumb/3/33/Chinese-grammar-wiki-wei.jpg/600px-Chinese-grammar-wiki-wei.jpg 2x" /></a></div>
+</div>
+<p>Both 给 and 为 can mean "<a href="For" title="For">for</a>." They seem to be arbitrarily assigned to different verbs, and to make matters worse, some verbs (but not all!) can use either one. There are a few principles you can use to keep them straight, but also a few exceptions you need to memorize. As always, lots of examples help!
+</p>
+<div id="toc" class="toc"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2>Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#The_Core_Meaning_of_.E7.BB.99"><span class="tocnumber">1</span> <span class="toctext">The Core Meaning of 给</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Structure"><span class="tocnumber">2</span> <span class="toctext">Structure</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Examples"><span class="tocnumber">3</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#The_Core_Meaning_of_.E4.B8.BA"><span class="tocnumber">4</span> <span class="toctext">The Core Meaning of 为</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Structure_2"><span class="tocnumber">5</span> <span class="toctext">Structure</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Examples_2"><span class="tocnumber">6</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Comparison_of_.E7.BB.99_and_.E4.B8.BA_by_Collocation"><span class="tocnumber">7</span> <span class="toctext">Comparison of 给 and 为 by Collocation</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Sources_and_further_reading"><span class="tocnumber">9</span> <span class="toctext">Sources and further reading</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="Comparing_&quot;gei&quot;_and_&quot;wei&quot;#Books"><span class="tocnumber">9.1</span> <span class="toctext">Books</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span id="The_Core_Meaning_of_给"></span><span class="mw-headline" id="The_Core_Meaning_of_.E7.BB.99">The Core Meaning of 给</span></h2>
+<p>As you know, 给 is also a verb meaning "to give." As such, 给 is often used with verbs to express an action done out of kindness or friendship. Think of all the things a mother does for a child, or a generous friend does for her bestie. These would use 给.
+</p>
+<h2><span class="mw-headline" id="Structure">Structure</span></h2>
+<div class="jiegou">
+<p>Subj. + 给 + Recipient + [Verb Phrase]
+</p>
+</div>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<div class="liju">
+<ul><li>请 <em>给</em> 我 <strong>拿</strong> 一双 筷子。 <span class="pinyin">Qǐng <em>gěi</em> wǒ <strong>ná</strong> yī shuāng kuàizi.</span><span class="trans">Please get me a pair of chopsticks.</span></li>
+<li>下 飞机 以后，我 <em>给</em> 你 <strong>打</strong> 电话。 <span class="pinyin">Xià fēijī yǐhòu, wǒ <em>gěi</em> nǐ <strong>dǎ</strong> diànhuà.</span><span class="trans">After getting off the plane, I'll give you a call.</span></li>
+<li>你 别 忘 了 <em>给</em> 我 <strong>回</strong> 邮件。 <span class="pinyin">Nǐ bié wàng le <em>gěi</em> wǒ <strong>huí</strong> yóujiàn.</span><span class="trans">Don't forget to reply to my email.</span></li>
+<li>同事 <em>给</em> 我 <strong>介绍</strong> 了 公司 的 情况。 <span class="pinyin">Tóngshì <em>gěi</em> wǒ <strong>jièshào</strong> le gōngsī de qíngkuàng.</span><span class="trans">My coworker explained the company's situation to me.</span></li>
+<li>这 件 事 是 你 做 得 不 对， <em>给</em> 他 <strong>道歉</strong>。 <span class="pinyin">Zhè jiàn shì shì nǐ zuò de bù duì, <em>gěi</em> tā <strong>dàoqiàn</strong>.</span><span class="trans">What you did was wrong. Apologize to him.</span></li>
+<li>老板 <em>给</em> 我 <strong>提</strong> 了 很 多 建议。 <span class="pinyin">Lǎobǎn <em>gěi</em> wǒ <strong>tí</strong> le hěn duō jiànyì.</span><span class="trans">The boss gave me a lot of suggestions.</span></li>
+<li>上海 <em>给</em> 我 <strong>留下</strong> 了 很 深 的 印象。 <span class="pinyin">Shànghǎi <em>gěi</em> wǒ <strong>liúxià</strong> le hěn shēn de yìnxiàng.</span><span class="trans">Shanghai left a deep impression on me.</span></li></ul>
+</div>
+<h2><span id="The_Core_Meaning_of_为"></span><span class="mw-headline" id="The_Core_Meaning_of_.E4.B8.BA">The Core Meaning of 为</span></h2>
+<p>The word 为 automatically feels more formal than 给, due to its association with classical Chinese. Besides being more formal, it is also often associated with obligatory actions or responsibilities. The typical example of this is "to work for Company A": 为A公司工作.
+</p><p>One other common usage of 为 is for uncontrollable emotional reactions that result from relationships with other people. These reactions aren't really done out of kindness; they're spontaneous and not a result of a conscious choice.
+</p>
+<h2><span class="mw-headline" id="Structure_2">Structure</span></h2>
+<div class="jiegou">
+<p>为 + Person + Verb / Adj.
+</p>
+</div>
+<h2><span class="mw-headline" id="Examples_2">Examples</span></h2>
+<div class="liju">
+<ul><li>我 现在 <em>为</em> 谷歌 公司 <strong>工作</strong>。 <span class="pinyin">Wǒ xiànzài <em>wèi</em> Gǔgē gōngsī <strong>gōngzuò</strong>.</span><span class="trans">I currently work for Google.</span></li>
+<li>你 <em>为</em> 国家 <strong>做</strong> 过 贡献 吗 ？ <span class="pinyin">Nǐ <em>wèi</em> guójiā <strong>zuò</strong> guò gòngxiàn ma?</span><span class="trans">Have you made a contribution to our country?</span></li>
+<li>我 真的 <em>为</em> 你 <strong>高兴</strong> 。 <span class="pinyin">Wǒ zhēnde <em>wèi</em> nǐ <strong>gāoxìng</strong>.</span><span class="trans">I'm truly happy for you.</span></li>
+<li>父母 <em>为</em> 孩子 <strong>付出</strong> 了 很 多。 <span class="pinyin">Fùmǔ <em>wèi</em> háizi <strong>fùchū</strong> le hěn duō.</span><span class="trans">The parents did a lot for their child.</span></li>
+<li>父母 管 孩子 总是 说 是 <em>为</em> 孩子 <strong>好</strong>。 <span class="pinyin">Fùmǔ guǎn háizi zǒngshì shuō shì <em>wèi</em> háizi <strong>hǎo</strong>.</span><span class="trans">When parents micro-manage their kids, they always say it's for their children's own good.</span></li>
+<li>我们 都 是 成年人 了，应该 <em>为</em> 自己 的 行为 <strong>负责</strong>。 <span class="pinyin">Wǒmen dōu shì chéngniánrén le, yīnggāi <em>wèi</em> zìjǐ de xíngwéi <strong>fùzé</strong>.</span><span class="trans">We've all adults now, and ought to be responsible for our own actions.</span></li>
+<li>政府 <em>为</em> 公司 <strong>提供</strong> 了 保障。 <span class="pinyin">Zhèngfǔ <em>wèi</em> gōngsī <strong>tígōng</strong> le bǎozhàng.</span><span class="trans">The government provides companies certain protections.</span></li></ul>
+</div>
+<h2><span id="Comparison_of_给_and_为_by_Collocation"></span><span class="mw-headline" id="Comparison_of_.E7.BB.99_and_.E4.B8.BA_by_Collocation">Comparison of 给 and 为 by Collocation</span></h2>
+<p>The examples below should help you establish a bit of a feeling regarding the difference between 给and 为. You can see that the ones at the top feel more like something especially done for one person, whereas the ones at the end feel more like duty or obligation. The double yeses in the middle could be either, depending on context.
+</p>
+<table class="wikitable" style="width:40em">
+
+<tbody><tr>
+<th>Verb</th>
+<th>Pairs with 给?</th>
+<th>Pairs with 为?
+</th></tr>
+<tr>
+<td>发邮件</td>
+<td>YES</td>
+<td>no
+</td></tr>
+<tr>
+<td>打电话</td>
+<td>YES</td>
+<td>no
+</td></tr>
+<tr>
+<td>做菜</td>
+<td>YES</td>
+<td>YES
+</td></tr>
+<tr>
+<td>做</td>
+<td>YES</td>
+<td>YES
+</td></tr>
+<tr>
+<td>服务</td>
+<td>no</td>
+<td>YES
+</td></tr>
+<tr>
+<td>牺牲</td>
+<td>no</td>
+<td>YES
+</td></tr>
+<tr>
+<td>工作</td>
+<td>no</td>
+<td>YES
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li><a href="Expressing_&quot;for&quot;_with_&quot;gei&quot;" title="Expressing &quot;for&quot; with &quot;gei&quot;">Expressing "for" with "gei"</a></li>
+<li><a href="Expressing_&quot;for&quot;_with_&quot;wei&quot;" title="Expressing &quot;for&quot; with &quot;wei&quot;">Expressing "for" with "wei"</a></li></ul>
+<h2><span class="mw-headline" id="Sources_and_further_reading">Sources and further reading</span></h2>
+<h3><span class="mw-headline" id="Books">Books</span></h3>
+<ul><li><a href="https://resources.allsetlearning.com/gramwiki/?title=1700%E5%AF%B9&amp;action=edit&amp;redlink=1" class="new" title="1700对 (page does not exist)">1700对</a> (pp. 486) [ →buy]</li></ul>
+<div style="display:none;">
+<dl><dd>HSK5</dd></dl>
+</div>
+<p><br />
+</p>
+<div style="display:none;"></div>
+<div style="display:none;"></div>
+<div style="display:none;"></div>
+<div style="display:none;"></div>
+<!-- 
+NewPP limit report
+Cached time: 20220621071758
+Cache expiry: 1209600
+Dynamic content: false
+[SMW] In‐text annotation parser time: 0.019 seconds
+CPU time usage: 0.242 seconds
+Real time usage: 0.301 seconds
+Preprocessor visited node count: 510/1000000
+Preprocessor generated node count: 1881/1000000
+Post‐expand include size: 20102/2097152 bytes
+Template argument size: 321/2097152 bytes
+Highest expansion depth: 12/40
+Expensive parser function count: 1/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  220.224      1 -total
+ 55.50%  122.233      1 Template:Grammar_Box
+ 29.89%   65.821      1 Template:Basic_Grammar
+ 23.53%   51.828      1 Template:SEO_Keywords
+ 12.00%   26.432      3 Template:Character_and_All_Pinyin
+ 10.03%   22.089      3 Template:Print_All_Pinyin
+  9.82%   21.636      4 Template:Select_Image
+  8.76%   19.298      1 Template:Source
+  8.73%   19.231      2 Template:Print_Custom_Image
+  3.48%    7.660      2 Template:Select_Img_Pos
+-->
+
+<!-- Saved in parser cache with key gramwiki:pcache:idhash:4236-0!dateformat=default and timestamp 20220621071757 and revision id 47906
+ -->
+</div></div>                <!-- catlinks -->
+        <div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="https://resources.allsetlearning.com/gramwiki/?title=Category:Grammar_comparison&amp;action=edit&amp;redlink=1" class="new" title="Category:Grammar comparison (page does not exist)">Grammar comparison</a></li><li><a href="./Category:B2_grammar_points" title="Category:B2 grammar points">B2 grammar points</a></li></ul></div></div>        <!-- /catlinks -->
+        	<div id="gg-bot" class="gg"></div>
+          </div></div>
+                <!-- /innerbodycontent -->
+</div>
+</div>
+
+                <!-- printfooter -->
+        <div class="printfooter">
+        Retrieved from "<a dir="ltr" href="https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;oldid=47906">https://resources.allsetlearning.com/gramwiki/?title=Comparing_%22gei%22_and_%22wei%22&amp;oldid=47906</a>"        </div>
+        <!-- /printfooter -->
+                        <div class="visualClear"></div>
+        <!-- debughtml -->
+                <!-- /debughtml -->
+      </div>
+      <!-- /bodyContent -->
+    </section>
+    <!-- /content -->
+
+      <!-- footer -->
+
+      <div id="footer" class="footer container custom-footer"><div class="row-fluid"><div class="span2"></div><div class="span10"><p>不允许任何以商业为目的或不注明归属 Chinese Grammar Wiki &copy;2011-2022 AllSet Learning 的内容引用。关于合法使用此内容的更多信息，请参阅我们的<a href="./Chinese&#32;Grammar&#32;Wiki:Copyrights" title="Copyrights">知识共享权限条款（Creative Commons license）</a>。</p>
+
+<p>All content on the Chinese Grammar Wiki &copy;2011-2022 AllSet Learning, and may not be used for commercial purposes or without attribution. For more information on how to legally use this content, please see our <a href="./Chinese&#32;Grammar&#32;Wiki:Copyrights" title="Copyrights">Creative Commons license</a> unless otherwise noted.</p></div></div></div>
+      <div id="footer" class="footer container">
+        <div class="row">
+    
+            <ul id="footer-places">
+                              <li id="footer-places-privacy"><a href="https://resources.allsetlearning.com/chinese/grammar/Chinese_Grammar_Wiki:Privacy_policy" title="Chinese Grammar Wiki:Privacy policy">Privacy policy</a></li>
+                              <li id="footer-places-about"><a href="./Chinese_Grammar_Wiki:About" title="Chinese Grammar Wiki:About">About Chinese Grammar Wiki</a></li>
+                              <li id="footer-places-disclaimer"><a href="https://resources.allsetlearning.com/chinese/grammar/Chinese_Grammar_Wiki:General_disclaimer" title="Chinese Grammar Wiki:General disclaimer">Disclaimers</a></li>
+                            <li id="pt-login"><a href="https://resources.allsetlearning.com/gramwiki/?title=Special:UserLogin&amp;returnto=Comparing+%22gei%22+and+%22wei%22">Log in</a></li>            </ul>
+                                <ul id="footer-icons" class="noprint">
+                  <li id="footer-poweredbyico">
+                    <a href="https://www.mediawiki.org/"><img src="https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>
+                    <a href="https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki"><img src="data:image/png;base64,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" alt="Powered by Semantic MediaWiki" class="smw-footer" width="88" height="31"/></a>
+                  </li>
+                </ul>
+                  </div>
+      </div>
+      <!-- /footer -->
+
+
+    
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"smw":{"limitreport-intext-parsertime":0.019},"limitreport":{"cputime":"0.242","walltime":"0.301","ppvisitednodes":{"value":510,"limit":1000000},"ppgeneratednodes":{"value":1881,"limit":1000000},"postexpandincludesize":{"value":20102,"limit":2097152},"templateargumentsize":{"value":321,"limit":2097152},"expansiondepth":{"value":12,"limit":40},"expensivefunctioncount":{"value":1,"limit":100},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":0,"limit":5000000},"timingprofile":["100.00%  220.224      1 -total"," 55.50%  122.233      1 Template:Grammar_Box"," 29.89%   65.821      1 Template:Basic_Grammar"," 23.53%   51.828      1 Template:SEO_Keywords"," 12.00%   26.432      3 Template:Character_and_All_Pinyin"," 10.03%   22.089      3 Template:Print_All_Pinyin","  9.82%   21.636      4 Template:Select_Image","  8.76%   19.298      1 Template:Source","  8.73%   19.231      2 Template:Print_Custom_Image","  3.48%    7.660      2 Template:Select_Img_Pos"]},"cachereport":{"timestamp":"20220621071758","ttl":1209600,"transientcontent":false}}});});</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-32778107-1");
+pageTracker._trackPageview();
+</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":102});});</script>
+  </body>
+<!-- Cached/compressed 20220624151135 -->
+</html>

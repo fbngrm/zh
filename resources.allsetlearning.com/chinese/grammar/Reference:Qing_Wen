@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Reference:Qing Wen - Chinese Grammar Wiki</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"Reference","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":500,"wgPageName":"Reference:Qing_Wen","wgTitle":"Qing Wen","wgCurRevisionId":28316,"wgRevisionId":28316,"wgArticleId":199,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Reference:Qing_Wen","wgRelevantArticleId":199,"wgRequestId":"068cd493e7e88b4df0dfff39","wgCSPNonce":false,"wgIsProbablyEditable":false,"wgRelevantPageIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":false,"dialogs":false,"hidesig":true,"templateEditor":false,"templates":false,"preview":false,"previewDialog":false,"publish":false,"toc":false}});mw.loader.state({"site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"ready","user.tokens":"loading","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","ext.smw.style":"ready","ext.smw.tooltip.styles":"ready"});mw.loader.implement("user.tokens@0tffind",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});
+});RLPAGEMODULES=["site","mediawiki.page.startup","mediawiki.page.ready","mediawiki.searchSuggest","ext.ASLExtension","skins.allset"];mw.loader.load(RLPAGEMODULES);});</script>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=ext.smw.style%7Cext.smw.tooltip.styles&amp;only=styles&amp;skin=allset"/>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared&amp;only=styles&amp;skin=allset"/>
+<script async="" src="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=startup&amp;only=scripts&amp;skin=allset"></script>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap-store/styles.css?83b94" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap-store/responsive.css?10b44" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/bootstrap/awesome/css/font-awesome.css?3e78a" media="screen"/><link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/skins/allset/skin-style.css?ea523" media="screen"/>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="https://resources.allsetlearning.com/gramwiki/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=allset"/>
+<meta name="generator" content="MediaWiki 1.33.0"/>
+<meta name="twitter:site" content="@ChineseGrammar"/>
+<link rel="alternate" type="application/rdf+xml" title="Reference:Qing Wen" href="https://resources.allsetlearning.com/gramwiki/?title=Special:ExportRDF/Reference:Qing_Wen&amp;xmlmime=rdf"/>
+<link rel="shortcut icon" href="https://resources.allsetlearning.com/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="https://resources.allsetlearning.com/gramwiki/opensearch_desc.php" title="Chinese Grammar Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://resources.allsetlearning.com/gramwiki/api.php?action=rsd"/>
+ <meta property="url" content="http://resources.allsetlearning.com/chinese/grammar/"/>
+
+   <meta property="title" content="A comprehensive, free resource for standard Chinese grammar, organized by part of speech and difficulty level, with clear examples of usage."/>
+
+  <link rel="author" href="https://plus.google.com/104115976790023245464"/>
+<meta property="og:title" content="Reference:Qing Wen - Chinese Grammar Wiki"/>
+<meta property="og:site_name" content="Chinese Grammar Wiki"/>
+<meta property="og:url" content="https://resources.allsetlearning.com/chinese/grammar/Reference:Qing_Wen"/>
+<meta property="og:image" content="Localfile.jpg"/>
+<meta property="article:modified_time" content="2016-04-18T07:18:57Z"/>
+<meta property="article:published_time" content="2016-04-18T07:18:57Z"/>
+<meta property="twitter:title" content="Reference:Qing Wen - Chinese Grammar Wiki"/>
+<meta property="twitter:image" content="Localfile.jpg"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"article","name":"Reference:Qing Wen - Chinese Grammar Wiki","headline":"Reference:Qing Wen - Chinese Grammar Wiki","mainEntityOfPage":"Reference:Qing Wen","identifier":"https:\/\/resources.allsetlearning.com\/chinese\/grammar\/Reference:Qing_Wen","url":"https:\/\/resources.allsetlearning.com\/chinese\/grammar\/Reference:Qing_Wen","dateModified":"2016-04-18T07:18:57Z","datePublished":"2016-04-18T07:18:57Z","image":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png"},"author":{"@type":"Organization","name":"Chinese Grammar Wiki","url":"https:\/\/resources.allsetlearning.com","logo":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png","caption":"Chinese Grammar Wiki"}},"publisher":{"@type":"Organization","name":"Chinese Grammar Wiki","url":"https:\/\/resources.allsetlearning.com","logo":{"@type":"ImageObject","url":"https:\/\/resources.allsetlearning.com\/gramwiki\/resources\/assets\/gramwiki\/Wiki-title.png","caption":"Chinese Grammar Wiki"}},"potentialAction":{"@type":"SearchAction","target":"https:\/\/resources.allsetlearning.com\/gramwiki\/?title=Special:Search&search={search_term}","query-input":"required name=search_term"}}</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/gramwiki/skins/allset/csshover.min.htc")}</style><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if lt IE 9]><script src="/gramwiki/load.php?lang=en&amp;modules=html5shiv&amp;only=scripts&amp;skin=allset&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-500 ns-subject page-Reference_Qing_Wen rootpage-Reference_Qing_Wen skin-allset action-view"><div id="top_page" class="navbar navbar-static-top accounts noprint">
+    <div class="navbar-inner" style="background: white !important;">
+        <header class="Header Header--top">
+            <div class="Header-inner Header-inner--top" data-nc-group="top">
+                <div data-nc-container="top-left">
+                    <a class="Header-branding" href="https://www.allsetlearning.com/" data-nc-element="branding"
+                       data-content-field="site-title">
+                        <img class="Header-branding-logo" alt="AllSet Learning"
+                             src="https://resources.allsetlearning.com/gramwiki/skins/allset/assets/img/AllSet-Primary-Logo_transp_1000w227h.png" />
+                    </a>
+                </div>
+                <div data-nc-container="top-center">
+                </div>
+                <div data-nc-container="top-right">
+                    <nav data-nc-element="primary-nav" data-content-field="navigation"
+                         class="Header-nav Header-nav--primary">
+                        <div class="Header-nav-inner">
+                            <ul>
+                                <li><a class="Header-nav-item" href="https://resources.allsetlearning.com/chinese/" data-test="template-nav">Resources <span class="drop-arrow">▼</span></a>
+                                    <ul>
+                                        <li><a href="index.html">Chinese Grammar
+                                            Wiki</a></li>
+                                        <li><a href="https://resources.allsetlearning.com/chinese/vocabulary/">Chinese Vocabulary
+                                            Wiki</a></li>
+                                        <li><a href="https://resources.allsetlearning.com/chinese/pronunciation/">Chinese
+                                            Pronunciation Wiki</a></li>
+                                        <li><a href="https://www.allsetlearning.com/free-downloads/">Free Downloads</a></li>
+                                        <li><a href="https://www.allsetlearning.com/newsletter/">Product Newsletter</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <a class="Header-nav-item hide-on-mobile" href="https://store.allsetlearning.com/" data-test="template-nav">Store</a><a
+                                class="Header-nav-item hide-on-mobile" href="https://www.allsetlearning.com/products"
+                                data-test="template-nav">Books</a>
+                            <a class="Header-nav-item hide-on-mobile" href="https://www.allsetlearning.com/courses" data-test="template-nav">
+                                Courses <div class="newbadge">NEW</div>
+                            </a>
+                                                        <a class="Header-nav-item" href="https://resources.allsetlearning.com/gramwiki/?title=Special:UserLogin&amp;returnto=Reference%3AQing+Wen">
+                                <i class="icon-signin"></i> Log in                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+
+
+
+    <!-- Header -->
+    <div id="page-header" class="container signed-out">
+      <section class="span12">
+
+      
+      <ul class="navigation nav nav-pills pull-right searchform-disabled">
+
+      
+      </ul>
+
+    </section>
+    </div>
+        
+    
+    <!-- content -->
+    <section id="content" class="mw-body container user-loggedout not-editable">
+      <div id="top"></div>
+      <div id="mw-js-message" style="display:none;"></div>
+            <!-- bodyContent -->
+      <div id="bodyContent">
+        	<div id="gg-top" class="gg"></div>
+
+<div class="row-fluid wikititle"><a href="Main_Page"><img class="wikititle-spacer" src="https://resources.allsetlearning.com/gramwiki/skins/allset//assets/gramwiki/Wiki-title.png"></a></div>
+<div class="row-fluid noprint">
+   <div class="span2"></div>
+   <div id="menu-tabs" class="span10 tabs">
+      <ul>
+         <li class="menu-spacer"></li>
+                              <li id="ca-view" class="selected"><span><a href="./Reference:Qing_Wen" >View</a></span></li>
+                     <li id="ca-viewsource"><span><a href="https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+                     <li id="ca-history" class="collapsible"><span><a href="https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">History</a></span></li>
+                           <li>
+           
+<!-- 0 -->
+            <form class="navbar-search" action="https://resources.allsetlearning.com/gramwiki/" id="searchform">
+              <input id="searchInput" class="search-query" type="search" accesskey="f" title="Special:Search" placeholder="Search" name="search" value="">
+              <input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton btn hidden"/>            </form>
+
+          
+<!-- /0 -->
+         </li>
+      </ul>
+   </div>
+</div>
+<div class="row-fluid">
+<div id="mw-panel" class="span2 noprint">
+
+<!-- 0 -->
+         <ul class="sidebar-single">
+                <li><a href="Main_Page" id="n-Main-Page">Main Page</a></li>
+                <li><a href="Learner_FAQ" id="n-Learner-FAQ">Learner FAQ</a></li>
+                <li><a href="Grammar_points_by_level" id="n-Grammar-Points">Grammar Points</a></li>
+                <li><a href="A1_grammar_points" id="n-A1-Grammar-Points">A1 Grammar Points</a></li>
+                <li><a href="A2_grammar_points" id="n-A2-Grammar-Points">A2 Grammar Points</a></li>
+                <li><a href="B1_grammar_points" id="n-B1-Grammar-Points">B1 Grammar Points</a></li>
+                <li><a href="B2_grammar_points" id="n-B2-Grammar-Points">B2 Grammar Points</a></li>
+                <li><a href="HSK_1_grammar_points" id="n-HSK-1-Grammar">HSK 1 Grammar</a></li>
+                <li><a href="HSK_2_grammar_points" id="n-HSK-2-Grammar">HSK 2 Grammar</a></li>
+                <li><a href="HSK_3_grammar_points" id="n-HSK-3-Grammar">HSK 3 Grammar</a></li>
+                <li><a href="Keywords" id="n-Chinese-Keywords">Chinese Keywords</a></li>
+                <li><a href="Translations" id="n-Word-Translations">Word Translations</a></li>
+                <li><a href="Chinese_textbook_grammar_index" id="n-Textbook-Index">Textbook Index</a></li>
+                <li><a href="Forums" id="n-Chinese-Forums">Chinese Forums</a></li>
+                <li><a href="Acknowledgments" id="n-Acknowledgments">Acknowledgments</a></li>
+                <li><a href="Contact" id="n-Contact-Us">Contact Us</a></li>
+               </ul>
+            <li class="sidebar-group">
+               <a><div class="sidebar-caret"></div>Useful Pages</a>
+               <ul>
+                <li><a href="Tools" id="n-Reading-Tools">Reading Tools</a></li>
+                <li><a href="https://resources.allsetlearning.com/chinese/grammar/Special:RecentChanges" id="n-recentchanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+                <li><a href="https://resources.allsetlearning.com/chinese/grammar/Special:Random" id="n-randompage" title="Load a random page [x]" accesskey="x">Random page</a></li>
+                <li><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" id="n-help" title="The place to find out">Help</a></li>
+                <li><a href="http://resources.allsetlearning.com/" id="n-Newsletter" rel="nofollow">Newsletter</a></li>
+               </ul>
+               </ul>
+               </ul>
+               </ul>
+            </li>
+         </ul>
+
+<!-- /LANGUAGES -->
+
+<!-- 0 -->
+
+         <ul class="sidebar-single">
+            <li class="sidebar-group">
+               <a><div class="sidebar-caret"></div>Tools</a>
+               <ul>
+
+                <li id="t-whatlinkshere"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:WhatLinksHere/Reference:Qing_Wen" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:RecentChangesLinked/Reference:Qing_Wen" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="https://resources.allsetlearning.com/chinese/grammar/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;oldid=28316" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;action=info" title="More information about this page">Page information</a></li>              </ul>
+
+            </li>
+
+          </ul>
+          
+<!-- /0 -->
+  <div id="gg-mid" class="gg"></div>
+</div>
+
+<div class="span10">
+        <!-- innerbodycontent -->
+                  <div id="innerbodycontent" class="row nolayout"><div class="offset1 span10">
+            <div id="sm-cog-elements" class="noprint"></div>
+            <div class="allset-page-heading"><h1>Reference:Qing Wen</h1></div>
+            <!-- subtitle -->
+            <div id="contentSub" ></div>
+            <!-- /subtitle -->
+                        <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><p><i>Qing Wen</i> (请问) is a popular podcast published weekly by ChinesePod.  While the show is not focused on Chinese grammar exclusively, the majority of Qing Wen episodes revolve around a grammar point, or comparing the usage of several words.  It is useful to have an index of all the grammar points covered on Qing Wen.  (See also the <a rel="nofollow" class="external text" href="http://chinesepod.com/library/channels/list/Qing+Wen">ChinesePod Qing Wen episode listing</a>.)
+</p>
+<h2><span class="mw-headline" id="Grammar_Points_by_Episode">Grammar Points by Episode</span></h2>
+<ol><li>QW0001: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-%E7%9C%8B-kan-and-%E7%9C%8B%E8%B5%B7%E6%9D%A5-kan-qilai">Using 看 (kàn) and 看起来 (kàn qilai)</a>
+<ul><li>See: <a href="Appearance_with_&quot;kanqilai&quot;" title="Appearance with &quot;kanqilai&quot;">Appearance with "kanqilai"</a></li></ul></li>
+<li>QW0002: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/reduplication-of-verbs">Reduplication of Verbs</a>
+<ul><li>See: <a href="Verb_reduplication" class="mw-redirect" title="Verb reduplication">Verb reduplication</a></li></ul></li>
+<li>QW0003: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-%E5%8F%88-you-and-%E5%86%8D-zai">Using 又 (yòu) and 再 (zài)</a>
+<ul><li>See: <a href="Comparing_&quot;zai&quot;_and_&quot;you&quot;" title="Comparing &quot;zai&quot; and &quot;you&quot;">Comparing "zai" and "you"</a></li></ul></li>
+<li>QW0004: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/saying-sorry">Saying Sorry</a></li>
+<li>QW0005: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/name-calling-chinese-style">Name-Calling, Chinese-Style</a></li>
+<li>QW0006: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%BA%86-le-somethings-about-to-happen">了 (le): Something's About to Happen</a>
+<ul><li>See: <a href="About_to_happen_with_&quot;kuai..._le&quot;" class="mw-redirect" title="About to happen with &quot;kuai... le&quot;">About to happen with "kuai... le"</a></li></ul></li>
+<li>QW0007: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/negating-verbs-when-to-use-%E6%B2%A1%E6%9C%89-meiy%C7%92u-when-to-use-%E4%B8%8D-bu">Negating Verbs: When to Use 没有 (méiyǒu), When to Use 不 (bù)</a>
+<ul><li>See: <a href="Comparing_&quot;bu&quot;_and_&quot;mei&quot;" title="Comparing &quot;bu&quot; and &quot;mei&quot;">Comparing "bu" and "mei"</a></li></ul></li>
+<li>QW0008: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/thinking-in-chinese-%E8%A7%89%E5%BE%97-juede-%E8%AE%A4%E4%B8%BA-renwei-and-%E4%BB%A5%E4%B8%BA-y%C7%90wei">Thinking in Chinese: 觉得 (juéde), 认为 (rènwéi) and 以为 (yǐwéi)</a></li>
+<li>QW0009: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/we-answer">	We Answer</a></li>
+<li>QW0010: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-finish-something-off-verb-%E5%A5%BD-h%C7%8Eo">To Finish Something Off: Verb 好 (hǎo)</a>
+<ul><li>See: <a href="Result_complement_&quot;-hao&quot;" class="mw-redirect" title="Result complement &quot;-hao&quot;">Result complement "-hao"</a></li></ul></li>
+<li>QW0011: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%BD%A0%E5%A5%BD-n%C7%90h%C7%8Eo-is-a-many-splendored-thing">你好 (Nǐhǎo) is a Many-Splendored Thing</a></li>
+<li>QW0012: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/its-not-hard-to-say-goodbye">It's Not Hard to Say Goodbye</a></li>
+<li>QW0013: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/all-about-%E6%89%80%E6%9C%89-su%C7%92y%C7%92u-and-%E9%83%BD-dou">All About 所有 (suǒyǒu) and 都 (dōu)</a>
+<ul><li>See: <a href="Referring_to_&quot;all&quot;_using_&quot;suoyou&quot;" class="mw-redirect" title="Referring to &quot;all&quot; using &quot;suoyou&quot;">Referring to "all" using "suoyou"</a></li></ul></li>
+<li>QW0014: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/more-or-less-%E5%A4%9A-duo-and-%E5%B0%91-sh%C7%8Eo">	More or less? 多 (duō) and 少 (shǎo)</a>
+<ul><li>See: <a href="Doing_something_more_with_&quot;duo&quot;" title="Doing something more with &quot;duo&quot;">Doing something more with "duo"</a> and <a href="Doing_something_less_with_&quot;shao&quot;" title="Doing something less with &quot;shao&quot;">Doing something less with "shao"</a></li></ul></li>
+<li>QW0015: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/you-can-and-will-use-%E4%BC%9A-hui">You Can and Will Use 会 (huì)!</a>
+<ul><li>See: <a href="Expressing_a_learned_skill" class="mw-redirect" title="Expressing a learned skill">Expressing a learned skill</a> and <a href="Auxiliary_verb_&quot;hui&quot;_for_&quot;will&quot;" class="mw-redirect" title="Auxiliary verb &quot;hui&quot; for &quot;will&quot;">Auxiliary verb "hui" for "will"</a></li></ul></li>
+<li>QW0016: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/two-iffy-words">Two 'Iffy' Words</a>
+<ul><li>See: <a href="The_&quot;if&quot;_sandwich_pattern" class="mw-redirect" title="The &quot;if&quot; sandwich pattern">The "if" sandwich pattern</a></li></ul></li>
+<li>QW0017: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-double-%E4%BA%86-le-phenomenon">	The Double 了 (le) phenomenon</a></li>
+<li>QW0018: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/beyond-or-another-use-of-%E8%BF%98%E6%98%AF-haishi">Beyond Or: Another Use of 还是 (háishi)</a>
+<ul><li>See: <a href="&quot;Had_better&quot;_with_&quot;haishi&quot;" class="mw-redirect" title="&quot;Had better&quot; with &quot;haishi&quot;">"Had better" with "haishi"</a></li></ul></li>
+<li>QW0019: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/all-about-measure-words">	All About Measure Words</a></li>
+<li>QW0020: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/two-words-for-2">Two words for '2'</a>
+<ul><li>See: <a href="&quot;Er&quot;_and_&quot;liang&quot;" class="mw-redirect" title="&quot;Er&quot; and &quot;liang&quot;">"Er" and "liang"</a></li></ul></li>
+<li>QW0021: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/dont-underestimate-the-power-of-%E5%91%A2-ne">Don't Underestimate the Power of 呢 (ne)</a>
+<ul><li>See: <a href="Questions_with_&quot;ne&quot;" title="Questions with &quot;ne&quot;">Questions with "ne"</a></li></ul></li>
+<li>QW0022: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/excuse-us">	Excuse Us!</a></li>
+<li>QW0023: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/a-little-bit-about-%E4%B8%80%E7%82%B9%E5%84%BF">	A Little Bit About 一点儿</a>
+<ul><li>See: <a href="Expressing_&quot;a_bit_too&quot;" title="Expressing &quot;a bit too&quot;">Expressing "a bit too"</a></li></ul></li>
+<li>QW0024: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/more-and-more">	More and More</a>
+<ul><li>See: <a href="Expressing_&quot;more_and_more&quot;_with_&quot;yue…_yue…&quot;" class="mw-redirect" title="Expressing &quot;more and more&quot; with &quot;yue… yue…&quot;">Expressing "more and more" with "yue… yue…"</a></li></ul></li>
+<li>QW0025: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/just-say-yes">Just Say Yes</a></li>
+<li>QW0026: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/mainland-taiwan-lingo-transportation">	Mainland &amp; Taiwan Lingo: Transportation</a></li>
+<li>QW0027: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/most-frequently-asked-question-in-china">	Most Frequently Asked Question in China</a></li>
+<li>QW0028: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/what-does-%E5%8E%89%E5%AE%B3-lihai-mean-anyway">	What does 厉害 (lìhai) mean, anyway?</a></li>
+<li>QW0029: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/mainland-taiwan-lingo-electronics">	Mainland &amp; Taiwan Lingo: Electronics</a></li>
+<li>QW0030: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/you-talking-about-me">	You talking about me?</a></li>
+<li>QW0031: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-verbs-%E4%B8%8D%E5%87%BA%E6%9D%A5-bu-chulai-%E5%BE%97%E5%87%BA%E6%9D%A5-de-chulai">	Using Verbs 不出来 (bu chūlai), 得出来 (de chūlai)</a>
+<ul><li>See: <a href="Resultative_Complement_&quot;chu(lai)&quot;" class="mw-redirect" title="Resultative Complement &quot;chu(lai)&quot;">Resultative Complement "chu(lai)"</a></li></ul></li>
+<li>QW0032: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/extreme-chinese-%E4%B8%8D%E5%BE%97%E4%BA%86-budeli%C7%8Eo">	Extreme Chinese - 不得了 (bùdéliǎo)</a>
+<ul><li>See: <a href="Adjectival_complement_&quot;de_budeliao&quot;" title="Adjectival complement &quot;de budeliao&quot;">Adjectival complement "de budeliao"</a></li></ul></li>
+<li>QW0033: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-%E5%8F%88%E5%8F%88-youyou-episode">	The 又...又 (Yòu...Yòu) Episode</a>
+<ul><li>See: <a href="&quot;Both_A_and_B&quot;_with_&quot;you&quot;" class="mw-redirect" title="&quot;Both A and B&quot; with &quot;you&quot;">"Both A and B" with "you"</a></li></ul></li>
+<li>QW0034: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/even-you-can-use-the-%E8%BF%9E%E9%83%BD-pattern">	一边...一边 ... (yībiān...yībiān...)</a>
+<ul><li>See: <a href="Simultaneous_tasks_with_&quot;yibian&quot;" title="Simultaneous tasks with &quot;yibian&quot;">Simultaneous tasks with "yibian"</a></li></ul></li>
+<li>QW0035: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/even-you-can-use-the-%E8%BF%9E%E9%83%BD-pattern">	Even you can use the (连...都...) pattern</a>
+<ul><li>See: <a href="Expressing_&quot;even&quot;_with_&quot;lian&quot;_and_&quot;dou&quot;" title="Expressing &quot;even&quot; with &quot;lian&quot; and &quot;dou&quot;">Expressing "even" with "lian" and "dou"</a></li></ul></li>
+<li>QW0036: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E8%BF%98%E6%98%AF-haishi-or-%E6%88%96%E8%80%85-huozhe">	还是 háishi OR 或者 huòzhě</a>
+<ul><li>See: <a href="Comparing_&quot;haishi&quot;_and_&quot;huozhe&quot;" title="Comparing &quot;haishi&quot; and &quot;huozhe&quot;">Comparing "haishi" and "huozhe"</a></li></ul></li>
+<li>QW0037: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/making-comparisons-using-%E6%AF%94-b%C7%90">	Making Comparisons Using 比 bǐ</a>
+<ul><li>See: <a href="Basic_comparisons_with_&quot;bi&quot;" title="Basic comparisons with &quot;bi&quot;">Basic comparisons with "bi"</a></li></ul></li>
+<li>QW0038: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%B8%80%E5%B0%B1-yijiu-pattern">	 一...就... (yī...jiù...) pattern</a>
+<ul><li>See: <a href="Events_in_quick_succession_with_&quot;yi..._jiu&quot;" class="mw-redirect" title="Events in quick succession with &quot;yi... jiu&quot;">Events in quick succession with "yi... jiu"</a></li></ul></li>
+<li>QW0039: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/embrace-your-fears-%E6%80%95-paadj">	Embrace your Fears! 怕 (pà)...Adj</a></li>
+<li>QW0040: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E6%97%A0%E8%AE%BA-wulun-no-matter">	无论 (wúlùn) No matter...</a>
+<ul><li>See: <a href="&quot;No_Matter&quot;_with_&quot;wulun&quot;" class="mw-redirect" title="&quot;No Matter&quot; with &quot;wulun&quot;">"No Matter" with "wulun"</a></li></ul></li>
+<li>QW0041: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/you-must-listen-to-this-episode-%E9%9D%9E%E4%B8%8D%E5%8F%AF-feibu-ke">	You Must Listen to this Episode - 非...不可 (fēi...bù kě)</a>
+<ul><li>See: <a href="Adding_emphasis_with_&quot;fei....buke&quot;" title="Adding emphasis with &quot;fei....buke&quot;">Adding emphasis with "fei....buke"</a></li></ul></li>
+<li>QW0042: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ending-your-sentence-with-%E5%90%A7-ba">	Ending Your Sentence with 吧 (ba)</a>
+<ul><li>See: <a href="Suggestions_with_&quot;ba&quot;" title="Suggestions with &quot;ba&quot;">Suggestions with "ba"</a> , <a href="Conceding_with_&quot;ba&quot;" title="Conceding with &quot;ba&quot;">Conceding with "ba"</a> , and <a href="Softening_speech_with_&quot;ba&quot;" title="Softening speech with &quot;ba&quot;">Softening speech with "ba"</a></li></ul></li>
+<li>QW0043: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ending-your-sentence-with-%E5%98%9B-%EF%BC%88ma">	Ending your sentence with 嘛 （ma)</a>
+<ul><li>See: <a href="Expressing_the_self-evident_with_&quot;ma&quot;" title="Expressing the self-evident with &quot;ma&quot;">Expressing the self-evident with "ma"</a></li></ul></li>
+<li>QW0044: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/xink%C7%94-%E8%BE%9B%E8%8B%A6">	Xīnkǔ 辛苦</a></li>
+<li>QW0045: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ending-your-sentence-with-%E5%95%8A-%E5%91%80-a-ya">	Ending your sentence with 啊 &amp; 呀 (a &amp; ya)</a></li>
+<li>QW0046: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/lo-and-la-%EF%BC%88%E5%92%AF-%E5%95%A6%EF%BC%89">	Lo and La （咯 &amp; 啦）</a></li>
+<li>QW0047: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/more-than-50-kuai">	More than 50 kuai!</a>
+<ul><li>See: <a href="Indicating_a_number_in_excess" title="Indicating a number in excess">Indicating a number in excess</a></li></ul></li>
+<li>QW0048: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/arent-you-%EF%BC%88%E4%B8%8D%E6%98%AF-%E5%90%97%EF%BC%89">	Aren't you.... （不是.... 吗）</a></li>
+<li>QW0049: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/i-dont-have-the-strength-%E4%B8%8D%E5%8A%A8%EF%BC%89">	I Don't Have the Strength (... 不动）</a>
+<ul><li>See: <a href="Potential_complement_&quot;bu_dong&quot;" class="mw-redirect" title="Potential complement &quot;bu dong&quot;">Potential complement "bu dong"</a></li></ul></li>
+<li>QW0050: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/i-cancant-afford-it-%E5%BE%97%E8%B5%B7-%E4%B8%8D%E8%B5%B7%EF%BC%89">	I Can/Can't Afford it (...得起 &amp; ...不起）</a></li>
+<li>QW0051: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/i-just-%E5%88%9A-%E5%88%9A%E6%89%8D%EF%BC%88gang-gangcai%EF%BC%89">	I Just.... 刚 &amp; 刚才（gāng &amp; gāngcái）</a>
+<ul><li>See: <a href="Comparing_&quot;gang&quot;_and_&quot;gangcai&quot;" title="Comparing &quot;gang&quot; and &quot;gangcai&quot;">Comparing "gang" and "gangcai"</a></li></ul></li>
+<li>QW0052: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/do-you-remember">	Do You Remember....</a></li>
+<li>QW0053: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E9%83%BD-dou-the-bryan-adams-pattern">	...都 (dōu): The Bryan Adams pattern</a></li>
+<li>QW0054: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-attitude-pattern-y%C7%92u-shenme-%E6%9C%89%E4%BB%80%E4%B9%88">	The Attitude Pattern (yǒu shénme... 有什么...)</a></li>
+<li>QW0055: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/clarifying-how-to-use-every-%E6%AF%8F%EF%BC%88mei%EF%BC%89">	Clarifying how to use "every" 每（měi）</a>
+<ul><li>See: <a href="Pronoun_&quot;mei&quot;_for_&quot;every&quot;" class="mw-redirect" title="Pronoun &quot;mei&quot; for &quot;every&quot;">Pronoun "mei" for "every"</a></li></ul></li>
+<li>QW0056: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/colors-by-degrees">	Colors, By Degrees</a></li>
+<li>QW0057: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/addressing-people">	Addressing People</a></li>
+<li>QW0058: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-%E6%98%AF%E7%9A%84-shide-pattern">	The 是...的 (Shì...de) Pattern</a>
+<ul><li>See: <a href="Shi..._de_construction" class="mw-redirect" title="Shi... de construction">Shi... de construction</a></li></ul></li>
+<li>QW0059: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/measure-words-for-counting-people">	Measure Words for Counting People</a></li>
+<li>QW0060: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%BC%9A-hui-and-%E8%83%BD-neng-face-off">	会 (Huì) and 能 (Néng) Face-off</a>
+<ul><li>See: <a href="Comparing_&quot;hui&quot;_&quot;neng&quot;_&quot;keyi&quot;" class="mw-redirect" title="Comparing &quot;hui&quot; &quot;neng&quot; &quot;keyi&quot;">Comparing "hui" "neng" "keyi"</a></li></ul></li>
+<li>QW0061: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-my-minefield">	The My Minefield</a></li>
+<li>QW0062: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-pretty-podcast">	The Pretty Podcast</a></li>
+<li>QW0063: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/making-negative-comparisons">	Making Negative Comparisons</a>
+<ul><li>See: <a href="Basic_comparisons_with_&quot;bu_bi&quot;" title="Basic comparisons with &quot;bu bi&quot;">Basic comparisons with "bu bi"</a> , <a href="Comparisons_with_&quot;buru&quot;" title="Comparisons with &quot;buru&quot;">Comparisons with "buru"</a> , and <a href="Basic_comparisons_with_&quot;meiyou&quot;" title="Basic comparisons with &quot;meiyou&quot;">Basic comparisons with "meiyou"</a></li></ul></li>
+<li>QW0064: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/dont-never-say-never">	Don't Never Say Never</a></li>
+<li>QW0065: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-almost">	Using 'Almost'</a>
+<ul><li>See: <a href="Expressing_&quot;almost&quot;_using_&quot;chadian&quot;" title="Expressing &quot;almost&quot; using &quot;chadian&quot;">Expressing "almost" using "chadian"</a> and <a href="Expressing_&quot;almost&quot;_using_&quot;chadian_mei&quot;" title="Expressing &quot;almost&quot; using &quot;chadian mei&quot;">Expressing "almost" using "chadian mei"</a></li></ul></li>
+<li>QW0066: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/no-wonder">	No Wonder!</a>
+<ul><li>See: <a href="Expressing_&quot;no_wonder&quot;" title="Expressing &quot;no wonder&quot;">Expressing "no wonder"</a></li></ul></li>
+<li>QW0067: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/numbers-in-chinese">	Numbers in Chinese</a></li>
+<li>QW0068: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/last-and-next">	Last and Next</a></li>
+<li>QW0069: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E9%BA%BB%E7%83%A6%E4%BD%A0-mafan-n%C7%90-to-say-please">	麻烦你 (Máfan Nǐ) to Say Please</a></li>
+<li>QW0070: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/good-bad-and-otherwise">	Good, Bad and Otherwise</a></li>
+<li>QW0071: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/when-%E6%AF%94%E8%BE%83-b%C7%90jiao-becomes-%E6%9B%B4-geng">	When 比较 (bǐjiào) becomes 更 (gèng)</a>
+<ul><li>See: <a href="Expressing_&quot;rather&quot;_with_&quot;bijiao&quot;" title="Expressing &quot;rather&quot; with &quot;bijiao&quot;">Expressing "rather" with "bijiao"</a> and <a href="&quot;Even_more&quot;_with_&quot;geng&quot;" class="mw-redirect" title="&quot;Even more&quot; with &quot;geng&quot;">"Even more" with "geng"</a></li></ul></li>
+<li>QW0072: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/often-using-%E5%B8%B8%E5%B8%B8%EF%BC%8C%E7%BB%8F%E5%B8%B8%EF%BC%8C%E9%80%9A%E5%B8%B8-changchang-jingchang-tongchang">	Often: Using 常常，经常，通常 (chángcháng, jīngcháng, tōngcháng)</a></li>
+<li>QW0073: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E8%AF%B7-q%C7%90ng-please-and-beyond">	请 (Qǐng) - Please and Beyond</a></li>
+<li>QW0074: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-magic-word-%E8%AE%A9-rang">	The Magic Word 让 (Ràng)</a></li>
+<li>QW0075: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-%E9%99%A4%E4%BA%86%E3%80%82%E3%80%82%E3%80%82%E4%BB%A5%E5%A4%96-chule-y%C7%90wai">	Using 除了。。。以外 (Chúle... Yǐwài)</a>
+<ul><li>See: <a href="&quot;Except&quot;_and_&quot;in_addition&quot;_with_&quot;chule…_yiwai&quot;" class="mw-redirect" title="&quot;Except&quot; and &quot;in addition&quot; with &quot;chule… yiwai&quot;">"Except" and "in addition" with "chule… yiwai"</a></li></ul></li>
+<li>QW0076: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/understanding-%E4%BA%86%E8%A7%A3-li%C7%8Eojie-and-%E7%90%86%E8%A7%A3-l%C7%90jie">	Understanding 了解 (Liǎojiě) and 理解 (Lǐjiě)</a></li>
+<li>QW0077: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/always-in-chinese-%E6%80%BB%E6%98%AF-z%C7%92ngshi-and-%E8%80%81%E6%98%AF-l%C7%8Eoshi">	Always in Chinese: 总是 (zǒngshì) and 老是 (lǎoshi)</a>
+<ul><li>See: <a href="&quot;Always&quot;_with_&quot;zongshi&quot;" class="mw-redirect" title="&quot;Always&quot; with &quot;zongshi&quot;">"Always" with "zongshi"</a> and <a href="&quot;Always&quot;_as_a_complaint_with_&quot;laoshi&quot;" class="mw-redirect" title="&quot;Always&quot; as a complaint with &quot;laoshi&quot;">"Always" as a complaint with "laoshi" </a></li></ul></li>
+<li>QW0078: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/being-vague-%E5%A4%A7%E6%A6%82-dagai-%E5%B7%A6%E5%8F%B3-zu%C7%92you-%E4%B8%8A%E4%B8%8B-shangxia">	Being Vague: 大概 (dàgài), 左右 (zuǒyòu), 上下 (shàngxià)</a></li>
+<li>QW0079: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/all-the-things-you-can-hit-%E6%89%93-d%C7%8E">	All the Things You Can Hit: 打 (dǎ)</a></li>
+<li>QW0080: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/stop-in-the-name-of-the-%E6%B3%95-f%C7%8E">	Stop in the Name of the 法 (fǎ)</a></li>
+<li>QW0081: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/lucky-duckies">	Lucky Duckies</a></li>
+<li>QW0082: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/slang-ular-momentum">	Slang-ular Momentum</a></li>
+<li>QW0083: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/talking-with-numbers">	Talking with Numbers</a></li>
+<li>QW0084: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/funny-business-%E6%90%9E%E7%AC%91%EF%BC%8C-%E5%A5%BD%E7%AC%91%EF%BC%8C-%E5%8F%AF%E7%AC%91">	Funny Business -- 搞笑， 好笑， 可笑</a></li>
+<li>QW0085: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/interesting-or-boring">	Interesting or Boring?</a></li>
+<li>QW0086: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/taking-it-all-off">	Taking it all off</a></li>
+<li>QW0087: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/sorry-and-thank-you">	Sorry and Thank You</a></li>
+<li>QW0088: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/making-commands-more-emphatic-with-%E5%8D%83%E4%B8%87-and-%E4%B8%80%E5%AE%9A">	Making Commands More Emphatic with 千万 and 一定</a>
+<ul><li>See: <a href="Expressing_&quot;to_make_certain&quot;_with_&quot;qianwan&quot;" title="Expressing &quot;to make certain&quot; with &quot;qianwan&quot;">Expressing "to make certain" with "qianwan"</a></li></ul></li>
+<li>QW0089: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/about-face-a-multi-faceted-look-at-%E9%9D%A2%E5%AD%90">	About Face! A Multi-faceted Look at 面子</a></li>
+<li>QW0090: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/letting-go-with-%E6%94%BE">	Letting go with 放</a></li>
+<li>QW0091: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/broken-busted-and-smashed">	Broken, Busted, and Smashed</a></li>
+<li>QW0092: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/dropping-and-losing-%E4%B8%A2-%E5%BC%84%E4%B8%A2%EF%BC%8C%E4%B8%A2%E6%8E%89">	Dropping and Losing 丢, 弄丢，丢掉</a></li>
+<li>QW0093: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/picking-up-%E6%8B%BF">	Picking Up 拿</a></li>
+<li>QW0094: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-magic-word-%E6%8A%8A">	The Magic Word 把</a>
+<ul><li>See: <a href="Ba_sentence" class="mw-redirect" title="Ba sentence">Ba sentence</a></li></ul></li>
+<li>QW0095: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/how-far-away-are-you-from-understanding-%E7%A6%BB%EF%BC%9F">	How Far Away are You From Understanding 离？</a>
+<ul><li>See: <a href="Expressing_distance_with_&quot;li&quot;" title="Expressing distance with &quot;li&quot;">Expressing distance with "li"</a></li></ul></li>
+<li>QW0096: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/are-you-happy-content-or-delighted">	Are You Happy, Content, or Delighted?</a></li>
+<li>QW0097: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/pain-and-suffering-%E4%BC%A4%E5%BF%83-%E9%9A%BE%E5%8F%97%EF%BC%8C%E9%83%81%E9%97%B7-%E4%B8%8D%E7%88%BD%EF%BC%8C%E9%9A%BE%E8%BF%87">	Pain and Suffering 伤心, 难受，郁闷 ,不爽，难过</a></li>
+<li>QW0098: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/hot-and-cool-%E7%83%AD-%E7%83%AB-%E5%87%89-%E5%86%B7">	Hot and Cool 热, 烫 , 凉 , 冷</a></li>
+<li>QW0099: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/podcast-language-1">	Podcast Language 1</a></li>
+<li>QW0100: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/podcast-language-2">	Podcast Language 2</a></li>
+<li>QW0101: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/podcast-language-3">	Podcast Language 3</a></li>
+<li>QW0102: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-do">	To do</a></li>
+<li>QW0103: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/finally">	Finally</a></li>
+<li>QW0104: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/how-long-has-this-been-going-on">	How Long Has This Been Going On?</a></li>
+<li>QW0105: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/hate-is-a-very-strong-word">	Hate is a Very Strong Word</a></li>
+<li>QW0106: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/howre-you-doing-%E5%BE%97">	How're You Doing? 得</a></li>
+<li>QW0107: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/bringing-it-all-back-home-with-%E5%9B%9E%E5%8E%BB-and-%E5%9B%9E%E6%9D%A5">	Bringing it All Back Home With 回去 and 回来</a>
+<ul><li>See: <a href="Direction_complement" title="Direction complement">Direction complement</a></li></ul></li>
+<li>QW0108: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/measure-word-fundamentals-%E4%B8%AA%EF%BC%8C%E5%8F%AA%EF%BC%8C%E6%9D%A1%EF%BC%8C%E5%BC%A0">	Measure Word Fundamentals: 个，只，条，张</a></li>
+<li>QW0109: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/measure-words-for-food">	Measure Words for Food</a></li>
+<li>QW0110: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/pair-set-match-%E5%8F%8C-%E5%89%AF-%E5%AF%B9-%E5%A5%97">	Pair, Set, Match 双, 副, 对 , 套</a></li>
+<li>QW0111: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/earlier-and-later-than-expected-%E6%89%8Dand-%E5%B0%B1">	Earlier and Later than Expected: 才and 就</a>
+<ul><li>See: <a href="Comparing_&quot;cai&quot;_and_&quot;jiu&quot;" title="Comparing &quot;cai&quot; and &quot;jiu&quot;">Comparing "cai" and "jiu"</a></li></ul></li>
+<li>QW0112: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E6%8A%8A-humbug">	把 Humbug</a></li>
+<li>QW0113: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/hotels-hostels-and-restaurants">	Hotels, Hostels and Restaurants</a></li>
+<li>QW0114: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/how-to-say-and-in-chinese">	How to Say "and" in Chinese</a>
+<ul><li>See: <a href="Expressing_&quot;and&quot;_with_&quot;he&quot;" title="Expressing &quot;and&quot; with &quot;he&quot;">Expressing "and" with "he"</a></li></ul></li>
+<li>QW0115: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E9%83%BD%E4%BA%86already">	都......了Already</a>
+<ul><li>See: <a href="&quot;Already&quot;_with_&quot;dou…le&quot;" class="mw-redirect" title="&quot;Already&quot; with &quot;dou…le&quot;">"Already" with "dou…le"</a></li></ul></li>
+<li>QW0116: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/coming-up-next-%E6%8E%A5%E4%B8%8B%E6%9D%A5%EF%BC%8C%E7%84%B6%E5%90%8E%EF%BC%8C%E8%BF%98%E6%9C%89%EF%BC%8C%E9%82%A3%E4%B9%88">	Coming Up Next: 接下来，然后，还有，那么</a></li>
+<li>QW0117: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/fruit-basket-of-cause-effect">	Fruit Basket of Cause-Effect</a></li>
+<li>QW0118: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/giving-%E7%BB%99-another-look">	Giving 给 Another Look	grammar</a></li>
+<li>QW0119: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/dare-to-use-%E6%95%A2">	Dare to Use 敢	grammar</a></li>
+<li>QW0120: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/nothing-more-than-only-and-just">	Nothing More Than Only and Just	grammar</a></li>
+<li>QW0121: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/even-if">	Even If...	grammar</a>
+<ul><li>See: <a href="Expressing_&quot;Even_if…&quot;_with_&quot;napa&quot;" class="mw-redirect" title="Expressing &quot;Even if…&quot; with &quot;napa&quot;">Expressing "Even if…" with "napa"</a>, <a href="Expressing_&quot;Even_if…&quot;_with_&quot;jishi&quot;" class="mw-redirect" title="Expressing &quot;Even if…&quot; with &quot;jishi&quot;">Expressing "Even if…" with "jishi"</a>, and <a href="Expressing_&quot;Even_if…&quot;_with_&quot;jiusuan&quot;" class="mw-redirect" title="Expressing &quot;Even if…&quot; with &quot;jiusuan&quot;">Expressing "Even if…" with "jiusuan"</a></li></ul></li>
+<li>QW0122: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/originally-original">	Originally Original	grammar</a></li>
+<li>QW0123: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/flexible-not-reflexive">	Flexible, Not Reflexive	grammar</a></li>
+<li>QW0124: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/with-regards-to-%E5%AF%B9-and-%E5%AF%B9%E4%BA%8E">	With Regards to 对 and 对于	grammar</a>
+<ul><li>See: <a href="Comparing_&quot;dui&quot;_and_&quot;duiyu&quot;" title="Comparing &quot;dui&quot; and &quot;duiyu&quot;">Comparing "dui" and "duiyu"</a></li></ul></li>
+<li>QW0125: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/expressing-location-with-%E8%BE%B9-and-%E9%9D%A2">	Expressing Location with 边 and 面	grammar</a></li>
+<li>QW0126: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/picking-things-up-%E6%8B%BF%E3%80%81%E5%B8%A6%E3%80%81%E5%8F%96">	Picking things up: 拿、带、取	verb, grammar</a></li>
+<li>QW0127: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E6%AC%A1%EF%BC%8C%E9%81%8D%EF%BC%8C%E8%B6%9F-measuring-times">	次，遍，趟: Measuring Times	measure words, time</a></li>
+<li>QW0128: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ways-to-describe-things-that-are-inside">	Ways to Describe Things that are "Inside"	position, directions, grammar</a></li>
+<li>QW0129: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/time-period-patterns-with-%E6%9C%AB-%E5%BA%95-%E5%88%9D">	Time Period Patterns with 末, 底, 初	time, grammar</a></li>
+<li>QW0130: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/pulling-out-all-the-stops-for-complement-%E4%BD%8F">	Pulling Out all the Stops for Complement 住	complement, verb, grammar</a>
+<ul><li>See: <a href="Resultative_Complement_&quot;zhu&quot;" class="mw-redirect" title="Resultative Complement &quot;zhu&quot;">Resultative Complement "zhu"</a></li></ul></li>
+<li>QW0131: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/rhetorical-question-marker-%E9%9A%BE%E9%81%93">	Rhetorical Question Marker 难道	questions, grammar</a>
+<ul><li>See: <a href="Rhetorical_questions_with_&quot;nandao&quot;" title="Rhetorical questions with &quot;nandao&quot;">Rhetorical questions with "nandao"</a></li></ul></li>
+<li>QW0132: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E8%88%8D%E4%B8%8D%E5%BE%97">	舍不得	feelings, grammar</a></li>
+<li>QW0133: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/talking-about-others-%E5%88%AB%E7%9A%84%EF%BC%8C%E5%85%B6%E4%BB%96%E7%9A%84%EF%BC%8C%E5%8F%A6%E5%A4%96%E7%9A%84">	Talking about others: 别的，其他的，另外的	other, grammar</a></li>
+<li>QW0134: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ch-ch-ch-ch-changes">	Ch-ch-ch-ch-Changes	change, verb, grammar</a></li>
+<li>QW0135: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/pay-verbs">	Pay Verbs	verb, paying, grammar, bill, credit cards, mortgage</a></li>
+<li>QW0136: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-white-spectrum-of-meaning">	The White Spectrum of Meaning	white, grammar, culture, colors</a></li>
+<li>QW0137: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-black-spectrum-of-meaning">	The Black Spectrum of Meaning	illegal, black, grammar, culture, colors</a></li>
+<li>QW0138: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/how-to-start-a-conversation-with-chinese-people">	How to Start a Conversation with Chinese People	culture, relationships, conversation, questions</a></li>
+<li>QW0139: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-red-spectrum-of-meaning">	The Red Spectrum of Meaning	colors, red, culture, happiness, grammar, popular</a></li>
+<li>QW0140: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/keeping-%E6%94%B6-and-%E5%8F%97-straight">	Keeping 收 and 受 Straight	grammar, verb, accept</a></li>
+<li>QW0141: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-yellow-and-green-spectrum-of-meaning">	The Yellow and Green Spectrum of Meaning	movies, books, culture, green, yellow, colors</a></li>
+<li>QW0142: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/passive-verbs-and-%E8%A2%AB">	Passive Verbs and 被	preposition, bei, passive, grammar</a>
+<ul><li>See: <a href="Bei_sentence" class="mw-redirect" title="Bei sentence">Bei sentence</a></li></ul></li>
+<li>QW0143: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/talking-about-talking-in-chinese">	Talking about Talking in Chinese	to say, to speak, to talk, to discuss, verb, grammar</a></li>
+<li>QW0144: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/back-to-basics-making-people-plural-with-%E4%BB%AC-men">	Back to Basics: Making People Plural with 们 (men)	noun, people, plural</a></li>
+<li>QW0145: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/describing-fear">	Describing Fear	adjective, verb, grammar, fear, scary</a></li>
+<li>QW0146: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/lovey-dovey-terminology">	Lovey-Dovey Terminology	relationships, names</a></li>
+<li>QW0147: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/suffix-magic">	Suffix Magic	noun, verb, adjective, grammar</a></li>
+<li>QW0148: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/must-have-modals">	Must-Have Modals	grammar, verb, modals</a></li>
+<li>QW0149: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/realization-reality-and-authenticity">	Realization, Reality and Authenticity	wish, perception</a></li>
+<li>QW0150: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/feelings">	Feelings	affection, emotions, feelings</a></li>
+<li>QW0151: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/suffixes-for-describing-people">	Suffixes for Describing People	jobs, professions, people</a></li>
+<li>QW0152: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/going-leaving-and-leaving-for-good">	Going, Leaving, and Leaving for Good</a></li>
+<li>QW0153: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/doing-the-math-with-%E7%AE%97-suan">	Doing the math with 算 (suàn)</a></li>
+<li>QW0154: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/getting-into-the-habit-with-%E4%B9%A0%E6%83%AF-xiguan">	Getting into the habit with 习惯 (xíguàn)</a></li>
+<li>QW0155: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/future-fun-with-%E4%BC%9A-hui4-%E8%A6%81-yao4-and-%E5%B0%86-jiang1">	Future fun with 会 (hui4), 要 (yao4), and 将 (jiang1)</a>
+<ul><li>See: <a href="Auxiliary_verb_&quot;hui&quot;_for_&quot;will&quot;" class="mw-redirect" title="Auxiliary verb &quot;hui&quot; for &quot;will&quot;">Auxiliary verb "hui" for "will"</a> , <a href="Expressing_Future_with_&quot;jiang&quot;" class="mw-redirect" title="Expressing Future with &quot;jiang&quot;">Expressing Future with "jiang"</a> and <a href="Auxiliary_verb_&quot;yao&quot;_and_its_multiple_meanings" title="Auxiliary verb &quot;yao&quot; and its multiple meanings">Auxiliary verb "yao" and its multiple meanings</a></li></ul></li>
+<li>QW0156: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%BA%BA%E5%AE%B6-other-people-and-pouty-girls">	人家: Other People and Pouty Girls</a></li>
+<li>QW0157: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/some-uses-of-%E4%BA%9B">	Some uses of 些</a>
+<ul><li>See: <a href="&quot;Some&quot;_using_&quot;yixie&quot;" class="mw-redirect" title="&quot;Some&quot; using &quot;yixie&quot;">"Some" using "yixie"</a></li></ul></li>
+<li>QW0158: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/whatever-wherever-whoever">	Whatever, Wherever, Whoever</a></li>
+<li>QW0159: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/separable-verbs">	Separable Verbs</a>
+<ul><li>See: <a href="Separable_verb" title="Separable verb">Separable verb</a></li></ul></li>
+<li>QW0160: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/comparing-buts-%E4%BD%86-and-%E5%8D%B4">	Comparing Buts: 但 and 却</a>
+<ul><li>See: <a href="The_&quot;however&quot;_adverb_&quot;que&quot;" title="The &quot;however&quot; adverb &quot;que&quot;">The "however" adverb "que"</a></li></ul></li>
+<li>QW0161: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/festivals-holidays-vacations-and-leave">	Festivals, Holidays, Vacations, and Leave</a></li>
+<li>QW0162: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/revisiting-before-and-after">	Revisiting Before and After</a></li>
+<li>QW0163: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/making-people-do-things-with-%E8%AE%A9%EF%BC%8C%E4%BB%A4%EF%BC%8Cand-%E4%BD%BF">	Making people do things with 让，令，and 使</a></li>
+<li>QW0164: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/what-is-up-with-%E7%94%B1">	What is up with 由</a>
+<ul><li>See: <a href="Emphasizing_the_doer_of_an_action_with_&quot;you&quot;" title="Emphasizing the doer of an action with &quot;you&quot;">Emphasizing the doer of an action with "you"</a></li></ul></li>
+<li>QW0165: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/speaking-with-%E8%B7%9F-gen-and-%E5%AF%B9-dui">	Speaking with 跟 (gen) and 对 (dui)</a>
+<ul><li>See: <a href="Using_&quot;gen&quot;" class="mw-redirect" title="Using &quot;gen&quot;">Using "gen"</a> and <a href="Using_&quot;dui&quot;" class="mw-redirect" title="Using &quot;dui&quot;">Using "dui"</a></li></ul></li>
+<li>QW0166: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/there-is-no-try">	There Is No Try</a></li>
+<li>QW0167: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/various-speech-acts-and-%E5%90%91-xiang">	Various Speech Acts and 向 (xiang)</a></li>
+<li>QW0168: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ending-completing-finishing">	Ending, Completing, Finishing</a></li>
+<li>QW0169: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/four-uses-of-the-complement-%E8%B5%B7%E6%9D%A5-qilai">	Four Uses of the Complement 起来 (qilai)</a>
+<ul><li>See: <a href="Result_complement_&quot;-qilai&quot;" class="mw-redirect" title="Result complement &quot;-qilai&quot;">Result complement "-qilai"</a></li></ul></li>
+<li>QW0170: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/an-introduction-to-chengyu">	An Introduction to Chengyu</a></li>
+<li>QW0171: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/keeping-and-leaving">	Keeping and Leaving</a></li>
+<li>QW0172: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/dealing-with-%E7%AE%A1-guan">	Dealing with 管 (guan)</a></li>
+<li>QW0173: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/losing-and-forgetting">	Losing and Forgetting</a></li>
+<li>QW0174: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/surfing-the-web-chinese-style">	Surfing the Web Chinese Style</a></li>
+<li>QW0175: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/nothing-more-than-%E8%80%8C%E5%B7%B2-eryi-and-%E7%BD%A2%E4%BA%86-bale">	Nothing more than 而已 (eryi) and 罢了 (bale)</a></li>
+<li>QW0176: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-%E7%9D%80-zhe-chronicles-how-we-verb">	The 着 (zhe) Chronicles: How We Verb</a>
+<ul><li>See: <a href="&quot;Verbing_away&quot;_using_&quot;zhe&quot;" class="mw-redirect" title="&quot;Verbing away&quot; using &quot;zhe&quot;">"Verbing away" using "zhe"</a> and <a href="Aspect_particle_&quot;zhe&quot;" title="Aspect particle &quot;zhe&quot;">Aspect particle "zhe"</a></li></ul></li>
+<li>QW0177: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/possible-possibly-possibility">	Possible, Possibly, Possibility</a></li>
+<li>QW0178: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-%E7%9D%80-zhe-chronicles-actions-in-progress">	The 着 (zhe) Chronicles: Actions in Progress</a>
+<ul><li>See: <a href="Expressing_actions_in_progress" class="mw-redirect" title="Expressing actions in progress">Expressing actions in progress</a></li></ul></li>
+<li>QW0179: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/adjectives-with-%E6%98%AF-shi">	Adjectives with 是 (shi)</a></li>
+<li>QW0180: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-%E7%9D%80-zhe-chronicles-verbs-as-states">	The 着 (zhe) Chronicles: Verbs as States</a></li>
+<li>QW0181: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/actually">	Actually</a></li>
+<li>QW0182: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/back-in-the-day-with-%E5%BD%93">	Back in the Day with "当"</a></li>
+<li>QW0183: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/so-adjective-that">	So (adjective) that...</a></li>
+<li>QW0184: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/making-the-most-of-%E6%9C%80-zui">	Making the Most of 最 (zui)</a>
+<ul><li>See: <a href="The_&quot;zui&quot;_superlative" class="mw-redirect" title="The &quot;zui&quot; superlative">The "zui" superlative</a></li></ul></li>
+<li>QW0185: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-various-guises-of-until">	The Various Guises of "Until"</a></li>
+<li>QW0186: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/of-soldiers-and-military-people">	Of Soldiers and Military People</a></li>
+<li>QW0187: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/eating-idioms-part-1">	Eating Idioms, Part 1</a></li>
+<li>QW0188: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/eating-idioms-part-2">	Eating Idioms, Part 2</a></li>
+<li>QW0189: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/eating-idioms-part-3">	Eating Idioms, Part 3</a></li>
+<li>QW0190: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/by-myself-so-alone">	By Myself, So Alone</a></li>
+<li>QW0191: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/getting-to-the-bottom-of-%E5%88%B0%E5%BA%95">	Getting to the Bottom of 到底</a>
+<ul><li>See: <a href="Expressing_&quot;In_the_End&quot;_with_&quot;daodi&quot;" class="mw-redirect" title="Expressing &quot;In the End&quot; with &quot;daodi&quot;">Expressing "In the End" with "daodi"</a></li></ul></li>
+<li>QW0192: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/rainbow">	Rainbow</a></li>
+<li>QW0193: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/deadly-complements-of-degree">	Deadly Complements of Degree</a>
+<ul><li>See: <a href="Degree_complement" title="Degree complement">Degree complement</a></li></ul></li>
+<li>QW0194: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/preferences-and-druthers">	Preferences and Druthers</a></li>
+<li>QW0195: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/actually-contrary-with-%E5%80%92">	Actually Contrary with 倒</a>
+<ul><li>See: <a href="Expressing_Contrariness_with_&quot;dao&quot;" class="mw-redirect" title="Expressing Contrariness with &quot;dao&quot;">Expressing Contrariness with "dao"</a></li></ul></li>
+<li>QW0196: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E5%B0%B1-for-emphasis">	就 for Emphasis</a>
+<ul><li>See: <a href="Emphasis_with_&quot;jiu&quot;" class="mw-redirect" title="Emphasis with &quot;jiu&quot;">Emphasis with "jiu"</a></li></ul></li>
+<li>QW0197: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/when-opposites-collide-1">	When Opposites Collide (1)</a></li>
+<li>QW0198: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/when-opposites-collide-2">	When Opposites Collide (2)</a></li>
+<li>QW0199: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-complement-%E4%B8%8D%E4%BA%86">	The Complement 不了</a></li>
+<li>QW0200: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-complement-%E4%B8%8D%E4%B8%8B">	The Complement 不下</a>
+<ul><li>See: <a href="Potential_complement_&quot;bu_xia&quot;" class="mw-redirect" title="Potential complement &quot;bu xia&quot;">Potential complement "bu xia"</a></li></ul></li>
+<li>QW0201: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%B8%BA-and-%E4%B8%BA%E4%BA%86">	为 and 为了</a>
+<ul><li>See: <a href="&quot;For&quot;_with_&quot;wei&quot;" class="mw-redirect" title="&quot;For&quot; with &quot;wei&quot;">"For" with "wei"</a> and <a href="Expressing_purpose_with_&quot;weile&quot;" title="Expressing purpose with &quot;weile&quot;">Expressing purpose with "weile"</a></li></ul></li>
+<li>QW0202: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/two-tones-two-meanings-for-%E8%BD%AC">Two tones, two meanings for 转</a></li>
+<li>QW0203: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/unfairness-misblaming-and-feeling-wronged">Unfairness, Misblaming, and Feeling Wronged</a></li>
+<li>QW0204: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/sleeping-in">Sleeping in</a></li>
+<li>QW0205: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/manly-men-and-womanly-women">Manly Men and Womanly Women </a></li>
+<li>QW0206: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/going-and-leaving">Going and Leaving </a></li>
+<li>QW0207: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/strong">Strong </a></li>
+<li>QW0208: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/paying-attention-and-caring">Paying Attention and Caring </a></li>
+<li>QW0209: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/strong-in-the-abstract">Strong (in the abstract) </a></li>
+<li>QW0210: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/words-with-heart">Words with Heart </a></li>
+<li>QW0211: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/words-with-heart-part-2">Words with Heart (Part 2) </a></li>
+<li>QW0212: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/punctuation-marks">Punctuation Marks </a></li>
+<li>QW0213: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/building-establishing-and-creating">Building, Establishing, and Creating </a></li>
+<li>QW0214: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/translation-tools">Translation Tools </a></li>
+<li>QW0215: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-depth-of-%E6%B7%B1">The Depth of 深 </a></li>
+<li>QW0216: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/western-brands-in-chinese">Western Brands in Chinese </a></li>
+<li>QW0217: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/addressing-people-revisited">Addressing People Revisited </a></li>
+<li>QW0218: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/pinyin-terms">Pinyin Terms </a></li>
+<li>QW0219: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-complexities-of-de">The Complexities of 'De' </a>
+<ul><li>See: <a href="Structural_particle_&quot;de&quot;" title="Structural particle &quot;de&quot;">Structural particle "de"</a></li></ul></li>
+<li>QW0220: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/very-and-other-degree-modifiers">'Very' and Other Degree Modifiers </a></li>
+<li>QW0221: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-glorious%E4%BA%86le-part-1">The Glorious了(le): Part 1 </a>
+<ul><li>See: <a href="Uses_of_&quot;le&quot;" title="Uses of &quot;le&quot;">Uses of "le"</a></li></ul></li>
+<li>QW0222: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-glorious-%E4%BA%86le-part-2">The Glorious了(le): Part 2 </a>
+<ul><li>See: <a href="Uses_of_&quot;le&quot;" title="Uses of &quot;le&quot;">Uses of "le"</a></li></ul></li>
+<li>QW0223: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E8%BF%87guo">过(guo) </a>
+<ul><li>See: <a href="Expressing_experiences_with_&quot;guo&quot;" title="Expressing experiences with &quot;guo&quot;">Expressing experiences with "guo"</a></li></ul></li>
+<li>QW0224: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%B8%80%E4%B8%8B%EF%BC%8C%E4%B8%80%E4%BC%9A%E5%84%BF%EF%BC%8Cand-%E4%B8%80%E7%82%B9%E5%84%BF">一下，一会儿，and 一点儿 </a></li>
+<li>QW0225: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/measure-words-for-animals">Measure Words for Animals </a></li>
+<li>QW0226: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%B8%80%E4%B8%8B%EF%BC%8C%E4%B8%80%E4%BC%9A%E5%84%BF%EF%BC%8Cand-%E4%B8%80%E7%82%B9%E5%84%BF">一下，一会儿，and 一点儿 </a></li>
+<li>QW0227: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/how-to-be-negative">How to be Negative </a></li>
+<li>QW0228: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/essential-math-terms">Essential Math Terms </a></li>
+<li>QW0229: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/lucky-and-unlucky-numbers-in-chinese">Lucky and Unlucky Numbers in Chinese </a></li>
+<li>QW0230: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/water">Water </a></li>
+<li>QW0231: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/an-improved-understanding-of-improve">An Improved Understanding of Improve </a></li>
+<li>QW0232: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/christmas-in-chinese">Christmas in Chinese </a></li>
+<li>QW0233: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/giving-gifts-in-china">Giving Gifts in China </a></li>
+<li>QW0234: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/old-and-new">Old and New </a></li>
+<li>QW0235: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/popular-slang-from-2011">Popular Slang from 2011 </a></li>
+<li>QW0236: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/new-years-well-wishes">New Year's Well-Wishes </a></li>
+<li>QW0237: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/family-member-terms-of-address">Family Member Terms of Address </a></li>
+<li>QW0238: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/international-currency">International Currency</a></li>
+<li>QW0239: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/prices-and-expenses">Prices and Expenses</a></li>
+<li>QW0240: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/salaries-and-income">Salaries and Income</a></li>
+<li>QW0241: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/onomatopoeias">Onomatopoeias</a></li>
+<li>QW0242: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/email-terms-and-composition">Email Terms and Composition</a></li>
+<li>QW0243: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/a-qing-wen-to-our-listeners">A Qing Wen to Our Listeners</a></li>
+<li>QW0244: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/why-oh-why">Why oh Why</a></li>
+<li>QW0245: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/number-one-idioms">Number One Idioms</a></li>
+<li>QW0246: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/always-reexamined">Always Reexamined</a></li>
+<li>QW0247: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-correct-usage-of-correct">the Correct Usage of Correct</a></li>
+<li>QW0248: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/withstanding-%E5%92%8C%EF%BC%8C%E8%B7%9F%EF%BC%8Cand-%E4%B8%8E">WithstAnding 和，跟，and 与</a></li>
+<li>QW0249: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/meet-up-frenzy">Meet up Frenzy</a></li>
+<li>QW0250: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/a-much-needed-discussion-of-%E9%9C%80%E8%A6%81-and-%E8%A6%81">A Much-Needed Discussion of 需要 and 要</a></li>
+<li>QW0251: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/no-worries-no-problem">No Worries No Problem</a></li>
+<li>QW0252: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-stable-%E7%A8%B3-wen">The Stable 稳 (wen)</a></li>
+<li>QW0253: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-different-differences-of-different-and-difference">The Different Differences of Different and Difference</a></li>
+<li>QW0254: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/hiring-and-employment">Hiring and Employment</a></li>
+<li>QW0255: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-preposition-%E4%BA%8Eyu">The Preposition 于 (yu)</a></li>
+<li>QW0256: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/words-with-%E5%8F%AFke">Words with 可 (ke)</a></li>
+<li>QW0257: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/additional-conjunctions">Additional Conjunctions</a></li>
+<li>QW0258: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/expectations-and-predictions">Expectations and Predictions</a></li>
+<li>QW0259: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/taking-transportation">Taking Transportation</a></li>
+<li>QW0260: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/random-and-reckless">Random and Reckless</a></li>
+<li>QW0261: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/addressing-women">Addressing Women</a></li>
+<li>QW0262: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ferocious-tiger-idioms">Ferocious Tiger Idioms</a></li>
+<li>QW0263: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/rules-and-regulations">Rules and Regulations</a></li>
+<li>QW0264: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/petty-chicken-idioms">Petty Chicken Idioms</a></li>
+<li>QW0265: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E7%9C%8B-you-dig-it">看 You Dig it?</a></li>
+<li>QW0266: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-quick-smooth-%E9%A9%AC">The Quick, Smooth 马</a></li>
+<li>QW0267: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/regardless">Regardless</a></li>
+<li>QW0268: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/duplicitous-snake-idioms">Duplicitous Snake Idioms</a></li>
+<li>QW0269: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/whether-or-not-to-use-if">Whether or Not to Use "if"</a></li>
+<li>QW0270: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/send-and-deliver">Send and Deliver</a></li>
+<li>QW0271: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/were-serious">We're Serious!</a></li>
+<li>QW0272: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/lifes-a-zoo">Life's A Zoo</a></li>
+<li>QW0273: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-mysteries-of-%E8%80%8C-revealed">The Mysteries of 而 Revealed</a></li>
+<li>QW0274: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-many-ways-to-but-in">The Many Ways to 'But' In</a>
+<ul><li>See: <a href="But" title="But">But</a></li></ul></li>
+<li>QW0275: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/increase-and-decrease-rise-and-fall">Increase and Decrease, Rise and Fall</a></li>
+<li>QW0276: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-opposite-and-the-unexpected-%E7%9B%B8%E5%8F%8D-and-%E5%8F%8D%E8%80%8C">The Opposite and The Unexpected: 相反 and 反而</a></li>
+<li>QW0277: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/american-tv-shows-in-china">American TV Shows in China</a></li>
+<li>QW0278: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-degrees-of-willingness">The Degrees of Willingness</a></li>
+<li>QW0279: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/so-it-goes">So It Goes</a></li>
+<li>QW0280: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/talking-about-mistakes-part-1">Talking about Mistakes (Part 1)</a></li>
+<li>QW0281: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/talking-about-mistakes-part-2">Talking About Mistakes (Part 2)</a></li>
+<li>QW0282: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-chinese-experience">The Chinese Experience</a></li>
+<li>QW0283: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/everything-is-entirely-complete">Everything is Entirely Complete</a></li>
+<li>QW0284: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-mysterious-metric-system-part-1">The Mysterious Metric System (Part 1)</a></li>
+<li>QW0285: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-mysterious-metric-system-part-2">The Mysterious Metric System (Part 2)</a></li>
+<li>QW0286: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-many-ways-to-play">The Many Ways to Play</a></li>
+<li>QW0287: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/getting-your-pictures-perfect">Getting Your Pictures Perfect</a></li>
+<li>QW0288: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/chinese-catch-phrases-for-2012">Chinese Catch Phrases for 2012</a></li>
+<li>QW0289: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/spreading-the-word-on-marketing">Spreading the Word on Marketing</a></li>
+<li>QW0290: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/were-so-excited">We're So Excited!</a></li>
+<li>QW0291: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/accounting-for-taste">Accounting for Taste</a></li>
+<li>QW0292: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/chengyu-by-the-numbers-part-1">Chengyu By the Numbers (Part 1)</a></li>
+<li>QW0293: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-mysteries-of-age">The Mysteries of Age</a></li>
+<li>QW0294: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/chengyu-by-the-numbers-part-2">Chengyu By the Numbers (Part 2)</a></li>
+<li>QW0295: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/chinese-gets-cooking">Chinese Gets Cooking</a></li>
+<li>QW0296: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/tone-controversies">Tone Controversies</a></li>
+<li>QW0297: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/nouns-becoming-adjectives-part-1">Nouns Becoming Adjectives! (Part 1)</a></li>
+<li>QW0298: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/nouns-becoming-adjectives-part-2">Nouns Becoming Adjectives! (Part 2)</a></li>
+<li>QW0299: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/nouns-becoming-adjectives-part-3">Nouns Becoming Adjectives! (Part 3)</a></li>
+<li>QW0300: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/get-happy">Get Happy!</a></li>
+<li>QW0301: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/excited-about-exclamations-part-1">Excited about Exclamations! (Part 1)</a></li>
+<li>QW0302: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/excited-about-exclamations-part-2">Excited about Exclamations! (Part 2)</a></li>
+<li>QW0303: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/english-letters-make-chinese-words">English Letters Make Chinese Words</a></li>
+<li>QW0304: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/english-loan-words-in-chinese">English Loan Words in Chinese</a></li>
+<li>QW0305: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/excited-about-exclamations-part-3">Excited about Exclamations (Part 3)</a></li>
+<li>QW0306: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/excited-about-exclamations-part-4">Excited about Exclamations (Part 4)</a></li>
+<li>QW0307: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/it-takes-all-kinds">It Takes All Kinds</a></li>
+<li>QW0308: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-time-has-come">The Time Has Come</a></li>
+<li>QW0309: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/not-feeling-well">Not Feeling Well?</a></li>
+<li>QW0310: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/causing-creating-and-making-with-%E9%80%A0">Causing, Creating and Making with 造</a></li>
+<li>QW0311: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E4%BA%8F-has-its-day">亏 Has Its Day</a></li>
+<li>QW0312: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/strange-addictions">Strange Addictions</a></li>
+<li>QW0313: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/show-me-the-ways">Show Me the Ways</a></li>
+<li>QW0314: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/coming-to-order">Coming to Order</a></li>
+<li>QW0315: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/excited-about-exclamations-part-5">Excited about Exclamations (Part 5)</a></li>
+<li>QW0316: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/weve-got-the-power">We've Got the Power</a></li>
+<li>QW0317: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/days-of-wonder">Days of Wonder</a></li>
+<li>QW0318: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/youre-fired">You're Fired!</a></li>
+<li>QW0319: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/bringing-up-%E4%BB%A5">Bringing Up 以</a></li>
+<li>QW0320: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/learning-your-lessons">Learning Your Lessons</a></li>
+<li>QW0321: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/chinese-school-system">Chinese School System</a></li>
+<li>QW0322: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/one-visit-after-another">One Visit After Another</a></li>
+<li>QW0323: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/something-special">Something Special</a></li>
+<li>QW0324: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/groups-associations-and-foundations">Groups, Associations and Foundations</a></li>
+<li>QW0325: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/telling-your-%E5%B0%BD-apart">Telling Your 尽 Apart</a></li>
+<li>QW0326: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/taking-on-the-machines">Taking on the Machines</a></li>
+<li>QW0327: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/an-i-for-an-i">An I for an I</a></li>
+<li>QW0328: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/listen-up-foreigners">Listen Up, Foreigners!</a></li>
+<li>QW0329: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/time-to-perform">Time to Perform</a></li>
+<li>QW0330: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/making-the-cut">Making the Cut</a></li>
+<li>QW0331: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/useful-usages">Useful Usages</a></li>
+<li>QW0332: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/in-praise-of-praise">In Praise of Praise!</a></li>
+<li>QW0333: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/2013-chinese-internet-buzzwords">2013 Chinese Internet Buzzwords</a></li>
+<li>QW0334: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/saying-the-right-things-good-times">Saying the Right Things - Good Times</a></li>
+<li>QW0335: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/saying-the-right-things-bad-times">Saying the Right Things - Bad Times</a></li>
+<li>QW0336: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/help">Help!</a></li>
+<li>QW0337: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/where-is-the-%E5%9C%A8-at">Where Is The 在 At?</a></li>
+<li>QW0338: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-right-way-to-%E6%95%99">The Right Way to 教</a></li>
+<li>QW0339: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-%E2%80%9C%E7%84%B6%E2%80%9D-around">The “然” Around</a></li>
+<li>QW0340: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/a-hands-on-approach">A Hands On Approach</a></li>
+<li>QW0341: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/syllables-and-verbs">Syllables and Verbs</a></li>
+<li>QW0342: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-many-ways-of-%E9%95%BF-%E5%A5%BD-and-%E6%95%B0">The Many Ways of 长, 好 and 数</a></li>
+<li>QW0343: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/immediate-solutions">Immediate Solutions</a></li>
+<li>QW0344: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/surname-surprises">Surname Surprises</a></li>
+<li>QW0345: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/approximate-numbers-part-1">Approximate Numbers - Part 1</a></li>
+<li>QW0346: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/approximate-numbers-part-2">Approximate Numbers - Part 2</a></li>
+<li>QW0347: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/words-in-the-north-and-south">Words in the North and South</a></li>
+<li>QW0348: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/so-many-sayings">So Many Sayings!</a></li>
+<li>QW0349: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/toilet-time">Toilet Time</a></li>
+<li>QW0350: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/taking-advantage">Taking Advantage</a></li>
+<li>QW0351: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/persuasion">Persuasion</a></li>
+<li>QW0352: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/dealing-with-regrets">Dealing with Regrets</a></li>
+<li>QW0353: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/documents-documents-documents">Documents, Documents, Documents</a></li>
+<li>QW0354: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/you-can-handle-the-truth">You Can Handle the Truth</a></li>
+<li>QW0355: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/sorting-out-the-situation">Sorting Out the Situation</a></li>
+<li>QW0356: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/do-your-measure-words-measure-up">Do Your Measure Words Measure Up?</a></li>
+<li>QW0357: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/practice-made-perfect">"Practice" Made Perfect</a></li>
+<li>QW0358: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/goal">Goal!</a></li>
+<li>QW0359: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/warm-and-speechless">"Warm" and "Speechless"</a></li>
+<li>QW0360: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/which-one-is-which">Which one is Which</a></li>
+<li>QW0361: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ways-to-say-stubborn">Ways to Say "Stubborn"</a></li>
+<li>QW0362: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E5%9C%A8-%E6%97%B6%E9%97%B4-and-%E4%B8%AD">"在 时间" and "中"</a></li>
+<li>QW0363: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/continue-and-very">"Continue" and "Very"</a></li>
+<li>QW0364: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/all-about-but">All about "But"</a>
+<ul><li>See: <a href="But" title="But">But</a></li></ul></li>
+<li>QW0365: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-usage-of-%E6%9D%A5-lai">The usage of 来 (lái)</a></li>
+<li>QW0366: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/get-famous">Get "Famous"</a></li>
+<li>QW0367: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/investigation-%E8%80%83%E5%AF%9F-k%C7%8Eocha-and-%E8%80%83%E6%9F%A5-k%C7%8Eocha">Investigation: 考察 (kǎochá) and 考查 (kǎochá)</a></li>
+<li>QW0368: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-regret-%E5%90%8E%E6%82%94-houhu%C7%90-vs-%E9%81%97%E6%86%BE-yihan">To Regret: 后悔 (hòuhuǐ) vs 遗憾 (yíhàn)</a></li>
+<li>QW0369: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/how-to-say-blame-in-chinese">How to Say 'Blame' in Chinese</a></li>
+<li>QW0370: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/%E5%90%A7-ba-and-%E8%A6%81%E4%B8%8D-yao-bu">吧 (ba) and 要不 (yào bù)</a></li>
+<li>QW0371: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-carry-out-%E6%8E%A8%E8%A1%8C-tuixing-vs-%E5%AE%9E%E6%96%BD-shishi">To carry out: 推行 (tuīxíng) vs 实施 (shíshī)</a></li>
+<li>QW0372: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-avoid-%E7%9C%81%E5%BE%97-shengde-vs-%E4%BB%A5%E5%85%8D-y%C7%90mi%C7%8En">Using "avoid": 省得 (shěngdé) vs 以免 (yǐmiǎn)</a></li>
+<li>QW0373: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-train-%E8%AE%AD%E7%BB%83-xunlian-or-%E5%9F%B9%E8%AE%AD-peixun">To train: 训练 (xùnliàn) or 培训 (péixùn)</a></li>
+<li>QW0374: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ways-to-say-interesting-%E6%9C%89%E5%85%B4%E8%B6%A3-y%C7%92u-xingqu-and-%E6%9C%89%E6%84%8F%E6%80%9D-y%C7%92uyisi">Ways to say Interesting: 有兴趣 (yǒu xìngqù) and 有意思 (yǒuyìsi)</a></li>
+<li>QW0375: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-%E8%BF%87%E7%A8%8B-guocheng-and-%E6%B5%81%E7%A8%8B-liucheng-process">Using 过程 (Guòchéng) and 流程 (liúchéng): Process</a></li>
+<li>QW0376: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/outstanding-%E5%87%BA%E8%89%B2-chuse-and-%E4%BC%98%E7%A7%80-youxiu">Outstanding: 出色 (chūsè) and 优秀 (yōuxiù)</a></li>
+<li>QW0377: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-express-%E6%A0%87%E5%BF%97-biaozhi-and-%E8%A1%A8%E7%A4%BA-bi%C7%8Eoshi">To Express: 标志 (biāozhì) and 表示 (biǎoshì)</a></li>
+<li>QW0378: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/using-%E8%B5%B6%E5%BE%97%E4%B8%8A-g%C7%8Endeshang-or-%E6%9D%A5%E5%BE%97%E5%8F%8A-laideji">Using 赶得上 (gǎndéshàng) or 来得及 (láidéjí)</a></li>
+<li>QW0379: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/life-%E7%94%9F%E6%B4%BB-shenghuo%EF%BC%8C%E7%94%9F%E5%91%BD-shengming%EF%BC%8C%E4%BA%BA%E7%94%9F-rensheng">Life! 生活 (shēnghuó)，生命 (shēngmìng)，人生 (rénshēng)</a> <a rel="nofollow" class="external text" href="http://youtu.be/BKRpTh7M2QM">Video</a></li>
+<li>QW0380: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/towards-%E5%90%91-xiang-%E6%9C%9D-chao-%E5%BE%80-w%C7%8Eng">Towards: 向 (xiàng) , 朝 (cháo) , 往 (wǎng)</a></li>
+<li>QW0381: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/to-accumulate-%E7%A7%AF%E7%B4%AF-jilei-%E7%A7%AF%E8%93%84-jixu-and-%E7%B4%AF%E7%A7%AF-leiji">To Accumulate 积累 (jīlěi) , 积蓄 (jīxù) and 累积 (lěijī)</a></li>
+<li>QW0382: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/ways-to-say-otherwise-%E5%90%A6%E5%89%87-f%C7%92uze-%E4%B8%8D%E7%84%B6-buran-%E8%A6%81%E4%B8%8D-yao-bu">Ways to say "Otherwise": 否則 (fǒuzé) 不然 (bùrán) 要不 (yào bù)</a> <a rel="nofollow" class="external text" href="http://youtu.be/YeZUbnLAcNo">Video</a></li>
+<li>QW0383: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/the-important-difference-between-%E9%9C%80-xu-and-%E9%A1%BB-xu">The Important Difference Between 需 (xū) and 须 (xū)</a> <a rel="nofollow" class="external text" href="http://chinesepodtv.wistia.com/medias/4mp0ynvxbk">Video</a></li>
+<li>QW0384: <a rel="nofollow" class="external text" href="http://chinesepod.com/lessons/when-to-use-%E2%80%9C%E4%B8%8D%E2%80%9D-bu-and-%E2%80%9C%E6%B2%A1%E2%80%9D-mei">When To Use “不” bù and “没” méi?</a>
+<ul><li>See: <a href="Comparing_&quot;bu&quot;_and_&quot;mei&quot;" title="Comparing &quot;bu&quot; and &quot;mei&quot;">Comparing "bu" and "mei"</a></li></ul></li>
+<li>QW0385: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/advantages%E3%80%8C%E4%BC%98%E7%82%B9%E3%80%8Dyoudi%C7%8En-vs-%E3%80%8C%E5%A5%BD%E5%A4%84%E3%80%8Dh%C7%8Eochu-videoaudio">Advantages:「优点」yōudiǎn VS 「好处」hǎochù</a></li>
+<li>QW0386: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/entirewhole-%E6%95%B4-zheng-vs-%E5%85%A8-quan-videoaudio">Entire/Whole: 整 (zhěng) vs 全 (quán) [Video/Audio</a>]</li>
+<li>QW0387: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/the-many-meanings-of-%E5%85%8D%E6%9C%AA%E5%85%8D%E4%BB%A5%E5%85%8D%E9%9A%BE%E5%85%8D%E5%85%8D%E4%B8%8D%E4%BA%86video">The Many Meanings of 免:未免,以免,难免,免不了[Video</a>]</li>
+<li>QW0388: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/saying-youre-angry-%E7%94%9F%E6%B0%94">	 Saying You're Angry: 生气</a></li>
+<li>QW0389: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/we-got-skills-%E6%8A%80%E8%83%BD%E6%8A%80%E6%9C%AF%E6%8A%80%E5%B7%A7">We Got Skills: 技能,技术,技巧</a></li>
+<li>QW0390: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/learning-words-with-%E5%8F%AF-%E5%8F%AF%E7%88%B1-ke-ai-%E5%8F%AF%E6%80%9C-kelian-%E5%8F%AF%E6%80%95-kepa-%E5%8F%AF%E7%96%91-keyi">Learning Words with 可: 可爱 Kě ài, 可怜 kělián, 可怕 kěpà, 可疑 kěyí</a></li>
+<li>QW0391: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/learning-words-with-%E7%84%B6-ran%EF%BC%9A%E5%BD%93%E7%84%B6%E8%99%BD%E7%84%B6%E7%AB%9F%E7%84%B6%E6%9E%9C%E7%84%B6%E4%B8%8D%E7%84%B6">Learning words with 然 rán：当然,虽然,竟然,果然,不然</a></li>
+<li>QW0392: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/i-want-to-pay-%E4%BB%98-fu-%E7%BC%B4-ji%C7%8Eo-and-%E4%BA%A4-jiao">"I Want to Pay..." 付 fù, 缴 jiǎo and 交 jiāo</a></li>
+<li>QW0393: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/different-uses-of-%E5%A4%9F-gou">Different Uses of 够 gòu</a></li>
+<li>QW0394: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/time-word-tips-p1-%E4%B8%8A-and-%E4%B8%8B">Time Word Tips P1: 上 and 下</a></li>
+<li>QW0395: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/time-word-tips-p2-%E5%89%8D-and-%E5%90%8E">Time Word Tips P2&#160;: 前 and 后</a></li>
+<li>QW0396: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/the-logic-behind-%E5%88%A5%E7%9A%84%EF%BC%8C%E5%85%B6%E4%BB%96%EF%BC%8C%E5%8F%A6%E5%A4%96">The logic behind 別的，其他，另外</a></li>
+<li>QW0397: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/measure-words-for-verbs-%E5%8A%A8%E9%87%8F%E8%AF%8D">Measure Words for Verbs 动量词</a></li>
+<li>QW0398: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/how-to-add-emphasis">How to Add Emphasis</a></li>
+<li>QW0399: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/introduce-your-name-like-a-native">Introduce Your Name Like a Native</a></li>
+<li>QW0400: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/small-talk-like-a-native">Small Talk Like a Native</a></li>
+<li>QW0401: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/do-you-mind-%E4%BB%8B%E6%84%8F-vs-%E5%9C%A8%E6%84%8F">Do You Mind? 介意 vs 在意</a></li>
+<li>QW0402: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/ways-to-say-for-example">Ways to say "For Example”</a></li>
+<li>QW0403: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/films-and-book-genres">Films and Book Genres</a></li>
+<li>QW0404: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/we-love-each-other-%E5%BD%BC%E6%AD%A4%EF%BC%8C%E4%BA%92%E7%9B%B8%EF%BC%8C%E5%AF%B9%E6%96%B9">We love each other! 彼此，互相，对方</a></li>
+<li>QW0405: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/i-miss-you-%E6%83%B3%E5%BF%B5%E3%80%81%E6%80%80%E5%BF%B5%E3%80%81%E6%80%9D%E5%BF%B5">I MISS YOU! 想念、怀念、思念</a></li>
+<li>QW0406: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/im-so-happy-%E5%BF%AB%E4%B9%90%E3%80%81%E9%AB%98%E5%85%B4%E3%80%81%E5%B9%B8%E7%A6%8F">I'm So Happy! 快乐、高兴、幸福</a></li>
+<li>QW0407: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/to-use-%E7%94%A8-yong-%E4%BD%BF%E7%94%A8-sh%C7%90yong-%E5%88%A9%E7%94%A8-liyong">To Use 用 yòng 使用 shǐyòng 利用 lìyòng</a></li>
+<li>QW0408: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/everything-and-nothing-question-word-%E9%83%BD-video">Everything and Nothing: Question Word &amp; 都 [VIDEO</a>]</li>
+<li>QW0409: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/describing-personalities-1">Describing Personalities 1</a></li>
+<li>QW0410: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/describing-personalities-2">Describing Personalities 2</a></li>
+<li>QW0411: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/ways-to-talk-about-holiday">Ways To Talk About Holiday</a></li>
+<li>QW0412: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/how-to-say-cannot">How To Say "Cannot”</a></li>
+<li>QW0413: <a rel="nofollow" class="external text" href="https://chinesepod.com/lesson-redirect?v3id=QW0413">All About Hair</a></li>
+<li>QW0414: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/suitableto-suit-%E5%90%88%E9%80%82%E3%80%81%E9%80%82%E5%90%88%E3%80%81%E5%90%88">Suitable/to Suit: 合适、适合、合</a></li>
+<li>QW0415: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/all-about-can-%E8%83%BD-neng%E4%BC%9A-hui%E5%8F%AF%E4%BB%A5-key%C7%90">All about Can: 能 (néng),会 (huì),可以 (kěyǐ)</a></li>
+<li>QW0416: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/to-think-to-recall-%E6%83%B3%E5%88%B0%E3%80%81%E6%83%B3%E5%87%BA%E6%9D%A5%E3%80%81%E6%83%B3%E8%B5%B7%E6%9D%A5">To Think, to Recall: 想到、想出来、想起来</a></li>
+<li>QW0417: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/how-to-say-probably-in-chinese">How to Say 'Probably' in Chinese</a></li>
+<li>QW0418: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/lets-do-math-in-chinese">Let's Do Math In Chinese!</a></li>
+<li>QW0419: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/womens-day-special">Women's Day Special</a></li>
+<li>QW0420: <a rel="nofollow" class="external text" href="https://chinesepod.com/lessons/language-exchange-language">Language Exchange Language</a></li></ol>
+<!-- 
+NewPP limit report
+Cached time: 20220614092606
+Cache expiry: 1209600
+Dynamic content: false
+[SMW] In‐text annotation parser time: 0.003 seconds
+CPU time usage: 0.131 seconds
+Real time usage: 0.134 seconds
+Preprocessor visited node count: 3/1000000
+Preprocessor generated node count: 8/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key gramwiki:pcache:idhash:199-0!canonical and timestamp 20220614092606 and revision id 28316
+ -->
+</div></div>                <!-- catlinks -->
+        <div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>        <!-- /catlinks -->
+        	<div id="gg-bot" class="gg"></div>
+          </div></div>
+                <!-- /innerbodycontent -->
+</div>
+</div>
+
+                <!-- printfooter -->
+        <div class="printfooter">
+        Retrieved from "<a dir="ltr" href="https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;oldid=28316">https://resources.allsetlearning.com/gramwiki/?title=Reference:Qing_Wen&amp;oldid=28316</a>"        </div>
+        <!-- /printfooter -->
+                        <div class="visualClear"></div>
+        <!-- debughtml -->
+                <!-- /debughtml -->
+      </div>
+      <!-- /bodyContent -->
+    </section>
+    <!-- /content -->
+
+      <!-- footer -->
+
+      <div id="footer" class="footer container custom-footer"><div class="row-fluid"><div class="span2"></div><div class="span10"><p>不允许任何以商业为目的或不注明归属 Chinese Grammar Wiki &copy;2011-2022 AllSet Learning 的内容引用。关于合法使用此内容的更多信息，请参阅我们的<a href="./Chinese&#32;Grammar&#32;Wiki:Copyrights" title="Copyrights">知识共享权限条款（Creative Commons license）</a>。</p>
+
+<p>All content on the Chinese Grammar Wiki &copy;2011-2022 AllSet Learning, and may not be used for commercial purposes or without attribution. For more information on how to legally use this content, please see our <a href="./Chinese&#32;Grammar&#32;Wiki:Copyrights" title="Copyrights">Creative Commons license</a> unless otherwise noted.</p></div></div></div>
+      <div id="footer" class="footer container">
+        <div class="row">
+    
+            <ul id="footer-places">
+                              <li id="footer-places-privacy"><a href="https://resources.allsetlearning.com/chinese/grammar/Chinese_Grammar_Wiki:Privacy_policy" title="Chinese Grammar Wiki:Privacy policy">Privacy policy</a></li>
+                              <li id="footer-places-about"><a href="./Chinese_Grammar_Wiki:About" title="Chinese Grammar Wiki:About">About Chinese Grammar Wiki</a></li>
+                              <li id="footer-places-disclaimer"><a href="https://resources.allsetlearning.com/chinese/grammar/Chinese_Grammar_Wiki:General_disclaimer" title="Chinese Grammar Wiki:General disclaimer">Disclaimers</a></li>
+                            <li id="pt-login"><a href="https://resources.allsetlearning.com/gramwiki/?title=Special:UserLogin&amp;returnto=Reference%3AQing+Wen">Log in</a></li>            </ul>
+                                <ul id="footer-icons" class="noprint">
+                  <li id="footer-poweredbyico">
+                    <a href="https://www.mediawiki.org/"><img src="https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, https://resources.allsetlearning.com/gramwiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>
+                    <a href="https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAACJVBMVEXe3t62trbLy8vGxsbAwMDX19e6urqsrKxHcEzQ0NC2tratra2oqKixsbHd3eDFxcXe3t7U1NTa2trX19fQ0NDV1dWNjY2dnZ2UlJSUlJTS0tKUlJSWlpbR0dGenp79/f38/Pz+/v7t7e3v7+/u7u7s7Oz19fX29vb6+vr7+/vz8/Pz8/P4+fnw8PD39/gWTq/09PX6+vktX7b/sg8XT7F6mc/f5OwhVrNvkMthhsfT2+j7rQ/M1eZqjcmFotPs7e9Cb722xuFResK/zOObstnu7/Grvd3M1+mNqNY6aLoaUbEaUbZWfsTk6fE2Zrnp7O8bTq0kWLQuYcpcg8Xh5/Byk83a4eukud1/nM+6yeQkWcGwwuDxnRQyYrigttvI0+gpW7XGyttLdsBni8geVLo0Z9XlkCPb4u+QqtcfVLLo7PNHcr73phFGX6HsmBnpkxg6bNwnXcbX3er19vnr7/SVrdhuhLl+j70vVqY6Xqv0oxJVcbQhV76DjKTz9ffQ2evE0OZAbbzu7/PS1uFufrDnrGgpSZjy8/SQnMFddrKuekXSiCsgTKRaaZHejy9yang3VptNaqspWbnmliy3j2/m6OzT3e7x8fL4+v3p6uwaN2re0cifqLiLiZWYhYGYb0xXYn+5g0xwiMKYpc2BcHZmW2srRXpGWIhecKfilz4+WID2+PyosMywqbGqss1aVnLZq33p1sGklZqrp7dkfr7CpY9yg59Ud6QZAAAAH3RSTlPfBN/f39/f2wDf39vV3/7N2rrEz5D5c8ONuHaPuXXDImoxqwAABO1JREFUSMe1kQdz01gQgBXaBS4w9OtHwMFSdPKTUNxkW+61xN2Je4tLHJNOGukkAUINJTzaUIbO9fr7TpLtS44DZiC5b6Sn3dW+TysJaWz4cv9eZFPZu/+bhkakYR88WqP59u3vjxzdDCT7GpCD4qNH3sEGzOhB5MCR/4PmA8j25uZ33t0A23lxff5hZTIzOrz2Ph8qK936l7i1tT7hk8DAoHNsbeLWKjPdQcZ+qvX9tHMNXca1XBDXHtL6x2Bh0HWtuXUo8oTgC1gVpcdsdpew92PUYtjwzFq+E9mJYfXxx1x5l2/l5Vhy0DW6TuyQCZcR2hnswXJM0h+203471u5WKMIE5mDpspIIO8sZTMZiIbczY6+JCaI+/sJZ38qjP28+nQjkx/mcqGJ26rW3iKg/fYphCL1jNk5WbqXI0nBnu00RJ2j9bNRp6MmFS0SYIXLuUlQ5w22qizHr5MTyy2u/3XxVvHHlwtWVa/xTCQIIlEaMzrgswzA5P9BrAciYASqNoiNdjL8b0GYAHN3AGAEgzPSQc9UtYCeyBQAMO2G9PhhzXfp9qdifSCT6Lj788QQnrvWEuNPI2um0LW0D+m4A6E4AnIZOeq7ksQuJvi6eUXRW+8EWXsxNPhkYGJiSXr7Rd1qtVp9MXHkgIurzAkdFxjrj7cmKbN4K5v8RGxT2sJMTpwBflNHhUJgBdoUylzy3TuwIDBRi0hf9p9VtbW3qk30X7q2Je1IybZq7mLVWFKTSADXPoqi9AzVorda0kKTS6KkRbSgaR1GT1h5CObYiW1GU27yc5z6F9Fn/yTYedeLi9AIA6AbgxGIxAMPZcZeUHH9cFavVfY97FaNA/DbazRZVV89/61at2BTlg1JXiFtrYoBmRyd7p6/UP0XxaSDmy4pt0jmuh8qx6wQ2MmRz18TaJCUWO9xisUVhMMsoZZDiGHLLuXUbso2iatP/1HvhYu3n3bh6Pe/LUjZSj1NUJ8lSlNwahRRlMRjmyFDICikVn8+SacomdbZTVj+0mQSxweS1WqpiHK/Ncubs858f9idOJ/qKS1cv+RbFuIbMmHEvTbO4QeF25CxyD62nSbmJ1MUzRrpiwR0RPBJMpnCGxWVGXBn8TkarNGQHjuPrxOeWY4GY9FmxWHy19Gvv+ayYF6f8oYi7i8U93bjFkYokvbhWEFu8Og2ZxrUe3NMpc3vLhqqYpVV4XbwDQkpgoVwYKOR9N5d+eXB5vJevQA0pD7oVqi4WOj16vX6EYSA08WKvyeOZJw1cQ6rsnXOa/RYoM0Kls0zLuVoHhHAHL8YFXkwVCoE8uXhvMVCY8mW5Ci8eKkcgJ9azOl0UajNDFiUpj5JeloEqTgwd/iCUJP0sFMSejkpO96b4zl1fPuYiyd6Vs4GBmHSsJoYmLy/WeBTlis5rlJYrgjhe1s+XOXGEtHJOMl4VB2EHLauKdyG7JBLIc//uslRKkhOrcGJqyiU9z5UkOpVOwiGXSyQizRAfqlRc7Y5KJFnV6FReiWSV7xAWeQd/SOSq6qY18eVHq4vjlyazEJ73ScmJPVxJVKdF9MFwYpFIEL+ehvDOcSH8YXRsAa4XfwS7kd0tLfw7Sp7fl7xJywbYjTTVotfTb+849lEcb0K+2lMN/5o+tons+Rxp+PrQ8U3n0BcNSGPj4W+bPuX5ZLNo+uxwY+PfoLJHX1KXgyMAAAAASUVORK5CYII=" alt="Powered by Semantic MediaWiki" class="smw-footer" width="88" height="31"/></a>
+                  </li>
+                </ul>
+                  </div>
+      </div>
+      <!-- /footer -->
+
+
+    
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"smw":{"limitreport-intext-parsertime":0.003},"limitreport":{"cputime":"0.131","walltime":"0.134","ppvisitednodes":{"value":3,"limit":1000000},"ppgeneratednodes":{"value":8,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":0,"limit":5000000},"timingprofile":["100.00%    0.000      1 -total"]},"cachereport":{"timestamp":"20220614092606","ttl":1209600,"transientcontent":false}}});});</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-32778107-1");
+pageTracker._trackPageview();
+</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":138});});</script>
+  </body>
+<!-- Cached/compressed 20220625081252 -->
+</html>

@@ -1,0 +1,17 @@
+User-agent: *
+Sitemap: /sitemap/sitemap-index-gramwiki.xml
+Disallow: /chinese/grammar/?
+Disallow: /chinese/grammar/Help
+Disallow: /chinese/grammar/MediaWiki
+Disallow: /chinese/grammar/Special:
+Disallow: /chinese/grammar/Template
+Disallow: /gramwiki/skins/
+
+User-agent: AhrefsBot
+Disallow: / 
+
+User-agent: MJ12bot
+Disallow: / 
+
+User-agent: PetalBot
+Disallow: /
