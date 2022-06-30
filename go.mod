@@ -7,5 +7,6 @@ require (
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/sahilm/fuzzy v0.1.0
 	github.com/stretchr/testify v1.7.5
+	gopkg.in/yaml.v2 v2.4.0
 	gopkg.in/yaml.v3 v3.0.1
 )
