@@ -9,6 +9,7 @@ import (
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/finder"
+	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 )
@@ -18,7 +19,7 @@ const (
 	idsSrc    = "../../lib/cjkvi/ids.txt"
 )
 
-var decomposer *cedict.Decomposer
+var decomposer *hanzi.Decomposer
 
 func TestMain(m *testing.M) {
 	dict, err := cedict.NewDict(cedictSrc)
@@ -33,7 +34,7 @@ func TestMain(m *testing.M) {
 		os.Exit(1)
 	}
 
-	decomposer = cedict.NewDecomposer(dict, finder.NewFinder(dict), idsDecomposer)
+	decomposer = hanzi.NewDecomposer(dict, finder.NewFinder(dict), idsDecomposer)
 	os.Exit(m.Run())
 }
 
