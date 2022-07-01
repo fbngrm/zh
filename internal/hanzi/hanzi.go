@@ -8,11 +8,6 @@ import (
 	"github.com/fatih/structs"
 )
 
-const (
-	genDir   = "./gen/unihan"
-	filename = "%s.json"
-)
-
 type Hanzi struct {
 	Ideograph             string   `yaml:"ideograph,omitempty" json:"ideograph,omitempty" structs:"ideograph"`
 	Source                string   `yaml:"source,omitempty" json:"source,omitempty" structs:"source"`
