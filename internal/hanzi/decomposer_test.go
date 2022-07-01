@@ -1,4 +1,4 @@
-package cedict_test
+package hanzi_test
 
 import (
 	"errors"
