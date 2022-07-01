@@ -139,8 +139,6 @@ func (f *Finder) lookup(i int) (string, error) {
 		return f.dict.Ideograph(i)
 	case searchMode_hanzi_word: // TODO: support traditional
 		return f.dict.IdeographsSimplified(i)
-	// case searchMode_ascii:
-	// 	return f.dict[i].Definitions
 	default:
 		return "", fmt.Errorf("mode %v not supported", f.mode)
 	}
