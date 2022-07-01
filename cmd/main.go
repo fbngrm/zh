@@ -9,10 +9,11 @@ import (
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/finder"
 	"github.com/fgrimme/zh/internal/hanzi"
+	"github.com/fgrimme/zh/internal/unihan"
 )
 
 const idsSrc = "./lib/cjkvi/ids.txt"
-const hanziSrc = "./lib/unihan/Unihan_Readings.txt"
+const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 
 var query string
@@ -31,24 +32,43 @@ func main() {
 	flag.StringVar(&templatePath, "t", "", "go template")
 	flag.StringVar(&format, "fmt", "text", "format output [json|yaml|text]")
 	flag.BoolVar(&interactive, "i", false, "interactive search")
-	// flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
+	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.IntVar(&results, "r", 3, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
 
-	dict, err := cedict.NewDict(cedictSrc)
-	if err != nil {
-		fmt.Printf("could not init cedict: %v\n", err)
-		os.Exit(1)
+	// we either search in unihan db or in CEDICT (mdbg). unihan supports single hanzi/kangxi only. CEDICT supports
+	// single hanzi/hangxi and words.
+	// for more info on unihan see:
+	// github.com/fbngrm/zh/lib/unihan/Unihan_Readings.txt
+	// for more info on CEDICT see:
+	// github.com/fbngrm/zh/lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt
+	var dict finder.Dict
+	var err error
+	if unihanSearch {
+		dict, err = unihan.NewDict(unihanSrc)
+		if err != nil {
+			fmt.Printf("could not initialize unihan dict: %v\n", err)
+			os.Exit(1)
+		}
+	} else {
+		dict, err = cedict.NewDict(cedictSrc)
+		if err != nil {
+			fmt.Printf("could not init cedict: %v\n", err)
+			os.Exit(1)
+		}
 	}
 
+	// decompose hanzi or words (recursively) by their "ideographic description sequence (IDS)" from CHISE IDS Database.
+	// for more info on CHISE IDS Database see: github.com/fbngrm/zh/lib/cjkvi/ids.txt
 	idsDecomposer, err := cjkvi.NewIDSDecomposer(idsSrc)
 	if err != nil {
 		fmt.Printf("could not initialize ids decompose: %v\n", err)
 		os.Exit(1)
 	}
 
-	h, errs, err := cedict.NewDecomposer(
+	// recursively decompose words or single hanzi
+	h, errs, err := hanzi.NewDecomposer(
 		dict,
 		finder.NewFinder(dict),
 		idsDecomposer,
@@ -63,7 +83,6 @@ func main() {
 		format,
 		fields,
 	)
-
 	var formatted string
 	if templatePath != "" {
 		formatted, err = formatter.FormatTemplate(h, fields, templatePath)

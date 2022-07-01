@@ -8,22 +8,18 @@ import (
 	"github.com/fgrimme/zh/pkg/conversion"
 )
 
-type Parser struct {
-	Src string
-}
+type entry map[string]string
+type parsedEntries map[string]entry
 
-type ReadingsByMapping map[string]Readings
-type Readings map[string]string
-
-func (p *Parser) Parse() (ReadingsByMapping, error) {
-	file, err := os.Open(p.Src)
+func parse(unihanSrc string) (parsedEntries, error) {
+	file, err := os.Open(unihanSrc)
 	if err != nil {
-		return ReadingsByMapping{}, err
+		return parsedEntries{}, err
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	dict := ReadingsByMapping{}
+	dict := make(parsedEntries)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] == '#' {
@@ -43,11 +39,13 @@ func (p *Parser) Parse() (ReadingsByMapping, error) {
 		dict[mapping][key] = value
 	}
 
-	// add hanzi
+	// we need to add the actual hanzi since it is not included in unihan source file.
+	// FIXME: how does unihan handle simplified and traditional / if they are separate
+	// mappings, how to asscociate them?
 	for mapping := range dict {
 		ideograph, err := conversion.ToCJKIdeograph(mapping)
 		if err != nil {
-			return ReadingsByMapping{}, err
+			return parsedEntries{}, err
 		}
 		dict[mapping][CJKVIdeograph] = ideograph
 	}

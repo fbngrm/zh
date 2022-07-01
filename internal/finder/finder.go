@@ -14,6 +14,7 @@ type searchMode int
 const (
 	unknown = "unknown"
 
+	// FIXME: not fully supported
 	// keep order
 	searchMode_codepoint = iota
 	searchMode_ascii
@@ -22,14 +23,6 @@ const (
 	searchMode_hanzi_word
 	searchMode_init = searchMode_ascii
 )
-
-type Dict interface {
-	Len() int
-	Definitions(i int) ([]string, error)
-	Mapping(i int) (string, error)
-	Ideograph(i int) (string, error)
-	IdeographsSimplified(i int) (string, error)
-}
 
 type Finder struct {
 	mode searchMode
@@ -133,11 +126,9 @@ func (f *Finder) GetMode() int {
 
 func (f *Finder) lookup(i int) (string, error) {
 	switch f.mode {
-	case searchMode_codepoint:
-		return f.dict.Mapping(i)
 	case searchMode_hanzi_char:
 		return f.dict.Ideograph(i)
-	case searchMode_hanzi_word: // TODO: support traditional
+	case searchMode_hanzi_word: // TODO: support traditional; not supported in unihan
 		return f.dict.IdeographsSimplified(i)
 	default:
 		return "", fmt.Errorf("mode %v not supported", f.mode)

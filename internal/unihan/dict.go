@@ -1,12 +1,26 @@
-package cedict
+package unihan
 
 import (
+	"errors"
 	"fmt"
+	"unicode/utf8"
 
 	"github.com/fgrimme/zh/internal/hanzi"
 )
 
-var ErrIndexOutOfBounds = "cedict index %d out of bounds %d"
+var ErrIndexOutOfBounds = "unihan index %d out of bounds %d"
+
+const (
+	KDefinition  string = "definition"
+	KMandarin    string = "mandarin"
+	KCantonese   string = "cantonese"
+	KHanyuPinyin string = "hanyuPinyin"
+	KXHC1983     string = "xHC1983"
+	KHangul      string = "hangul"
+	KHanyuPinlu  string = "hanyuPinlu"
+
+	CJKVIdeograph string = "ideograph"
+)
 
 type Dict []*hanzi.Hanzi
 
@@ -18,14 +32,17 @@ func NewDict(src string) (Dict, error) {
 
 	dict := make(Dict, len(parsedEntries))
 	var i int
-	for _, entry := range parsedEntries {
+	for codepoint, entry := range parsedEntries {
+		r, _ := utf8.DecodeRuneInString(entry[CJKVIdeograph])
 		dict[i] = &hanzi.Hanzi{
-			Source:                "cedict",
-			Ideograph:             entry.Simplified,
-			IdeographsSimplified:  entry.Simplified,
-			IdeographsTraditional: entry.Traditional,
-			Definitions:           entry.Definition,
-			Readings:              entry.Readings,
+			Source:                "unihan",
+			Mapping:               codepoint,
+			Decimal:               int32(r),
+			Ideograph:             entry[CJKVIdeograph],
+			IdeographsSimplified:  entry[CJKVIdeograph],
+			IdeographsTraditional: entry[CJKVIdeograph],
+			Definitions:           []string{entry[KDefinition]},
+			Readings:              []string{entry[KMandarin], entry[KCantonese]},
 		}
 		i++
 	}
@@ -33,7 +50,7 @@ func NewDict(src string) (Dict, error) {
 }
 
 func (d Dict) Src() string {
-	return "cedict"
+	return "unihan"
 }
 
 func (d Dict) Len() int {
@@ -69,8 +86,5 @@ func (d Dict) Ideograph(i int) (string, error) {
 }
 
 func (d Dict) IdeographsSimplified(i int) (string, error) {
-	if i >= len(d) {
-		return "", fmt.Errorf(ErrIndexOutOfBounds, i, len(d))
-	}
-	return d[i].IdeographsSimplified, nil
+	return "", errors.New("IdeographsSimplified is not supported for unihan dict")
 }

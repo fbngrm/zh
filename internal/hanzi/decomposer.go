@@ -3,27 +3,16 @@ package hanzi
 import (
 	"fmt"
 	"strings"
-
-	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/sahilm/fuzzy"
 )
 
-type Finder interface {
-	FindSorted(query string, limit int) (fuzzy.Matches, error)
-}
-
-type IDSDecomposer interface {
-	Decompose(query string, depth int) cjkvi.Decomposition
-}
-
 type Decomposer struct {
-	dict          []*Hanzi
+	dict          Dict
 	finder        Finder
 	idsDecomposer IDSDecomposer
 	offset        int
 }
 
-func NewDecomposer(dict []*Hanzi, f Finder, d IDSDecomposer) *Decomposer {
+func NewDecomposer(dict Dict, f Finder, d IDSDecomposer) *Decomposer {
 	return &Decomposer{
 		dict:          dict,
 		finder:        f,
@@ -53,10 +42,13 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 		return nil, nil, fmt.Errorf("no translation found %s", query)
 	}
 	index := matches[0].Index
-	if len(d.dict) <= index {
+	if d.dict.Len() <= index {
 		return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
 	}
-	dictEntry := d.dict[index]
+	dictEntry, err := d.dict.Entry(index)
+	if err != nil {
+		return nil, nil, err
+	}
 
 	errs := make([]error, 0)
 	var readingsIndex int
@@ -137,7 +129,10 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 		if i >= len(matches) {
 			break
 		}
-		d := d.dict[matches[i].Index]
+		d, err := d.dict.Entry(matches[i].Index)
+		if err != nil {
+			return nil, err
+		}
 		if len(query) != len(d.Ideograph) {
 			continue
 		}
@@ -168,6 +163,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	}
 
 	return &Hanzi{
+		Source:                d.dict.Src(),
 		Ideograph:             query,
 		IdeographsSimplified:  simplified,
 		IdeographsTraditional: traditional,
