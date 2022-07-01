@@ -39,9 +39,9 @@ func main() {
 
 	// we either search in unihan db or in CEDICT (mdbg). unihan supports single hanzi/kangxi only. CEDICT supports
 	// single hanzi/hangxi and words.
-	// for more info on unihan see:
+	// for documentation on unihan see:
 	// github.com/fbngrm/zh/lib/unihan/Unihan_Readings.txt
-	// for more info on CEDICT see:
+	// for documentation on CEDICT see:
 	// github.com/fbngrm/zh/lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt
 	var dict finder.Dict
 	var err error
@@ -60,7 +60,7 @@ func main() {
 	}
 
 	// decompose hanzi or words (recursively) by their "ideographic description sequence (IDS)" from CHISE IDS Database.
-	// for more info on CHISE IDS Database see: github.com/fbngrm/zh/lib/cjkvi/ids.txt
+	// for documentation on CHISE IDS Database see: github.com/fbngrm/zh/lib/cjkvi/ids.txt
 	idsDecomposer, err := cjkvi.NewIDSDecomposer(idsSrc)
 	if err != nil {
 		fmt.Printf("could not initialize ids decompose: %v\n", err)

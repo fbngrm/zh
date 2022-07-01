@@ -1,5 +1,36 @@
 # zh
-Lookup hanzi from cmd-line
+zh is a command-line CEDICT dictionary, unihan search tool and word/hanzi decomposer.
+
+### Features
+
+- [x] translate words, hanzi or kangxi (chinese to english)
+- [x] decompose words or hanzi into their components (hanzi, kangxi)
+- [x] query unihan database by hanzi or unicode codepoint
+- [x] lookup pinyin (reading/pronounciation) for words or hanzi
+- [x] various output formats like yaml, json, go-templates
+- [x] support scored search results for disambiguation
+- [ ] translate english to chinese
+- [ ] HSK browser
+- [ ] unihan browser
+- [ ] lookup hanzi containing radicals
+- [ ] lookup words containing hanzi
+
+### Data Sources
+
+#### CEDICT
+- Community maintained free Chinese-English dictionary.
+- Published by MDBG
+- For documentation, see https://cc-cedict.org/wiki/
+
+#### IDS Decompositions
+- CJKVI Database
+- Based on CHISE IDS Database
+- For documentation, see https://github.com/cjkvi/cjkvi-ids
+
+#### Unihan
+- Unicode Character Database
+- Unicode version: 13.0.0
+- For documentation, see http://www.unicode.org/reports/tr38/
 
 ### Todo
 
@@ -10,11 +41,11 @@ Lookup hanzi from cmd-line
 - [x] Make ids recursive
 - [x] Do not decompose unihan hanzi by default
 - [x] Decompose words
+- [ ] Support En to Zh translation
 - [ ] Batch decompose hanzi (from file)
 - [x] HSK lists
 - [ ] Batch decompose files
 - [ ] HSK example sentences
 - [ ] Filter * for slices
-- [ ] Config file
 - [ ] Batch decompose sentences / split into words
 
