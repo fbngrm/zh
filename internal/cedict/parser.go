@@ -2,7 +2,6 @@ package cedict
 
 import (
 	"bufio"
-	"log"
 	"os"
 	"strings"
 )
@@ -19,7 +18,7 @@ type parsedEntries map[string]entry
 func parse(cedictSrcPath string) (parsedEntries, error) {
 	file, err := os.Open(cedictSrcPath)
 	if err != nil {
-		log.Fatal(err)
+		return parsedEntries{}, err
 	}
 	defer file.Close()
 
