@@ -130,6 +130,9 @@ func (f *Finder) lookup(i int) (string, error) {
 		return f.dict.Ideograph(i)
 	case searchMode_hanzi_word: // TODO: support traditional; not supported in unihan
 		return f.dict.IdeographsSimplified(i)
+	case searchMode_ascii: // FIXME: the scoring is pretty bad for english
+		definitions, err := f.dict.Definitions(i)
+		return strings.Join(definitions, ", "), err
 	default:
 		return "", fmt.Errorf("mode %v not supported", f.mode)
 	}

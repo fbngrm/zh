@@ -1,5 +1,5 @@
-# zh
-zh is a command-line CEDICT dictionary, unihan search tool and word/hanzi decomposer.
+## zh
+`zh` is a command-line CEDICT dictionary, unihan search tool and word/hanzi decomposer.
 
 ### Features
 

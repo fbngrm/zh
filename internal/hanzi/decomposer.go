@@ -41,6 +41,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 	if len(matches) < 1 {
 		return nil, nil, fmt.Errorf("no translation found %s", query)
 	}
+	// FIXME: return several results
 	index := matches[0].Index
 	if d.dict.Len() <= index {
 		return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
@@ -173,4 +174,48 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 		IDS:                   ids.IdeographicDescriptionSequence,
 		Decompositions:        decompositions,
 	}, nil
+}
+
+// FIXME: return several results
+func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Hanzi, []error, error) {
+	// we add an offset here to catch more matches with an equal
+	// scoring to achieve getting a consitent set of sorted matches
+	limit := results + 150
+	matches, err := d.finder.FindSorted(query, limit)
+	if err != nil {
+		return nil, nil, err
+	}
+	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
+	filteredEntries := make([]*Hanzi, 0)
+	for _, m := range matches {
+		index := m.Index
+		if d.dict.Len() <= index {
+			return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
+		}
+		dictEntry, err := d.dict.Entry(index)
+		if err != nil {
+			return nil, nil, err
+		}
+		if strings.Contains(m.Str, query+" ") {
+			fmt.Printf("%+v\n", m)
+		}
+		var readingsContainQuery bool
+		for _, d := range dictEntry.Definitions {
+			if d == query {
+				readingsContainQuery = true
+				break
+			}
+			if strings.Contains(d, query+" ") {
+				readingsContainQuery = true
+				break
+			}
+		}
+		if !readingsContainQuery {
+			continue
+		}
+		filteredEntries = append(filteredEntries, dictEntry)
+	}
+	// use ideograph here to support unihan and cedict
+	// FIXME: fix the above somehow
+	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, results, depth)
 }

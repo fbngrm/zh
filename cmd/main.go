@@ -10,6 +10,7 @@ import (
 	"github.com/fgrimme/zh/internal/finder"
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/unihan"
+	"github.com/fgrimme/zh/pkg/conversion"
 )
 
 const idsSrc = "./lib/cjkvi/ids.txt"
@@ -68,11 +69,19 @@ func main() {
 	}
 
 	// recursively decompose words or single hanzi
-	h, errs, err := hanzi.NewDecomposer(
+	d := hanzi.NewDecomposer(
 		dict,
 		finder.NewFinder(dict),
 		idsDecomposer,
-	).Decompose(query, results, depth)
+	)
+	var h *hanzi.Hanzi
+	var errs []error
+	// note: english search is broken since fuzzy scoring is not sufficient to detect best match
+	if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
+		h, errs, err = d.DecomposeFromEnglish(query, results, depth)
+	} else { // query is chinese
+		h, errs, err = d.Decompose(query, results, depth)
+	}
 	if err != nil {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)

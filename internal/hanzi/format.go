@@ -88,8 +88,6 @@ func formatText(data interface{}) (string, error) {
 	result += strings.Join(d.Readings, ", ")
 	result += "\t"
 	result += strings.Join(d.Definitions, ", ")
-	result += "\t"
-	result += fmt.Sprintf("source=%s", d.Source)
 	return result, nil
 }
 
