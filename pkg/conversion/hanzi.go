@@ -36,9 +36,9 @@ func ToMapping(r rune) string {
 type RuneType int
 
 const (
-	RuneType_UnihanHanzi = iota
+	RuneType_Ascii = iota
 	RuneType_Pinyin
-	RuneType_Ascii
+	RuneType_UnihanHanzi
 
 	firstUnihanHanzi int32 = 13312
 	lastAscii        int32 = 128
@@ -54,4 +54,19 @@ func DetectRuneType(r rune) RuneType {
 		return RuneType_Ascii
 	}
 
+}
+
+// assumptions:
+// intially, it's a plain text string
+// if a pinyin character is detected, it's a pinyin string
+// if a hanzi is detected, it is a hanzi string
+func StringType(s string) RuneType {
+	var strType RuneType
+	for _, r := range s {
+		t := DetectRuneType(r)
+		if t > strType {
+			strType = t
+		}
+	}
+	return strType
 }
