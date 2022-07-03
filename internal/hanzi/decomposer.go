@@ -196,9 +196,9 @@ func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Ha
 		if err != nil {
 			return nil, nil, err
 		}
-		if strings.Contains(m.Str, query+" ") {
-			fmt.Printf("%+v\n", m)
-		}
+		// if strings.Contains(m.Str, query+" ") {
+		// 	fmt.Printf("%+v\n", m)
+		// }
 		var readingsContainQuery bool
 		for _, d := range dictEntry.Definitions {
 			if d == query {

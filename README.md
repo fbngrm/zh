@@ -9,11 +9,11 @@
 - [x] lookup pinyin (reading/pronounciation) for words or hanzi
 - [x] various output formats like yaml, json, go-templates
 - [x] support scored search results for disambiguation
-- [ ] translate english to chinese
 - [ ] HSK browser
-- [ ] unihan browser
 - [ ] lookup hanzi containing radicals
 - [ ] lookup words containing hanzi
+- [ ] unihan browser
+- [ ] translate english to chinese
 
 ### Data Sources
 
