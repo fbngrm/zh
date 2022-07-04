@@ -33,7 +33,26 @@ func (f *Formatter) FormatTemplate(h *Hanzi, fields, tmplPath string) (string, e
 	if err != nil {
 		return "", fmt.Errorf("could not filter fields: %w", err)
 	}
-	tmpl, err := template.ParseFiles(tmplPath)
+
+	tplFuncMap := make(template.FuncMap)
+	tplFuncMap["threeDefinitions"] = func(definitions []string) string {
+		defs := ""
+		var split []string
+		if len(definitions) > 1 {
+			split = definitions
+		} else {
+			split = strings.Split(definitions[0], ",")
+		}
+		for i, s := range split {
+			defs += s
+			if i == 2 {
+				break
+			}
+			defs += ", "
+		}
+		return defs
+	}
+	tmpl, err := template.New("anki.tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
 	if err != nil {
 		return "", err
 	}

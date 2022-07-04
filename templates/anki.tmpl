@@ -1,7 +1,7 @@
 {{range .}}
 model: Chinese
 deck: Default
-tags:
+tags: HSK1
 
 # Note
 
@@ -12,7 +12,22 @@ tags:
 {{range .Readings}}{{.}} {{end}}
 
 ## English
-{{range .Definitions}}{{.}} {{end}}
+{{range .Definitions}}{{.}}, {{end}}
 
 ## Audio
+{{range .Decompositions}}
+# Note
+
+## Hanzi
+{{.Ideograph}}
+
+## Pinyin
+{{range .Readings}}{{.}} {{end}}
+
+## English
+{{threeDefinitions .Definitions}}
+
+## Audio
+{{end}}
+
 {{end}}
