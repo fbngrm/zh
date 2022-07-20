@@ -8,11 +8,11 @@ import (
 
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/fgrimme/zh/internal/finder"
 	"github.com/fgrimme/zh/internal/hanzi"
-	"github.com/fgrimme/zh/internal/search"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
+	"github.com/fgrimme/zh/pkg/finder"
+	"github.com/fgrimme/zh/pkg/search"
 )
 
 const idsSrc = "./lib/cjkvi/ids.txt"

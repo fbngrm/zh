@@ -3,7 +3,7 @@ package search
 import (
 	"strings"
 
-	"github.com/fgrimme/zh/internal/finder"
+	"github.com/fgrimme/zh/pkg/finder"
 )
 
 type Searcher struct {

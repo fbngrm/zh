@@ -65,9 +65,11 @@ func (f *Finder) lookup(i int) (string, error) {
 		return f.dict.Ideograph(i)
 	case searchMode_hanzi_word: // TODO: support traditional; not supported in unihan
 		return f.dict.IdeographsSimplified(i)
-	case searchMode_ascii:
+	case searchMode_ascii: // FIXME: do a proper string matching for all elements
+    	// e.g. dog results in
+    	// 69915 狗 狗 [gou3] /dog/CL:隻|只[zhi1],條|条[tiao2]/
 		definitions, err := f.dict.Definitions(i)
-		return strings.Join(definitions, ", "), err
+		return definitions[0], err
 	default:
 		return "", fmt.Errorf("mode %v not supported", f.mode)
 	}

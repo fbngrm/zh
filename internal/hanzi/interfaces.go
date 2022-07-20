@@ -2,7 +2,7 @@ package hanzi
 
 import (
 	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/fgrimme/zh/internal/finder"
+	"github.com/fgrimme/zh/pkg/finder"
 )
 
 type Searcher interface {

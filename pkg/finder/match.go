@@ -17,7 +17,7 @@ type Matches []Match
 func (m Matches) Len() int { return len(m) }
 
 func (m Matches) Less(i, j int) bool {
-	return m[i].Meaning > m[j].Meaning
+	return m[i].Meaning < m[j].Meaning
 }
 
 func (m Matches) Swap(i, j int) { m[i], m[j] = m[j], m[i] }
