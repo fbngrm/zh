@@ -35,22 +35,20 @@ func (f *Formatter) FormatTemplate(h *Hanzi, fields, tmplPath string) (string, e
 	}
 
 	tplFuncMap := make(template.FuncMap)
-	tplFuncMap["threeDefinitions"] = func(definitions []string) string {
+	tplFuncMap["definitions"] = func(definitions []string) string {
 		defs := ""
-		var split []string
 		if len(definitions) == 0 {
 			return ""
 		}
-		split = definitions
 		if len(definitions) == 1 {
-			split = strings.Split(definitions[0], ",")
+			definitions = strings.Split(definitions[0], ",")
 		}
-		for i, s := range split {
+		for i, s := range definitions {
 			defs += s
-			if i == 2 {
+			if i == 4 {
 				break
 			}
-			if i == len(split)-1 {
+			if i == len(definitions)-1 {
 				break
 			}
 			defs += ", "
