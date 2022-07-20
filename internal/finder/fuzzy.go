@@ -7,24 +7,24 @@ import (
 	"github.com/sahilm/fuzzy"
 )
 
-type Finder struct {
+type Fuzzy struct {
 	mode searchMode
 	dict Dict
 	err  error
 }
 
-func NewFinder(d Dict) *Finder {
-	return &Finder{
+func NewFinder(d Dict) *Fuzzy {
+	return &Fuzzy{
 		mode: searchMode_init,
 		dict: d,
 	}
 }
 
-func (f *Finder) SetSearchMode(query string) {
+func (f *Fuzzy) SetSearchMode(query string) {
 	f.mode = ModeFromString(query, f.mode)
 }
 
-func (f *Finder) Find(query string, limit int) Matches {
+func (f *Fuzzy) Find(query string, limit int) Matches {
 	fuzzyMatches := fuzzy.FindFrom(query, f)
 	if len(fuzzyMatches) < limit {
 		limit = len(fuzzyMatches)
@@ -41,13 +41,13 @@ func (f *Finder) Find(query string, limit int) Matches {
 	return matches
 }
 
-func (f *Finder) FindSorted(query string, limit int) Matches {
+func (f *Fuzzy) FindSorted(query string, limit int) Matches {
 	matches := f.Find(query, limit)
 	sort.Sort(matches)
 	return matches
 }
 
-func (f *Finder) String(i int) string {
+func (f *Fuzzy) String(i int) string {
 	s, err := f.lookup(i)
 	if err != nil {
 		f.err = err
@@ -55,7 +55,7 @@ func (f *Finder) String(i int) string {
 	return s
 }
 
-func (f *Finder) Len() int {
+func (f *Fuzzy) Len() int {
 	return f.dict.Len()
 }
 
@@ -67,7 +67,7 @@ func (f *Finder) Len() int {
 // 	return int(f.mode)
 // }
 
-func (f *Finder) lookup(i int) (string, error) {
+func (f *Fuzzy) lookup(i int) (string, error) {
 	switch f.mode {
 	case searchMode_hanzi_char:
 		return f.dict.Ideograph(i)
