@@ -2,11 +2,11 @@ package hanzi
 
 import (
 	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/sahilm/fuzzy"
+	"github.com/fgrimme/zh/internal/finder"
 )
 
-type Finder interface {
-	FindSorted(query string, limit int) (fuzzy.Matches, error)
+type Searcher interface {
+	FindSorted(query string, limit int) finder.Matches
 }
 
 type IDSDecomposer interface {

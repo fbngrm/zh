@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"os"
@@ -9,6 +10,7 @@ import (
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/finder"
 	"github.com/fgrimme/zh/internal/hanzi"
+	"github.com/fgrimme/zh/internal/search"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 )
@@ -20,7 +22,7 @@ const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 var query string
 var templatePath string
 var format string
-var interactive bool
+var fromFile string
 var results int
 var depth int
 var unihanSearch bool
@@ -32,7 +34,7 @@ func main() {
 	flag.StringVar(&fields, "f", "", "filter fields")
 	flag.StringVar(&templatePath, "t", "", "go template")
 	flag.StringVar(&format, "fmt", "text", "format output [json|yaml|text]")
-	flag.BoolVar(&interactive, "i", false, "interactive search")
+	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.IntVar(&results, "r", 3, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
@@ -44,7 +46,7 @@ func main() {
 	// github.com/fbngrm/zh/lib/unihan/Unihan_Readings.txt
 	// for documentation on CEDICT see:
 	// github.com/fbngrm/zh/lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt
-	var dict finder.Dict
+	var dict hanzi.Dict
 	var err error
 	if unihanSearch {
 		dict, err = unihan.NewDict(unihanSrc)
@@ -71,11 +73,35 @@ func main() {
 	// recursively decompose words or single hanzi
 	d := hanzi.NewDecomposer(
 		dict,
-		finder.NewFinder(dict),
+		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
 	)
+
+	if fromFile != "" {
+		file, err := os.Open(fromFile)
+		if err != nil {
+			fmt.Printf("could not open file: %v\n", err)
+			os.Exit(1)
+		}
+		scanner := bufio.NewScanner(file)
+		// optionally, resize scanner's capacity for lines over 64K
+		for scanner.Scan() {
+			decompose(scanner.Text(), d)
+		}
+		if err := scanner.Err(); err != nil {
+			fmt.Printf("scanner error: %v\n", err)
+			os.Exit(1)
+		}
+		file.Close()
+	} else {
+		decompose(query, d)
+	}
+}
+
+func decompose(query string, d *hanzi.Decomposer) {
 	var h *hanzi.Hanzi
 	var errs []error
+	var err error
 	// note: english search is broken since fuzzy scoring is not sufficient to detect best match
 	if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
 		h, errs, err = d.DecomposeFromEnglish(query, results, depth)

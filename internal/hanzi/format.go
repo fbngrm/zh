@@ -38,9 +38,11 @@ func (f *Formatter) FormatTemplate(h *Hanzi, fields, tmplPath string) (string, e
 	tplFuncMap["threeDefinitions"] = func(definitions []string) string {
 		defs := ""
 		var split []string
-		if len(definitions) > 1 {
-			split = definitions
-		} else {
+		if len(definitions) == 0 {
+			return ""
+		}
+		split = definitions
+		if len(definitions) == 1 {
 			split = strings.Split(definitions[0], ",")
 		}
 		for i, s := range split {
@@ -48,7 +50,11 @@ func (f *Formatter) FormatTemplate(h *Hanzi, fields, tmplPath string) (string, e
 			if i == 2 {
 				break
 			}
+			if i == len(split)-1 {
+				break
+			}
 			defs += ", "
+			defs += "\n"
 		}
 		return defs
 	}

@@ -7,15 +7,15 @@ import (
 
 type Decomposer struct {
 	dict          Dict
-	finder        Finder
+	searcher      Searcher
 	idsDecomposer IDSDecomposer
 	offset        int
 }
 
-func NewDecomposer(dict Dict, f Finder, d IDSDecomposer) *Decomposer {
+func NewDecomposer(dict Dict, s Searcher, d IDSDecomposer) *Decomposer {
 	return &Decomposer{
 		dict:          dict,
-		finder:        f,
+		searcher:      s,
 		idsDecomposer: d,
 		offset:        20,
 	}
@@ -34,10 +34,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + d.offset
-	matches, err := d.finder.FindSorted(query, limit)
-	if err != nil {
-		return nil, nil, err
-	}
+	matches := d.searcher.FindSorted(query, limit)
 	if len(matches) < 1 {
 		return nil, nil, fmt.Errorf("no translation found %s", query)
 	}
@@ -122,25 +119,22 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + d.offset
-	matches, err := d.finder.FindSorted(query, limit)
-	if err != nil {
-		return nil, err
-	}
+	matches := d.searcher.FindSorted(query, limit)
 	for i := 0; i < results; i++ {
 		if i >= len(matches) {
 			break
 		}
-		d, err := d.dict.Entry(matches[i].Index)
+		dictEntry, err := d.dict.Entry(matches[i].Index)
 		if err != nil {
 			return nil, err
 		}
-		if len(query) != len(d.Ideograph) {
+		if len(query) != len(dictEntry.Ideograph) {
 			continue
 		}
-		definitions = append(definitions, strings.Join(d.Definitions, ", "))
-		readings = append(readings, d.Readings...)
-		simplified += d.IdeographsSimplified
-		traditional += d.IdeographsTraditional
+		definitions = append(definitions, strings.Join(dictEntry.Definitions, ", "))
+		readings = append(readings, dictEntry.Readings...)
+		simplified += dictEntry.IdeographsSimplified
+		traditional += dictEntry.IdeographsTraditional
 		if i < results-2 {
 			simplified += "; "
 			traditional += "; "
@@ -152,6 +146,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	if depth > 0 {
 		decompositions = make([]*Hanzi, len(ids.Decompositions))
 		for i, decomp := range ids.Decompositions {
+			var err error
 			decompositions[i], err = d.BuildHanzi(
 				decomp.Ideograph,
 				results,
@@ -181,10 +176,7 @@ func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Ha
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + 150
-	matches, err := d.finder.FindSorted(query, limit)
-	if err != nil {
-		return nil, nil, err
-	}
+	matches := d.searcher.FindSorted(query, limit)
 	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
 	filteredEntries := make([]*Hanzi, 0)
 	for _, m := range matches {
@@ -196,9 +188,6 @@ func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Ha
 		if err != nil {
 			return nil, nil, err
 		}
-		// if strings.Contains(m.Str, query+" ") {
-		// 	fmt.Printf("%+v\n", m)
-		// }
 		var readingsContainQuery bool
 		for _, d := range dictEntry.Definitions {
 			if d == query {

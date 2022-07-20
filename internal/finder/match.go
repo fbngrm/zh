@@ -2,13 +2,16 @@ package finder
 
 import (
 	"fmt"
-
-	"github.com/sahilm/fuzzy"
 )
 
+// Match represents a matched string.
 type Match struct {
-	meaning string
-	match   fuzzy.Match
+	// The matched string.
+	Str string
+	// The index of the matched string in the supplied slice.
+	Index int
+	// Score used to rank matches
+	Score int
 }
 
 type Matches []Match
@@ -18,12 +21,12 @@ func (m Matches) Len() int { return len(m) }
 func (m Matches) Less(i, j int) bool {
 	return fmt.Sprintf(
 		"%d %s",
-		m[i].match.Score,
-		m[i].meaning,
+		m[i].Score,
+		m[i].Str,
 	) > fmt.Sprintf(
 		"%d %s",
-		m[j].match.Score,
-		m[j].meaning,
+		m[j].Score,
+		m[j].Str,
 	)
 }
 

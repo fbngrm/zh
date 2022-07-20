@@ -2,19 +2,6 @@
 model: Chinese
 deck: Default
 tags: HSK1
-
-# Note
-
-## Hanzi
-{{.Ideograph}}
-
-## Pinyin
-{{range .Readings}}{{.}} {{end}}
-
-## English
-{{range .Definitions}}{{.}}, {{end}}
-
-## Audio
 {{range .Decompositions}}
 # Note
 
@@ -29,5 +16,18 @@ tags: HSK1
 
 ## Audio
 {{end}}
+
+# Note
+
+## Hanzi
+{{.Ideograph}}
+
+## Pinyin
+{{range .Readings}}{{.}} {{end}}
+
+## English
+{{range .Definitions}}{{.}}, {{end}}
+
+## Audio
 
 {{end}}

@@ -9,10 +9,12 @@
 - [x] lookup pinyin (reading/pronounciation) for words or hanzi
 - [x] various output formats like yaml, json, go-templates
 - [x] support scored search results for disambiguation
-- [ ] HSK browser
-- [ ] lookup hanzi containing radicals
-- [ ] lookup words containing hanzi
-- [ ] unihan browser
+- [ ] from file
+- [ ] example words for hanzi by frequency and HSK
+- [ ] example sentences for words
+- [ ] example hanzi for kangxi
+- [ ] sentence decomposition
+- [ ] word frequency in BCC
 - [ ] translate english to chinese
 
 ### Data Sources
