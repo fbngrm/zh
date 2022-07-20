@@ -13,7 +13,7 @@ type Fuzzy struct {
 	err  error
 }
 
-func NewFinder(d Dict) *Fuzzy {
+func NewFuzzy(d Dict) *Fuzzy {
 	return &Fuzzy{
 		mode: searchMode_init,
 		dict: d,
