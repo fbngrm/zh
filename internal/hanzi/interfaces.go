@@ -6,7 +6,7 @@ import (
 )
 
 type Searcher interface {
-	FindSorted(query string, limit int) finder.Matches
+	FindSorted(query string, limit int) (finder.Matches, error)
 }
 
 type IDSDecomposer interface {

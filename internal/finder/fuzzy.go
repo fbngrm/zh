@@ -24,27 +24,27 @@ func (f *Fuzzy) SetSearchMode(query string) {
 	f.mode = ModeFromString(query, f.mode)
 }
 
-func (f *Fuzzy) Find(query string, limit int) Matches {
+func (f *Fuzzy) Find(query string, limit int) (ScoredMatches, error) {
 	fuzzyMatches := fuzzy.FindFrom(query, f)
 	if len(fuzzyMatches) < limit {
 		limit = len(fuzzyMatches)
 	}
 	fuzzyMatches = fuzzyMatches[:limit]
-	matches := make(Matches, len(fuzzyMatches))
+	matches := make(ScoredMatches, len(fuzzyMatches))
 	for i, match := range fuzzyMatches {
 		matches[i] = Match{
-			Str:   match.Str,
+			Hanzi: match.Str,
 			Index: match.Index,
 			Score: match.Score,
 		}
 	}
-	return matches
+	return matches, nil
 }
 
-func (f *Fuzzy) FindSorted(query string, limit int) Matches {
-	matches := f.Find(query, limit)
+func (f *Fuzzy) FindSorted(query string, limit int) (ScoredMatches, error) {
+	matches, _ := f.Find(query, limit)
 	sort.Sort(matches)
-	return matches
+	return matches, nil
 }
 
 func (f *Fuzzy) String(i int) string {

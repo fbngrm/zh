@@ -34,7 +34,10 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + d.offset
-	matches := d.searcher.FindSorted(query, limit)
+	matches, err := d.searcher.FindSorted(query, limit)
+	if err != nil {
+		return nil, nil, err
+	}
 	if len(matches) < 1 {
 		return nil, nil, fmt.Errorf("no translation found %s", query)
 	}
@@ -119,7 +122,10 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + d.offset
-	matches := d.searcher.FindSorted(query, limit)
+	matches, err := d.searcher.FindSorted(query, limit)
+	if err != nil {
+		return nil, err
+	}
 	for i := 0; i < results; i++ {
 		if i >= len(matches) {
 			break
@@ -176,7 +182,10 @@ func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Ha
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + 150
-	matches := d.searcher.FindSorted(query, limit)
+	matches, err := d.searcher.FindSorted(query, limit)
+	if err != nil {
+		return nil, nil, err
+	}
 	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
 	filteredEntries := make([]*Hanzi, 0)
 	for _, m := range matches {

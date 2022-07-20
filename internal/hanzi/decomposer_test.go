@@ -10,6 +10,7 @@ import (
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/finder"
 	"github.com/fgrimme/zh/internal/hanzi"
+	"github.com/fgrimme/zh/internal/search"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 )
@@ -34,7 +35,7 @@ func TestMain(m *testing.M) {
 		os.Exit(1)
 	}
 
-	decomposer = hanzi.NewDecomposer(dict, finder.NewFinder(dict), idsDecomposer)
+	decomposer = hanzi.NewDecomposer(dict, search.NewSearcher(finder.NewFinder(dict)), idsDecomposer)
 	os.Exit(m.Run())
 }
 
