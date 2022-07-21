@@ -8,11 +8,19 @@ tags: HSK1
 ## Hanzi
 {{.Ideograph}}
 
-## Pinyin
-{{range .Readings}}{{.}} {{end}}
+## Readings
+{{range .Readings}}{{.}}; {{end}}
+{{if .OtherReadings}}
+## Other Readings
+{{range .OtherReadings}}{{.}}; {{end}}
+{{end}}
 
-## English
-{{definitions .Definitions}}
+## Definitions
+{{range .Definitions}}{{.}}; {{end}}
+{{if .OtherDefinitions}}
+## Other Definitions
+{{range .OtherDefinitions}}{{.}}; {{end}}
+{{end}}
 
 ## Audio
 {{end}}
@@ -22,11 +30,11 @@ tags: HSK1
 ## Hanzi
 {{.Ideograph}}
 
-## Pinyin
-{{range .Readings}}{{.}} {{end}}
+## Readings
+{{range .Readings}}{{.}}; {{end}}
 
-## English
-{{range .Definitions}}{{.}}, {{end}}
+## Definitions
+{{range .Definitions}}{{.}}; {{end}}
 
 ## Audio
 
