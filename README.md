@@ -9,13 +9,15 @@
 - [x] lookup pinyin (reading/pronounciation) for words or hanzi
 - [x] various output formats like yaml, json, go-templates
 - [x] support scored search results for disambiguation
-- [ ] from file
+- [x] from file
 - [ ] example words for hanzi by frequency and HSK
 - [ ] example sentences for words
 - [ ] example hanzi for kangxi
 - [ ] sentence decomposition
 - [ ] word frequency in BCC
-- [ ] translate english to chinese
+- [x] translate english to chinese
+- [ ] stroke index/count
+- [ ] batch decompose sentences / split into words
 
 ### Data Sources
 
@@ -33,21 +35,3 @@
 - Unicode Character Database
 - Unicode version: 13.0.0
 - For documentation, see http://www.unicode.org/reports/tr38/
-
-### Todo
-
-- [x] Omit empty yaml
-- [x] Filter fields name mapping
-- [x] Depth flag for decomposition
-- [x] Force unihan search for hanzi
-- [x] Make ids recursive
-- [x] Do not decompose unihan hanzi by default
-- [x] Decompose words
-- [ ] Support En to Zh translation
-- [ ] Batch decompose hanzi (from file)
-- [x] HSK lists
-- [ ] Batch decompose files
-- [ ] HSK example sentences
-- [ ] Filter * for slices
-- [ ] Batch decompose sentences / split into words
-
