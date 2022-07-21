@@ -13,6 +13,7 @@ const src = "./testdata/cedict.txt"
 func TestNewCedict(t *testing.T) {
 	expected :=
 		`- ideograph: 㐄
+  kangxi: false
   source: cedict
   simplified: 㐄
   traditional: 㐄
@@ -21,6 +22,7 @@ func TestNewCedict(t *testing.T) {
   readings:
     - kua4
 - ideograph: 㐌
+  kangxi: false
   source: cedict
   simplified: 㐌
   traditional: 㐌
