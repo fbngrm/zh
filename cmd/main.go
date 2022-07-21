@@ -36,7 +36,7 @@ func main() {
 	flag.StringVar(&format, "fmt", "text", "format output [json|yaml|text]")
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
-	flag.IntVar(&results, "r", 3, "number of results")
+	flag.IntVar(&results, "r", 10, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
 
