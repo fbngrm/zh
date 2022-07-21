@@ -120,7 +120,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	traditional := ""
 
 	// we add an offset here to catch more matches with an equal
-	// scoring to achieve getting a consitent set of sorted matches
+	// scoring to achieve getting a consistent set of sorted matches
 	limit := results + d.offset
 	matches, err := d.searcher.FindSorted(query, limit)
 	if err != nil {
@@ -141,17 +141,17 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 		readings = append(readings, dictEntry.Readings...)
 		simplified += dictEntry.IdeographsSimplified
 		traditional += dictEntry.IdeographsTraditional
-		if i < results-2 {
+		if len(matches) > 1 && i < results-2 {
 			simplified += "; "
 			traditional += "; "
 		}
 	}
-	ids := d.idsDecomposer.Decompose(query, 1)
+	decomposition := d.idsDecomposer.Decompose(query, 1)
 
 	var decompositions []*Hanzi
 	if depth > 0 {
-		decompositions = make([]*Hanzi, len(ids.Decompositions))
-		for i, decomp := range ids.Decompositions {
+		decompositions = make([]*Hanzi, len(decomposition.Decompositions))
+		for i, decomp := range decomposition.Decompositions {
 			var err error
 			decompositions[i], err = d.BuildHanzi(
 				decomp.Ideograph,
@@ -166,13 +166,14 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 
 	return &Hanzi{
 		Source:                d.dict.Src(),
+		IsKangxi:              decomposition.Ideograph == decomposition.IdeographicDescriptionSequence,
 		Ideograph:             query,
 		IdeographsSimplified:  simplified,
 		IdeographsTraditional: traditional,
-		Mapping:               ids.Mapping,
+		Mapping:               decomposition.Mapping,
 		Definitions:           definitions,
 		Readings:              readings,
-		IDS:                   ids.IdeographicDescriptionSequence,
+		IDS:                   decomposition.IdeographicDescriptionSequence,
 		Decompositions:        decompositions,
 	}, nil
 }

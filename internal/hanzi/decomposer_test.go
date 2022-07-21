@@ -39,7 +39,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func TestWordWordDecomposition(t *testing.T) {
+func TestWordDecomposition(t *testing.T) {
 	testcases := []struct {
 		name    string
 		query   string
@@ -55,6 +55,7 @@ func TestWordWordDecomposition(t *testing.T) {
 			results: 1,
 			depth:   1,
 			hanzi: `ideograph: 漂亮
+kangxi: false
 source: cedict
 simplified: 漂亮
 traditional: 漂亮
@@ -66,15 +67,19 @@ readings:
     - liang5
 decompositions:
     - ideograph: 漂
+      kangxi: false
+      source: cedict
       mapping: U+6F02
       simplified: 漂
       traditional: 漂
-      other_definitions:
-        - to float, to drift
-      other_readings:
-        - piao1
+      definitions:
+        - elegant, polished
+      readings:
+        - piao4
       ids: ⿰氵票
     - ideograph: 亮
+      kangxi: false
+      source: cedict
       mapping: U+4EAE
       simplified: 亮
       traditional: 亮
@@ -85,8 +90,6 @@ decompositions:
       ids: ⿱⿳亠口冖几[G]
 `,
 			errs: []error{
-				errors.New("no reading match found for hanzi decomposition 漂"),
-				errors.New("no definition match found for hanzi decomposition 漂"),
 				errors.New("no reading match found for hanzi decomposition 亮"),
 				errors.New("no definition match found for hanzi decomposition 亮"),
 			},
@@ -97,6 +100,7 @@ decompositions:
 			results: 1,
 			depth:   2,
 			hanzi: `ideograph: 漂亮
+kangxi: false
 source: cedict
 simplified: 漂亮
 traditional: 漂亮
@@ -108,16 +112,20 @@ readings:
     - liang5
 decompositions:
     - ideograph: 漂
+      kangxi: false
+      source: cedict
       mapping: U+6F02
       simplified: 漂
       traditional: 漂
-      other_definitions:
-        - to float, to drift
-      other_readings:
-        - piao1
+      definitions:
+        - elegant, polished
+      readings:
+        - piao4
       ids: ⿰氵票
       decompositions:
         - ideograph: 氵
+          kangxi: true
+          source: cedict
           mapping: U+6C35
           simplified: 氵
           traditional: 氵
@@ -127,6 +135,8 @@ decompositions:
             - shui3
           ids: 氵
         - ideograph: 票
+          kangxi: false
+          source: cedict
           mapping: U+7968
           simplified: 票
           traditional: 票
@@ -136,6 +146,8 @@ decompositions:
             - piao4
           ids: ⿱覀示
     - ideograph: 亮
+      kangxi: false
+      source: cedict
       mapping: U+4EAE
       simplified: 亮
       traditional: 亮
@@ -146,6 +158,8 @@ decompositions:
       ids: ⿱⿳亠口冖几[G]
       decompositions:
         - ideograph: 亠
+          kangxi: false
+          source: cedict
           mapping: U+4EA0
           simplified: 亠
           traditional: 亠
@@ -155,6 +169,8 @@ decompositions:
             - tou2
           ids: ⿱丶一[GTK]
         - ideograph: 口
+          kangxi: true
+          source: cedict
           mapping: U+53E3
           simplified: 口
           traditional: 口
@@ -164,6 +180,8 @@ decompositions:
             - kou3
           ids: 口
         - ideograph: 冖
+          kangxi: true
+          source: cedict
           mapping: U+5196
           simplified: 冖
           traditional: 冖
@@ -173,18 +191,18 @@ decompositions:
             - mi4
           ids: 冖
         - ideograph: 几
+          kangxi: true
+          source: cedict
           mapping: U+51E0
           simplified: 几
-          traditional: 几
+          traditional: 幾
           definitions:
-            - small table
+            - almost
           readings:
             - ji1
           ids: 几
 `,
 			errs: []error{
-				errors.New("no reading match found for hanzi decomposition 漂"),
-				errors.New("no definition match found for hanzi decomposition 漂"),
 				errors.New("no reading match found for hanzi decomposition 亮"),
 				errors.New("no definition match found for hanzi decomposition 亮"),
 			},
@@ -194,11 +212,11 @@ decompositions:
 	for _, tc := range testcases {
 		h, errs, err := decomposer.Decompose(tc.query, tc.results, tc.depth)
 		if err != tc.err {
-			t.Logf("expected error %v but got %v\n", tc.err, err)
+			t.Logf("%s: expected error %v but got %v\n", tc.name, tc.err, err)
 			t.FailNow()
 		}
 		if len(errs) != len(tc.errs) {
-			t.Logf("expected errors %d but got %d\n", len(tc.errs), len(errs))
+			t.Logf("%s: expected errors %d but got %d\n", tc.name, len(tc.errs), len(errs))
 			for _, e := range errs {
 				t.Log(e)
 			}
@@ -207,10 +225,12 @@ decompositions:
 
 		b, err := yaml.Marshal(h)
 		if err != nil {
-			t.Logf("could not format hanzi decomposition for query %s: %v\n", tc.query, err)
+			t.Logf("%s: could not format hanzi decomposition for query %s: %v\n", tc.name, tc.query, err)
 			t.FailNow()
 		}
-		assert.Equal(t, tc.hanzi, string(b))
+		if !assert.Equal(t, tc.hanzi, string(b)) {
+			fmt.Println(string(b))
+		}
 	}
 }
 
@@ -416,6 +436,8 @@ decompositions:
 			t.Logf("could not format hanzi decomposition for query %s: %v\n", tc.query, err)
 			t.FailNow()
 		}
-		assert.Equal(t, tc.hanzi, string(b))
+		if !assert.Equal(t, tc.hanzi, string(b)) {
+			fmt.Println(string(b))
+		}
 	}
 }
