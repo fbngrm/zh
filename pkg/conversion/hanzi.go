@@ -25,7 +25,7 @@ func IsIdeographicDescriptionCharacter(char rune) bool {
 	return 12272 <= char && char <= 12287
 }
 
-func ToMapping(r rune) string {
+func ToUnicodeCodepoint(r rune) string {
 	if r < 128 {
 		return string(r)
 	} else {
@@ -69,4 +69,15 @@ func StringType(s string) RuneType {
 		}
 	}
 	return strType
+}
+
+// TODO: support equivalents and short form replacements
+func IsKangxi(s string) bool {
+	for _, r := range s {
+		isKangxi := 12032 <= r && r <= 12245
+		if !isKangxi {
+			return false
+		}
+	}
+	return true
 }
