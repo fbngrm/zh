@@ -8,10 +8,10 @@ import (
 )
 
 type entry struct {
-	Level       string
-	Simplified  string
-	Readings    []string
-	Definitions []string
+	level       string
+	simplified  string
+	readings    []string
+	definitions []string
 }
 
 type parsedEntries map[string]entry
@@ -47,10 +47,10 @@ func parse(hskDir string) (parsedEntries, error) {
 					definitions = strings.Split(parts[2], ", ")
 				}
 				dict[parts[0]] = entry{
-					Level:       level,
-					Simplified:  parts[0],
-					Readings:    readings,
-					Definitions: definitions,
+					level:       level,
+					simplified:  parts[0],
+					readings:    readings,
+					definitions: definitions,
 				}
 			}
 			if err := scanner.Err(); err != nil {

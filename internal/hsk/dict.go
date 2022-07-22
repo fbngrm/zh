@@ -21,10 +21,11 @@ func NewDict(dir string) (Dict, error) {
 	for _, entry := range parsedEntries {
 		dict[i] = &hanzi.Hanzi{
 			Source:               "hsk",
-			Ideograph:            entry.Simplified,
-			IdeographsSimplified: entry.Simplified,
-			Definitions:          entry.Definitions,
-			Readings:             entry.Readings,
+			HSKLevel:             entry.level,
+			Ideograph:            entry.simplified,
+			IdeographsSimplified: entry.simplified,
+			Definitions:          entry.definitions,
+			Readings:             entry.readings,
 		}
 		i++
 	}

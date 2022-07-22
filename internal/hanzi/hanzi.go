@@ -12,6 +12,7 @@ type Hanzi struct {
 	Ideograph             string   `yaml:"ideograph,omitempty" json:"ideograph,omitempty" structs:"ideograph"`
 	IsKangxi              bool     `yaml:"kangxi" json:"kangxi" structs:"kangxi"`
 	Source                string   `yaml:"source,omitempty" json:"source,omitempty" structs:"source"`
+	HSKLevel              string   `yaml:"level,omitempty" json:"level,omitempty" structs:"level"`
 	Mapping               string   `yaml:"mapping,omitempty" json:"mapping,omitempty" structs:"mapping"`
 	IdeographsSimplified  string   `yaml:"simplified,omitempty" json:"simplified,omitempty" structs:"simplified"`
 	IdeographsTraditional string   `yaml:"traditional,omitempty" json:"traditional,omitempty" structs:"traditional"`
