@@ -9,6 +9,7 @@ import (
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/hanzi"
+	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/fgrimme/zh/pkg/finder"
@@ -18,6 +19,7 @@ import (
 const idsSrc = "./lib/cjkvi/ids.txt"
 const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
+const hskSrcDir = "./lib/hsk/"
 
 var query string
 var templatePath string
@@ -26,6 +28,7 @@ var fromFile string
 var results int
 var depth int
 var unihanSearch bool
+var hskSearch bool
 
 var fields string
 
@@ -36,6 +39,7 @@ func main() {
 	flag.StringVar(&format, "fmt", "text", "format output [json|yaml|text]")
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
+	flag.BoolVar(&hskSearch, "h", false, "force search in hsk data")
 	flag.IntVar(&results, "r", 10, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
@@ -52,6 +56,12 @@ func main() {
 		dict, err = unihan.NewDict(unihanSrc)
 		if err != nil {
 			fmt.Printf("could not initialize unihan dict: %v\n", err)
+			os.Exit(1)
+		}
+	} else if hskSearch {
+		dict, err = hsk.NewDict(hskSrcDir)
+		if err != nil {
+			fmt.Printf("could not initialize hsk dict: %v\n", err)
 			os.Exit(1)
 		}
 	} else {
