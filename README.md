@@ -10,6 +10,8 @@
 - [x] various output formats like yaml, json, go-templates
 - [x] support scored search results for disambiguation
 - [x] from file
+- [x] hsk lookup
+- [ ] support kangxi equivalents
 - [ ] example words for hanzi by frequency and HSK
 - [ ] example sentences for words
 - [ ] example hanzi for kangxi
