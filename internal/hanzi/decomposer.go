@@ -67,7 +67,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 		// a hanzi has several readings and definitions so we need to find the one
 		// that is used the current search query (dict entry).
 		// FIXME: map reading for sound tone 4 and tone 5
-		if len(dictEntry.Readings) <= readingsIndex {
+		if len(dictEntry.Readings) < readingsIndex {
 			return nil, nil, fmt.Errorf("missing reading for hanzi %s", string(q))
 		}
 		if len(h.Readings) != len(h.Definitions) {
