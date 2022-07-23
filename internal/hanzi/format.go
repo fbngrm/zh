@@ -69,6 +69,9 @@ func (f *Formatter) FormatTemplate(h *Hanzi, fields, tmplPath string) (string, e
 }
 
 func (f *Formatter) Format(h *Hanzi, fields string) (string, error) {
+	if h == nil {
+		return "no results :(", nil
+	}
 	i, err := f.filter(h, fields)
 	if err != nil {
 		return "", fmt.Errorf("could not filter fields: %w", err)

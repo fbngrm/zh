@@ -182,10 +182,10 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 }
 
 // FIXME: return several results
-func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Hanzi, []error, error) {
+func (d *Decomposer) DecomposeFromEnglish(query string, numResults, depth int) (*Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
-	limit := results + 150
+	limit := numResults + 150
 	matches, err := d.searcher.FindSorted(query, limit)
 	if err != nil {
 		return nil, nil, err
@@ -203,11 +203,11 @@ func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Ha
 		}
 		var readingsContainQuery bool
 		for _, d := range dictEntry.Definitions {
-			if d == query {
-				readingsContainQuery = true
-				break
-			}
-			if strings.Contains(d, query+" ") {
+			// if d == query {
+			// 	readingsContainQuery = true
+			// 	break
+			// }
+			if strings.Contains(d, query) {
 				readingsContainQuery = true
 				break
 			}
@@ -217,7 +217,10 @@ func (d *Decomposer) DecomposeFromEnglish(query string, results, depth int) (*Ha
 		}
 		filteredEntries = append(filteredEntries, dictEntry)
 	}
+	if len(filteredEntries) == 0 {
+		return nil, nil, nil
+	}
 	// use ideograph here to support unihan and cedict
 	// FIXME: fix the above somehow
-	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, results, depth)
+	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults, depth)
 }
