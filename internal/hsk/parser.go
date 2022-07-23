@@ -5,10 +5,12 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"golang.org/x/exp/slices"
 )
 
 type entry struct {
-	level       string
+	levels      []string
 	simplified  string
 	readings    []string
 	definitions []string
@@ -46,8 +48,18 @@ func parse(hskDir string) (parsedEntries, error) {
 				if len(parts) > 1 {
 					definitions = strings.Split(parts[2], ", ")
 				}
+				levels := []string{level}
+				existing, ok := dict[parts[0]]
+				if ok {
+					if !slices.Contains(existing.levels, level) {
+						levels = append(existing.levels, level)
+					} else {
+						levels = existing.levels
+					}
+					// TODO: we assume definitions and readings don't change in among levels
+				}
 				dict[parts[0]] = entry{
-					level:       level,
+					levels:      levels,
 					simplified:  parts[0],
 					readings:    readings,
 					definitions: definitions,

@@ -18,10 +18,11 @@ func NewDict(dir string) (Dict, error) {
 
 	dict := make(Dict, len(parsedEntries))
 	var i int
+	// TODO: deduplication
 	for _, entry := range parsedEntries {
 		dict[i] = &hanzi.Hanzi{
 			Source:               "hsk",
-			HSKLevel:             entry.level,
+			HSKLevels:            entry.levels,
 			Ideograph:            entry.simplified,
 			IdeographsSimplified: entry.simplified,
 			Definitions:          entry.definitions,

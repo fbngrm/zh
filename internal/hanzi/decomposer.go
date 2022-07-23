@@ -116,6 +116,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error) {
 	readings := make([]string, 0)
 	definitions := make([]string, 0)
+	levels := make([]string, 0)
 	simplified := ""
 	traditional := ""
 
@@ -139,6 +140,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 		}
 		definitions = append(definitions, strings.Join(dictEntry.Definitions, ", "))
 		readings = append(readings, dictEntry.Readings...)
+		levels = append(levels, dictEntry.HSKLevels...)
 		simplified += dictEntry.IdeographsSimplified
 		traditional += dictEntry.IdeographsTraditional
 		if len(matches) > 1 && i < results-2 {
@@ -167,6 +169,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	return &Hanzi{
 		Source:                d.dict.Src(),
 		IsKangxi:              decomposition.Ideograph == decomposition.IdeographicDescriptionSequence,
+		HSKLevels:             levels,
 		Ideograph:             query,
 		IdeographsSimplified:  simplified,
 		IdeographsTraditional: traditional,
