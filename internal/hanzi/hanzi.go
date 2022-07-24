@@ -10,6 +10,7 @@ import (
 
 type Hanzi struct {
 	Ideograph             string   `yaml:"ideograph,omitempty" json:"ideograph,omitempty" structs:"ideograph"`
+	Equivalents           []string `yaml:"equivalents,omitempty" json:"equivalents,omitempty" structs:"equivalents"`
 	IsKangxi              bool     `yaml:"kangxi" json:"kangxi" structs:"kangxi"`
 	Source                string   `yaml:"source,omitempty" json:"source,omitempty" structs:"source"`
 	HSKLevels             []string `yaml:"levels,omitempty" json:"levels,omitempty" structs:"levels"`

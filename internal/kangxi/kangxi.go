@@ -1,6 +1,6 @@
 package kangxi
 
-var Dict = map[string]string{
+var data = map[string]string{
 	"一": "one",
 	"丨": "line",
 	"丶": "dot",

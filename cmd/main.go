@@ -10,6 +10,7 @@ import (
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
+	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/fgrimme/zh/pkg/finder"
@@ -83,6 +84,7 @@ func main() {
 	// recursively decompose words or single hanzi
 	d := hanzi.NewDecomposer(
 		dict,
+		kangxi.NewDict(),
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
 	)

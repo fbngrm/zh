@@ -3,18 +3,22 @@ package hanzi
 import (
 	"fmt"
 	"strings"
+
+	"github.com/fgrimme/zh/internal/kangxi"
 )
 
 type Decomposer struct {
 	dict          Dict
+	kangxiDict    kangxi.Dict
 	searcher      Searcher
 	idsDecomposer IDSDecomposer
 	offset        int
 }
 
-func NewDecomposer(dict Dict, s Searcher, d IDSDecomposer) *Decomposer {
+func NewDecomposer(dict Dict, kangxi kangxi.Dict, s Searcher, d IDSDecomposer) *Decomposer {
 	return &Decomposer{
 		dict:          dict,
+		kangxiDict:    kangxi,
 		searcher:      s,
 		idsDecomposer: d,
 		offset:        20,
@@ -122,6 +126,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consistent set of sorted matches
+
 	limit := results + d.offset
 	matches, err := d.searcher.FindSorted(query, limit)
 	if err != nil {
@@ -149,6 +154,22 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 		}
 	}
 	decomposition := d.idsDecomposer.Decompose(query, 1)
+
+	kangxi, isKangxi := d.kangxiDict[decomposition.Ideograph]
+	if isKangxi {
+		return &Hanzi{
+			Source:         d.kangxiDict.Src(),
+			IsKangxi:       true,
+			HSKLevels:      levels,
+			Ideograph:      query,
+			Equivalents:    kangxi.Equivalents,
+			Mapping:        decomposition.Mapping,
+			Definitions:    strings.Split(kangxi.Definition, "/"),
+			Readings:       readings,
+			IDS:            decomposition.IdeographicDescriptionSequence,
+			Decompositions: nil,
+		}, nil
+	}
 
 	var decompositions []*Hanzi
 	if depth > 0 {
