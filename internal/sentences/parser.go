@@ -9,7 +9,7 @@ import (
 type Sentence struct {
 	Source       string
 	Chinese      string
-	ChineseWords []string
+	ChineseWords []string `yaml:"-" json:"-" structs:"-"`
 	Pinyin       string
 	English      string
 }

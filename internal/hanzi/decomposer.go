@@ -5,36 +5,46 @@ import (
 	"strings"
 
 	"github.com/fgrimme/zh/internal/kangxi"
+	"github.com/fgrimme/zh/internal/sentences"
 )
 
 type Decomposer struct {
 	dict          Dict
 	kangxiDict    kangxi.Dict
+	sentenceDict  sentences.Dict
 	searcher      Searcher
 	idsDecomposer IDSDecomposer
 	offset        int
 }
 
-func NewDecomposer(dict Dict, kangxi kangxi.Dict, s Searcher, d IDSDecomposer) *Decomposer {
+func NewDecomposer(
+	dict Dict,
+	kangxiDict kangxi.Dict,
+	sentenceDict sentences.Dict,
+	s Searcher,
+	d IDSDecomposer,
+) *Decomposer {
+
 	return &Decomposer{
 		dict:          dict,
-		kangxiDict:    kangxi,
+		kangxiDict:    kangxiDict,
+		sentenceDict:  sentenceDict,
 		searcher:      s,
 		idsDecomposer: d,
 		offset:        20,
 	}
 }
 
-func (d *Decomposer) Decompose(query string, results, depth int) (*Hanzi, []error, error) {
+func (d *Decomposer) Decompose(query string, results, depth, addSentences int) (*Hanzi, []error, error) {
 	isWord := len(query) > 4
 	if isWord {
-		return d.BuildWordDecomposition(query, results, depth)
+		return d.BuildWordDecomposition(query, results, depth, addSentences)
 	}
-	h, err := d.BuildHanzi(query, results, depth)
+	h, err := d.BuildHanzi(query, results, depth, addSentences)
 	return h, []error{}, err
 }
 
-func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*Hanzi, []error, error) {
+func (d *Decomposer) BuildWordDecomposition(query string, results, depth, addSentences int) (*Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := results + d.offset
@@ -63,6 +73,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 			string(q),
 			results,
 			depth-1,
+			0, // no sentences for decompositions
 		)
 		if err != nil {
 			errs = append(errs, err)
@@ -114,10 +125,13 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth int) (*
 		readingsIndex++
 	}
 	dictEntry.Decompositions = decompositions
+	if addSentences > 0 {
+		dictEntry.Sentences = d.sentenceDict.Get(query, addSentences, true)
+	}
 	return dictEntry, errs, nil
 }
 
-func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error) {
+func (d *Decomposer) BuildHanzi(query string, results, depth, addSentences int) (*Hanzi, error) {
 	readings := make([]string, 0)
 	definitions := make([]string, 0)
 	levels := make([]string, 0)
@@ -155,6 +169,11 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 	}
 	decomposition := d.idsDecomposer.Decompose(query, 1)
 
+	var sentences sentences.Sentences
+	if addSentences > 0 {
+		sentences = d.sentenceDict.Get(query, addSentences, true)
+	}
+
 	kangxi, isKangxi := d.kangxiDict[decomposition.Ideograph]
 	if isKangxi {
 		return &Hanzi{
@@ -168,6 +187,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 			Readings:       readings,
 			IDS:            decomposition.IdeographicDescriptionSequence,
 			Decompositions: nil,
+			Sentences:      sentences,
 		}, nil
 	}
 
@@ -180,6 +200,7 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 				decomp.Ideograph,
 				results,
 				depth-1,
+				0, // no sentences for decompositions
 			)
 			if err != nil {
 				return nil, err
@@ -199,11 +220,12 @@ func (d *Decomposer) BuildHanzi(query string, results, depth int) (*Hanzi, error
 		Readings:              readings,
 		IDS:                   decomposition.IdeographicDescriptionSequence,
 		Decompositions:        decompositions,
+		Sentences:             sentences,
 	}, nil
 }
 
 // FIXME: return several results
-func (d *Decomposer) DecomposeFromEnglish(query string, numResults, depth int) (*Hanzi, []error, error) {
+func (d *Decomposer) DecomposeFromEnglish(query string, numResults, depth, addSentences int) (*Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consitent set of sorted matches
 	limit := numResults + 150
@@ -243,5 +265,5 @@ func (d *Decomposer) DecomposeFromEnglish(query string, numResults, depth int) (
 	}
 	// use ideograph here to support unihan and cedict
 	// FIXME: fix the above somehow
-	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults, depth)
+	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults, depth, addSentences)
 }

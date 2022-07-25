@@ -30,15 +30,20 @@ func NewDict(src string) (Dict, error) {
 }
 
 // sort order, ascending number of chinese words
-func (d Dict) Get(query string, sorted bool) (Sentences, error) {
+func (d Dict) Get(query string, limit int, sorted bool) Sentences {
 	sentences, ok := d[query]
 	if !ok {
-		return Sentences{}, fmt.Errorf("no sentences found for query: %s", query)
+		fmt.Printf("no sentences found for: %s\n", query)
+		return Sentences{}
 	}
+	if len(sentences) < limit {
+		limit = len(sentences)
+	}
+	sentences = sentences[:limit]
 	if sorted {
 		sort.Sort(sentences)
 	}
-	return sentences, nil
+	return sentences
 }
 
 type Sentences []Sentence

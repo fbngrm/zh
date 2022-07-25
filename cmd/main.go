@@ -32,7 +32,7 @@ var results int
 var depth int
 var unihanSearch bool
 var hskSearch bool
-var addSentences bool
+var addSentences int
 
 var fields string
 
@@ -44,7 +44,7 @@ func main() {
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.BoolVar(&hskSearch, "h", false, "force search in hsk data")
-	flag.BoolVar(&addSentences, "s", false, "add example sentences")
+	flag.IntVar(&addSentences, "s", 0, "add example sentences")
 	flag.IntVar(&results, "r", 10, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
@@ -85,10 +85,21 @@ func main() {
 		os.Exit(1)
 	}
 
+	var sentenceDict sentences.Dict
+	if addSentences > 0 {
+		var err error
+		sentenceDict, err = sentences.NewDict(sentenceSrc)
+		if err != nil {
+			fmt.Printf("could not create sentence dict: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
 	// recursively decompose words or single hanzi
 	d := hanzi.NewDecomposer(
 		dict,
 		kangxi.NewDict(),
+		sentenceDict,
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
 	)
@@ -120,29 +131,13 @@ func decompose(query string, d *hanzi.Decomposer) {
 	var err error
 	// note: english search is broken since fuzzy scoring is not sufficient to detect best match
 	if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
-		h, errs, err = d.DecomposeFromEnglish(query, results, depth)
+		h, errs, err = d.DecomposeFromEnglish(query, results, depth, addSentences)
 	} else { // query is chinese
-		h, errs, err = d.Decompose(query, results, depth)
+		h, errs, err = d.Decompose(query, results, depth, addSentences)
 	}
 	if err != nil {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)
-	}
-
-	if addSentences {
-		sentenceDict, err := sentences.NewDict(sentenceSrc)
-		if err != nil {
-			fmt.Printf("could not create sentence dict: %v\n", err)
-			os.Exit(1)
-		}
-		sentences, err := sentenceDict.Get(h.Ideograph, true)
-		if err != nil {
-			fmt.Printf("could not find example sentences for: %s\n", h.Ideograph)
-		} else {
-			for _, s := range sentences {
-				fmt.Println(s)
-			}
-		}
 	}
 
 	// out
