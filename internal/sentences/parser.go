@@ -16,7 +16,7 @@ type Sentence struct {
 
 type parsedSentences map[string]Sentence
 
-func parse(src string) (parsedSentences, error) {
+func Parse(src string) (parsedSentences, error) {
 	file, err := os.Open(src)
 	if err != nil {
 		return parsedSentences{}, err
