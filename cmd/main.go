@@ -11,6 +11,7 @@ import (
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/kangxi"
+	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/fgrimme/zh/pkg/finder"
@@ -21,6 +22,7 @@ const idsSrc = "./lib/cjkvi/ids.txt"
 const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 const hskSrcDir = "./lib/hsk/"
+const sentenceSrc = "./lib/sentences/tatoeba-cn-eng.txt"
 
 var query string
 var templatePath string
@@ -30,6 +32,7 @@ var results int
 var depth int
 var unihanSearch bool
 var hskSearch bool
+var addSentences bool
 
 var fields string
 
@@ -41,6 +44,7 @@ func main() {
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.BoolVar(&hskSearch, "h", false, "force search in hsk data")
+	flag.BoolVar(&addSentences, "s", false, "add example sentences")
 	flag.IntVar(&results, "r", 10, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
@@ -123,6 +127,22 @@ func decompose(query string, d *hanzi.Decomposer) {
 	if err != nil {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)
+	}
+
+	if addSentences {
+		sentenceDict, err := sentences.NewDict(sentenceSrc)
+		if err != nil {
+			fmt.Printf("could not create sentence dict: %v\n", err)
+			os.Exit(1)
+		}
+		sentences, err := sentenceDict.Get(h.Ideograph, true)
+		if err != nil {
+			fmt.Printf("could not find example sentences for: %s\n", h.Ideograph)
+		} else {
+			for _, s := range sentences {
+				fmt.Println(s)
+			}
+		}
 	}
 
 	// out
