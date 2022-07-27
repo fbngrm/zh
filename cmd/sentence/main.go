@@ -4,12 +4,23 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/sentences"
+	"golang.org/x/exp/slices"
 )
 
 const hskSrcDir = "./lib/hsk/"
 const sentenceSrc = "./lib/sentences/tatoeba-cn-eng.txt"
+
+type hskSentence struct {
+	hsk1, hsk2, hsk3, hsk4, hsk5, hsk6 int
+	wordCount                          int
+	countHSKWord                       int
+	countNotHSKWord                    int
+	levels                             []string
+	sentence                           sentences.Sentence
+}
 
 func main() {
 	hskDict, err := hsk.NewDictByLevel(hskSrcDir)
@@ -17,12 +28,35 @@ func main() {
 		fmt.Printf("could not initialize hsk level dict: %v\n", err)
 		os.Exit(1)
 	}
-	// b, err := yaml.Marshal(dict["hsk1"])
-	// if err != nil {
-	// 	fmt.Printf("could not yaml dict: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// fmt.Println(string(b))
+
+	sentencesForWords := make(map[string][]hskSentence)
+	sentencesByLevel := getSentecesByLevel()
+	unmatched := make([]string, 0)
+	for word := range hskDict["hsk1"] {
+		match := false
+		for _, hskSen := range sentencesByLevel["hsk1"] {
+			if slices.Contains(hskSen.sentence.ChineseWords, word) {
+				match = true
+				if _, ok := sentencesForWords[word]; !ok {
+					sentencesForWords[word] = make([]hskSentence, 0)
+				}
+				sentencesForWords[word] = append(sentencesForWords[word], hskSen)
+			}
+		}
+		if !match {
+			unmatched = append(unmatched, word)
+		}
+	}
+	spew.Dump(sentencesForWords)
+	fmt.Println(len(unmatched))
+}
+
+func getSentecesByLevel() map[string][]hskSentence {
+	hskDict, err := hsk.NewDictByLevel(hskSrcDir)
+	if err != nil {
+		fmt.Printf("could not initialize hsk level dict: %v\n", err)
+		os.Exit(1)
+	}
 
 	sentenceDict, err := sentences.Parse(sentenceSrc)
 	if err != nil {
@@ -30,7 +64,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	// map sentences to their hsl level
+	// map sentences to their hsk level
 	sentencesByLevel := make(map[string][]hskSentence)
 	sentencesNotMatched := make([]hskSentence, 0)
 
@@ -150,13 +184,6 @@ func main() {
 	fmt.Println("hsk5: ", len(sentencesByLevel["hsk5"]))
 	fmt.Println("hsk6: ", len(sentencesByLevel["hsk6"]))
 	fmt.Println("not hsk: ", len(sentencesNotMatched))
-}
 
-type hskSentence struct {
-	hsk1, hsk2, hsk3, hsk4, hsk5, hsk6 int
-	wordCount                          int
-	countHSKWord                       int
-	countNotHSKWord                    int
-	levels                             []string
-	sentence                           sentences.Sentence
+	return sentencesByLevel
 }
