@@ -11,6 +11,7 @@ import (
 	"os/signal"
 	"path/filepath"
 	"syscall"
+	"time"
 )
 
 var query string
@@ -34,7 +35,7 @@ func main() {
 	}()
 
 	fmt.Println(query)
-	fmt.Printf("r = record / p = play recording / c = cancel / s = save \n")
+	fmt.Printf("r = record / p = play recording / d = delete / c = cancel \n")
 
 	err := os.Mkdir(outputDir, os.ModeDir)
 	if !errors.Is(err, os.ErrExist) {
@@ -99,7 +100,8 @@ func record(ctx context.Context, path string, convertToMP3 bool) error {
 	go func() {
 		cmd := exec.CommandContext(ctxRec, "ffmpeg", "-y", "-f", "alsa", "-i", "hw:0,0", path+".wav")
 		if err := cmd.Run(); err != nil {
-			if err.Error() != "signal: killed" {
+			e := err.Error()
+			if e != "signal: killed" && e != "exit status 1" {
 				fmt.Println(err)
 			}
 		}
@@ -108,6 +110,7 @@ func record(ctx context.Context, path string, convertToMP3 bool) error {
 	_, err := reader.ReadString('\n')
 	if err != nil {
 		cancel()
+		time.Sleep(1 + time.Second)
 		return err
 	}
 	cancel()
