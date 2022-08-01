@@ -85,36 +85,52 @@ func (d *Decomposer) BuildWordDecomposition(query string, results, depth, addSen
 		if len(dictEntry.Readings) < readingsIndex {
 			return nil, nil, fmt.Errorf("missing reading for hanzi %s", string(q))
 		}
+
+		// FIXME: if there is a mismatch between number of readings and definitions, we need to address it here.
 		if len(h.Readings) != len(h.Definitions) {
-			return nil, nil, fmt.Errorf(
-				"missing definitions(%d) or readings(%d) for %s",
+			errs = append(errs, fmt.Errorf(
+				"warning: missing definitions(%d) or readings(%d) for %s",
 				len(h.Definitions),
 				len(h.Readings),
 				string(q),
-			)
+			))
 		}
 		entryReadings := make([]string, 0)
 		otherReadings := make([]string, 0)
 		entryDefinitions := make([]string, 0)
 		otherDefinitions := make([]string, 0)
 		for i, hanziReading := range h.Readings {
-			if hanziReading == dictEntry.Readings[readingsIndex] {
+			if strings.ToLower(hanziReading) == strings.ToLower(dictEntry.Readings[readingsIndex]) {
 				entryReadings = append(entryReadings, hanziReading)
-				entryDefinitions = append(entryDefinitions, h.Definitions[i])
+				if len(h.Definitions) > i {
+					entryDefinitions = append(entryDefinitions, h.Definitions[i])
+				}
 				continue
 			}
 			otherReadings = append(otherReadings, hanziReading)
-			otherDefinitions = append(otherDefinitions, h.Definitions[i])
+			if len(h.Definitions) > i {
+				otherDefinitions = append(otherDefinitions, h.Definitions[i])
+			}
 		}
 		h.Readings = entryReadings
 		h.OtherReadings = otherReadings
 		h.Definitions = entryDefinitions
 		h.OtherDefinitions = otherDefinitions
 
-		if len(entryReadings) == 0 {
+		// if can't match a reading but found other readings, we use the other readings as readings.
+		if len(entryReadings) == 0 && len(otherReadings) != 0 {
+			h.Readings = otherReadings
+			h.OtherReadings = []string{}
+		}
+		if len(h.Definitions) == 0 {
+			h.Definitions = otherDefinitions
+			h.OtherDefinitions = []string{}
+		}
+
+		if len(entryReadings) == 0 && len(otherReadings) == 0 {
 			errs = append(errs, fmt.Errorf("no reading match found for hanzi decomposition %s", string(q)))
 		}
-		if len(entryDefinitions) == 0 {
+		if len(entryDefinitions) == 0 && len(otherDefinitions) == 0 {
 			errs = append(errs, fmt.Errorf("no definition match found for hanzi decomposition %s", string(q)))
 		}
 
