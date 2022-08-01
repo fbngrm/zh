@@ -74,6 +74,7 @@ func main() {
 		os.Exit(1)
 	}
 }
+
 func deleteFile(ctx context.Context, path string, convertToMP3 bool) error {
 	file := path + ".wav"
 	if convertToMP3 {
