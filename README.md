@@ -13,7 +13,7 @@
 - [x] hsk lookup
 - [x] support kangxi equivalents
 - [ ] example words for hanzi
-  - [ ] by frequency and HSK
+  - [ ] by frequency
   - [ ] by HSK
 - [x] example sentences for words
 - [ ] example hanzi for kangxi
