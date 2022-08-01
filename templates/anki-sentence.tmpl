@@ -1,44 +1,9 @@
-model: zh
-deck: Gateway to Chinese
-tags: Gateway to Chinese
-# Note
-
-## Hanzi
-{{.Sentence.Chinese}}
-## Pinyin
-{{.Sentence.Pinyin}}
-## English
-{{.Sentence.EnglishLiteral}}
-{{.Sentence.English}}
-
-## Components
-{{.Sentence.ChineseWords}}
-
-## Audio
 {{range .Decomposition}}
-model: zh
-deck: Gateway to Chinese
-tags: Gateway to Chinese
-# Note
-
-## Hanzi
-{{.Ideograph}}
-
-## Pinyin
-{{range .Readings}}{{.}}; {{end}}
-
-## English
-{{range .Definitions}}{{.}}; {{end}}
-
-## Audio
 {{range .Decompositions}}
 model: zh
-deck: Gateway to Chinese
+deck: Default
 tags: Gateway to Chinese
-
 # Note
-
-## Audio
 
 ## Hanzi
 {{.Ideograph}}
@@ -57,5 +22,44 @@ tags: Gateway to Chinese
 {{range .OtherDefinitions}}{{.}}; {{end}}
 {{end}}
 
+## Audio
+
+## Components
+{{.Ideograph}}
 {{end}}
+model: zh
+deck: Default
+tags: Gateway to Chinese
+# Note
+
+## Hanzi
+{{.Ideograph}}
+
+## Pinyin
+{{range .Readings}}{{.}}; {{end}}
+
+## English
+{{range .Definitions}}{{.}}; {{end}}
+
+## Audio
+
+## Components
+{{.Ideograph}}
 {{end}}
+model: zh
+deck: Default
+tags: Gateway to Chinese
+# Note
+
+## Hanzi
+{{.Sentence.Chinese}}
+## Pinyin
+{{.Sentence.Pinyin}}
+## English
+{{.Sentence.EnglishLiteral}}
+{{.Sentence.English}}
+
+## Audio
+
+## Components
+{{.Sentence.ChineseWords}}
