@@ -80,7 +80,7 @@ func main() {
 
 	// decompose hanzi or words (recursively) by their "ideographic description sequence (IDS)" from CHISE IDS Database.
 	// for documentation on CHISE IDS Database see: github.com/fbngrm/zh/lib/cjkvi/ids.txt
-	idsDecomposeR, err := cjkvi.NewIDSDecomposer(idsSrc)
+	idsDecomposer, err := cjkvi.NewIDSDecomposer(idsSrc)
 	if err != nil {
 		fmt.Printf("could not initialize ids decompose: %v\n", err)
 		os.Exit(1)
@@ -104,7 +104,7 @@ func main() {
 		kangxi.NewDict(),
 		sentenceDict,
 		search.NewSearcher(finder.NewFinder(dict)),
-		idsDecomposeR,
+		idsDecomposer,
 	)
 
 	if fromFile != "" {
