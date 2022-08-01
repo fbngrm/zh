@@ -35,7 +35,6 @@ var depth int
 var unihanSearch bool
 var hskSearch bool
 var addSentences int
-
 var fields string
 
 func main() {
@@ -81,6 +80,14 @@ func main() {
 
 	// decompose hanzi or words (recursively) by their "ideographic description sequence (IDS)" from CHISE IDS Database.
 	// for documentation on CHISE IDS Database see: github.com/fbngrm/zh/lib/cjkvi/ids.txt
+	idsDecomposeR, err := cjkvi.NewIDSDecomposer(idsSrc)
+	if err != nil {
+		fmt.Printf("could not initialize ids decompose: %v\n", err)
+		os.Exit(1)
+	}
+
+	// example sentences are chosed from the tatoeba ch/en corpus.
+	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
 	var sentenceDict sentences.Dict
 	if addSentences > 0 {
 		var err error
@@ -89,11 +96,6 @@ func main() {
 			fmt.Printf("could not create sentence dict: %v\n", err)
 			os.Exit(1)
 		}
-	}
-	idsDecomposeR, err := cjkvi.NewIDSDecomposer(idsSrc)
-	if err != nil {
-		fmt.Printf("could not initialize ids decompose: %v\n", err)
-		os.Exit(1)
 	}
 
 	// recursively decompose words or single hanzi
