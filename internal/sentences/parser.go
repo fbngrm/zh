@@ -7,17 +7,18 @@ import (
 )
 
 type Sentence struct {
-	Source       string
-	Chinese      string
-	ChineseWords []string `yaml:"-" json:"-" structs:"-"`
-	Pinyin       string
-	English      string
+	Source         string
+	Chinese        string
+	ChineseWords   []string `yaml:"-" json:"-" structs:"-"`
+	Pinyin         string
+	English        string
+	EnglishLiteral string
 }
 
 type parsedSentences map[string]Sentence
 
-func Parse(src string) (parsedSentences, error) {
-	file, err := os.Open(src)
+func Parse(sourceName, sourcePath string) (parsedSentences, error) {
+	file, err := os.Open(sourcePath)
 	if err != nil {
 		return parsedSentences{}, err
 	}
@@ -39,12 +40,17 @@ func Parse(src string) (parsedSentences, error) {
 		if len(parts) > 1 {
 			english = parts[2]
 		}
+		englishLiteral := ""
+		if len(parts) > 2 {
+			englishLiteral = parts[3]
+		}
 		dict[parts[0]] = Sentence{
-			Source:       "tatoeba",
-			Chinese:      parts[0],
-			ChineseWords: splitWords(parts[0], pinyin),
-			Pinyin:       pinyin,
-			English:      english,
+			Source:         sourceName,
+			Chinese:        parts[0],
+			ChineseWords:   splitWords(parts[0], pinyin),
+			Pinyin:         pinyin,
+			English:        english,
+			EnglishLiteral: englishLiteral,
 		}
 	}
 	return dict, scanner.Err()
@@ -56,7 +62,6 @@ func Parse(src string) (parsedSentences, error) {
 // wo3 zai4 jie1ba5。
 func splitWords(chinese, pinyin string) []string {
 	pinyinWords := strings.Split(pinyin, " ")
-
 	// the pinyin is divided into words by whitespaces. we count the numbers (used for tone intonation)
 	// in each words to distinguish how many ideographs the word has. we use these word-lengths to split
 	// the chinese sentence into words.

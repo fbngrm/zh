@@ -8,8 +8,8 @@ import (
 // sentences by words contained in the sentence
 type Dict map[string]Sentences
 
-func NewDict(src string) (Dict, error) {
-	parsedSentences, err := Parse(src)
+func NewDict(sourceName, sourcePath string) (Dict, error) {
+	parsedSentences, err := Parse(sourceName, sourcePath)
 	if err != nil {
 		return nil, err
 	}
