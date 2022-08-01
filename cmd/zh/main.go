@@ -18,6 +18,8 @@ import (
 	"github.com/fgrimme/zh/pkg/search"
 )
 
+// FIXME:母亲
+
 const idsSrc = "./lib/cjkvi/ids.txt"
 const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
