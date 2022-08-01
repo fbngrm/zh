@@ -10,7 +10,7 @@ type Searcher interface {
 }
 
 type IDSDecomposer interface {
-	Decompose(query string, depth int) cjkvi.Decomposition
+	Decompose(query string) (cjkvi.Decomposition, error)
 }
 
 type Dict interface {
@@ -20,5 +20,5 @@ type Dict interface {
 	Definitions(i int) ([]string, error)
 	Mapping(i int) (string, error)
 	Ideograph(i int) (string, error)
-	IdeographsSimplified(i int) (string, error)
+	IdeographsSimplified(i int) ([]string, error)
 }

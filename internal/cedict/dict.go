@@ -22,9 +22,9 @@ func NewDict(src string) (Dict, error) {
 		dict[i] = &hanzi.Hanzi{
 			Source:                "cedict",
 			Ideograph:             entry.Simplified,
-			IdeographsSimplified:  entry.Simplified,
-			IdeographsTraditional: entry.Traditional,
-			Definitions:           entry.Definition,
+			IdeographsSimplified:  []string{entry.Simplified},
+			IdeographsTraditional: []string{entry.Traditional},
+			Definitions:           entry.Definitions,
 			Readings:              entry.Readings,
 		}
 		i++
@@ -68,9 +68,9 @@ func (d Dict) Ideograph(i int) (string, error) {
 	return d[i].Ideograph, nil
 }
 
-func (d Dict) IdeographsSimplified(i int) (string, error) {
+func (d Dict) IdeographsSimplified(i int) ([]string, error) {
 	if i >= len(d) {
-		return "", fmt.Errorf(ErrIndexOutOfBounds, i, len(d))
+		return []string{}, fmt.Errorf(ErrIndexOutOfBounds, i, len(d))
 	}
 	return d[i].IdeographsSimplified, nil
 }

@@ -24,7 +24,7 @@ func NewDict(dir string) (Dict, error) {
 			Source:               "hsk",
 			HSKLevels:            entry.levels,
 			Ideograph:            entry.simplified,
-			IdeographsSimplified: entry.simplified,
+			IdeographsSimplified: []string{entry.simplified},
 			Definitions:          entry.definitions,
 			Readings:             entry.readings,
 		}
@@ -69,9 +69,9 @@ func (d Dict) Ideograph(i int) (string, error) {
 	return d[i].Ideograph, nil
 }
 
-func (d Dict) IdeographsSimplified(i int) (string, error) {
+func (d Dict) IdeographsSimplified(i int) ([]string, error) {
 	if i >= len(d) {
-		return "", fmt.Errorf(ErrIndexOutOfBounds, i, len(d))
+		return []string{}, fmt.Errorf(ErrIndexOutOfBounds, i, len(d))
 	}
 	return d[i].IdeographsSimplified, nil
 }

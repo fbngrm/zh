@@ -63,8 +63,14 @@ func (f *Finder) lookup(i int) (string, error) {
 	switch f.mode {
 	case searchMode_hanzi_char:
 		return f.dict.Ideograph(i)
-	case searchMode_hanzi_word: // TODO: support traditional; not supported in unihan
-		return f.dict.IdeographsSimplified(i)
+	case searchMode_hanzi_word:
+		// FIXME: do a proper string matching for all elements
+		// TODO: support traditional; not supported in unihan
+		s, err := f.dict.IdeographsSimplified(i)
+		if err != nil {
+			return "", err
+		}
+		return s[0], nil
 	case searchMode_ascii: // FIXME: do a proper string matching for all elements
 		// e.g. dog results in
 		// 69915 狗 狗 [gou3] /dog/CL:隻|只[zhi1],條|条[tiao2]/

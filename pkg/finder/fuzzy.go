@@ -72,7 +72,12 @@ func (f *Fuzzy) lookup(i int) (string, error) {
 	case searchMode_hanzi_char:
 		return f.dict.Ideograph(i)
 	case searchMode_hanzi_word: // TODO: support traditional; not supported in unihan
-		return f.dict.IdeographsSimplified(i)
+		// FIXME: do a proper string matching for all elements
+		s, err := f.dict.IdeographsSimplified(i)
+		if err != nil {
+			return "", err
+		}
+		return s[0], nil
 	// case searchMode_ascii:
 	// 	definitions, err := f.dict.Definitions(i)
 	// 	return strings.Join(definitions, ", "), err

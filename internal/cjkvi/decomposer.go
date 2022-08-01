@@ -48,23 +48,35 @@ func NewIDSDecomposer(sourceFilePath string) (*IDSDecomposer, error) {
 }
 
 // ideograph could be a hanzi or kangxi
-func (i *IDSDecomposer) Decompose(ideographToDecompose string, depth int) Decomposition {
-	var d Decomposition
-	for _, decomposition := range i.decompositions {
-		if ideographToDecompose == decomposition.Ideograph {
-			d = decomposition
-		}
+func (i *IDSDecomposer) Decompose(ideographToDecompose string) (Decomposition, error) {
+	d, ok := i.decompositions[ideographToDecompose]
+	if !ok {
+		return Decomposition{}, fmt.Errorf("no decomposition found for ideograph: %s", ideographToDecompose)
 	}
-	return i.decompose(d, depth)
+
+	d, err := i.decompose(d)
+	if err != nil {
+		return Decomposition{}, err
+	}
+
+	// FIXME: support kangxi
+	// add components from IDS, ignoring the IDS characters
+	components := make([]string, 0)
+	for _, ideograph := range d.IdeographicDescriptionSequence {
+		if conversion.IsIdeographicDescriptionCharacter(ideograph) {
+			continue
+		}
+		components = append(components, string(ideograph))
+	}
+	d.Components = components
+	return d, nil
 }
 
-func (i *IDSDecomposer) decompose(d Decomposition, depth int) Decomposition {
-	if depth == 0 {
-		return d
-	}
+// recursively decompose this decomposition's decompositions
+func (i *IDSDecomposer) decompose(d Decomposition) (Decomposition, error) {
 	d.Decompositions = make([]Decomposition, 0)
 	for _, ideograph := range d.IdeographicDescriptionSequence {
-		// we skip the ids character
+		// ids characters can't be decomposed
 		if conversion.IsIdeographicDescriptionCharacter(ideograph) {
 			continue
 		}
@@ -74,16 +86,18 @@ func (i *IDSDecomposer) decompose(d Decomposition, depth int) Decomposition {
 		if ideograph == ' ' {
 			continue
 		}
-		if ideograph == '鼻' {
-			continue
-		}
+
+		// ideographs that can't be deomposed further (kangxi), contain only
+		// themselves as a the IDS, so here we also end the recursion
 		if string(ideograph) == d.Ideograph {
 			continue
 		}
-		d.Decompositions = append(
-			d.Decompositions,
-			i.Decompose(string(ideograph), depth-1),
-		)
+
+		decomposition, err := i.Decompose(string(ideograph))
+		if err != nil {
+			return Decomposition{}, err
+		}
+		d.Decompositions = append(d.Decompositions, decomposition)
 	}
-	return d
+	return d, nil
 }

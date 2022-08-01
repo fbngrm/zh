@@ -10,7 +10,7 @@ type entry struct {
 	Traditional string
 	Simplified  string
 	Readings    []string
-	Definition  []string
+	Definitions []string
 }
 
 type parsedEntries map[string]entry
@@ -33,13 +33,11 @@ func parse(cedictSrcPath string) (parsedEntries, error) {
 		ideographs := strings.Fields(parts[0])
 		readingsAndDef := strings.Split(parts[1], "]")
 		readings := strings.Fields(readingsAndDef[0])
-		definition := strings.Split(
+		definitions := strings.Split(
 			strings.Trim(
 				strings.TrimSpace(readingsAndDef[1]),
-				"/",
-			),
-			"/",
-		)
+				"/"),
+			"/")
 		traditional := ideographs[0]
 		simplified := ""
 		if len(ideographs) > 1 {
@@ -49,7 +47,7 @@ func parse(cedictSrcPath string) (parsedEntries, error) {
 			Traditional: traditional,
 			Simplified:  simplified,
 			Readings:    readings,
-			Definition:  definition,
+			Definitions: definitions,
 		}
 	}
 	return dict, scanner.Err()

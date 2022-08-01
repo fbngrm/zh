@@ -13,7 +13,6 @@ import (
 	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
-	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
 )
@@ -133,11 +132,11 @@ func decompose(query string, d *hanzi.Decomposer) {
 	var errs []error
 	var err error
 	// note: english search is broken since fuzzy scoring is not sufficient to detect best match
-	if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
-		h, errs, err = d.DecomposeFromEnglish(query, results, depth, addSentences)
-	} else { // query is chinese
-		h, errs, err = d.Decompose(query, results, depth, addSentences)
-	}
+	// if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
+	// 	h, errs, err = d.DecomposeFromEnglish(query, results, depth, addSentences)
+	// } else { // query is chinese
+	h, errs, err = d.Decompose(query, results)
+	// }
 	if err != nil {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)

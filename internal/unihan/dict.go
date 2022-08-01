@@ -39,8 +39,8 @@ func NewDict(src string) (Dict, error) {
 			Mapping:               codepoint,
 			Decimal:               int32(r),
 			Ideograph:             entry[CJKVIdeograph],
-			IdeographsSimplified:  entry[CJKVIdeograph],
-			IdeographsTraditional: entry[CJKVIdeograph],
+			IdeographsSimplified:  []string{entry[CJKVIdeograph]},
+			IdeographsTraditional: []string{entry[CJKVIdeograph]},
 			Definitions:           []string{entry[KDefinition]},
 			Readings:              []string{entry[KMandarin], entry[KCantonese]},
 		}
@@ -85,6 +85,6 @@ func (d Dict) Ideograph(i int) (string, error) {
 	return d[i].Ideograph, nil
 }
 
-func (d Dict) IdeographsSimplified(i int) (string, error) {
-	return "", errors.New("IdeographsSimplified is not supported for unihan dict")
+func (d Dict) IdeographsSimplified(i int) ([]string, error) {
+	return []string{}, errors.New("IdeographsSimplified is not supported for unihan dict")
 }
