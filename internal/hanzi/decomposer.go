@@ -51,7 +51,6 @@ func (d *Decomposer) BuildWordDecomposition(query string, numResults int) (*Hanz
 	if err != nil {
 		return nil, nil, err
 	}
-	// FIXME: return several results
 	dictEntry, err := d.dict.Entry(matches[0].Index)
 	if err != nil {
 		return nil, nil, err
