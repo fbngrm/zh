@@ -11,13 +11,10 @@ import (
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/kangxi"
-	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
 )
-
-// FIXME:母亲
 
 const idsSrc = "./lib/cjkvi/ids.txt"
 const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
@@ -75,6 +72,11 @@ func main() {
 			fmt.Printf("could not init cedict: %v\n", err)
 			os.Exit(1)
 		}
+		// for _, h := range dict.(cedict.Dict) {
+		// 	if h.Ideograph == "母" {
+		// 		spew.Dump(h)
+		// 	}
+		// }
 	}
 
 	// decompose hanzi or words (recursively) by their "ideographic description sequence (IDS)" from CHISE IDS Database.
@@ -87,21 +89,20 @@ func main() {
 
 	// example sentences are chosed from the tatoeba ch/en corpus.
 	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
-	var sentenceDict sentences.Dict
-	if addSentences > 0 {
-		var err error
-		sentenceDict, err = sentences.NewDict("tatoeba", sentenceSrc)
-		if err != nil {
-			fmt.Printf("could not create sentence dict: %v\n", err)
-			os.Exit(1)
-		}
-	}
+	// var sentenceDict sentences.Dict
+	// if addSentences > 0 {
+	// 	var err error
+	// 	sentenceDict, err = sentences.NewDict("tatoeba", sentenceSrc)
+	// 	if err != nil {
+	// 		fmt.Printf("could not create sentence dict: %v\n", err)
+	// 		os.Exit(1)
+	// 	}
+	// }
 
 	// recursively decompose words or single hanzi
 	d := hanzi.NewDecomposer(
 		dict,
 		kangxi.NewDict(),
-		sentenceDict,
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
 	)
