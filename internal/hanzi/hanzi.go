@@ -10,8 +10,8 @@ import (
 )
 
 type Hanzi struct {
-	IsKangxi                 bool                `yaml:"kangxi" json:"kangxi" structs:"kangxi"`
 	Ideograph                string              `yaml:"ideograph,omitempty" json:"ideograph,omitempty" structs:"ideograph"`
+	IsKangxi                 bool                `yaml:"is_kangxi,omitempty" json:"is_kangxi,omitempty" structs:"is_kangxi`
 	Source                   string              `yaml:"source,omitempty" json:"source,omitempty" structs:"source"`
 	Mapping                  string              `yaml:"mapping,omitempty" json:"mapping,omitempty" structs:"mapping"`
 	IDS                      string              `yaml:"ids,omitempty" json:"ids,omitempty" structs:"ids"`

@@ -158,7 +158,7 @@ func (d *Decomposer) BuildHanzi(query string, numResults int) (*Hanzi, error) {
 	}
 
 	// decompose the hanzi's components
-	componentsDecomposition, err := d.buildComponentsDecompositions(base, numResults)
+	componentsDecomposition, err := d.buildComponentsDecompositions(query, numResults)
 	if err != nil {
 		return nil, fmt.Errorf("could not build decompositions [%s]: %w", query, err)
 	}
@@ -188,10 +188,10 @@ type componentsDecompositionResult struct {
 	decomposedComponents []*Hanzi
 }
 
-func (d *Decomposer) buildComponentsDecompositions(base *Hanzi, numResults int) (componentsDecompositionResult, error) {
-	decomposition, err := d.idsDecomposer.Decompose(base.Ideograph)
+func (d *Decomposer) buildComponentsDecompositions(query string, numResults int) (componentsDecompositionResult, error) {
+	decomposition, err := d.idsDecomposer.Decompose(query)
 	if err != nil {
-		return componentsDecompositionResult{}, fmt.Errorf("could not decompose hanzi [%s]: %w", base.Ideograph, err)
+		return componentsDecompositionResult{}, fmt.Errorf("could not decompose hanzi [%s]: %w", query, err)
 	}
 	// recursively build decompositions for all components
 	var decomposedComponents []*Hanzi
@@ -325,9 +325,6 @@ func (d *Decomposer) find(query string, numResults int) (finder.Matches, error) 
 		return nil, fmt.Errorf("could not find query [%s]: %v", query, err)
 	}
 	numMatches := matches.Len()
-	if numMatches < 1 {
-		return nil, fmt.Errorf("no translation found %s", query)
-	}
 	if numMatches < numResults {
 		numResults = numMatches
 	}
