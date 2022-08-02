@@ -1,7 +1,9 @@
 package hanzi
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/fgrimme/zh/internal/cjkvi"
@@ -33,6 +35,33 @@ func NewDecomposer(
 		idsDecomposer: d,
 		offset:        20,
 	}
+}
+
+func (d *Decomposer) DecomposeFromFile(path string, numResults int) ([]*Hanzi, []error, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, nil, fmt.Errorf("could not open file: %v\n", err)
+	}
+	scanner := bufio.NewScanner(file)
+	// optionally, resize scanner's capacity for lines over 64K
+	var results []*Hanzi
+	var errs []error
+	for scanner.Scan() {
+		h, errs, err := d.Decompose(scanner.Text(), numResults)
+		if err != nil {
+			return nil, nil, err
+		}
+		results = append(results, h)
+		errs = append(errs, errs...)
+
+	}
+	if err := scanner.Err(); err != nil {
+		return nil, nil, fmt.Errorf("scanner error: %v\n", err)
+	}
+	if err := file.Close(); err != nil {
+		return nil, nil, fmt.Errorf("could not close input file: %v\n", err)
+	}
+	return results, errs, nil
 }
 
 func (d *Decomposer) Decompose(query string, numResults int) (*Hanzi, []error, error) {
