@@ -11,7 +11,9 @@ import (
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/kangxi"
+	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
+	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
 )
@@ -30,7 +32,7 @@ var results int
 var depth int
 var unihanSearch bool
 var hskSearch bool
-var addSentences int
+var numExampleSentences int
 var fields string
 
 func main() {
@@ -41,7 +43,7 @@ func main() {
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.BoolVar(&hskSearch, "h", false, "force search in hsk data")
-	flag.IntVar(&addSentences, "s", 0, "add example sentences")
+	flag.IntVar(&numExampleSentences, "s", 0, "add example sentences")
 	flag.IntVar(&results, "r", 10, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
@@ -72,11 +74,6 @@ func main() {
 			fmt.Printf("could not init cedict: %v\n", err)
 			os.Exit(1)
 		}
-		// for _, h := range dict.(cedict.Dict) {
-		// 	if h.Ideograph == "母" {
-		// 		spew.Dump(h)
-		// 	}
-		// }
 	}
 
 	// decompose hanzi or words (recursively) by their "ideographic description sequence (IDS)" from CHISE IDS Database.
@@ -86,18 +83,6 @@ func main() {
 		fmt.Printf("could not initialize ids decompose: %v\n", err)
 		os.Exit(1)
 	}
-
-	// example sentences are chosed from the tatoeba ch/en corpus.
-	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
-	// var sentenceDict sentences.Dict
-	// if addSentences > 0 {
-	// 	var err error
-	// 	sentenceDict, err = sentences.NewDict("tatoeba", sentenceSrc)
-	// 	if err != nil {
-	// 		fmt.Printf("could not create sentence dict: %v\n", err)
-	// 		os.Exit(1)
-	// 	}
-	// }
 
 	// recursively decompose words or single hanzi
 	d := hanzi.NewDecomposer(
@@ -133,14 +118,27 @@ func decompose(query string, d *hanzi.Decomposer) {
 	var errs []error
 	var err error
 	// note: english search is broken since fuzzy scoring is not sufficient to detect best match
-	// if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
-	// 	h, errs, err = d.DecomposeFromEnglish(query, results, depth, addSentences)
-	// } else { // query is chinese
-	h, errs, err = d.Decompose(query, results)
-	// }
+	if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
+		// h, errs, err = d.DecomposeFromEnglish(query, results, depth, addSentences)
+	} else { // query is chinese
+		h, errs, err = d.Decompose(query, results)
+	}
 	if err != nil {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)
+	}
+
+	// example sentences are chosen from the tatoeba ch/en corpus.
+	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
+	var sentenceDict sentences.Dict
+	if numExampleSentences > 0 {
+		var err error
+		sentenceDict, err = sentences.NewDict("tatoeba", sentenceSrc)
+		if err != nil {
+			fmt.Printf("could not create sentence dict: %v\n", err)
+			os.Exit(1)
+		}
+		h.Sentences = sentenceDict.Get(h.Ideograph, numExampleSentences, true)
 	}
 
 	// out

@@ -12,7 +12,7 @@ type Sentence struct {
 	ChineseWords   []string `yaml:"-" json:"-" structs:"-"`
 	Pinyin         string
 	English        string
-	EnglishLiteral string
+	EnglishLiteral string `yaml:"englishLiteral,omitempty" json:"englishLiteral,omitempty"`
 }
 
 type parsedSentences map[string]Sentence
@@ -37,11 +37,11 @@ func Parse(sourceName, sourcePath string) (parsedSentences, error) {
 			pinyin = parts[1]
 		}
 		english := ""
-		if len(parts) > 1 {
+		if len(parts) > 2 {
 			english = parts[2]
 		}
 		englishLiteral := ""
-		if len(parts) > 2 {
+		if len(parts) > 3 {
 			englishLiteral = parts[3]
 		}
 		dict[parts[0]] = Sentence{

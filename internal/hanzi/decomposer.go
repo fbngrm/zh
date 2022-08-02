@@ -4,11 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/sentences"
-	"github.com/fgrimme/zh/pkg/finder"
+	"github.com/fgrimme/zh/pkg/conversion"
 )
 
 type Decomposer struct {
@@ -37,17 +36,24 @@ func NewDecomposer(
 }
 
 func (d *Decomposer) Decompose(query string, numResults int) (*Hanzi, []error, error) {
+	// query is english
+	if conversion.StringType(query) == conversion.RuneType_Ascii {
+		return d.buildFromEnglishWord(query, numResults)
+	}
+	// query is chinese
+	// max length of a single hanzi is 4 so we know that query is a word if it's longer
 	isWord := len(query) > 4
 	if isWord {
-		return d.BuildWordDecomposition(query, numResults)
+		return d.buildFromChineseWord(query, numResults)
 	}
-	h, err := d.BuildHanzi(query, numResults)
-
+	h, err := d.buildFromChineseHanzi(query, numResults)
 	return h, []error{}, err
 }
 
-func (d *Decomposer) BuildWordDecomposition(query string, numResults int) (*Hanzi, []error, error) {
-	matches, err := d.find(query, numResults)
+func (d *Decomposer) buildFromChineseWord(query string, numResults int) (*Hanzi, []error, error) {
+	// we add an offset here to catch more matches with an equal
+	// scoring to achieve getting a consistent set of sorted matches
+	matches, err := d.searcher.FindSorted(query, numResults+d.offset)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -60,7 +66,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, numResults int) (*Hanz
 	decompositions := make([]*Hanzi, 0)
 	components := make([]string, 0)
 	for _, q := range query {
-		h, err := d.BuildHanzi(
+		h, err := d.buildFromChineseHanzi(
 			string(q),
 			numResults,
 		)
@@ -76,7 +82,7 @@ func (d *Decomposer) BuildWordDecomposition(query string, numResults int) (*Hanz
 	return dictEntry, errs, nil
 }
 
-func (d *Decomposer) BuildHanzi(query string, numResults int) (*Hanzi, error) {
+func (d *Decomposer) buildFromChineseHanzi(query string, numResults int) (*Hanzi, error) {
 	// if the query is a kangxi, we don't need to decompose
 	if _, isKangxi := d.kangxiDict[query]; isKangxi {
 		return d.buildKangxi(query, numResults)
@@ -87,8 +93,6 @@ func (d *Decomposer) BuildHanzi(query string, numResults int) (*Hanzi, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not build hanzi [%s]: %w", query, err)
 	}
-
-	spew.Dump(base)
 
 	// decompose the hanzi's components
 	componentsDecomposition, err := d.buildComponentsDecompositions(query, numResults)
@@ -129,7 +133,7 @@ func (d *Decomposer) buildComponentsDecompositions(query string, numResults int)
 	// recursively build decompositions for all components
 	var decomposedComponents []*Hanzi
 	for _, decomp := range decomposition.Decompositions {
-		h, err := d.BuildHanzi(decomp.Ideograph, numResults)
+		h, err := d.buildFromChineseHanzi(decomp.Ideograph, numResults)
 		if err != nil {
 			return componentsDecompositionResult{}, err
 		}
@@ -142,7 +146,9 @@ func (d *Decomposer) buildComponentsDecompositions(query string, numResults int)
 }
 
 func (d *Decomposer) buildHanziBaseFromSearchResults(query string, numResults int) (*Hanzi, error) {
-	matches, err := d.find(query, numResults)
+	// we add an offset here to catch more matches with an equal
+	// scoring to achieve getting a consistent set of sorted matches
+	matches, err := d.searcher.FindSorted(query, numResults+d.offset)
 	if err != nil {
 		return nil, err
 	}
@@ -205,53 +211,44 @@ func (d *Decomposer) buildKangxi(query string, numResults int) (*Hanzi, error) {
 }
 
 // FIXME: return several results
-// func (d *Decomposer) DecomposeFromEnglish(query string, numResults, depth, addSentences int) (*Hanzi, []error, error) {
-// 	// we add an offset here to catch more matches with an equal
-// 	// scoring to achieve getting a consitent set of sorted matches
-// 	limit := numResults + 150
-// 	matches, err := d.searcher.FindSorted(query, limit)
-// 	if err != nil {
-// 		return nil, nil, err
-// 	}
-// 	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
-// 	filteredEntries := make([]*Hanzi, 0)
-// 	for _, m := range matches {
-// 		index := m.Index
-// 		if d.dict.Len() <= index {
-// 			return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
-// 		}
-// 		dictEntry, err := d.dict.Entry(index)
-// 		if err != nil {
-// 			return nil, nil, err
-// 		}
-// 		var readingsContainQuery bool
-// 		for _, d := range dictEntry.Definitions {
-// 			// if d == query {
-// 			// 	readingsContainQuery = true
-// 			// 	break
-// 			// }
-// 			if strings.Contains(d, query) {
-// 				readingsContainQuery = true
-// 				break
-// 			}
-// 		}
-// 		if !readingsContainQuery {
-// 			continue
-// 		}
-// 		filteredEntries = append(filteredEntries, dictEntry)
-// 	}
-// 	if len(filteredEntries) == 0 {
-// 		return nil, nil, nil
-// 	}
-// 	// use ideograph here to support unihan and cedict
-// 	// FIXME: fix the above somehow
-// 	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults, depth, addSentences)
-// }
-
-// TODO: move to finder
-func (d *Decomposer) find(query string, numResults int) (finder.Matches, error) {
+func (d *Decomposer) buildFromEnglishWord(query string, numResults int) (*Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consistent set of sorted matches
-	limit := numResults + d.offset
-	return d.searcher.FindSorted(query, limit)
+	matches, err := d.searcher.FindSorted(query, numResults+d.offset)
+	if err != nil {
+		return nil, nil, err
+	}
+	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
+	filteredEntries := make([]*Hanzi, 0)
+	for _, m := range matches {
+		index := m.Index
+		if d.dict.Len() <= index {
+			return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
+		}
+		dictEntry, err := d.dict.Entry(index)
+		if err != nil {
+			return nil, nil, err
+		}
+		var readingsContainQuery bool
+		for _, d := range dictEntry.Definitions {
+			// if d == query {
+			// 	readingsContainQuery = true
+			// 	break
+			// }
+			if strings.Contains(d, query) {
+				readingsContainQuery = true
+				break
+			}
+		}
+		if !readingsContainQuery {
+			continue
+		}
+		filteredEntries = append(filteredEntries, dictEntry)
+	}
+	if len(filteredEntries) == 0 {
+		return nil, nil, nil
+	}
+	// use ideograph here to support unihan and cedict
+	// FIXME: fix the above somehow
+	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults)
 }
