@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/sentences"
@@ -22,7 +23,6 @@ type Decomposer struct {
 func NewDecomposer(
 	dict Dict,
 	kangxiDict kangxi.Dict,
-	sentenceDict sentences.Dict,
 	s Searcher,
 	d IDSDecomposer,
 ) *Decomposer {
@@ -30,7 +30,6 @@ func NewDecomposer(
 	return &Decomposer{
 		dict:          dict,
 		kangxiDict:    kangxiDict,
-		sentenceDict:  sentenceDict,
 		searcher:      s,
 		idsDecomposer: d,
 		offset:        20,
@@ -47,101 +46,34 @@ func (d *Decomposer) Decompose(query string, numResults int) (*Hanzi, []error, e
 	return h, []error{}, err
 }
 
-func (d *Decomposer) BuildWordDecomposition(query string, results int) (*Hanzi, []error, error) {
-	// we add an offset here to catch more matches with an equal
-	// scoring to achieve getting a consitent set of sorted matches
-	limit := results + d.offset
-	matches, err := d.searcher.FindSorted(query, limit)
+func (d *Decomposer) BuildWordDecomposition(query string, numResults int) (*Hanzi, []error, error) {
+	matches, err := d.find(query, numResults)
 	if err != nil {
 		return nil, nil, err
 	}
-	if len(matches) < 1 {
-		return nil, nil, fmt.Errorf("no translation found %s", query)
-	}
 	// FIXME: return several results
-	index := matches[0].Index
-	if d.dict.Len() <= index {
-		return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
-	}
-	dictEntry, err := d.dict.Entry(index)
+	dictEntry, err := d.dict.Entry(matches[0].Index)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	errs := make([]error, 0)
-	var readingsIndex int
 	decompositions := make([]*Hanzi, 0)
+	components := make([]string, 0)
 	for _, q := range query {
 		h, err := d.BuildHanzi(
 			string(q),
-			results,
+			numResults,
 		)
 		if err != nil {
 			errs = append(errs, err)
+			continue
 		}
-
-		// a hanzi has several readings and definitions so we need to find the one
-		// that is used the current search query (dict entry).
-		// FIXME: map reading for sound tone 4 and tone 5
-		if len(dictEntry.Readings) < readingsIndex {
-			return nil, nil, fmt.Errorf("missing reading for hanzi %s", string(q))
-		}
-
-		// FIXME: if there is a mismatch between number of readings and definitions, we need to address it here.
-		if len(h.Readings) != len(h.Definitions) {
-			errs = append(errs, fmt.Errorf(
-				"warning: missing definitions(%d) or readings(%d) for %s",
-				len(h.Definitions),
-				len(h.Readings),
-				string(q),
-			))
-		}
-		entryReadings := make([]string, 0)
-		otherReadings := make([]string, 0)
-		entryDefinitions := make([]string, 0)
-		otherDefinitions := make([]string, 0)
-		for i, hanziReading := range h.Readings {
-			if strings.ToLower(hanziReading) == strings.ToLower(dictEntry.Readings[readingsIndex]) {
-				entryReadings = append(entryReadings, hanziReading)
-				if len(h.Definitions) > i {
-					entryDefinitions = append(entryDefinitions, h.Definitions[i])
-				}
-				continue
-			}
-			otherReadings = append(otherReadings, hanziReading)
-			if len(h.Definitions) > i {
-				otherDefinitions = append(otherDefinitions, h.Definitions[i])
-			}
-		}
-		h.Readings = entryReadings
-		h.OtherReadings = otherReadings
-		h.Definitions = entryDefinitions
-		h.OtherDefinitions = otherDefinitions
-
-		// if can't match a reading but found other readings, we use the other readings as readings.
-		if len(entryReadings) == 0 && len(otherReadings) != 0 {
-			h.Readings = otherReadings
-			h.OtherReadings = []string{}
-		}
-		if len(h.Definitions) == 0 {
-			h.Definitions = otherDefinitions
-			h.OtherDefinitions = []string{}
-		}
-
-		if len(entryReadings) == 0 && len(otherReadings) == 0 {
-			errs = append(errs, fmt.Errorf("no reading match found for hanzi decomposition %s", string(q)))
-		}
-		if len(entryDefinitions) == 0 && len(otherDefinitions) == 0 {
-			errs = append(errs, fmt.Errorf("no definition match found for hanzi decomposition %s", string(q)))
-		}
-
-		decompositions = append(
-			decompositions,
-			h,
-		)
-		readingsIndex++
+		decompositions = append(decompositions, h)
+		components = append(components, h.Ideograph)
 	}
 	dictEntry.ComponentsDecompositions = decompositions
+	dictEntry.Components = components
 	return dictEntry, errs, nil
 }
 
@@ -156,6 +88,8 @@ func (d *Decomposer) BuildHanzi(query string, numResults int) (*Hanzi, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not build hanzi [%s]: %w", query, err)
 	}
+
+	spew.Dump(base)
 
 	// decompose the hanzi's components
 	componentsDecomposition, err := d.buildComponentsDecompositions(query, numResults)
@@ -320,13 +254,5 @@ func (d *Decomposer) find(query string, numResults int) (finder.Matches, error) 
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consistent set of sorted matches
 	limit := numResults + d.offset
-	matches, err := d.searcher.FindSorted(query, limit)
-	if err != nil {
-		return nil, fmt.Errorf("could not find query [%s]: %v", query, err)
-	}
-	numMatches := matches.Len()
-	if numMatches < numResults {
-		numResults = numMatches
-	}
-	return matches[:numResults], nil
+	return d.searcher.FindSorted(query, limit)
 }
