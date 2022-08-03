@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/hanzi"
@@ -116,30 +115,32 @@ func decompose(query string, d *hanzi.Decomposer) {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)
 	}
+	export(result)
+}
 
-	spew.Dump(result)
+func export(result hanzi.DecompositionResult) {
+	// out
+	formatter := &hanzi.Formatter{}
+	if fields != "" {
+		formatter = formatter.WithFields(fields)
+	}
+	if format != "" {
+		formatter = formatter.WithFormat(format)
+	}
+	if templatePath != "" {
+		formatter = formatter.WithTemplate(templatePath)
+	}
+	formatted, err := formatter.Format(result.Hanzis, fields)
+	if err != nil {
+		fmt.Printf("could not format hanzi: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println(formatted)
 
-	// // out
-	// formatter := hanzi.NewFormatter(
-	// 	format,
-	// 	fields,
-	// )
-	// var formatted string
-	// if templatePath != "" {
-	// 	formatted, err = formatter.FormatTemplate(hs, fields, templatePath)
-	// } else {
-	// 	formatted, err = formatter.Format(hs, fields)
-	// }
-	// if err != nil {
-	// 	fmt.Printf("could not format hanzi: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// fmt.Println(formatted)
-
-	// // errs
-	// if len(errs) != 0 {
-	// 	for _, e := range errs {
-	// 		os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
-	// 	}
-	// }
+	// errs
+	if len(result.Errs) != 0 {
+		for _, e := range result.Errs {
+			os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
+		}
+	}
 }

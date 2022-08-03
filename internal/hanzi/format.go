@@ -13,76 +13,103 @@ import (
 type Format int
 
 const (
-	Format_JSON = iota
+	Format_TXT = iota
+	Format_JSON
 	Format_YAML
-	Format_text
 )
 
 type Formatter struct {
-	format Format
+	format   Format
+	fields   []string
+	template string
 }
 
-func NewFormatter(fmt, fields string) *Formatter {
-	return &Formatter{
-		format: format(fmt),
+func (f *Formatter) WithFormat(format string) *Formatter {
+	if format == "json" {
+		f.format = Format_JSON
+	} else if format == "yaml" {
+		f.format = Format_YAML
+	} else {
+		f.format = Format_TXT
 	}
+	return f
 }
 
-func (f *Formatter) FormatTemplate(h *Hanzi, fields, tmplPath string) (string, error) {
-	i, err := f.filter(h, fields)
-	if err != nil {
-		return "", fmt.Errorf("could not filter fields: %w", err)
-	}
-
-	tplFuncMap := make(template.FuncMap)
-	tplFuncMap["definitions"] = func(definitions []string) string {
-		defs := ""
-		if len(definitions) == 0 {
-			return ""
-		}
-		if len(definitions) == 1 {
-			definitions = strings.Split(definitions[0], ",")
-		}
-		for i, s := range definitions {
-			defs += s
-			if i == 4 {
-				break
-			}
-			if i == len(definitions)-1 {
-				break
-			}
-			defs += ", "
-			defs += "\n"
-		}
-		return defs
-	}
-	tmpl, err := template.New("anki.tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
-	if err != nil {
-		return "", err
-	}
-	buf := new(bytes.Buffer)
-	err = tmpl.Execute(buf, []*Hanzi{i.(*Hanzi)})
-	if err != nil {
-		return "", err
-	}
-	return buf.String(), nil
+func (f *Formatter) WithFields(fields string) *Formatter {
+	f.fields = strings.Split(fields, ",")
+	return f
 }
 
-func (f *Formatter) Format(h *Hanzi, fields string) (string, error) {
+func (f *Formatter) WithTemplate(tmpl string) *Formatter {
+	f.template = tmpl
+	return f
+}
+
+func (f *Formatter) Format(h []*Hanzi, fields string) (string, error) {
 	if h == nil {
 		return "no results :(", nil
 	}
-	i, err := f.filter(h, fields)
-	if err != nil {
-		return "", fmt.Errorf("could not filter fields: %w", err)
+
+	if f.template != "" {
+		return f.FormatTemplate(h)
 	}
+
+	var i interface{}
+	i = h
+	if len(f.fields) > 0 {
+		var err error
+		i, err = f.filter(h)
+		if err != nil {
+			return "", fmt.Errorf("could not filter fields: %w", err)
+		}
+	}
+
 	if f.format == Format_JSON {
 		return formatJSON(i)
 	}
 	if f.format == Format_YAML {
 		return formatYAML(i)
 	}
-	return formatText(i)
+	return formatText(h)
+}
+
+func (f *Formatter) FormatTemplate(h []*Hanzi) (string, error) {
+	// tplFuncMap := make(template.FuncMap)
+	// tplFuncMap["definitions"] = func(definitions []string) string {
+	// 	defs := ""
+	// 	if len(definitions) == 0 {
+	// 		return ""
+	// 	}
+	// 	if len(definitions) == 1 {
+	// 		definitions = strings.Split(definitions[0], ",")
+	// 	}
+	// 	for i, s := range definitions {
+	// 		defs += s
+	// 		if i == 4 {
+	// 			break
+	// 		}
+	// 		if i == len(definitions)-1 {
+	// 			break
+	// 		}
+	// 		defs += ", "
+	// 		defs += "\n"
+	// 	}
+	// 	return defs
+	// }
+	// tmpl, err := template.New("anki.tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
+
+	// tmplName needs to be name of argument to ParseFiles
+	tmplName := "anki.tmpl"
+	tmpl, err := template.New(tmplName).ParseFiles(f.template)
+	if err != nil {
+		return "", err
+	}
+	buf := new(bytes.Buffer)
+	err = tmpl.Execute(buf, h)
+	if err != nil {
+		return "", err
+	}
+	return buf.String(), nil
 }
 
 func formatJSON(data interface{}) (string, error) {
@@ -101,42 +128,36 @@ func formatYAML(data interface{}) (string, error) {
 	return string(b), nil
 }
 
-func formatText(data interface{}) (string, error) {
+func formatText(hs []*Hanzi) (string, error) {
 	var result string
-	d, ok := data.(*Hanzi)
-	if !ok {
-		return "", fmt.Errorf("could not format; expected type %T but got %T", &Hanzi{}, data)
+	for _, h := range hs {
+		if h.Ideograph != "" {
+			result += h.Ideograph
+		}
+		result += "\t"
+		result += strings.Join(h.Readings, ", ")
+		result += "\t"
+		result += strings.Join(h.Definitions, ", ")
+		result += "\n"
 	}
-	if d.Ideograph != "" {
-		result += d.Ideograph
-	}
-	result += "\t"
-	result += strings.Join(d.Readings, ", ")
-	result += "\t"
-	result += strings.Join(d.Definitions, ", ")
 	return result, nil
 }
 
-func format(fmt string) Format {
-	if fmt == "json" {
-		return Format_JSON
-	} else if fmt == "yaml" {
-		return Format_YAML
-	}
-	return Format_text
-}
+func (f *Formatter) filter(hs []*Hanzi) ([]map[string]interface{}, error) {
+	var filtered []map[string]interface{}
+	for _, h := range hs {
+		var filterFields []string
+		for i, field := range filterFields {
+			filterFields[i] = strings.TrimSpace(field)
+		}
 
-func (f *Formatter) filter(h *Hanzi, fields string) (interface{}, error) {
-	var filterFields []string
-	if len(fields) > 0 {
-		filterFields = strings.Split(fields, ",")
+		if len(f.fields) != 0 {
+			fields, err := h.GetFields(filterFields)
+			if err != nil {
+				return nil, err
+			}
+			filtered = append(filtered, fields)
+		}
 	}
-	for i, field := range filterFields {
-		filterFields[i] = strings.TrimSpace(field)
-	}
-
-	if len(fields) != 0 {
-		return h.GetFields(filterFields)
-	}
-	return h, nil
+	return filtered, nil
 }

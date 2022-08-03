@@ -3,33 +3,7 @@
 model: zh
 deck: Default
 tags: Gateway to Chinese
-# Note
 
-## Hanzi
-{{.Ideograph}}
-
-## Pinyin
-{{range .Readings}}{{.}}; {{end}}
-{{if .OtherReadings}}
-## Other Readings
-{{range .OtherReadings}}{{.}}; {{end}}
-{{end}}
-
-## English
-{{range .Definitions}}{{.}}; {{end}}
-{{if .OtherDefinitions}}
-## Other Definitions
-{{range .OtherDefinitions}}{{.}}; {{end}}
-{{end}}
-
-## Audio
-
-## Components
-{{.Ideograph}}
-{{end}}
-model: zh
-deck: Default
-tags: Gateway to Chinese
 # Note
 
 ## Hanzi
@@ -45,10 +19,27 @@ tags: Gateway to Chinese
 
 ## Components
 {{.Ideograph}}
+
 {{end}}
-model: zh
-deck: Default
-tags: Gateway to Chinese
+
+# Note
+
+## Hanzi
+{{.Ideograph}}
+
+## Pinyin
+{{range .Readings}}{{.}}; {{end}}
+
+## English
+{{range .Definitions}}{{.}}; {{end}}
+
+## Audio
+
+## Components
+{{.Ideograph}}
+
+{{end}} // end 
+
 # Note
 
 ## Hanzi

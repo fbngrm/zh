@@ -2,7 +2,7 @@
 model: Chinese
 deck: Default
 tags: HSK1
-{{range .Decompositions}}
+{{range .ComponentsDecompositions}}
 # Note
 
 ## Hanzi
@@ -10,17 +10,9 @@ tags: HSK1
 
 ## Readings
 {{range .Readings}}{{.}}; {{end}}
-{{if .OtherReadings}}
-## Other Readings
-{{range .OtherReadings}}{{.}}; {{end}}
-{{end}}
 
 ## Definitions
 {{range .Definitions}}{{.}}; {{end}}
-{{if .OtherDefinitions}}
-## Other Definitions
-{{range .OtherDefinitions}}{{.}}; {{end}}
-{{end}}
 
 ## Audio
 {{end}}

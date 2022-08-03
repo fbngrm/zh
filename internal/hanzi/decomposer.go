@@ -38,8 +38,8 @@ func NewDecomposer(
 }
 
 type DecompositionResult struct {
-	hs   []*Hanzi
-	errs []error
+	Hanzis []*Hanzi
+	Errs   []error
 }
 
 func (d *Decomposer) DecomposeFromFile(path string, numResults, numSentences int) (DecompositionResult, error) {
@@ -55,8 +55,8 @@ func (d *Decomposer) DecomposeFromFile(path string, numResults, numSentences int
 		if err != nil {
 			return DecompositionResult{}, err
 		}
-		results.hs = append(results.hs, result.hs...)
-		results.errs = append(results.errs, result.errs...)
+		results.Hanzis = append(results.Hanzis, result.Hanzis...)
+		results.Errs = append(results.Errs, result.Errs...)
 	}
 	if err := scanner.Err(); err != nil {
 		return DecompositionResult{}, fmt.Errorf("scanner error: %v\n", err)
@@ -80,13 +80,13 @@ func (d *Decomposer) Decompose(query string, numResults, numSentences int) (Deco
 		// max length of a single hanzi is 4 so we know that query is a word if it's longer
 		h, errs, err = d.buildFromChineseWord(query, numResults, numSentences)
 		result = DecompositionResult{
-			hs:   []*Hanzi{h},
-			errs: errs,
+			Hanzis: []*Hanzi{h},
+			Errs:   errs,
 		}
 	} else {
 		h, err = d.buildFromChineseHanzi(query, numResults, numSentences)
 		result = DecompositionResult{
-			hs: []*Hanzi{h},
+			Hanzis: []*Hanzi{h},
 		}
 	}
 	if err != nil {
@@ -97,7 +97,7 @@ func (d *Decomposer) Decompose(query string, numResults, numSentences int) (Deco
 		return result, nil
 	}
 
-	result.hs = d.AddSentences(result.hs, numSentences)
+	result.Hanzis = d.AddSentences(result.Hanzis, numSentences)
 	return result, err
 }
 
