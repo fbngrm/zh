@@ -45,7 +45,7 @@ func (f *Formatter) WithTemplate(tmpl string) *Formatter {
 	return f
 }
 
-func (f *Formatter) Format(h []*Hanzi, fields string) (string, error) {
+func (f *Formatter) Format(h []*Hanzi) (string, error) {
 	if h == nil {
 		return "no results :(", nil
 	}
