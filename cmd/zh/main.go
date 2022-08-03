@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"os"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/hanzi"
@@ -13,7 +13,6 @@ import (
 	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
-	"github.com/fgrimme/zh/pkg/conversion"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
 )
@@ -28,7 +27,7 @@ var query string
 var templatePath string
 var format string
 var fromFile string
-var results int
+var numResults int
 var depth int
 var unihanSearch bool
 var hskSearch bool
@@ -44,7 +43,7 @@ func main() {
 	flag.BoolVar(&unihanSearch, "u", false, "force search in unihan db (single hanzi only)")
 	flag.BoolVar(&hskSearch, "h", false, "force search in hsk data")
 	flag.IntVar(&numExampleSentences, "s", 0, "add example sentences")
-	flag.IntVar(&results, "r", 10, "number of results")
+	flag.IntVar(&numResults, "r", 10, "number of results")
 	flag.IntVar(&depth, "d", 1, "decomposition depth")
 	flag.Parse()
 
@@ -84,84 +83,63 @@ func main() {
 		os.Exit(1)
 	}
 
+	// example sentences are chosen from the tatoeba ch/en corpus.
+	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
+	sentenceDict, err := sentences.NewDict("tatoeba", sentenceSrc)
+	if err != nil {
+		fmt.Printf("could not create sentence dict: %v\n", err)
+		os.Exit(1)
+	}
+
 	// recursively decompose words or single hanzi
 	d := hanzi.NewDecomposer(
 		dict,
 		kangxi.NewDict(),
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
+		sentenceDict,
 	)
 
-	if fromFile != "" {
-		file, err := os.Open(fromFile)
-		if err != nil {
-			fmt.Printf("could not open file: %v\n", err)
-			os.Exit(1)
-		}
-		scanner := bufio.NewScanner(file)
-		// optionally, resize scanner's capacity for lines over 64K
-		for scanner.Scan() {
-			decompose(scanner.Text(), d)
-		}
-		if err := scanner.Err(); err != nil {
-			fmt.Printf("scanner error: %v\n", err)
-			os.Exit(1)
-		}
-		file.Close()
-	} else {
-		decompose(query, d)
-	}
+	decompose(query, d)
 }
 
 func decompose(query string, d *hanzi.Decomposer) {
-	var h *hanzi.Hanzi
-	var errs []error
+	var result hanzi.DecompositionResult
 	var err error
-	// note: english search is broken since fuzzy scoring is not sufficient to detect best match
-	if conversion.StringType(query) == conversion.RuneType_Ascii { // query is english
-		// h, errs, err = d.DecomposeFromEnglish(query, results, depth, addSentences)
-	} else { // query is chinese
-		h, errs, err = d.Decompose(query, results)
+
+	if fromFile != "" {
+		result, err = d.DecomposeFromFile(fromFile, numResults, numExampleSentences)
+	} else {
+		result, err = d.Decompose(query, numResults, numExampleSentences)
 	}
 	if err != nil {
 		fmt.Printf("could not decompose: %v\n", err)
 		os.Exit(1)
 	}
 
-	// example sentences are chosen from the tatoeba ch/en corpus.
-	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
-	var sentenceDict sentences.Dict
-	if numExampleSentences > 0 {
-		var err error
-		sentenceDict, err = sentences.NewDict("tatoeba", sentenceSrc)
-		if err != nil {
-			fmt.Printf("could not create sentence dict: %v\n", err)
-			os.Exit(1)
-		}
-		h.Sentences = sentenceDict.Get(h.Ideograph, numExampleSentences, true)
-	}
+	spew.Dump(result)
 
-	// out
-	formatter := hanzi.NewFormatter(
-		format,
-		fields,
-	)
-	var formatted string
-	if templatePath != "" {
-		formatted, err = formatter.FormatTemplate(h, fields, templatePath)
-	} else {
-		formatted, err = formatter.Format(h, fields)
-	}
-	if err != nil {
-		fmt.Printf("could not format hanzi: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println(formatted)
+	// // out
+	// formatter := hanzi.NewFormatter(
+	// 	format,
+	// 	fields,
+	// )
+	// var formatted string
+	// if templatePath != "" {
+	// 	formatted, err = formatter.FormatTemplate(hs, fields, templatePath)
+	// } else {
+	// 	formatted, err = formatter.Format(hs, fields)
+	// }
+	// if err != nil {
+	// 	fmt.Printf("could not format hanzi: %v\n", err)
+	// 	os.Exit(1)
+	// }
+	// fmt.Println(formatted)
 
-	// errs
-	if len(errs) != 0 {
-		for _, e := range errs {
-			os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
-		}
-	}
+	// // errs
+	// if len(errs) != 0 {
+	// 	for _, e := range errs {
+	// 		os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
+	// 	}
+	// }
 }

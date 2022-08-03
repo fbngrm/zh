@@ -2,6 +2,7 @@ package hanzi
 
 import (
 	"github.com/fgrimme/zh/internal/cjkvi"
+	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/pkg/finder"
 )
 
@@ -21,4 +22,8 @@ type Dict interface {
 	Mapping(i int) (string, error)
 	Ideograph(i int) (string, error)
 	IdeographsSimplified(i int) ([]string, error)
+}
+
+type SentenceDict interface {
+	Get(ideograph string, numExampleSentences int, sort bool) sentences.Sentences
 }

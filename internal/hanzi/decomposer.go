@@ -8,14 +8,13 @@ import (
 
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/kangxi"
-	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/pkg/conversion"
 )
 
 type Decomposer struct {
 	dict          Dict
 	kangxiDict    kangxi.Dict
-	sentenceDict  sentences.Dict
+	sentenceDict  SentenceDict
 	searcher      Searcher
 	idsDecomposer IDSDecomposer
 	offset        int
@@ -26,60 +25,83 @@ func NewDecomposer(
 	kangxiDict kangxi.Dict,
 	s Searcher,
 	d IDSDecomposer,
+	sd SentenceDict,
 ) *Decomposer {
-
 	return &Decomposer{
 		dict:          dict,
 		kangxiDict:    kangxiDict,
 		searcher:      s,
 		idsDecomposer: d,
+		sentenceDict:  sd,
 		offset:        20,
 	}
 }
 
-func (d *Decomposer) DecomposeFromFile(path string, numResults int) ([]*Hanzi, []error, error) {
+type DecompositionResult struct {
+	hs   []*Hanzi
+	errs []error
+}
+
+func (d *Decomposer) DecomposeFromFile(path string, numResults, numSentences int) (DecompositionResult, error) {
 	file, err := os.Open(path)
 	if err != nil {
-		return nil, nil, fmt.Errorf("could not open file: %v\n", err)
+		return DecompositionResult{}, fmt.Errorf("could not open file: %v\n", err)
 	}
 	scanner := bufio.NewScanner(file)
 	// optionally, resize scanner's capacity for lines over 64K
-	var results []*Hanzi
-	var errs []error
+	var results DecompositionResult
 	for scanner.Scan() {
-		h, errs, err := d.Decompose(scanner.Text(), numResults)
+		result, err := d.Decompose(scanner.Text(), numResults, numSentences)
 		if err != nil {
-			return nil, nil, err
+			return DecompositionResult{}, err
 		}
-		results = append(results, h)
-		errs = append(errs, errs...)
-
+		results.hs = append(results.hs, result.hs...)
+		results.errs = append(results.errs, result.errs...)
 	}
 	if err := scanner.Err(); err != nil {
-		return nil, nil, fmt.Errorf("scanner error: %v\n", err)
+		return DecompositionResult{}, fmt.Errorf("scanner error: %v\n", err)
 	}
 	if err := file.Close(); err != nil {
-		return nil, nil, fmt.Errorf("could not close input file: %v\n", err)
+		return DecompositionResult{}, fmt.Errorf("could not close input file: %v\n", err)
 	}
-	return results, errs, nil
+	return results, nil
 }
 
-func (d *Decomposer) Decompose(query string, numResults int) (*Hanzi, []error, error) {
+func (d *Decomposer) Decompose(query string, numResults, numSentences int) (DecompositionResult, error) {
+	var result DecompositionResult
+	var h *Hanzi
+	var err error
+	var errs []error
+
 	// query is english
 	if conversion.StringType(query) == conversion.RuneType_Ascii {
-		return d.buildFromEnglishWord(query, numResults)
+		result, err = d.buildFromEnglishWord(query, numResults, numSentences)
+	} else if len(query) > 4 { // from here we know that query is chinese
+		// max length of a single hanzi is 4 so we know that query is a word if it's longer
+		h, errs, err = d.buildFromChineseWord(query, numResults, numSentences)
+		result = DecompositionResult{
+			hs:   []*Hanzi{h},
+			errs: errs,
+		}
+	} else {
+		h, err = d.buildFromChineseHanzi(query, numResults, numSentences)
+		result = DecompositionResult{
+			hs: []*Hanzi{h},
+		}
 	}
-	// query is chinese
-	// max length of a single hanzi is 4 so we know that query is a word if it's longer
-	isWord := len(query) > 4
-	if isWord {
-		return d.buildFromChineseWord(query, numResults)
+	if err != nil {
+		return DecompositionResult{}, err
 	}
-	h, err := d.buildFromChineseHanzi(query, numResults)
-	return h, []error{}, err
+
+	if numSentences == 0 {
+		return result, nil
+	}
+
+	result.hs = d.AddSentences(result.hs, numSentences)
+	return result, err
 }
 
-func (d *Decomposer) buildFromChineseWord(query string, numResults int) (*Hanzi, []error, error) {
+func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences int) (*Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consistent set of sorted matches
 	matches, err := d.searcher.FindSorted(query, numResults+d.offset)
@@ -98,6 +120,7 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults int) (*Hanzi,
 		h, err := d.buildFromChineseHanzi(
 			string(q),
 			numResults,
+			numSentences,
 		)
 		if err != nil {
 			errs = append(errs, err)
@@ -111,7 +134,7 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults int) (*Hanzi,
 	return dictEntry, errs, nil
 }
 
-func (d *Decomposer) buildFromChineseHanzi(query string, numResults int) (*Hanzi, error) {
+func (d *Decomposer) buildFromChineseHanzi(query string, numResults, numSentences int) (*Hanzi, error) {
 	// if the query is a kangxi, we don't need to decompose
 	if _, isKangxi := d.kangxiDict[query]; isKangxi {
 		return d.buildKangxi(query, numResults)
@@ -124,7 +147,7 @@ func (d *Decomposer) buildFromChineseHanzi(query string, numResults int) (*Hanzi
 	}
 
 	// decompose the hanzi's components
-	componentsDecomposition, err := d.buildComponentsDecompositions(query, numResults)
+	componentsDecomposition, err := d.buildComponentsDecompositions(query, numResults, numSentences)
 	if err != nil {
 		return nil, fmt.Errorf("could not build decompositions [%s]: %w", query, err)
 	}
@@ -154,7 +177,7 @@ type componentsDecompositionResult struct {
 	decomposedComponents []*Hanzi
 }
 
-func (d *Decomposer) buildComponentsDecompositions(query string, numResults int) (componentsDecompositionResult, error) {
+func (d *Decomposer) buildComponentsDecompositions(query string, numResults, numSentences int) (componentsDecompositionResult, error) {
 	decomposition, err := d.idsDecomposer.Decompose(query)
 	if err != nil {
 		return componentsDecompositionResult{}, fmt.Errorf("could not decompose hanzi [%s]: %w", query, err)
@@ -162,7 +185,7 @@ func (d *Decomposer) buildComponentsDecompositions(query string, numResults int)
 	// recursively build decompositions for all components
 	var decomposedComponents []*Hanzi
 	for _, decomp := range decomposition.Decompositions {
-		h, err := d.buildFromChineseHanzi(decomp.Ideograph, numResults)
+		h, err := d.buildFromChineseHanzi(decomp.Ideograph, numResults, numSentences)
 		if err != nil {
 			return componentsDecompositionResult{}, err
 		}
@@ -240,23 +263,23 @@ func (d *Decomposer) buildKangxi(query string, numResults int) (*Hanzi, error) {
 }
 
 // FIXME: return several results
-func (d *Decomposer) buildFromEnglishWord(query string, numResults int) (*Hanzi, []error, error) {
+func (d *Decomposer) buildFromEnglishWord(query string, numResults, numSentences int) (DecompositionResult, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consistent set of sorted matches
 	matches, err := d.searcher.FindSorted(query, numResults+d.offset)
 	if err != nil {
-		return nil, nil, err
+		return DecompositionResult{}, err
 	}
 	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
 	filteredEntries := make([]*Hanzi, 0)
 	for _, m := range matches {
 		index := m.Index
 		if d.dict.Len() <= index {
-			return nil, nil, fmt.Errorf("lookup dict index does not exist %d", index)
+			return DecompositionResult{}, fmt.Errorf("lookup dict index does not exist %d", index)
 		}
 		dictEntry, err := d.dict.Entry(index)
 		if err != nil {
-			return nil, nil, err
+			return DecompositionResult{}, err
 		}
 		var readingsContainQuery bool
 		for _, d := range dictEntry.Definitions {
@@ -275,9 +298,16 @@ func (d *Decomposer) buildFromEnglishWord(query string, numResults int) (*Hanzi,
 		filteredEntries = append(filteredEntries, dictEntry)
 	}
 	if len(filteredEntries) == 0 {
-		return nil, nil, nil
+		return DecompositionResult{}, nil
 	}
 	// use ideograph here to support unihan and cedict
 	// FIXME: fix the above somehow
-	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults)
+	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults, numSentences)
+}
+
+func (d *Decomposer) AddSentences(hs []*Hanzi, numExampleSentences int) []*Hanzi {
+	for _, h := range hs {
+		h.Sentences = d.sentenceDict.Get(h.Ideograph, numExampleSentences, true)
+	}
+	return hs
 }
