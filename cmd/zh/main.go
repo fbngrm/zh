@@ -17,6 +17,7 @@ var searchType string
 var fields string
 var numResults int
 var numExampleSentences int
+var verbose bool
 
 func main() {
 	flag.StringVar(&query, "q", "", "query")
@@ -27,6 +28,7 @@ func main() {
 	flag.StringVar(&searchType, "s", "cedict", "search type [cedict|hsk|unihan]")
 	flag.IntVar(&numExampleSentences, "es", 0, "example sentences")
 	flag.IntVar(&numResults, "r", 10, "number of results")
+	flag.BoolVar(&verbose, "v", false, "include decompositions")
 	flag.Parse()
 
 	d := zh.NewDecomposer(searchType)
@@ -54,6 +56,9 @@ func format(r hanzi.DecompositionResult) string {
 		formatter = formatter.WithFields(fields)
 	}
 	if formatType != "" {
+		if verbose {
+			formatType = "verbose"
+		}
 		formatter = formatter.WithFormat(formatType)
 	}
 	if templatePath != "" {

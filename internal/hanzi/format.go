@@ -14,6 +14,7 @@ type Format int
 
 const (
 	Format_TXT = iota
+	Format_verbose_TXT
 	Format_JSON
 	Format_YAML
 )
@@ -29,6 +30,8 @@ func (f *Formatter) WithFormat(format string) *Formatter {
 		f.format = Format_JSON
 	} else if format == "yaml" {
 		f.format = Format_YAML
+	} else if format == "verbose" {
+		f.format = Format_verbose_TXT
 	} else {
 		f.format = Format_TXT
 	}
@@ -69,6 +72,9 @@ func (f *Formatter) Format(h []*Hanzi) (string, error) {
 	}
 	if f.format == Format_YAML {
 		return formatYAML(i)
+	}
+	if f.format == Format_verbose_TXT {
+		return formatTextVerbose(h)
 	}
 	return formatText(h)
 }
@@ -139,6 +145,31 @@ func formatText(hs []*Hanzi) (string, error) {
 		result += "\t"
 		result += strings.Join(h.Definitions, ", ")
 		result += "\n"
+	}
+	return result, nil
+}
+
+func formatTextVerbose(hs []*Hanzi) (string, error) {
+	var result string
+	for _, h := range hs {
+		if h.Ideograph != "" {
+			result += h.Ideograph
+		}
+		result += "\t"
+		result += strings.Join(h.Readings, ", ")
+		result += "\t"
+		result += strings.Join(h.Definitions, ", ")
+		result += "\n"
+		for _, c := range h.ComponentsDecompositions {
+			if c.Ideograph != "" {
+				result += c.Ideograph
+			}
+			result += "\t"
+			result += strings.Join(c.Readings, ", ")
+			result += "\t"
+			result += strings.Join(c.Definitions, ", ")
+			result += "\n"
+		}
 	}
 	return result, nil
 }
