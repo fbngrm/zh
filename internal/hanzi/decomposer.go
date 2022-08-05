@@ -116,7 +116,7 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences
 	if err != nil {
 		return nil, nil, err
 	}
-	dictEntry, err := d.dict.Entry(matches[0].Index)
+	h, err := d.dict.Entry(matches[0].Index)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -137,9 +137,9 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences
 		decompositions = append(decompositions, h)
 		components = append(components, h.Ideograph)
 	}
-	dictEntry.ComponentsDecompositions = decompositions
-	dictEntry.Components = components
-	return dictEntry, errs, nil
+	h.ComponentsDecompositions = decompositions
+	h.Components = components
+	return h, errs, nil
 }
 
 func (d *Decomposer) buildFromChineseHanzi(query string, numResults, numSentences int) (*Hanzi, error) {
