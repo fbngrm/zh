@@ -116,6 +116,9 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences
 	if err != nil {
 		return nil, nil, err
 	}
+	if len(matches) < 1 {
+		return nil, nil, fmt.Errorf("no matches found")
+	}
 	h, err := d.dict.Entry(matches[0].Index)
 	if err != nil {
 		return nil, nil, err
@@ -160,6 +163,9 @@ func (d *Decomposer) buildFromChineseHanzi(query string, numResults, numSentence
 		return nil, fmt.Errorf("could not build decompositions [%s]: %w", query, err)
 	}
 
+	// recursively add kangxi components
+	kangxi := d.buildKangxiComponents(componentsDecomposition.decomposedComponents)
+
 	return &Hanzi{
 		Source: d.dict.Src(),
 		// base data
@@ -173,8 +179,8 @@ func (d *Decomposer) buildFromChineseHanzi(query string, numResults, numSentence
 		// decomposition data
 		Mapping:    componentsDecomposition.decomposition.Mapping,
 		IDS:        componentsDecomposition.decomposition.IdeographicDescriptionSequence,
-		Kangxi:     componentsDecomposition.decomposition.Kangxi,
 		Components: componentsDecomposition.decomposition.Components,
+		Kangxi:     kangxi,
 		// decomposed components
 		ComponentsDecompositions: componentsDecomposition.decomposedComponents,
 	}, nil
@@ -203,6 +209,18 @@ func (d *Decomposer) buildComponentsDecompositions(query string, numResults, num
 		decomposition:        decomposition,
 		decomposedComponents: decomposedComponents,
 	}, nil
+}
+
+func (d *Decomposer) buildKangxiComponents(componentsDecompositions []*Hanzi) []string {
+	var kangxi []string
+	for _, decomposition := range componentsDecompositions {
+		if decomposition.IsKangxi {
+			kangxi = append(kangxi, decomposition.Ideograph)
+		} else {
+			kangxi = append(kangxi, d.buildKangxiComponents(decomposition.ComponentsDecompositions)...)
+		}
+	}
+	return kangxi
 }
 
 func (d *Decomposer) buildHanziBaseFromSearchResults(query string, numResults int) (*Hanzi, error) {
