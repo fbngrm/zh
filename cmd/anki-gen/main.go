@@ -19,9 +19,7 @@ import (
 )
 
 const idsSrc = "./lib/cjkvi/ids.txt"
-const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
-const hskSrcDir = "./lib/hsk/"
 
 var in string
 var templatePath string
@@ -38,7 +36,7 @@ func main() {
 	flag.StringVar(&existingHanziPath, "e", "", "existing hanzi")
 	flag.Parse()
 
-	sentenceDict, err := sentences.Parse("gateway-to-chinese", in)
+	sentenceDict, err := sentences.Parse("", in)
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)
@@ -56,36 +54,37 @@ func main() {
 		os.Exit(1)
 	}
 
-	d := hanzi.NewDecomposer(
+	decomposer := hanzi.NewDecomposer(
 		dict,
 		kangxi.NewDict(),
-		nil,
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
+		nil,
 	)
 
 	// we keep track of hanzi to avoid redundant cards
 	existingHanzi := loadHanziLog()
 	defer writeHanziLog(existingHanzi)
 
-	depth := 1
-	addSentences := 0
+	numSentences := 0
 	results := 3
 	ankiSentences := make([]AnkiSentence, len(sentenceDict))
 	i := 0
 	for _, sentence := range sentenceDict {
 		hanzis := make([]*hanzi.Hanzi, 0)
 		for _, word := range sentence.ChineseWords {
-			h, errs, err := d.Decompose(word, results, depth, addSentences)
+			h, err := decomposer.Decompose(word, results, numSentences)
 			if err != nil {
 				os.Stderr.WriteString(fmt.Sprintf("error: %v\n", err))
+				continue
 			}
-			if len(errs) != 0 {
-				for _, e := range errs {
+			if len(h.Errs) != 0 {
+				for _, e := range h.Errs {
 					os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
 				}
+				continue
 			}
-			hanzis = append(hanzis, h)
+			hanzis = append(hanzis, h.Hanzi...)
 		}
 		// we filter hanzi for which we already have cards generated.
 		existingHanzi, hanzis = removeRedundant(existingHanzi, hanzis)
@@ -181,6 +180,9 @@ func removeRedundant(existingHanzi map[string]struct{}, newHanzi []*hanzi.Hanzi)
 			filtered = append(filtered, h)
 			existingHanzi[h.Ideograph] = struct{}{}
 		}
+		var filteredDecompositions []*hanzi.Hanzi
+		existingHanzi, filteredDecompositions = removeRedundant(existingHanzi, h.ComponentsDecompositions)
+		filtered = append(filtered, filteredDecompositions...)
 	}
 	return existingHanzi, filtered
 }

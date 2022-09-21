@@ -1,5 +1,5 @@
 {{range .Decomposition}}
-{{range .Decompositions}}
+{{range .ComponentsDecompositions}}
 model: zh
 deck: Default
 tags: Gateway to Chinese
@@ -38,14 +38,16 @@ tags: Gateway to Chinese
 ## Components
 {{.Ideograph}}
 
-{{end}} // end 
+{{end}}
 
 # Note
 
 ## Hanzi
 {{.Sentence.Chinese}}
+
 ## Pinyin
 {{.Sentence.Pinyin}}
+
 ## English
 {{.Sentence.EnglishLiteral}}
 {{.Sentence.English}}
