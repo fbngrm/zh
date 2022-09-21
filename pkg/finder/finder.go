@@ -30,7 +30,7 @@ func (f *Finder) Find(query string, limit int) (Matches, error) {
 		if err != nil {
 			return nil, err
 		}
-		if query == s {
+		if strings.ToLower(query) == strings.ToLower(s) {
 			definitions, err := f.dict.Definitions(i)
 			if err != nil {
 				return nil, err
