@@ -39,7 +39,12 @@ func (f *Formatter) WithFormat(format string) *Formatter {
 }
 
 func (f *Formatter) WithFields(fields string) *Formatter {
-	f.fields = strings.Split(fields, ",")
+	var filterFields []string
+	for _, field := range strings.Split(fields, ",") {
+		filterFields = append(filterFields, strings.TrimSpace(field))
+	}
+
+	f.fields = filterFields
 	return f
 }
 
@@ -177,13 +182,8 @@ func formatTextVerbose(hs []*Hanzi) (string, error) {
 func (f *Formatter) filter(hs []*Hanzi) ([]map[string]interface{}, error) {
 	var filtered []map[string]interface{}
 	for _, h := range hs {
-		var filterFields []string
-		for i, field := range filterFields {
-			filterFields[i] = strings.TrimSpace(field)
-		}
-
 		if len(f.fields) != 0 {
-			fields, err := h.GetFields(filterFields)
+			fields, err := h.GetFields(f.fields)
 			if err != nil {
 				return nil, err
 			}
