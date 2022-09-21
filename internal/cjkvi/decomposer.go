@@ -59,7 +59,6 @@ func (i *IDSDecomposer) Decompose(ideographToDecompose string) (Decomposition, e
 		return Decomposition{}, err
 	}
 
-	// FIXME: support kangxi
 	// add components from IDS, ignoring the IDS characters
 	components := make([]string, 0)
 	for _, ideograph := range d.IdeographicDescriptionSequence {

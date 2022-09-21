@@ -37,6 +37,7 @@ func TestMain(m *testing.M) {
 	}
 
 	decomposer = hanzi.NewDecomposer(dict, sentences.Dict{}, search.NewSearcher(finder.NewFinder(dict)), idsDecomposer)
+
 	os.Exit(m.Run())
 }
 

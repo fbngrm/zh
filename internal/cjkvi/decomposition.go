@@ -8,5 +8,4 @@ type Decomposition struct {
 	IdeographicDescriptionSequence string          `yaml:"ids,omitempty" json:"ids,omitempty"`
 	Decompositions                 []Decomposition `yaml:"decomposition,omitempty" json:"decomposition,omitempty"`
 	Components                     []string        `yaml:"components,omitempty" json:"components,omitempty"`
-	Kangxi                         []string        `yaml:"kangxi,omitempty" json:"kangxi,omitempty"`
 }
