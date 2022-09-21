@@ -31,7 +31,7 @@ func Parse(sourceName, sourcePath string) (parsedSentences, error) {
 		if len(line) > 0 && line[0] == '/' {
 			continue
 		}
-		parts := strings.Split(line, "\t")
+		parts := strings.Split(line, ";")
 		pinyin := ""
 		if len(parts) > 1 {
 			pinyin = parts[1]
