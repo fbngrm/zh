@@ -22,7 +22,7 @@ var verbose bool
 func main() {
 	flag.StringVar(&query, "q", "", "query")
 	flag.StringVar(&fields, "f", "", "filter fields")
-	flag.StringVar(&templatePath, "t", "", "go template")
+	flag.StringVar(&templatePath, "t", "", "path to go template")
 	flag.StringVar(&formatType, "fmt", "text", "format output [json|yaml|text]")
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.StringVar(&searchType, "s", "cedict", "search type [cedict|hsk|unihan]")
