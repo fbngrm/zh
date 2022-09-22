@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"context"
+	"crypto/sha1"
+	"encoding/hex"
 	"errors"
 	"flag"
 	"fmt"
@@ -11,6 +13,7 @@ import (
 	"os/exec"
 	"os/signal"
 	"path/filepath"
+	"strings"
 	"syscall"
 	"time"
 
@@ -21,12 +24,33 @@ import (
 var query string
 var outputDir string
 var convert bool
+var in string
+var deckName string
 
 func main() {
 	flag.StringVar(&query, "q", "", "query to show and record")
-	flag.StringVar(&outputDir, "o", "./media", "output directory")
+	flag.StringVar(&outputDir, "o", "", "output directory")
 	flag.BoolVar(&convert, "c", false, "convert to mp3")
+	flag.StringVar(&in, "i", "", "input file")
+	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.Parse()
+
+	ankiSentences, err := load(in)
+	if err != nil {
+		fmt.Printf("could not load input data: %v\n", err)
+		os.Exit(1)
+	}
+
+	dir, name := filepath.Split(in)
+	name = strings.TrimSuffix(name, filepath.Ext(name))
+	if outputDir == "" {
+		outputDir = filepath.Join(dir, "audio")
+	}
+	err = os.MkdirAll(outputDir, os.ModePerm)
+	if err != nil && !errors.Is(err, os.ErrExist) {
+		fmt.Printf("could not create output dir: %v\n", err)
+		os.Exit(1)
+	}
 
 	ctx, cancel := context.WithCancel(context.Background())
 	c := make(chan os.Signal)
@@ -38,19 +62,30 @@ func main() {
 		os.Exit(1)
 	}()
 
-	fmt.Println(query)
-	fmt.Printf("r = record / p = play recording / d = delete / c = cancel \n")
+	fmt.Printf("r = record / p = play recording / d = delete / n = next \n")
 
-	err := os.Mkdir(outputDir, os.ModeDir)
-	if !errors.Is(err, os.ErrExist) {
-		fmt.Printf("could not create output dir: %v\n", err)
-		os.Exit(1)
+	for _, sentence := range ankiSentences {
+		fmt.Println(sentence.Sentence.English)
+		fmt.Println(sentence.Sentence.Pinyin)
+		fmt.Println(sentence.Sentence.Chinese)
+		loop(ctx, sentence.Sentence.Chinese)
+
+		for _, hanzi := range sentence.Decomposition {
+			fmt.Println(hanzi.Definitions)
+			fmt.Println(hanzi.Readings)
+			fmt.Println(hanzi.Ideograph)
+			loop(ctx, hanzi.Ideograph)
+		}
 	}
-	path := filepath.Join(outputDir, query)
+}
+
+func loop(ctx context.Context, query string) {
+	queryHash := hash(query)
+	path := filepath.Join(outputDir, queryHash)
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		text := scanner.Text()
-		if text == "c" {
+		if text == "n" {
 			break
 		}
 		switch text {
@@ -69,8 +104,10 @@ func main() {
 			if err != nil {
 				fmt.Printf("could not delete: %v\n", err)
 			}
+		default:
+
 		}
-		fmt.Printf("r = record / p = play recording / d = delete / c = cancel \n")
+		fmt.Printf("r = record / p = play recording / d = delete / n = next \n")
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -92,6 +129,7 @@ func play(ctx context.Context, path string, convertToMP3 bool) error {
 	if convertToMP3 {
 		file = path + ".mp3"
 	}
+	fmt.Println(file)
 	cmd := exec.CommandContext(ctx, "ffplay", "-autoexit", file)
 	if err := cmd.Run(); err != nil {
 		return err
@@ -141,4 +179,10 @@ func load(path string) ([]anki.Sentence, error) {
 		return nil, err
 	}
 	return as, nil
+}
+
+func hash(s string) string {
+	h := sha1.New()
+	h.Write([]byte(strings.TrimSpace(s)))
+	return hex.EncodeToString(h.Sum(nil))
 }

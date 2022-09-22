@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"crypto/sha1"
+	"encoding/hex"
 	"flag"
 	"fmt"
 	"os"
@@ -24,7 +26,7 @@ import (
 const idsSrc = "./lib/cjkvi/ids.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 
-var in, out string
+var in string
 var templatePath string
 var existingHanziPath string
 var deckName string
@@ -150,6 +152,9 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 		}
 		return defs
 	}
+	tplFuncMap["audio"] = func(query string) string {
+		return "[sound:" + hash(query) + ".mp3]"
+	}
 	tmpl, err := template.New("anki-sentence.tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
 	if err != nil {
 		return "", err
@@ -226,4 +231,10 @@ func writeFile(data, outPath string) {
 		fmt.Printf("could not write anki cards: %v", err)
 		os.Exit(1)
 	}
+}
+
+func hash(s string) string {
+	h := sha1.New()
+	h.Write([]byte(strings.TrimSpace(s)))
+	return hex.EncodeToString(h.Sum(nil))
 }
