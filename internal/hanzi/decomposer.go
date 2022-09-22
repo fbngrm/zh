@@ -231,7 +231,7 @@ func (d *Decomposer) buildHanziBaseFromSearchResults(query string, numResults in
 		return nil, err
 	}
 
-	readings := make([]string, 0)
+	readings := make(map[string]struct{})
 	definitions := make([]string, 0)
 	levels := make([]string, 0)
 	simplified := make([]string, 0)
@@ -248,10 +248,13 @@ func (d *Decomposer) buildHanziBaseFromSearchResults(query string, numResults in
 			continue
 		}
 		definitions = append(definitions, strings.Join(dictEntry.Definitions, ", "))
-		readings = append(readings, dictEntry.Readings...)
 		levels = append(levels, dictEntry.HSKLevels...)
 		simplified = append(simplified, dictEntry.IdeographsSimplified...)
 		traditional = append(traditional, dictEntry.IdeographsTraditional...)
+
+		for _, reading := range dictEntry.Readings {
+			readings[strings.ToLower(reading)] = struct{}{}
+		}
 	}
 
 	return &Hanzi{
@@ -261,7 +264,7 @@ func (d *Decomposer) buildHanziBaseFromSearchResults(query string, numResults in
 		IdeographsSimplified:  simplified,
 		IdeographsTraditional: traditional,
 		Definitions:           definitions,
-		Readings:              readings,
+		Readings:              getKeysFromMap(readings),
 	}, nil
 }
 
@@ -336,4 +339,14 @@ func (d *Decomposer) AddSentences(hs []*Hanzi, numExampleSentences int) []*Hanzi
 		h.Sentences = d.sentenceDict.Get(h.Ideograph, numExampleSentences, true)
 	}
 	return hs
+}
+
+func getKeysFromMap(m map[string]struct{}) []string {
+	keys := make([]string, len(m))
+	i := 0
+	for k := range m {
+		keys[i] = k
+		i++
+	}
+	return keys
 }
