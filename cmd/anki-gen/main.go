@@ -21,22 +21,31 @@ import (
 const idsSrc = "./lib/cjkvi/ids.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 
-var in string
+var in, out string
 var templatePath string
 var existingHanziPath string
+var deckName string
 
 type AnkiSentence struct {
+	DeckName      string
 	Sentence      sentences.Sentence
 	Decomposition []*hanzi.Hanzi
 }
 
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
+	flag.StringVar(&out, "o", "", "output file")
 	flag.StringVar(&templatePath, "t", "", "go template")
 	flag.StringVar(&existingHanziPath, "e", "", "existing hanzi")
+	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.Parse()
 
-	sentenceDict, err := sentences.Parse("", in)
+	if deckName == "" {
+		fmt.Println("need deck name")
+		os.Exit(1)
+	}
+
+	sentenceDict, err := sentences.Parse(deckName, in)
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)
@@ -90,20 +99,23 @@ func main() {
 		existingHanzi, allHanziInSentence = removeRedundant(existingHanzi, allHanziInSentence)
 
 		ankiSentences[i] = AnkiSentence{
+			DeckName:      deckName,
 			Sentence:      sentence,
 			Decomposition: allHanziInSentence,
 		}
 		i++
 	}
 
+	cards := ""
 	for _, as := range ankiSentences {
 		formatted, err := formatTemplate(as, templatePath)
 		if err != nil {
 			fmt.Printf("could not format hanzi: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Println(formatted)
+		cards += formatted
 	}
+	writeAnkiCards(cards, out)
 }
 
 func formatTemplate(s AnkiSentence, tmplPath string) (string, error) {
@@ -140,6 +152,13 @@ func formatTemplate(s AnkiSentence, tmplPath string) (string, error) {
 		return "", err
 	}
 	return buf.String(), nil
+}
+
+func writeAnkiCards(data, outPath string) {
+	if err := os.WriteFile(outPath, []byte(data), 0644); err != nil {
+		fmt.Printf("could not write anki cards: %v", err)
+		os.Exit(1)
+	}
 }
 
 func loadHanziLog() map[string]struct{} {
