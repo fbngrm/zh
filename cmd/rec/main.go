@@ -6,12 +6,16 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"os/signal"
 	"path/filepath"
 	"syscall"
 	"time"
+
+	"github.com/fgrimme/zh/internal/anki"
+	"gopkg.in/yaml.v2"
 )
 
 var query string
@@ -124,4 +128,17 @@ func record(ctx context.Context, path string, convertToMP3 bool) error {
 		fmt.Println(err)
 	}
 	return os.Remove(path + ".wav")
+}
+
+func load(path string) ([]anki.Sentence, error) {
+	yamlFile, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var as []anki.Sentence
+	err = yaml.Unmarshal(yamlFile, &as)
+	if err != nil {
+		return nil, err
+	}
+	return as, nil
 }

@@ -6,9 +6,11 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 
+	"github.com/fgrimme/zh/internal/anki"
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/hanzi"
@@ -16,6 +18,7 @@ import (
 	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
+	"gopkg.in/yaml.v2"
 )
 
 const idsSrc = "./lib/cjkvi/ids.txt"
@@ -26,15 +29,8 @@ var templatePath string
 var existingHanziPath string
 var deckName string
 
-type AnkiSentence struct {
-	DeckName      string
-	Sentence      sentences.Sentence
-	Decomposition []*hanzi.Hanzi
-}
-
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
-	flag.StringVar(&out, "o", "", "output file")
 	flag.StringVar(&templatePath, "t", "", "go template")
 	flag.StringVar(&existingHanziPath, "e", "", "existing hanzi")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
@@ -44,8 +40,15 @@ func main() {
 		fmt.Println("need deck name")
 		os.Exit(1)
 	}
+	_, name := filepath.Split(in)
+	name = strings.TrimSuffix(name, filepath.Ext(name))
+	outMarkdown := filepath.Join("gen", deckName, name+".md")
+	outYaml := filepath.Join("gen", deckName, name+".yaml")
+	if existingHanziPath == "" {
+		existingHanziPath = filepath.Join("gen", deckName, name+".log")
+	}
 
-	sentenceDict, err := sentences.Parse(deckName, in)
+	sentenceDict, err := sentences.Parse(name, in)
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)
@@ -77,7 +80,7 @@ func main() {
 
 	numSentences := 0
 	results := 3
-	ankiSentences := make([]AnkiSentence, len(sentenceDict))
+	ankiSentences := make([]anki.Sentence, len(sentenceDict))
 	i := 0
 	for _, sentence := range sentenceDict {
 		allHanziInSentence := make([]*hanzi.Hanzi, 0)
@@ -98,7 +101,7 @@ func main() {
 
 		existingHanzi, allHanziInSentence = removeRedundant(existingHanzi, allHanziInSentence)
 
-		ankiSentences[i] = AnkiSentence{
+		ankiSentences[i] = anki.Sentence{
 			DeckName:      deckName,
 			Sentence:      sentence,
 			Decomposition: allHanziInSentence,
@@ -107,18 +110,24 @@ func main() {
 	}
 
 	cards := ""
-	for _, as := range ankiSentences {
-		formatted, err := formatTemplate(as, templatePath)
+	for _, sentence := range ankiSentences {
+		formatted, err := formatTemplate(sentence, templatePath)
 		if err != nil {
 			fmt.Printf("could not format hanzi: %v\n", err)
 			os.Exit(1)
 		}
 		cards += formatted
 	}
-	writeAnkiCards(cards, out)
+	writeFile(cards, outMarkdown)
+	y, err := toYaml(ankiSentences)
+	if err != nil {
+		fmt.Printf("could not write yaml log: %v\n", err)
+		os.Exit(1)
+	}
+	writeFile(y, outYaml)
 }
 
-func formatTemplate(s AnkiSentence, tmplPath string) (string, error) {
+func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 	tplFuncMap := make(template.FuncMap)
 	tplFuncMap["definitions"] = func(definitions []string) string {
 		defs := ""
@@ -152,13 +161,6 @@ func formatTemplate(s AnkiSentence, tmplPath string) (string, error) {
 		return "", err
 	}
 	return buf.String(), nil
-}
-
-func writeAnkiCards(data, outPath string) {
-	if err := os.WriteFile(outPath, []byte(data), 0644); err != nil {
-		fmt.Printf("could not write anki cards: %v", err)
-		os.Exit(1)
-	}
 }
 
 func loadHanziLog() map[string]struct{} {
@@ -209,4 +211,19 @@ func removeRedundant(existingHanzi map[string]struct{}, newHanzi []*hanzi.Hanzi)
 		}
 	}
 	return existingHanzi, filtered
+}
+
+func toYaml(data interface{}) (string, error) {
+	b, err := yaml.Marshal(data)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
+}
+
+func writeFile(data, outPath string) {
+	if err := os.WriteFile(outPath, []byte(data), 0644); err != nil {
+		fmt.Printf("could not write anki cards: %v", err)
+		os.Exit(1)
+	}
 }
