@@ -71,26 +71,27 @@ func main() {
 	ankiSentences := make([]AnkiSentence, len(sentenceDict))
 	i := 0
 	for _, sentence := range sentenceDict {
-		hanzis := make([]*hanzi.Hanzi, 0)
+		allHanziInSentence := make([]*hanzi.Hanzi, 0)
 		for _, word := range sentence.ChineseWords {
-			h, err := decomposer.Decompose(word, results, numSentences)
+			decomposition, err := decomposer.Decompose(word, results, numSentences)
 			if err != nil {
 				os.Stderr.WriteString(fmt.Sprintf("error: %v\n", err))
 				continue
 			}
-			if len(h.Errs) != 0 {
-				for _, e := range h.Errs {
+			if len(decomposition.Errs) != 0 {
+				for _, e := range decomposition.Errs {
 					os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
 				}
 				continue
 			}
-			hanzis = append(hanzis, h.Hanzi...)
+			allHanziInSentence = append(allHanziInSentence, decomposition.Hanzi...)
 		}
-		// we filter hanzi for which we already have cards generated.
-		existingHanzi, hanzis = removeRedundant(existingHanzi, hanzis)
+
+		existingHanzi, allHanziInSentence = removeRedundant(existingHanzi, allHanziInSentence)
+
 		ankiSentences[i] = AnkiSentence{
 			Sentence:      sentence,
-			Decomposition: hanzis,
+			Decomposition: allHanziInSentence,
 		}
 		i++
 	}
@@ -180,9 +181,13 @@ func removeRedundant(existingHanzi map[string]struct{}, newHanzi []*hanzi.Hanzi)
 			filtered = append(filtered, h)
 			existingHanzi[h.Ideograph] = struct{}{}
 		}
-		var filteredDecompositions []*hanzi.Hanzi
-		existingHanzi, filteredDecompositions = removeRedundant(existingHanzi, h.ComponentsDecompositions)
-		filtered = append(filtered, filteredDecompositions...)
+
+		var decompHanzi []*hanzi.Hanzi
+		existingHanzi, decompHanzi = removeRedundant(existingHanzi, h.ComponentsDecompositions)
+
+		for _, h := range decompHanzi {
+			filtered = append(filtered, h)
+		}
 	}
 	return existingHanzi, filtered
 }
