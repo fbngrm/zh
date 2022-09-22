@@ -32,7 +32,7 @@ func parse(cedictSrcPath string) (parsedEntries, error) {
 		parts := strings.Split(line, "[")
 		ideographs := strings.Fields(parts[0])
 		readingsAndDef := strings.Split(parts[1], "]")
-		readings := strings.Fields(readingsAndDef[0])
+		readings := strings.Fields(strings.ToLower(readingsAndDef[0]))
 		definitions := strings.Split(
 			strings.Trim(
 				strings.TrimSpace(readingsAndDef[1]),
