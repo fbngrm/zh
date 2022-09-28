@@ -26,6 +26,7 @@ var outputDir string
 var convert bool
 var in string
 var deckName string
+var blacklistFile *os.File
 
 func main() {
 	flag.StringVar(&query, "q", "", "query to show and record")
@@ -51,6 +52,12 @@ func main() {
 		fmt.Printf("could not create output dir: %v\n", err)
 		os.Exit(1)
 	}
+	blacklistPath := filepath.Join(dir, "blacklist")
+	blacklistFile, err = os.OpenFile(blacklistPath, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModeAppend)
+	if err != nil {
+		fmt.Printf("could not open blacklist: %v\n", err)
+		os.Exit(1)
+	}
 
 	ctx, cancel := context.WithCancel(context.Background())
 	c := make(chan os.Signal)
@@ -62,7 +69,7 @@ func main() {
 		os.Exit(1)
 	}()
 
-	fmt.Printf("r = record / p = play recording / d = delete / n = next \n")
+	fmt.Printf("r = record / p = play recording / d = delete / n = next / b = blacklist \n")
 
 	for _, sentence := range ankiSentences {
 		fmt.Println(sentence.Sentence.English)
@@ -77,11 +84,12 @@ func main() {
 			loop(ctx, hanzi.Ideograph)
 		}
 	}
+	fmt.Println(blacklistFile.Close())
 }
 
 func loop(ctx context.Context, query string) {
 	queryHash := hash(query)
-	path := filepath.Join(outputDir, queryHash)
+	path := filepath.Join(outputDir, deckName+"_"+queryHash)
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		text := scanner.Text()
@@ -103,6 +111,11 @@ func loop(ctx context.Context, query string) {
 			err := deleteFile(ctx, path, convert)
 			if err != nil {
 				fmt.Printf("could not delete: %v\n", err)
+			}
+		case "b":
+			_, err := blacklistFile.WriteString(text)
+			if err != nil {
+				fmt.Printf("could not append to blacklist: %v\n", err)
 			}
 		default:
 
