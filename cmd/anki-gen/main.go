@@ -111,7 +111,10 @@ func main() {
 		i++
 	}
 
-	cards := ""
+	header := `model: zh
+deck: %s
+tags:`
+	cards := fmt.Sprintf(header, deckName)
 	for _, sentence := range ankiSentences {
 		formatted, err := formatTemplate(sentence, templatePath)
 		if err != nil {
@@ -121,6 +124,7 @@ func main() {
 		cards += formatted
 	}
 	writeFile(cards, outMarkdown)
+
 	y, err := toYaml(ankiSentences)
 	if err != nil {
 		fmt.Printf("could not write yaml log: %v\n", err)
@@ -153,7 +157,7 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 		return defs
 	}
 	tplFuncMap["audio"] = func(query string) string {
-		return "[sound:" + hash(query) + ".mp3]"
+		return "[sound:" + deckName + "_" + hash(query) + ".mp3]"
 	}
 	tmpl, err := template.New("anki-sentence.tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
 	if err != nil {
@@ -204,6 +208,9 @@ func removeRedundant(existingHanzi map[string]struct{}, newHanzi []*hanzi.Hanzi)
 	var filtered []*hanzi.Hanzi
 	for _, h := range newHanzi {
 		if _, exists := existingHanzi[h.Ideograph]; !exists {
+			if len(h.Definitions) == 0 {
+				continue
+			}
 			filtered = append(filtered, h)
 			existingHanzi[h.Ideograph] = struct{}{}
 		}
