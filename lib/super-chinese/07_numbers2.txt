@@ -1,0 +1,27 @@
+你的生日是几月几号？;Ni3 de sheng1ri4 shi4 ji3 yue4 ji3 hao4?;When is your birthday?
+我的生日是十月七号，你呢？;Wo3 e sheng1ri4 shi4 shi2 yue4 qi1hao4, ni3 ne?;My birthday is on October 7th, what about you?
+我的生日是六月九号。;Wo3 de sheng1ri4 shi4 liu4 yue4 jiu3 hao4.;My birthday is on June 9th.
+你弟弟的生日是几月几号？;Ni3 di4di de sheng1ri4 shi4 ji3 yue4 ji3 hao4?;When is your younger brother's birthday?
+我的弟弟的生日是八月七号。;Wo3 de di4di de sheng1ri4 shi4 ba1 yue4 qi1 hao4.;My younger brother's birthday is on August 7th.
+他的生日是几月几号？;Ta1 de sheng1ri4 shi4 ji3 yue4 ji3 hao4?;When is his birthday?
+我的生日是八月七号，你呢？;Wo3 de sheng1ri4 shi4 ba1 yue4 qi1 hao4, ni3 ne?; My birthday is on August 7th, how about you?
+今天几号？今天六号。;Jin1tian1 ji3 hao4? Jin1tian1 liu4 hao4.;What date is today? Today is the 6th.
+明天是八月七号。;Ming2tian1 shi4 ba1yue4 qi1 hao4;Tomorrow is August 7th.
+明天是你的弟弟的生日！;Ming2tian1 shi4 ni3 de di4di de sheng1ri4!Tomorrow is your younger brother's birthday.
+他十号回上海。;Ta1 shi2 hao4 hui2 Shang4hai3.;He will return to Shanghai on the 10th.
+七号是我的生日。;Qi1 hao4 shi4 wo3 de sheng1ri4;My birthday is on the 7th.
+他有几本书？;Ta1 you3 ji3 ben3 shu1?;How many books does he have?
+我明天不会家。;Wo3 ming2tian1 bu4 hui2 jia1.;I will not go home tomorrow.
+我八月去中国。;Wo3 ba1 yue4 qu4 zhong1guo2.;I will go to China on in August.
+今天几月几号？;Jin1tian1 ji3 yue4 ji3 hao4?;What date is today?
+明天几个学生去中国？明天五个学生去中国。;Ming2tian1 ji3 ge xue2sheng1 qu4 Zhong1guo2?;Tomorrow how many of your classmates will go to China? Tomorrow five of my classmates will go to China.
+一;yi1;one
+二;er4;two
+三;san1;three
+四;si4;four
+五;wu3;five
+六;liu4;six
+七;qi1;seven
+八;ba1;eight
+九;jiu3;nine
+十;shi2;ten
