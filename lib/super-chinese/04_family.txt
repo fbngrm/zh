@@ -6,3 +6,14 @@
 她的妈妈是老师。;Ta1 de ma1ma shi4 lao3shi1.; Her mother is a teacher.
 她的弟弟叫小明。小明是学生。;Ta1 de di4di jiao4 Xiao3Ming2. Xiao3Ming2 shi4 xue2sheng1.; Her brother is called Xioaming. Xioaming is a student.
 他们是中国人。;Ta1man shi4 zhong1guo2 ren2.; They are Chinese.
+
+My family has 4 people.
+I am married (to a Chinese).
+I (don't) have kids.
+I have a (older|younger) sister.
+I have a (older|younger) brother.
+I have (don't) siblings.
+I have a grandma (mother side).
+I have a grandpa (mother side).
+I have a grandma (father side).
+I have a grandpa (father side).
