@@ -19,3 +19,18 @@ generate:
 		-e ./gen/$(source)/log \
 		-e ./gen/$(source)/blacklist \
 		-d $(source)
+
+.PHONY: record
+record:
+	go run cmd/rec/main.go \
+		-d $(source) \
+		-i ./gen/$(source)/$(file).yaml \
+		-c
+
+.PHONY: force-record
+force-record:
+	go run cmd/rec/main.go \
+		-d $(source) \
+		-i ./gen/$(source)/$(file).yaml \
+		-c \
+		-f
