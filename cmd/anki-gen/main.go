@@ -28,14 +28,14 @@ const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 
 var in string
 var templatePath string
-var existingHanziPath string
+var ignorePath string
 var blacklistPath string
 var deckName string
 
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
 	flag.StringVar(&templatePath, "t", "", "go template")
-	flag.StringVar(&existingHanziPath, "e", "", "existing hanzi path")
+	flag.StringVar(&ignorePath, "e", "", "existing hanzi path")
 	flag.StringVar(&blacklistPath, "b", "", "blacklist path")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.Parse()
@@ -48,8 +48,8 @@ func main() {
 	name = strings.TrimSuffix(name, filepath.Ext(name))
 	outMarkdown := filepath.Join("gen", deckName, name+".md")
 	outYaml := filepath.Join("gen", deckName, name+".yaml")
-	if existingHanziPath == "" {
-		existingHanziPath = filepath.Join("gen", deckName, "generated")
+	if ignorePath == "" {
+		ignorePath = filepath.Join("gen", deckName, "ignore")
 	}
 	if blacklistPath == "" {
 		blacklistPath = filepath.Join("gen", deckName, "blacklist")
@@ -82,9 +82,9 @@ func main() {
 	)
 
 	// we keep track of hanzi to avoid redundant cards
-	excludedHanzi := make(map[string]struct{})
-	excludedHanzi = load(existingHanziPath, excludedHanzi)
-	excludedHanzi = load(blacklistPath, excludedHanzi)
+	ignoreHanzi := make(map[string]struct{})
+	ignoreHanzi = load(ignorePath, ignoreHanzi)
+	ignoreHanzi = load(blacklistPath, ignoreHanzi)
 
 	numSentences := 0
 	results := 3
@@ -117,7 +117,7 @@ func main() {
 			allHanziInSentence = append(allHanziInSentence, decomposition.Hanzi...)
 		}
 
-		excludedHanzi, allHanziInSentence = removeRedundant(excludedHanzi, allHanziInSentence)
+		ignoreHanzi, allHanziInSentence = removeRedundant(ignoreHanzi, allHanziInSentence)
 
 		ankiSentences[i] = anki.Sentence{
 			DeckName:      deckName,
@@ -148,7 +148,7 @@ tags:`
 	}
 	writeFile(y, outYaml)
 
-	writeHanziLog(excludedHanzi)
+	writeHanziLog(ignoreHanzi)
 }
 
 func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
@@ -215,7 +215,7 @@ func writeHanziLog(log map[string]struct{}) {
 		hanzi += k
 		hanzi += "\n"
 	}
-	if err := os.WriteFile(existingHanziPath, []byte(hanzi), 0644); err != nil {
+	if err := os.WriteFile(ignorePath, []byte(hanzi), 0644); err != nil {
 		fmt.Printf("could not write existing hanzi: %v", err)
 		os.Exit(1)
 	}
