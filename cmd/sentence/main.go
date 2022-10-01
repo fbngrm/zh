@@ -58,7 +58,7 @@ func getSentecesByLevel() map[string][]hskSentence {
 		os.Exit(1)
 	}
 
-	sentenceDict, err := sentences.Parse(sentenceSrc)
+	sentenceDict, err := sentences.Parse("fixme", sentenceSrc)
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)
