@@ -1,0 +1,43 @@
+{{range .Decomposition}}
+# Note
+## Audio
+{{ audio .Ideograph }}
+## Hanzi
+{{.Ideograph}}
+## Pinyin
+{{range .Readings}}{{.}} {{end}}
+## English
+{{range .Definitions}}{{.}} {{end}}
+## Equivalents
+{{if .Equivalents }}Equivalents: {{.Equivalents}}{{end}}
+## Components
+{{if .Components}}Components: {{.Components}}{{end}}
+## Kangxi
+{{if .Kangxi }}Kangxi: {{.Kangxi}}{{end}}
+## Traditional
+{{if .IdeographsTraditional }}Traditional: {{.IdeographsTraditional}}{{end}}
+## IsKangxi
+{{if .IsKangxi }}Is Kangxi: {{.IsKangxi}}{{end}}
+## HSKLevels{{if .HSKLevels }}HSK Levels: {{.HSKLevels}}{{end}}
+## Source
+{{if .Source }}Source: {{.Source}}{{end}}
+{{end}}
+# Note
+## Audio
+{{ audio .Sentence.Chinese }}
+## Hanzi
+{{.Sentence.Chinese}}
+## Equivalents
+## Pinyin
+{{.Sentence.Pinyin}}
+## English
+{{.Sentence.EnglishLiteral}}
+{{.Sentence.English}}
+## Components
+{{if .Sentence.ChineseWords}}Components: {{.Sentence.ChineseWords}}{{end}}
+## Kangxi
+## Traditional
+## IsKangxi
+## HSKLevels
+## Source
+{{if .Sentence.Source }}Source: {{.Sentence.Source}}{{end}}
