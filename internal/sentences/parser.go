@@ -2,7 +2,6 @@ package sentences
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
 )
@@ -80,7 +79,6 @@ func splitWords(chinese, pinyin string) []string {
 			if isPunctuation {
 				// if the char before punctuation is not a number, we need to increase word length
 				if previousIsAlpha {
-					fmt.Println(string(char))
 					wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
 				}
 				wordLengths = append(wordLengths, 1)
