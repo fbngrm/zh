@@ -29,12 +29,14 @@ const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 var in string
 var templatePath string
 var existingHanziPath string
+var blacklistPath string
 var deckName string
 
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
 	flag.StringVar(&templatePath, "t", "", "go template")
-	flag.StringVar(&existingHanziPath, "e", "", "existing hanzi")
+	flag.StringVar(&existingHanziPath, "e", "", "existing hanzi path")
+	flag.StringVar(&blacklistPath, "b", "", "blacklist path")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.Parse()
 
@@ -47,7 +49,10 @@ func main() {
 	outMarkdown := filepath.Join("gen", deckName, name+".md")
 	outYaml := filepath.Join("gen", deckName, name+".yaml")
 	if existingHanziPath == "" {
-		existingHanziPath = filepath.Join("gen", deckName, name+".log")
+		existingHanziPath = filepath.Join("gen", deckName, "generated")
+	}
+	if blacklistPath == "" {
+		blacklistPath = filepath.Join("gen", deckName, "blacklist")
 	}
 
 	sentenceDict, err := sentences.Parse(name, in)
@@ -77,8 +82,9 @@ func main() {
 	)
 
 	// we keep track of hanzi to avoid redundant cards
-	existingHanzi := loadHanziLog()
-	defer writeHanziLog(existingHanzi)
+	excludedHanzi := make(map[string]struct{})
+	excludedHanzi = load(existingHanziPath, excludedHanzi)
+	excludedHanzi = load(blacklistPath, excludedHanzi)
 
 	numSentences := 0
 	results := 3
@@ -101,7 +107,7 @@ func main() {
 			allHanziInSentence = append(allHanziInSentence, decomposition.Hanzi...)
 		}
 
-		existingHanzi, allHanziInSentence = removeRedundant(existingHanzi, allHanziInSentence)
+		excludedHanzi, allHanziInSentence = removeRedundant(excludedHanzi, allHanziInSentence)
 
 		ankiSentences[i] = anki.Sentence{
 			DeckName:      deckName,
@@ -131,6 +137,8 @@ tags:`
 		os.Exit(1)
 	}
 	writeFile(y, outYaml)
+
+	writeHanziLog(excludedHanzi)
 }
 
 func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
@@ -159,7 +167,7 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 	tplFuncMap["audio"] = func(query string) string {
 		return "[sound:" + deckName + "_" + hash(query) + ".mp3]"
 	}
-	tmpl, err := template.New("anki-sentence.tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
+	tmpl, err := template.New(deckName + ".tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
 	if err != nil {
 		return "", err
 	}
@@ -172,8 +180,8 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 	return buf.String(), nil
 }
 
-func loadHanziLog() map[string]struct{} {
-	file, err := os.Open(existingHanziPath)
+func load(path string, hanzi map[string]struct{}) map[string]struct{} {
+	file, err := os.Open(path)
 	if err != nil {
 		fmt.Printf("could not parse existing hanzi: %v", err)
 		os.Exit(1)
@@ -181,7 +189,6 @@ func loadHanziLog() map[string]struct{} {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	hanzi := make(map[string]struct{})
 	for scanner.Scan() {
 		line := scanner.Text()
 		if line == " " {
