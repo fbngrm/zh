@@ -23,7 +23,7 @@ import (
 
 var query string
 var outputDir string
-var convert bool
+var convertToMP3, force bool
 var in string
 var deckName string
 var blacklistFile *os.File
@@ -31,7 +31,8 @@ var blacklistFile *os.File
 func main() {
 	flag.StringVar(&query, "q", "", "query to show and record")
 	flag.StringVar(&outputDir, "o", "", "output directory")
-	flag.BoolVar(&convert, "c", false, "convert to mp3")
+	flag.BoolVar(&convertToMP3, "c", false, "convert to mp3")
+	flag.BoolVar(&force, "f", false, "force re-recording for existing audio files")
 	flag.StringVar(&in, "i", "", "input file")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.Parse()
@@ -72,17 +73,25 @@ func main() {
 	fmt.Printf("r = record / p = play recording / d = delete / n = next / b = blacklist \n")
 
 	for _, sentence := range ankiSentences {
+		// we assume all entries have the same deckname
+		if deckName == "" {
+			deckName = sentence.DeckName
+		}
+		fmt.Println("START SENTENCE ========")
 		fmt.Println(sentence.Sentence.English)
 		fmt.Println(sentence.Sentence.Pinyin)
 		fmt.Println(sentence.Sentence.Chinese)
 		loop(ctx, sentence.Sentence.Chinese)
 
+		fmt.Println("START COMPONENTS ======")
 		for _, hanzi := range sentence.Decomposition {
+			fmt.Println("=======================")
 			fmt.Println(hanzi.Definitions)
 			fmt.Println(hanzi.Readings)
 			fmt.Println(hanzi.Ideograph)
 			loop(ctx, hanzi.Ideograph)
 		}
+		fmt.Println("END SENTENCE ==========")
 	}
 	fmt.Println(blacklistFile.Close())
 }
@@ -91,6 +100,10 @@ func loop(ctx context.Context, query string) {
 	queryHash := hash(query)
 	path := filepath.Join(outputDir, deckName+"_"+queryHash)
 	scanner := bufio.NewScanner(os.Stdin)
+	if fileExists(ctx, path, convertToMP3) {
+		fmt.Printf("file exists, skipping. use -f flag to overwrite: %s\n", path)
+		return
+	}
 	for scanner.Scan() {
 		text := scanner.Text()
 		if text == "n" {
@@ -98,35 +111,46 @@ func loop(ctx context.Context, query string) {
 		}
 		switch text {
 		case "r":
-			err := record(ctx, path, convert)
+			err := record(ctx, path, convertToMP3)
 			if err != nil {
 				fmt.Printf("could not record: %v\n", err)
 			}
 		case "p":
-			err := play(ctx, path, convert)
+			err := play(ctx, path, convertToMP3)
 			if err != nil {
 				fmt.Printf("could not play: %v\n", err)
 			}
 		case "d":
-			err := deleteFile(ctx, path, convert)
+			err := deleteFile(ctx, path, convertToMP3)
 			if err != nil {
 				fmt.Printf("could not delete: %v\n", err)
 			}
 		case "b":
-			_, err := blacklistFile.WriteString(text)
+			_, err := blacklistFile.WriteString(query)
 			if err != nil {
 				fmt.Printf("could not append to blacklist: %v\n", err)
 			}
+			return
 		default:
-
 		}
-		fmt.Printf("r = record / p = play recording / d = delete / n = next \n")
+		fmt.Printf("r = record / p = play recording / d = delete / n = next / b = blacklist \n")
 	}
 
 	if err := scanner.Err(); err != nil {
 		fmt.Printf("could not read input: %v\n", err)
 		os.Exit(1)
 	}
+}
+
+func fileExists(ctx context.Context, path string, convertToMP3 bool) bool {
+	file := path + ".wav"
+	if convertToMP3 {
+		file = path + ".mp3"
+	}
+	if _, err := os.Stat(file); err == nil && !force {
+		return true
+	}
+	return false
 }
 
 func deleteFile(ctx context.Context, path string, convertToMP3 bool) error {
