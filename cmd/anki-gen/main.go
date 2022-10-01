@@ -93,6 +93,14 @@ func main() {
 	for _, sentence := range sentenceDict {
 		allHanziInSentence := make([]*hanzi.Hanzi, 0)
 		for _, word := range sentence.ChineseWords {
+			if word == "!" ||
+				word == "！" ||
+				word == "，" ||
+				word == "," ||
+				word == "." ||
+				word == "。" {
+				continue
+			}
 			decomposition, err := decomposer.Decompose(word, results, numSentences)
 			if err != nil {
 				os.Stderr.WriteString(fmt.Sprintf("error: %v\n", err))
