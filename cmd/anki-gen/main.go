@@ -95,6 +95,8 @@ func main() {
 		for _, word := range sentence.ChineseWords {
 			if word == "!" ||
 				word == "！" ||
+				word == "？" ||
+				word == "?" ||
 				word == "，" ||
 				word == "," ||
 				word == "." ||
