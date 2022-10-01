@@ -32,6 +32,7 @@ func Parse(sourceName, sourcePath string) (parsedSentences, error) {
 			continue
 		}
 		parts := strings.Split(line, ";")
+		chinese := parts[0]
 		pinyin := ""
 		if len(parts) > 1 {
 			pinyin = parts[1]
@@ -44,34 +45,52 @@ func Parse(sourceName, sourcePath string) (parsedSentences, error) {
 		if len(parts) > 3 {
 			englishLiteral = parts[3]
 		}
-		dict[parts[0]] = Sentence{
+		dict[strings.TrimSpace(chinese)] = Sentence{
 			Source:         sourceName,
-			Chinese:        parts[0],
+			Chinese:        strings.TrimSpace(chinese),
 			ChineseWords:   splitWords(parts[0], pinyin),
-			Pinyin:         pinyin,
-			English:        english,
-			EnglishLiteral: englishLiteral,
+			Pinyin:         strings.TrimSpace(pinyin),
+			English:        strings.TrimSpace(english),
+			EnglishLiteral: strings.TrimSpace(englishLiteral),
 		}
 	}
 	return dict, scanner.Err()
 }
 
-// 我的老师教我负数也可以开平方根。
-// wo3 de5 lao3shi1 jiao4 wo3 fu4shu4 ye3 ke3yi3 Kai1ping2 fang1gen1。
-// 我在结巴。
-// wo3 zai4 jie1ba5。
 func splitWords(chinese, pinyin string) []string {
 	pinyinWords := strings.Split(pinyin, " ")
 	// the pinyin is divided into words by whitespaces. we count the numbers (used for tone intonation)
 	// in each words to distinguish how many ideographs the word has. we use these word-lengths to split
 	// the chinese sentence into words.
-	wordLengths := make([]int, len(pinyinWords))
-	for i, word := range pinyinWords {
-		wordLengths[i] = 0
-		for _, r := range word {
-			if 47 < r && r < 58 {
-				wordLengths[i] = wordLengths[i] + 1
+	wordLengths := make([]int, 0)
+	for _, word := range pinyinWords {
+		wordLengths = append(wordLengths, 0)
+		lastEntryIndex := len(wordLengths) - 1
+		previousIsAlpha := false
+		for i, char := range word {
+			if 47 < char && char < 58 {
+				wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
+				previousIsAlpha = false
+				continue
 			}
+
+			isPunctuation := char == '!' || char == ',' || char == '.'
+			// if we have a punctuation character, we need to add another word with length 1
+			if isPunctuation {
+				// if the char before punctuation is not a number, we need to increase word length
+				if previousIsAlpha {
+					wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
+				}
+				wordLengths = append(wordLengths, 1)
+				continue
+			}
+
+			isLast := i == len(word)-1
+			// if last char of word is not a number/intonation char, we need to increase length counter
+			if isLast {
+				wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
+			}
+			previousIsAlpha = true
 		}
 	}
 
