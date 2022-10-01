@@ -77,23 +77,25 @@ func main() {
 		if deckName == "" {
 			deckName = sentence.DeckName
 		}
-		fmt.Println("START SENTENCE ========")
+		fmt.Println()
 		fmt.Println(sentence.Sentence.English)
 		fmt.Println(sentence.Sentence.Pinyin)
 		fmt.Println(sentence.Sentence.Chinese)
 		loop(ctx, sentence.Sentence.Chinese)
 
-		fmt.Println("START COMPONENTS ======")
 		for _, hanzi := range sentence.Decomposition {
-			fmt.Println("=======================")
+			fmt.Println()
 			fmt.Println(hanzi.Definitions)
 			fmt.Println(hanzi.Readings)
 			fmt.Println(hanzi.Ideograph)
+			if len(hanzi.Definitions) == 0 || len(hanzi.Readings) == 0 {
+				fmt.Println("WARNING: no translations|readings found, blacklist?")
+			}
 			loop(ctx, hanzi.Ideograph)
 		}
-		fmt.Println("END SENTENCE ==========")
 	}
-	fmt.Println(blacklistFile.Close())
+	fmt.Println("Done")
+	blacklistFile.Close()
 }
 
 func loop(ctx context.Context, query string) {
