@@ -117,7 +117,7 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences
 		return nil, nil, err
 	}
 	if len(matches) < 1 {
-		return nil, nil, fmt.Errorf("no matches found")
+		return nil, nil, fmt.Errorf("no matches found for query: %q", query)
 	}
 	h, err := d.dict.Entry(matches[0].Index)
 	if err != nil {
