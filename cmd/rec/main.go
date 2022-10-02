@@ -43,7 +43,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	dir, name := filepath.Split(in)
+	_, name := filepath.Split(in)
 	name = strings.TrimSuffix(name, filepath.Ext(name))
 	if outputDir == "" {
 		outputDir = filepath.Join("lib", deckName, "audio")
@@ -53,7 +53,7 @@ func main() {
 		fmt.Printf("could not create output dir: %v\n", err)
 		os.Exit(1)
 	}
-	blacklistPath := filepath.Join(dir, "blacklist")
+	blacklistPath := filepath.Join("lib", deckName, "blacklist")
 	blacklistFile, err = os.OpenFile(blacklistPath, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModeAppend)
 	if err != nil {
 		fmt.Printf("could not open blacklist: %v\n", err)
@@ -128,7 +128,7 @@ func loop(ctx context.Context, query string) {
 				fmt.Printf("could not delete: %v\n", err)
 			}
 		case "b":
-			_, err := blacklistFile.WriteString(query)
+			_, err := blacklistFile.WriteString(query + "\n")
 			if err != nil {
 				fmt.Printf("could not append to blacklist: %v\n", err)
 			}
