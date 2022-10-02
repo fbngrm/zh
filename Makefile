@@ -1,10 +1,10 @@
 source_lib_dir=./lib/$(source)
 audio_lib_dir=./lib/$(source)/audio
 
-.PHONY: clean-log
-clean-log:
-	rm $(source_lib_dir)/log
-	touch $(source_lib_dir)/log
+.PHONY: clean-ignore
+clean-ignore:
+	rm $(source_lib_dir)/ignore
+	touch $(source_lib_dir)/ignore
 
 .PHONY: clean-blacklist
 clean-blacklist:
@@ -12,14 +12,14 @@ clean-blacklist:
 	touch $(source_lib_dir)/blacklist
 
 .PHONY: clean
-clean: clean-blacklist clean-log
+clean: clean-blacklist clean-ignore
 
 .PHONY: generate
 generate:
 	go run cmd/anki-gen/main.go \
 		-i $(source_lib_dir)/$(file) \
 		-t ./templates/$(source).tmpl \
-		-e $(source_lib_dir)/log \
+		-e $(source_lib_dir)/ignore \
 		-b $(source_lib_dir)/blacklist \
 		-d $(source)
 
