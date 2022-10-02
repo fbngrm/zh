@@ -46,7 +46,7 @@ func main() {
 	dir, name := filepath.Split(in)
 	name = strings.TrimSuffix(name, filepath.Ext(name))
 	if outputDir == "" {
-		outputDir = filepath.Join(dir, "audio")
+		outputDir = filepath.Join("lib", deckName, "audio")
 	}
 	err = os.MkdirAll(outputDir, os.ModePerm)
 	if err != nil && !errors.Is(err, os.ErrExist) {
