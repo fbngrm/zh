@@ -35,8 +35,8 @@ var deckName string
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
 	flag.StringVar(&templatePath, "t", "", "go template")
-	flag.StringVar(&ignorePath, "e", "", "existing hanzi path")
-	flag.StringVar(&blacklistPath, "b", "", "blacklist path")
+	flag.StringVar(&ignorePath, "e", "", "path of ignore file")
+	flag.StringVar(&blacklistPath, "b", "", "path of blacklist file")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.Parse()
 
