@@ -43,16 +43,26 @@ generate-noise-profile:
 	cd $(audio_lib_dir); ffmpeg -i ./$(file) -ss 00:00:02 -t 00:00:03 ./noisesample.wav
 	cd $(audio_lib_dir); sox ./noisesample.wav -n noiseprof ./noise_profile_file
 
-.PHONY: remove-noise
+.PHONY: copy-audio
 audio_gen_dir=./gen/$(source)/audio
-clean_dir=$(audio_gen_dir)/clean
-backup_dir=$(audio_gen_dir)//original
+noise_profile_file=../../../lib/$(source)/audio/noise_profile_file
+copy-audio:
+	mkdir -p $(audio_gen_dir)
+	cp $(audio_lib_dir)/*.mp3 $(audio_gen_dir)
+
+.PHONY: remove-noise
 remove-noise:
-	mkdir -p $(clean_dir)
-	mkdir -p $(backup_dir)
-	cp $(audio_gen_dir)/*.mp3 ./gen/$(source)/audio/original
-	cd $(audio_gen_dir); ls -r -1 *.mp3 | xargs -L1 -I{} sox {} {}_cleaned.mp3  noisered ../../noise_profile_file 0.30
-	for i in $(audio_gen_dir)/*.mp3; do ffmpeg -ss 0.75 -i "$$i" "$${i%.*}_shortened.mp3"; done
-	mv $(audio_gen_dir)/*.mp3_cleaned_shortened.mp3 $(clean_dir)
-	find $(clean_dir) -name "*shortened.mp3" -exec rename -v ".mp3_cleaned_shortened" "" {} ";"
-	rm $(audio_gen_dir)/*.mp3
+	cd $(audio_gen_dir); ls -r -1 *.mp3 | xargs -L1 -I{} sox {} {}_cleaned.mp3  noisered $(noise_profile_file) 0.30
+
+.PHONY: shorten-audio
+shorten-audio:
+	cd $(audio_gen_dir); for i in *mp3_cleaned.mp3; do ffmpeg -ss 0.75 -i "$$i" "$${i%.*}_shortened.mp3"; done
+
+.PHONY: rename-audio
+rename-audio:
+	cd $(audio_gen_dir); rm ./*cleaned.mp3
+	cd $(audio_gen_dir); find . -name "*shortened.mp3" -exec rename -v ".mp3_cleaned_shortened" "" {} ";"
+
+.PHONY: clean-audio
+clean-audio: copy-audio remove-noise shorten-audio rename-audio
+
