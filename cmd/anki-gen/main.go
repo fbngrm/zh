@@ -49,10 +49,10 @@ func main() {
 	outMarkdown := filepath.Join("gen", deckName, name+".md")
 	outYaml := filepath.Join("gen", deckName, name+".yaml")
 	if ignorePath == "" {
-		ignorePath = filepath.Join("gen", deckName, "ignore")
+		ignorePath = filepath.Join("lib", deckName, "ignore")
 	}
 	if blacklistPath == "" {
-		blacklistPath = filepath.Join("gen", deckName, "blacklist")
+		blacklistPath = filepath.Join("lib", deckName, "blacklist")
 	}
 
 	sentenceDict, err := sentences.Parse(name, in)
