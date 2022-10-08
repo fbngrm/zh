@@ -1,43 +1,42 @@
-{{range .Decomposition}}
+{{range .Decompositions}}
 # Note
-## Audio
-{{ audio .Ideograph }}
+model: zh
+deck: {{$.DeckName}}
+
 ## Hanzi
 {{.Ideograph}}
 ## Pinyin
-{{range .Readings}}{{.}} {{end}}
+{{listToString .Readings}}
 ## English
-{{range .Definitions}}{{.}} {{end}}
-## Equivalents
-{{if .Equivalents }}Equivalents: {{.Equivalents}}{{end}}
-## Components
-{{if .Components}}Components: {{.Components}}{{end}}
-## Kangxi
-{{if .Kangxi }}Kangxi: {{.Kangxi}}{{end}}
-## Traditional
-{{if .IdeographsTraditional }}Traditional: {{.IdeographsTraditional}}{{end}}
-## IsKangxi
-{{if .IsKangxi }}Is Kangxi: {{.IsKangxi}}{{end}}
-## HSKLevels{{if .HSKLevels }}HSK Levels: {{.HSKLevels}}{{end}}
-## Source
-{{if .Source }}Source: {{.Source}}{{end}}
-{{end}}
-# Note
+{{listToString .Definitions}}
 ## Audio
-{{ audio .Sentence.Chinese }}
+{{ audio .Ideograph }}
+## Components
+Components:
+{{components .ComponentsDecompositions}}
+Kangxi:
+{{kangxi .ComponentsDecompositions}}
+## Equivalents
+Equivalents: {{listToString .Equivalents}}
+## Traditional
+Traditional: {{listToString .IdeographsTraditional}}
+## Kangxi
+{{end}}
+
+# Note
+model: zh
+deck: {{$.DeckName}}
 ## Hanzi
 {{.Sentence.Chinese}}
-## Equivalents
 ## Pinyin
 {{.Sentence.Pinyin}}
 ## English
-{{.Sentence.EnglishLiteral}}
 {{.Sentence.English}}
+## Audio
+{{ audio .Sentence.Chinese }}
 ## Components
-{{if .Sentence.ChineseWords}}Components: {{.Sentence.ChineseWords}}{{end}}
+Components:
+{{sentenceComponents .Sentence.ChineseWords .AllDecomposition}}
 ## Kangxi
+## Equivalents
 ## Traditional
-## IsKangxi
-## HSKLevels
-## Source
-{{if .Sentence.Source }}Source: {{.Sentence.Source}}{{end}}

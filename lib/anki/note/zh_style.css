@@ -15,10 +15,10 @@ span.italic {font-style: italic;}
 /* .linux .chinese {font-family: "Kochi Mincho";} */
 /* .mobile .chinese {font-family: "Motoya L Cedar", "Motoya L Maru", "DroidSansJapanese", "Hiragino Mincho ProN";} */
 
-/* .card { */
-/*  font-family: arial; */
-/*  font-size: 20px; */
-/*  text-align: center; */
-/*  color: black; */
-/*  background-color: white; */
-/* } */
+.card {
+ font-family: arial;
+ font-size: 10px;
+ text-align: center;
+ color: black;
+ background-color: white;
+}
