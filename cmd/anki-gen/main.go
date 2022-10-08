@@ -178,9 +178,17 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 		}
 		formatted := "<br/>"
 		for _, component := range componentsDecompositions {
+			componentDefintions := make([]string, 0)
+			for _, definition := range component.Definitions {
+				definitions := strings.Split(definition, ",")
+				if len(definitions) > 3 {
+					definitions = definitions[:3]
+				}
+				componentDefintions = append(componentDefintions, definitions...)
+			}
 			formatted += component.Ideograph
 			formatted += " = "
-			formatted += listToString(component.Definitions)
+			formatted += listToString(componentDefintions)
 			formatted += "<br/>"
 		}
 		formatted += "<br/>"
@@ -192,12 +200,20 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 		}
 		formatted := "<br/>"
 		for _, component := range decompositions {
+			componentDefintions := make([]string, 0)
+			for _, definition := range component.Definitions {
+				definitions := strings.Split(definition, ",")
+				if len(definitions) > 3 {
+					definitions = definitions[:3]
+				}
+				componentDefintions = append(componentDefintions, definitions...)
+			}
 			if !Contains(components, component.Ideograph) {
 				continue
 			}
 			formatted += component.Ideograph
 			formatted += " = "
-			formatted += listToString(component.Definitions)
+			formatted += listToString(componentDefintions)
 			formatted += "<br/>"
 		}
 		formatted += "<br/>"
