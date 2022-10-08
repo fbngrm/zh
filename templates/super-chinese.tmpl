@@ -4,23 +4,24 @@ model: zh
 deck: {{$.DeckName}}
 
 ## Hanzi
-{{.Ideograph}}
+{{.Hanzi.Ideograph}}
 ## Pinyin
-{{listToString .Readings}}
+{{listToString .Hanzi.Readings}}
 ## English
-{{listToString .Definitions}}
+{{listToString .Hanzi.Definitions}}
 ## Audio
-{{ audio .Ideograph }}
+{{ audio .Hanzi.Ideograph }}
 ## Components
 Components:
-{{components .ComponentsDecompositions}}
+{{components .Hanzi.ComponentsDecompositions}}
 Kangxi:
-{{kangxi .ComponentsDecompositions}}
+{{kangxi .Hanzi.ComponentsDecompositions}}
 ## Equivalents
-Equivalents: {{listToString .Equivalents}}
+Equivalents: {{listToString .Hanzi.Equivalents}}
 ## Traditional
-Traditional: {{listToString .IdeographsTraditional}}
-## Kangxi
+Traditional: {{listToString .Hanzi.IdeographsTraditional}}
+## Example
+Example: {{.Example}}
 {{end}}
 
 # Note
@@ -36,7 +37,8 @@ deck: {{$.DeckName}}
 {{ audio .Sentence.Chinese }}
 ## Components
 Components:
-{{sentenceComponents .Sentence.ChineseWords .AllDecomposition}}
+{{sentenceComponents .Sentence.ChineseWords .AllDecompositions}}
 ## Kangxi
 ## Equivalents
 ## Traditional
+## Example
