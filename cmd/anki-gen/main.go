@@ -31,6 +31,7 @@ var templatePath string
 var ignorePath string
 var blacklistPath string
 var deckName string
+var ignoreChars = []string{"!", "！", "？", "?", "，", ",", ".", "。"}
 
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
@@ -82,25 +83,18 @@ func main() {
 	)
 
 	// we keep track of hanzi to avoid redundant cards
-	ignoreHanzi := make(map[string]struct{})
-	ignoreHanzi = load(ignorePath, ignoreHanzi)
-	ignoreHanzi = load(blacklistPath, ignoreHanzi)
+	ignoreList := make(map[string]struct{})
+	ignoreList = load(ignorePath, ignoreList)
+	ignoreList = load(blacklistPath, ignoreList)
 
 	numSentences := 0
 	results := 3
 	ankiSentences := make([]anki.Sentence, len(sentenceDict))
 	i := 0
 	for _, sentence := range sentenceDict {
-		allHanziInSentence := make([]*hanzi.Hanzi, 0)
+		allDecompositionsForSentence := make([]*hanzi.Hanzi, 0)
 		for _, word := range sentence.ChineseWords {
-			if word == "!" ||
-				word == "！" ||
-				word == "？" ||
-				word == "?" ||
-				word == "，" ||
-				word == "," ||
-				word == "." ||
-				word == "。" {
+			if Contains(ignoreChars, word) {
 				continue
 			}
 			decomposition, err := decomposer.Decompose(word, results, numSentences)
@@ -114,23 +108,22 @@ func main() {
 				}
 				continue
 			}
-			allHanziInSentence = append(allHanziInSentence, decomposition.Hanzi...)
+			allDecompositionsForSentence = append(allDecompositionsForSentence, decomposition.Hanzi...)
 		}
 
-		ignoreHanzi, allHanziInSentence = removeRedundant(ignoreHanzi, allHanziInSentence)
+		updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(ignoreList, allDecompositionsForSentence)
+		ignoreList = updatedIgnoreList
 
 		ankiSentences[i] = anki.Sentence{
-			DeckName:      deckName,
-			Sentence:      sentence,
-			Decomposition: allHanziInSentence,
+			DeckName:          deckName,
+			Sentence:          sentence,
+			Decompositions:    onlyNewDecompositions,
+			AllDecompositions: flatten(allDecompositionsForSentence),
 		}
 		i++
 	}
 
-	header := `model: zh
-deck: %s
-tags:`
-	cards := fmt.Sprintf(header, deckName)
+	cards := ""
 	for _, sentence := range ankiSentences {
 		formatted, err := formatTemplate(sentence, templatePath)
 		if err != nil {
@@ -148,31 +141,83 @@ tags:`
 	}
 	writeFile(y, outYaml)
 
-	writeHanziLog(ignoreHanzi)
+	writeHanziLog(ignoreList)
 }
 
 func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 	tplFuncMap := make(template.FuncMap)
-	tplFuncMap["definitions"] = func(definitions []string) string {
-		defs := ""
-		if len(definitions) == 0 {
+	listToString := func(list []string) string {
+		if len(list) == 0 {
 			return ""
 		}
-		if len(definitions) == 1 {
-			definitions = strings.Split(definitions[0], ",")
-		}
-		for i, s := range definitions {
-			defs += s
-			if i == 4 {
+		// if len(list) == 1 {
+		// 	list = strings.Split(list[0], ",")
+		// }
+		formatted := ""
+		ignored := 0
+		for i, s := range list {
+			if Contains(ignoreChars, s) {
+				ignored += 1
+				continue
+			}
+			if s == "[" {
 				break
 			}
-			if i == len(definitions)-1 {
+			formatted += s
+			if i >= len(list)-ignored-1 {
 				break
 			}
-			defs += ", "
-			defs += "\n"
+			formatted += ", "
 		}
-		return defs
+		return formatted
+	}
+	tplFuncMap["listToString"] = listToString
+	tplFuncMap["components"] = func(componentsDecompositions []*hanzi.Hanzi) string {
+		if len(componentsDecompositions) == 0 {
+			return ""
+		}
+		formatted := "<br/>"
+		for _, component := range componentsDecompositions {
+			formatted += component.Ideograph
+			formatted += " = "
+			formatted += listToString(component.Definitions)
+			formatted += "<br/>"
+		}
+		formatted += "<br/>"
+		return formatted
+	}
+	tplFuncMap["sentenceComponents"] = func(components []string, decompositions []*hanzi.Hanzi) string {
+		if len(decompositions) == 0 {
+			return ""
+		}
+		formatted := "<br/>"
+		for _, component := range decompositions {
+			if !Contains(components, component.Ideograph) {
+				continue
+			}
+			formatted += component.Ideograph
+			formatted += " = "
+			formatted += listToString(component.Definitions)
+			formatted += "<br/>"
+		}
+		formatted += "<br/>"
+		return formatted
+	}
+	tplFuncMap["kangxi"] = func(componentsDecompositions []*hanzi.Hanzi) string {
+		if len(componentsDecompositions) == 0 {
+			return ""
+		}
+		formatted := "<br/>"
+		for _, component := range componentsDecompositions {
+			if component.IsKangxi {
+				formatted += component.Ideograph
+				formatted += " = "
+				formatted += listToString(component.Definitions)
+				formatted += "<br/>"
+			}
+		}
+		formatted += "<br/>"
+		return formatted
 	}
 	tplFuncMap["audio"] = func(query string) string {
 		return "[sound:" + deckName + "_" + hash(query) + ".mp3]"
@@ -221,25 +266,39 @@ func writeHanziLog(log map[string]struct{}) {
 	}
 }
 
-func removeRedundant(existingHanzi map[string]struct{}, newHanzi []*hanzi.Hanzi) (map[string]struct{}, []*hanzi.Hanzi) {
+// flattens hanzi, its component decompositions in to a map.
+func flatten(newHanzi []*hanzi.Hanzi) []*hanzi.Hanzi {
+	var flattened []*hanzi.Hanzi
+	for _, h := range newHanzi {
+		flattened = append(flattened, h)
+		for _, h := range h.ComponentsDecompositions {
+			flattened = append(flattened, h)
+		}
+	}
+	return flattened
+}
+
+// recursively removes hanzi that are contained in the the provided ignore list.
+// ignore list usually contains blacklisted hanzi and those, already contained in
+// a previously generated deck (logged in ../../lib/<deckname>/ignore).
+func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi) (map[string]struct{}, []*hanzi.Hanzi) {
 	var filtered []*hanzi.Hanzi
 	for _, h := range newHanzi {
-		if _, exists := existingHanzi[h.Ideograph]; !exists {
+		if _, ignore := ignoreList[h.Ideograph]; !ignore {
 			if len(h.Definitions) == 0 {
 				continue
 			}
 			filtered = append(filtered, h)
-			existingHanzi[h.Ideograph] = struct{}{}
+			ignoreList[h.Ideograph] = struct{}{}
 		}
 
 		var decompHanzi []*hanzi.Hanzi
-		existingHanzi, decompHanzi = removeRedundant(existingHanzi, h.ComponentsDecompositions)
-
+		ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions)
 		for _, h := range decompHanzi {
 			filtered = append(filtered, h)
 		}
 	}
-	return existingHanzi, filtered
+	return ignoreList, filtered
 }
 
 func toYaml(data interface{}) (string, error) {
@@ -261,4 +320,13 @@ func hash(s string) string {
 	h := sha1.New()
 	h.Write([]byte(strings.TrimSpace(s)))
 	return hex.EncodeToString(h.Sum(nil))
+}
+
+func Contains[T comparable](s []T, e T) bool {
+	for _, v := range s {
+		if v == e {
+			return true
+		}
+	}
+	return false
 }
