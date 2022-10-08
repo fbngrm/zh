@@ -47,13 +47,13 @@ func main() {
 	}
 	_, name := filepath.Split(in)
 	name = strings.TrimSuffix(name, filepath.Ext(name))
-	outMarkdown := filepath.Join("gen", deckName, name+".md")
-	outYaml := filepath.Join("gen", deckName, name+".yaml")
+	outMarkdown := filepath.Join("data", "gen", deckName, name+".md")
+	outYaml := filepath.Join("data", "gen", deckName, name+".yaml")
 	if ignorePath == "" {
-		ignorePath = filepath.Join("lib", deckName, "ignore")
+		ignorePath = filepath.Join("data", "lib", deckName, "ignore")
 	}
 	if blacklistPath == "" {
-		blacklistPath = filepath.Join("lib", deckName, "blacklist")
+		blacklistPath = filepath.Join("data", "lib", deckName, "blacklist")
 	}
 
 	sentenceDict, err := sentences.Parse(name, in)

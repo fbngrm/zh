@@ -29,14 +29,14 @@ generate:
 record:
 	go run cmd/rec/main.go \
 		-d $(source) \
-		-i ./gen/$(source)/$(file).yaml \
+		-i ./data/gen/$(source)/$(file).yaml \
 		-c
 
 .PHONY: force-record
 force-record:
 	go run cmd/rec/main.go \
 		-d $(source) \
-		-i ./gen/$(source)/$(file).yaml \
+		-i ./data/gen/$(source)/$(file).yaml \
 		-c \
 		-f
 
@@ -48,8 +48,8 @@ generate-noise-profile:
 	cd $(audio_lib_dir); sox ./noisesample.wav -n noiseprof ./noise_profile_file
 
 .PHONY: copy-audio
-audio_gen_dir=./gen/$(source)/audio
-noise_profile_file=../../../lib/$(source)/audio/noise_profile_file
+audio_gen_dir=./data/gen/$(source)/audio
+noise_profile_file=../../../data/lib/$(source)/audio/noise_profile_file
 copy-audio:
 	mkdir -p $(audio_gen_dir)
 	cp $(audio_lib_dir)/*.mp3 $(audio_gen_dir)
@@ -87,7 +87,7 @@ generate-anki-deck:
 		exit 1; \
 	fi
 	@printf "Blacklist was not changed\n"
-	apy add-from-file gen/$(source)/$(file).md
+	apy add-from-file ./data/gen/$(source)/$(file).md
 	@printf "Done. Don't forget to sync: make sync-anki\n"
 
 .PHONY: sync-anki
