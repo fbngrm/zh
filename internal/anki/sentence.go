@@ -6,7 +6,8 @@ import (
 )
 
 type Sentence struct {
-	DeckName      string
-	Sentence      sentences.Sentence
-	Decomposition []*hanzi.Hanzi
+	DeckName          string
+	Sentence          sentences.Sentence
+	Decompositions    []*hanzi.Hanzi
+	AllDecompositions []*hanzi.Hanzi
 }
