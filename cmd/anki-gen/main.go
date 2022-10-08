@@ -110,12 +110,7 @@ func main() {
 				continue
 			}
 
-			example := word
-			// if the word is a single ideograph, we use the sentence as an example
-			if len(word) <= 4 {
-				example = sentence.Chinese
-			}
-			updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(ignoreList, decomposition.Hanzi, example)
+			updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(ignoreList, decomposition.Hanzi, sentence.Chinese)
 			ignoreList = updatedIgnoreList
 
 			newDecompositionsForSentence = append(newDecompositionsForSentence, onlyNewDecompositions...)
