@@ -1,6 +1,8 @@
 source_lib_dir=./lib/$(source)
 audio_lib_dir=./lib/$(source)/audio
 
+# generate data
+
 .PHONY: clean-ignore
 clean-ignore:
 	rm $(source_lib_dir)/ignore
@@ -38,6 +40,8 @@ force-record:
 		-c \
 		-f
 
+# generate audio
+
 .PHONY: generate-noise-profile
 generate-noise-profile:
 	cd $(audio_lib_dir); ffmpeg -i ./$(file) -ss 00:00:02 -t 00:00:03 ./noisesample.wav
@@ -66,3 +70,27 @@ rename-audio:
 .PHONY: clean-audio
 clean-audio: copy-audio remove-noise shorten-audio rename-audio
 
+# generate anki
+
+.PHONY: copy-anki-audio
+anki_audio_dir="/home/f/.local/share/Anki2/User 1/collection.media/"
+copy-anki-audio:
+	cp $(audio_gen_dir)/*.mp3 $(anki_audio_dir)
+
+.PHONY: generate-anki-deck
+generate-anki-deck:
+	@printf "Checking for changes in blacklist\n"
+	@CHANGES=$$(git status -s --porcelain -- ./lib/$(source)/blacklist); \
+	if [ ! -z "$${CHANGES}" ]; \
+	then \
+		echo "Please re-generate after blacklist was changed: make generate source=$(source) file=$(file)"; \
+		exit 1; \
+	fi
+	@printf "Blacklist was not changed\n"
+	apy add-from-file gen/$(source)/$(file).md
+	@printf "Done. Don't forget to sync: make sync-anki\n"
+
+.PHONY: sync-anki
+sync-anki: copy-anki-audio
+	apy check-media
+	apy sync
