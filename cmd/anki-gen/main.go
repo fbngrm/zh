@@ -93,6 +93,7 @@ func main() {
 	i := 0
 	for _, sentence := range sentenceDict {
 		allDecompositionsForSentence := make([]*hanzi.Hanzi, 0)
+		newDecompositionsForSentence := make([]anki.HanziWithExample, 0)
 		for _, word := range sentence.ChineseWords {
 			if Contains(ignoreChars, word) {
 				continue
@@ -108,16 +109,23 @@ func main() {
 				}
 				continue
 			}
+
+			example := word
+			// if the word is a single ideograph, we use the sentence as an example
+			if len(word) <= 4 {
+				example = sentence.Chinese
+			}
+			updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(ignoreList, decomposition.Hanzi, example)
+			ignoreList = updatedIgnoreList
+
+			newDecompositionsForSentence = append(newDecompositionsForSentence, onlyNewDecompositions...)
 			allDecompositionsForSentence = append(allDecompositionsForSentence, decomposition.Hanzi...)
 		}
-
-		updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(ignoreList, allDecompositionsForSentence)
-		ignoreList = updatedIgnoreList
 
 		ankiSentences[i] = anki.Sentence{
 			DeckName:          deckName,
 			Sentence:          sentence,
-			Decompositions:    onlyNewDecompositions,
+			Decompositions:    newDecompositionsForSentence,
 			AllDecompositions: flatten(allDecompositionsForSentence),
 		}
 		i++
@@ -297,23 +305,27 @@ func flatten(newHanzi []*hanzi.Hanzi) []*hanzi.Hanzi {
 // recursively removes hanzi that are contained in the the provided ignore list.
 // ignore list usually contains blacklisted hanzi and those, already contained in
 // a previously generated deck (logged in ../../lib/<deckname>/ignore).
-func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi) (map[string]struct{}, []*hanzi.Hanzi) {
-	var filtered []*hanzi.Hanzi
+func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi, example string) (map[string]struct{}, []anki.HanziWithExample) {
+	var filtered []anki.HanziWithExample
 	for _, h := range newHanzi {
 		if _, ignore := ignoreList[h.Ideograph]; !ignore {
 			if len(h.Definitions) == 0 {
 				continue
 			}
-			filtered = append(filtered, h)
+			filtered = append(filtered, anki.HanziWithExample{
+				Hanzi:   h,
+				Example: example,
+			})
 			ignoreList[h.Ideograph] = struct{}{}
 		}
 
-		var decompHanzi []*hanzi.Hanzi
-		ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions)
-		for _, h := range decompHanzi {
-			filtered = append(filtered, h)
+		var decompHanzi []anki.HanziWithExample
+		ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions, h.Ideograph)
+		for _, dh := range decompHanzi {
+			filtered = append(filtered, dh)
 		}
 	}
+
 	return ignoreList, filtered
 }
 
