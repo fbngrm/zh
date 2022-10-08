@@ -83,7 +83,7 @@ func main() {
 		fmt.Println(sentence.Sentence.Chinese)
 		loop(ctx, sentence.Sentence.Chinese)
 
-		for _, hanzi := range sentence.Decomposition {
+		for _, hanzi := range sentence.Decompositions {
 			fmt.Println()
 			fmt.Println(hanzi.Definitions)
 			fmt.Println(hanzi.Readings)
