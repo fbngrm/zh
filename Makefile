@@ -1,5 +1,5 @@
-source_lib_dir=./lib/$(source)
-audio_lib_dir=./lib/$(source)/audio
+source_lib_dir=./data/lib/$(source)
+audio_lib_dir=./data/lib/$(source)/audio
 
 # generate data
 
