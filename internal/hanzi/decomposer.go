@@ -8,7 +8,7 @@ import (
 
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/kangxi"
-	encoding "github.com/fgrimme/zh/pkg/encodig"
+	encoding "github.com/fgrimme/zh/pkg/encoding"
 )
 
 type Decomposer struct {
