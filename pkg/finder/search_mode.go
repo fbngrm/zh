@@ -1,6 +1,6 @@
 package finder
 
-import "github.com/fgrimme/zh/pkg/conversion"
+import "github.com/fgrimme/zh/pkg/encoding"
 
 type searchMode int
 
@@ -44,11 +44,11 @@ func ModeFromString(s string, currentMode searchMode) searchMode {
 // if more than one hanzi, it's a word
 func ModeFromRune(r rune) searchMode {
 	var mode searchMode
-	runeType := conversion.DetectRuneType(r)
+	runeType := encoding.DetectRuneType(r)
 	switch runeType {
-	case conversion.RuneType_UnihanHanzi:
+	case encoding.RuneType_UnihanHanzi:
 		mode = searchMode_hanzi_char
-	case conversion.RuneType_Pinyin:
+	case encoding.RuneType_Pinyin:
 		mode = searchMode_pinyin
 	default:
 		mode = searchMode_ascii

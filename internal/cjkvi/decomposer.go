@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fgrimme/zh/pkg/conversion"
+	"github.com/fgrimme/zh/pkg/encoding"
 )
 
 type IDSDecomposer struct {
@@ -62,7 +62,7 @@ func (i *IDSDecomposer) Decompose(ideographToDecompose string) (Decomposition, e
 	// add components from IDS, ignoring the IDS characters
 	components := make([]string, 0)
 	for _, ideograph := range d.IdeographicDescriptionSequence {
-		if conversion.IsIdeographicDescriptionCharacter(ideograph) {
+		if encoding.IsIdeographicDescriptionCharacter(ideograph) {
 			continue
 		}
 		components = append(components, string(ideograph))
@@ -76,7 +76,7 @@ func (i *IDSDecomposer) decompose(d Decomposition) (Decomposition, error) {
 	d.Decompositions = make([]Decomposition, 0)
 	for _, ideograph := range d.IdeographicDescriptionSequence {
 		// ids characters can't be decomposed
-		if conversion.IsIdeographicDescriptionCharacter(ideograph) {
+		if encoding.IsIdeographicDescriptionCharacter(ideograph) {
 			continue
 		}
 		if ideograph == '[' {

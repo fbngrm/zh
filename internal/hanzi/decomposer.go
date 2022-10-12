@@ -8,7 +8,7 @@ import (
 
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/kangxi"
-	"github.com/fgrimme/zh/pkg/conversion"
+	encoding "github.com/fgrimme/zh/pkg/encodig"
 )
 
 type Decomposer struct {
@@ -82,7 +82,7 @@ func (d *Decomposer) Decompose(query string, numResults, numSentences int) (Deco
 	var errs []error
 
 	// query is english
-	if conversion.StringType(query) == conversion.RuneType_Ascii {
+	if encoding.StringType(query) == encoding.RuneType_Ascii {
 		result, err = d.buildFromEnglishWord(query, numResults, numSentences)
 	} else if len(query) > 4 { // from here we know that query is chinese
 		// max length of a single hanzi is 4 so we know that query is a word if it's longer

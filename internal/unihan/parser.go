@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fgrimme/zh/pkg/conversion"
+	"github.com/fgrimme/zh/pkg/encoding"
 )
 
 type entry map[string]string
@@ -43,7 +43,7 @@ func parse(unihanSrc string) (parsedEntries, error) {
 	// FIXME: how does unihan handle simplified and traditional / if they are separate
 	// mappings, how to asscociate them?
 	for mapping := range dict {
-		ideograph, err := conversion.ToCJKIdeograph(mapping)
+		ideograph, err := encoding.ToCJKIdeograph(mapping)
 		if err != nil {
 			return parsedEntries{}, err
 		}
