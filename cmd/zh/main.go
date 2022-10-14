@@ -27,6 +27,8 @@ func main() {
 	flag.StringVar(&fromFile, "ff", "", "from file")
 	flag.StringVar(&searchType, "s", "cedict", "search type [cedict|hsk|unihan]")
 	flag.IntVar(&numExampleSentences, "es", 0, "example sentences")
+	// number of results is the number of dict entries, aggregated in one single hanzi as
+	// the result of the search. it is not the number of actual results returned.
 	flag.IntVar(&numResults, "r", 10, "number of results")
 	flag.BoolVar(&verbose, "v", false, "include decompositions")
 	flag.Parse()

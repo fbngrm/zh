@@ -27,3 +27,7 @@ type Dict interface {
 type SentenceDict interface {
 	Get(ideograph string, numExampleSentences int, sort bool) sentences.Sentences
 }
+
+type FrequencyIndex interface {
+	Get(word string) (int, error)
+}

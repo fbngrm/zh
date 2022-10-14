@@ -6,6 +6,7 @@ import (
 
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
+	"github.com/fgrimme/zh/internal/frequency"
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/kangxi"
@@ -20,6 +21,7 @@ const unihanSrc = "./lib/unihan/Unihan_Readings.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 const hskSrcDir = "./lib/hsk/"
 const sentenceSrc = "./lib/sentences/tatoeba-cn-eng.txt"
+const wordFrequencySrc = "./lib/word_frequencies/global_wordfreq.release_UTF-8.txt"
 
 type Decomposer struct {
 	decomposer *hanzi.Decomposer
@@ -73,6 +75,9 @@ func NewDecomposer(dictType string) *Decomposer {
 		os.Exit(1)
 	}
 
+	// we provide a word frequency index which needs to be initialized before first use.
+	frequencyIndex := frequency.NewWordIndex(wordFrequencySrc)
+
 	// recursively decompose words or single hanzi
 	decomposer := hanzi.NewDecomposer(
 		dict,
@@ -80,6 +85,7 @@ func NewDecomposer(dictType string) *Decomposer {
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
 		sentenceDict,
+		frequencyIndex,
 	)
 
 	return &Decomposer{

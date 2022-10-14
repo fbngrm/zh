@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/fgrimme/zh/internal/cjkvi"
@@ -12,12 +13,13 @@ import (
 )
 
 type Decomposer struct {
-	dict          Dict
-	kangxiDict    kangxi.Dict
-	sentenceDict  SentenceDict
-	searcher      Searcher
-	idsDecomposer IDSDecomposer
-	offset        int
+	dict           Dict
+	kangxiDict     kangxi.Dict
+	sentenceDict   SentenceDict
+	searcher       Searcher
+	idsDecomposer  IDSDecomposer
+	offset         int
+	frequencyIndex FrequencyIndex
 }
 
 func NewDecomposer(
@@ -26,14 +28,16 @@ func NewDecomposer(
 	s Searcher,
 	d IDSDecomposer,
 	sd SentenceDict,
+	fi FrequencyIndex,
 ) *Decomposer {
 	return &Decomposer{
-		dict:          dict,
-		kangxiDict:    kangxiDict,
-		searcher:      s,
-		idsDecomposer: d,
-		sentenceDict:  sd,
-		offset:        20,
+		dict:           dict,
+		kangxiDict:     kangxiDict,
+		searcher:       s,
+		idsDecomposer:  d,
+		sentenceDict:   sd,
+		offset:         10,
+		frequencyIndex: fi,
 	}
 }
 
@@ -75,6 +79,8 @@ func (d *Decomposer) DecomposeFromFile(path string, numResults, numSentences int
 	return results, nil
 }
 
+// Note, Chinese queries return a single hanzi that is an aggregate of numResults search results.
+// English queries return several results. Each hanzi in the results is an aggregate of numResults search results.
 func (d *Decomposer) Decompose(query string, numResults, numSentences int) (DecompositionResult, error) {
 	var result DecompositionResult
 	var h *Hanzi
@@ -82,16 +88,21 @@ func (d *Decomposer) Decompose(query string, numResults, numSentences int) (Deco
 	var errs []error
 
 	// query is english
+	// note, for english search we always need the word frequency index. it gets lazily initialized by first use.
 	if encoding.StringType(query) == encoding.RuneType_Ascii {
 		result, err = d.buildFromEnglishWord(query, numResults, numSentences)
+
 	} else if len(query) > 4 { // from here we know that query is chinese
 		// max length of a single hanzi is 4 so we know that query is a word if it's longer
+
+		// the returned hanzi is an aggregate of numResults search results.
 		h, errs, err = d.buildFromChineseWord(query, numResults, numSentences)
 		result = DecompositionResult{
 			Hanzi: []*Hanzi{h},
 			Errs:  errs,
 		}
 	} else {
+		// the returned hanzi is an aggregate of numResults search results.
 		h, err = d.buildFromChineseHanzi(query, numResults, numSentences)
 		result = DecompositionResult{
 			Hanzi: []*Hanzi{h},
@@ -111,7 +122,7 @@ func (d *Decomposer) Decompose(query string, numResults, numSentences int) (Deco
 
 func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences int) (*Hanzi, []error, error) {
 	// we add an offset here to catch more matches with an equal
-	// scoring to achieve getting a consistent set of sorted matches
+	// scoring to get a consistent set of sorted matches
 	matches, err := d.searcher.FindSorted(query, numResults+d.offset)
 	if err != nil {
 		return nil, nil, err
@@ -291,7 +302,6 @@ func (d *Decomposer) buildKangxi(query string, numResults int) (*Hanzi, error) {
 	return nil, fmt.Errorf("could not build kangxi [%s]: query not found in dict", query)
 }
 
-// FIXME: return several results
 func (d *Decomposer) buildFromEnglishWord(query string, numResults, numSentences int) (DecompositionResult, error) {
 	// we add an offset here to catch more matches with an equal
 	// scoring to achieve getting a consistent set of sorted matches
@@ -299,8 +309,9 @@ func (d *Decomposer) buildFromEnglishWord(query string, numResults, numSentences
 	if err != nil {
 		return DecompositionResult{}, err
 	}
-	// FIXME: this is a hack to improve matching against several definitions. we might need a different fuzzy matching lib
-	filteredEntries := make([]*Hanzi, 0)
+
+	res := make(map[int][]*Hanzi)
+	keys := make([]int, 0, len(matches))
 	for _, m := range matches {
 		index := m.Index
 		if d.dict.Len() <= index {
@@ -310,28 +321,41 @@ func (d *Decomposer) buildFromEnglishWord(query string, numResults, numSentences
 		if err != nil {
 			return DecompositionResult{}, err
 		}
-		var readingsContainQuery bool
-		for _, d := range dictEntry.Definitions {
-			// if d == query {
-			// 	readingsContainQuery = true
-			// 	break
-			// }
-			if strings.Contains(d, query) {
-				readingsContainQuery = true
-				break
-			}
-		}
-		if !readingsContainQuery {
-			continue
-		}
-		filteredEntries = append(filteredEntries, dictEntry)
+
+		freq, _ := d.frequencyIndex.Get(dictEntry.Ideograph)
+		keys = append(keys, freq)
+		res[freq] = append(res[freq], dictEntry)
+
 	}
-	if len(filteredEntries) == 0 {
-		return DecompositionResult{}, nil
+
+	// sort results by word frequency
+	sortedResults := make([]*Hanzi, 0)
+	sort.Sort(sort.Reverse(sort.IntSlice(keys)))
+	for _, k := range keys {
+		sortedResults = append(sortedResults, res[k]...)
 	}
-	// use ideograph here to support unihan and cedict
-	// FIXME: fix the above somehow
-	return d.Decompose(filteredEntries[len(filteredEntries)-1].Ideograph, numResults, numSentences)
+
+	// we want return numResults results only. we limit here to avoid unnecessary decomposition.
+	if len(sortedResults) > numResults {
+		sortedResults = sortedResults[:numResults]
+	}
+
+	// // FIXME: to speed up search time, we only use 1 search result for the aggregated hanzi.
+	numResults = 1
+
+	// decompose and aggregate results
+	aggregateResult := DecompositionResult{}
+	for _, h := range sortedResults {
+		r, err := d.Decompose(h.Ideograph, numResults, numSentences)
+		if err != nil {
+			// we probably want to ignore this
+			return DecompositionResult{}, err
+		}
+		aggregateResult.Hanzi = append(aggregateResult.Hanzi, r.Hanzi...)
+		aggregateResult.Errs = append(aggregateResult.Errs, r.Errs...)
+	}
+
+	return aggregateResult, nil
 }
 
 func (d *Decomposer) AddSentences(hs []*Hanzi, numExampleSentences int) []*Hanzi {
