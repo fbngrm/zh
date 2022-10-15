@@ -340,8 +340,8 @@ func (d *Decomposer) buildFromEnglishWord(query string, numResults, numSentences
 		sortedResults = sortedResults[:numResults]
 	}
 
-	// // FIXME: to speed up search time, we only use 1 search result for the aggregated hanzi.
-	numResults = 1
+	// FIXME: to speed up search time, we only use 1 search result for the aggregated hanzi.
+	// numResults = 1
 
 	// decompose and aggregate results
 	aggregateResult := DecompositionResult{}
