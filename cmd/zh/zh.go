@@ -18,6 +18,7 @@ var fields string
 var numResults int
 var numExampleSentences int
 var verbose bool
+var splitSentence bool
 
 func main() {
 	flag.StringVar(&query, "q", "", "query")
@@ -31,6 +32,7 @@ func main() {
 	// the result of the search. it is not the number of actual results returned.
 	flag.IntVar(&numResults, "r", 10, "number of results")
 	flag.BoolVar(&verbose, "v", false, "include decompositions")
+	flag.BoolVar(&splitSentence, "ss", false, "split sentences")
 	flag.Parse()
 
 	d := zh.NewDecomposer(searchType)
@@ -38,7 +40,9 @@ func main() {
 	var result hanzi.DecompositionResult
 	var err error
 
-	if fromFile != "" {
+	if splitSentence {
+		result, err = d.DecomposeSentence(query, numResults, numExampleSentences)
+	} else if fromFile != "" {
 		result, err = d.DecomposeFromFile(fromFile, numResults, numExampleSentences)
 	} else {
 		result, err = d.Decompose(query, numResults, numExampleSentences)

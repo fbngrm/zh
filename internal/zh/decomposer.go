@@ -10,6 +10,7 @@ import (
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/kangxi"
+	"github.com/fgrimme/zh/internal/segmentation"
 	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
 	"github.com/fgrimme/zh/pkg/finder"
@@ -24,7 +25,8 @@ const sentenceSrc = "./lib/sentences/tatoeba-cn-eng.txt"
 const wordFrequencySrc = "./lib/word_frequencies/global_wordfreq.release_UTF-8.txt"
 
 type Decomposer struct {
-	decomposer *hanzi.Decomposer
+	sentenceSegmenter *segmentation.SentenceCutter
+	decomposer        *hanzi.Decomposer
 }
 
 func NewDecomposer(dictType string) *Decomposer {
@@ -89,8 +91,15 @@ func NewDecomposer(dictType string) *Decomposer {
 	)
 
 	return &Decomposer{
-		decomposer: decomposer,
+		decomposer:        decomposer,
+		sentenceSegmenter: segmentation.NewSentenceCutter(),
 	}
+}
+
+func (z *Decomposer) DecomposeSentence(query string, numResults, numSentences int) (hanzi.DecompositionResult, error) {
+	words := z.sentenceSegmenter.Cut(query)
+	fmt.Println(words)
+	return hanzi.DecompositionResult{}, nil
 }
 
 func (z *Decomposer) DecomposeFromFile(fromFile string, numResults, numSentences int) (hanzi.DecompositionResult, error) {
