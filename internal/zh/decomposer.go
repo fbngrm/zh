@@ -96,10 +96,19 @@ func NewDecomposer(dictType string) *Decomposer {
 	}
 }
 
-func (z *Decomposer) DecomposeSentence(query string, numResults, numSentences int) (hanzi.DecompositionResult, error) {
+func (z *Decomposer) DecomposeSentence(query string, numResults, numSentences int) (hanzi.DecompositionResult, []error) {
 	words := z.sentenceSegmenter.Cut(query)
-	fmt.Println(words)
-	return hanzi.DecompositionResult{}, nil
+	res := hanzi.DecompositionResult{}
+	errs := []error{}
+	for _, word := range words {
+		r, err := z.decomposer.Decompose(word, numResults, numSentences)
+		if err != nil {
+			errs = append(errs, err)
+		}
+		res.Hanzi = append(res.Hanzi, r.Hanzi...)
+		res.Errs = append(res.Errs, r.Errs...)
+	}
+	return res, errs
 }
 
 func (z *Decomposer) DecomposeFromFile(fromFile string, numResults, numSentences int) (hanzi.DecompositionResult, error) {

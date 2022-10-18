@@ -41,7 +41,12 @@ func main() {
 	var err error
 
 	if splitSentence {
-		result, err = d.DecomposeSentence(query, numResults, numExampleSentences)
+		// FIXME: better error handling for search related and decomposition related errors
+		var errs []error
+		result, errs = d.DecomposeSentence(query, numResults, numExampleSentences)
+		if errs != nil {
+			fmt.Printf("search errors: %v\n", errs)
+		}
 	} else if fromFile != "" {
 		result, err = d.DecomposeFromFile(fromFile, numResults, numExampleSentences)
 	} else {
