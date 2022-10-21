@@ -39,22 +39,31 @@ func main() {
 
 	var result hanzi.DecompositionResult
 	var err error
+	var errs []error
 
-	if splitSentence {
+	if splitSentence && fromFile != "" {
 		// FIXME: better error handling for search related and decomposition related errors
-		var errs []error
+		result, errs = d.DecomposeSentencesFromFile(fromFile, numResults, numExampleSentences)
+		if errs != nil {
+			fmt.Printf("search errors: %v\n", errs)
+		}
+	} else if splitSentence {
+		// FIXME: better error handling for search related and decomposition related errors
 		result, errs = d.DecomposeSentence(query, numResults, numExampleSentences)
 		if errs != nil {
 			fmt.Printf("search errors: %v\n", errs)
 		}
 	} else if fromFile != "" {
-		result, err = d.DecomposeFromFile(fromFile, numResults, numExampleSentences)
+		result, errs = d.DecomposeFromFile(fromFile, numResults, numExampleSentences)
+		if errs != nil {
+			fmt.Printf("search errors: %v\n", errs)
+		}
 	} else {
 		result, err = d.Decompose(query, numResults, numExampleSentences)
-	}
-	if err != nil {
-		fmt.Printf("could not decompose: %v\n", err)
-		os.Exit(1)
+		if err != nil {
+			fmt.Printf("could not decompose: %v\n", err)
+			os.Exit(1)
+		}
 	}
 
 	fmt.Println(format(result))

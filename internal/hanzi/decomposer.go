@@ -1,7 +1,6 @@
 package hanzi
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"sort"
@@ -52,31 +51,6 @@ func (r DecompositionResult) PrintErrors() {
 			os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
 		}
 	}
-}
-
-func (d *Decomposer) DecomposeFromFile(path string, numResults, numSentences int) (DecompositionResult, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return DecompositionResult{}, fmt.Errorf("could not open file: %v\n", err)
-	}
-	scanner := bufio.NewScanner(file)
-	// optionally, resize scanner's capacity for lines over 64K
-	var results DecompositionResult
-	for scanner.Scan() {
-		result, err := d.Decompose(scanner.Text(), numResults, numSentences)
-		if err != nil {
-			return DecompositionResult{}, err
-		}
-		results.Hanzi = append(results.Hanzi, result.Hanzi...)
-		results.Errs = append(results.Errs, result.Errs...)
-	}
-	if err := scanner.Err(); err != nil {
-		return DecompositionResult{}, fmt.Errorf("scanner error: %v\n", err)
-	}
-	if err := file.Close(); err != nil {
-		return DecompositionResult{}, fmt.Errorf("could not close input file: %v\n", err)
-	}
-	return results, nil
 }
 
 // Note, Chinese queries return a single hanzi that is an aggregate of numResults search results.

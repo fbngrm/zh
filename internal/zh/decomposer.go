@@ -1,6 +1,7 @@
 package zh
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 
@@ -23,6 +24,8 @@ const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
 const hskSrcDir = "./lib/hsk/"
 const sentenceSrc = "./lib/sentences/tatoeba-cn-eng.txt"
 const wordFrequencySrc = "./lib/word_frequencies/global_wordfreq.release_UTF-8.txt"
+
+var ignorePunctuationChars = []string{"!", "！", "？", "?", "，", ",", ".", "。"}
 
 type Decomposer struct {
 	sentenceSegmenter *segmentation.SentenceCutter
@@ -96,11 +99,34 @@ func NewDecomposer(dictType string) *Decomposer {
 	}
 }
 
+func (z *Decomposer) readFile(path string) ([]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, fmt.Errorf("could not open file: %v\n", err)
+	}
+	scanner := bufio.NewScanner(file)
+	// optionally, resize scanner's capacity for lines over 64K
+	var lines []string
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		return nil, fmt.Errorf("scanner error: %v\n", err)
+	}
+	if err := file.Close(); err != nil {
+		return nil, fmt.Errorf("could not close input file: %v\n", err)
+	}
+	return lines, nil
+}
+
 func (z *Decomposer) DecomposeSentence(query string, numResults, numSentences int) (hanzi.DecompositionResult, []error) {
 	words := z.sentenceSegmenter.Cut(query)
 	res := hanzi.DecompositionResult{}
 	errs := []error{}
 	for _, word := range words {
+		if Contains(ignorePunctuationChars, word) {
+			continue
+		}
 		r, err := z.decomposer.Decompose(word, numResults, numSentences)
 		if err != nil {
 			errs = append(errs, err)
@@ -111,10 +137,51 @@ func (z *Decomposer) DecomposeSentence(query string, numResults, numSentences in
 	return res, errs
 }
 
-func (z *Decomposer) DecomposeFromFile(fromFile string, numResults, numSentences int) (hanzi.DecompositionResult, error) {
-	return z.decomposer.DecomposeFromFile(fromFile, numResults, numSentences)
+func (z *Decomposer) DecomposeSentencesFromFile(fromFile string, numResults, numSentences int) (hanzi.DecompositionResult, []error) {
+	lines, err := z.readFile(fromFile)
+	if err != nil {
+		return hanzi.DecompositionResult{}, []error{err}
+	}
+	results := hanzi.DecompositionResult{}
+	errs := []error{}
+	for _, line := range lines {
+		result, sErrs := z.DecomposeSentence(line, numResults, numSentences)
+		if len(sErrs) != 0 {
+			errs = append(errs, sErrs...)
+		}
+		results.Hanzi = append(results.Hanzi, result.Hanzi...)
+		results.Errs = append(results.Errs, result.Errs...)
+	}
+	return results, errs
+}
+
+func (z *Decomposer) DecomposeFromFile(fromFile string, numResults, numSentences int) (hanzi.DecompositionResult, []error) {
+	lines, err := z.readFile(fromFile)
+	if err != nil {
+		return hanzi.DecompositionResult{}, []error{err}
+	}
+	results := hanzi.DecompositionResult{}
+	errs := []error{}
+	for _, line := range lines {
+		result, err := z.decomposer.Decompose(line, numResults, numSentences)
+		if err != nil {
+			errs = append(errs, err)
+		}
+		results.Hanzi = append(results.Hanzi, result.Hanzi...)
+		results.Errs = append(results.Errs, result.Errs...)
+	}
+	return results, errs
 }
 
 func (z *Decomposer) Decompose(query string, numResults, numSentences int) (hanzi.DecompositionResult, error) {
 	return z.decomposer.Decompose(query, numResults, numSentences)
+}
+
+func Contains[T comparable](s []T, e T) bool {
+	for _, v := range s {
+		if v == e {
+			return true
+		}
+	}
+	return false
 }
