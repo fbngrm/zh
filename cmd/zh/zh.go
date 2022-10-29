@@ -7,6 +7,7 @@ import (
 
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/zh"
+	"github.com/fgrimme/zh/pkg/gcp/translate"
 )
 
 var query string
@@ -48,6 +49,11 @@ func main() {
 			fmt.Printf("search errors: %v\n", errs)
 		}
 	} else if splitSentence {
+		res, err := translate.TranslateText("en-US", query)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println(res)
 		// FIXME: better error handling for search related and decomposition related errors
 		result, errs = d.DecomposeSentence(query, numResults, numExampleSentences)
 		if errs != nil {
