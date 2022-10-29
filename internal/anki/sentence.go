@@ -12,6 +12,7 @@ type HanziWithExample struct {
 
 type Sentence struct {
 	DeckName          string
+	Tags              string
 	Sentence          sentences.Sentence
 	Decompositions    []HanziWithExample
 	AllDecompositions []*hanzi.Hanzi
