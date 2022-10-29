@@ -9,12 +9,14 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"text/template"
 
 	"github.com/fgrimme/zh/internal/anki"
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
+	"github.com/fgrimme/zh/internal/frequency"
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/sentences"
@@ -25,6 +27,7 @@ import (
 
 const idsSrc = "./lib/cjkvi/ids.txt"
 const cedictSrc = "./lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt"
+const wordFrequencySrc = "./lib/word_frequencies/global_wordfreq.release_UTF-8.txt"
 
 var in string
 var templatePath string
@@ -45,10 +48,11 @@ func main() {
 		fmt.Println("need deck name")
 		os.Exit(1)
 	}
-	_, name := filepath.Split(in)
-	name = strings.TrimSuffix(name, filepath.Ext(name))
-	outMarkdown := filepath.Join("data", "gen", deckName, name+".md")
-	outYaml := filepath.Join("data", "gen", deckName, name+".yaml")
+
+	_, filename := filepath.Split(in)
+	filename = strings.TrimSuffix(filename, filepath.Ext(filename))
+	outMarkdown := filepath.Join("data", "gen", deckName, filename+".md")
+	outYaml := filepath.Join("data", "gen", deckName, filename+".yaml")
 	if ignorePath == "" {
 		ignorePath = filepath.Join("data", "lib", deckName, "ignore")
 	}
@@ -56,7 +60,10 @@ func main() {
 		blacklistPath = filepath.Join("data", "lib", deckName, "blacklist")
 	}
 
-	sentenceDict, err := sentences.Parse(name, in)
+	re := regexp.MustCompile("[_0-9]")
+	tags := re.ReplaceAllString(filename, "")
+
+	sentenceDict, orderedKeys, err := sentences.Parse(filename, in)
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)
@@ -74,12 +81,16 @@ func main() {
 		os.Exit(1)
 	}
 
+	// we provide a word frequency index which needs to be initialized before first use.
+	frequencyIndex := frequency.NewWordIndex(wordFrequencySrc)
+
 	decomposer := hanzi.NewDecomposer(
 		dict,
 		kangxi.NewDict(),
 		search.NewSearcher(finder.NewFinder(dict)),
 		idsDecomposer,
 		nil,
+		frequencyIndex,
 	)
 
 	// we keep track of hanzi to avoid redundant cards
@@ -91,13 +102,15 @@ func main() {
 	results := 3
 	ankiSentences := make([]anki.Sentence, len(sentenceDict))
 	i := 0
-	for _, sentence := range sentenceDict {
+	for _, key := range orderedKeys {
+		sentence := sentenceDict[key]
 		allDecompositionsForSentence := make([]*hanzi.Hanzi, 0)
 		newDecompositionsForSentence := make([]anki.HanziWithExample, 0)
 		for _, word := range sentence.ChineseWords {
 			if Contains(ignoreChars, word) {
 				continue
 			}
+
 			decomposition, err := decomposer.Decompose(word, results, numSentences)
 			if err != nil {
 				os.Stderr.WriteString(fmt.Sprintf("error: %v\n", err))
@@ -110,7 +123,18 @@ func main() {
 				continue
 			}
 
-			updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(ignoreList, decomposition.Hanzi, sentence.Chinese)
+			isWord := len(word) > 4
+			depth := 1
+			if isWord {
+				depth = 2
+			}
+
+			updatedIgnoreList, onlyNewDecompositions := removeExistingAndFlatten(
+				ignoreList,
+				decomposition.Hanzi,
+				sentence.Chinese,
+				depth,
+			)
 			ignoreList = updatedIgnoreList
 
 			newDecompositionsForSentence = append(newDecompositionsForSentence, onlyNewDecompositions...)
@@ -119,6 +143,7 @@ func main() {
 
 		ankiSentences[i] = anki.Sentence{
 			DeckName:          deckName,
+			Tags:              tags,
 			Sentence:          sentence,
 			Decompositions:    newDecompositionsForSentence,
 			AllDecompositions: flatten(allDecompositionsForSentence),
@@ -300,8 +325,12 @@ func flatten(newHanzi []*hanzi.Hanzi) []*hanzi.Hanzi {
 // recursively removes hanzi that are contained in the the provided ignore list.
 // ignore list usually contains blacklisted hanzi and those, already contained in
 // a previously generated deck (logged in ../../lib/<deckname>/ignore).
-func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi, example string) (map[string]struct{}, []anki.HanziWithExample) {
+func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi, example string, depth int) (map[string]struct{}, []anki.HanziWithExample) {
 	var filtered []anki.HanziWithExample
+	if depth == 0 {
+		return ignoreList, filtered
+	}
+
 	for _, h := range newHanzi {
 		if _, ignore := ignoreList[h.Ideograph]; !ignore {
 			if len(h.Definitions) == 0 {
@@ -312,12 +341,12 @@ func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.
 				Example: example,
 			})
 			ignoreList[h.Ideograph] = struct{}{}
-		}
 
-		var decompHanzi []anki.HanziWithExample
-		ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions, h.Ideograph)
-		for _, dh := range decompHanzi {
-			filtered = append(filtered, dh)
+			var decompHanzi []anki.HanziWithExample
+			ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions, h.Ideograph, depth-1)
+			for _, dh := range decompHanzi {
+				filtered = append(filtered, dh)
+			}
 		}
 	}
 
