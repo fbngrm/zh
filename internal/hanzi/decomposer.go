@@ -132,9 +132,11 @@ func (d *Decomposer) buildFromChineseWord(query string, numResults, numSentences
 
 func (d *Decomposer) buildFromChineseHanzi(query string, numResults, numSentences int) (*Hanzi, error) {
 	// if the query is a kangxi, we don't need to decompose
-	if _, isKangxi := d.kangxiDict[query]; isKangxi {
-		return d.buildKangxi(query, numResults)
-	}
+	// if _, isKangxi := d.kangxiDict[query]; isKangxi {
+	// 	return d.buildKangxi(query, numResults)
+	// }
+	// we need to decompose since it might have several meanings
+	_, isKangxi := d.kangxiDict[query]
 
 	// build a base hanzi by summarizing numResults search results for the query
 	base, err := d.buildHanziBaseFromSearchResults(query, numResults)
@@ -154,7 +156,7 @@ func (d *Decomposer) buildFromChineseHanzi(query string, numResults, numSentence
 	return &Hanzi{
 		Source: d.dict.Src(),
 		// base data
-		IsKangxi:              base.IsKangxi,
+		IsKangxi:              isKangxi,
 		HSKLevels:             base.HSKLevels,
 		Ideograph:             base.Ideograph,
 		IdeographsSimplified:  base.IdeographsSimplified,
