@@ -40,7 +40,7 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, err := Parse(sourceName, sourcePath)
+		got, _, err := Parse(sourceName, sourcePath)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -77,7 +77,7 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, err := Parse(sourceName, sourcePath)
+		got, _, err := Parse(sourceName, sourcePath)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -120,7 +120,7 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, err := Parse(sourceName, sourcePath)
+		got, _, err := Parse(sourceName, sourcePath)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -155,7 +155,7 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, err := Parse(sourceName, sourcePath)
+		got, _, err := Parse(sourceName, sourcePath)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()

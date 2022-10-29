@@ -2,6 +2,7 @@ package sentences
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -17,20 +18,33 @@ type Sentence struct {
 
 type parsedSentences map[string]Sentence
 
-func Parse(sourceName, sourcePath string) (parsedSentences, error) {
+func ReadFile(sourceName, sourcePath string) ([]string, error) {
 	file, err := os.Open(sourcePath)
 	if err != nil {
-		return parsedSentences{}, err
+		return nil, err
 	}
 	defer file.Close()
 
+	lines := make([]string, 0)
 	scanner := bufio.NewScanner(file)
-	dict := make(parsedSentences)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] == '/' {
 			continue
 		}
+		lines = append(lines, line)
+	}
+	return lines, scanner.Err()
+}
+
+func Parse(sourceName, sourcePath string) (parsedSentences, []string, error) {
+	lines, err := ReadFile(sourceName, sourcePath)
+	if err != nil {
+		return parsedSentences{}, nil, fmt.Errorf("could not parse sentences %w", err)
+	}
+	dict := make(parsedSentences)
+	orderedKeys := make([]string, len(lines))
+	for i, line := range lines {
 		parts := strings.Split(line, ";")
 		chinese := parts[0]
 		pinyin := ""
@@ -45,6 +59,7 @@ func Parse(sourceName, sourcePath string) (parsedSentences, error) {
 		if len(parts) > 3 {
 			englishLiteral = parts[3]
 		}
+		orderedKeys[i] = strings.TrimSpace(chinese)
 		dict[strings.TrimSpace(chinese)] = Sentence{
 			Source:         sourceName,
 			Chinese:        strings.TrimSpace(chinese),
@@ -54,7 +69,7 @@ func Parse(sourceName, sourcePath string) (parsedSentences, error) {
 			EnglishLiteral: strings.TrimSpace(englishLiteral),
 		}
 	}
-	return dict, scanner.Err()
+	return dict, orderedKeys, nil
 }
 
 func splitWords(chinese, pinyin string) []string {

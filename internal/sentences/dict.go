@@ -9,7 +9,7 @@ import (
 type Dict map[string]Sentences
 
 func NewDict(sourceName, sourcePath string) (Dict, error) {
-	parsedSentences, err := Parse(sourceName, sourcePath)
+	parsedSentences, _, err := Parse(sourceName, sourcePath)
 	if err != nil {
 		return nil, err
 	}
