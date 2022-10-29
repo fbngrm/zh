@@ -32,12 +32,20 @@ record:
 		-i ./data/gen/$(source)/$(file).yaml \
 		-c
 
-.PHONY: force-record
-force-record:
+.PHONY: download-audio
+download-audio:
+	go run cmd/rec/main.go \
+		-d $(source) \
+		-i ./data/gen/$(source)/$(file).yaml \
+		-c -a
+
+.PHONY: force-download-audio
+force-download-audio:
 	go run cmd/rec/main.go \
 		-d $(source) \
 		-i ./data/gen/$(source)/$(file).yaml \
 		-c \
+        -a \
 		-f
 
 # generate audio
@@ -80,7 +88,7 @@ copy-anki-audio:
 .PHONY: generate-anki-deck
 generate-anki-deck:
 	@printf "Checking for changes in blacklist\n"
-	@CHANGES=$$(git status -s --porcelain -- ./lib/$(source)/blacklist); \
+	@CHANGES=$$(git status -s --porcelain -- ./data/lib/$(source)/blacklist); \
 	if [ ! -z "$${CHANGES}" ]; \
 	then \
 		echo "Please re-generate after blacklist was changed: make generate source=$(source) file=$(file)"; \
