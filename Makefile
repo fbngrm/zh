@@ -49,18 +49,26 @@ force-download-audio:
 		-f
 
 # generate audio
-
 .PHONY: generate-noise-profile
 generate-noise-profile:
 	cd $(audio_lib_dir); ffmpeg -i ./$(file) -ss 00:00:02 -t 00:00:03 ./noisesample.wav
 	cd $(audio_lib_dir); sox ./noisesample.wav -n noiseprof ./noise_profile_file
 
-.PHONY: copy-audio
 audio_gen_dir=./data/gen/$(source)/audio
 noise_profile_file=../../../data/lib/$(source)/audio/noise_profile_file
+.PHONY: copy-audio
 copy-audio:
 	mkdir -p $(audio_gen_dir)
 	cp $(audio_lib_dir)/*.mp3 $(audio_gen_dir)
+
+.PHONY: concat-audio
+audio_sub_dir=./data/gen/$(source)/audio/$(subdir)
+out_dir=/home/f/data/music/zh/$(source)/$(subdir)
+silence=../../../silence.mp3
+concat-audio:
+	echo $(audio_sub_dir)
+	mkdir -p $(out_dir)
+	cd $(audio_sub_dir); for i in *.mp3; do ffmpeg -i "concat:$$i|$(silence)|$$i|$(silence)|$$i|$(silence)|$$i|$(silence)|$$i|$(silence)|$(silence)" -acodec copy $(out_dir)/"$${i%.*}_concat.mp3"; done
 
 .PHONY: remove-noise
 remove-noise:
@@ -80,10 +88,11 @@ clean-audio: copy-audio remove-noise shorten-audio rename-audio
 
 # generate anki
 
-.PHONY: copy-anki-audio
 anki_audio_dir="/home/f/.local/share/Anki2/User 1/collection.media/"
+.PHONY: copy-anki-audio
 copy-anki-audio:
-	cp $(audio_gen_dir)/*.mp3 $(anki_audio_dir)
+	cd $(audio_gen_dir)
+	$(shell find . -type f -name '*.mp3' -exec cp {} $(anki_audio_dir) \;)
 
 .PHONY: generate-anki-deck
 generate-anki-deck:
