@@ -46,6 +46,9 @@ func Parse(sourceName, sourcePath string) (parsedSentences, []string, error) {
 	orderedKeys := make([]string, len(lines))
 	for i, line := range lines {
 		parts := strings.Split(line, ";")
+		if len(parts) <= 1 {
+			continue
+		}
 		chinese := parts[0]
 		pinyin := ""
 		if len(parts) > 1 {
@@ -60,7 +63,11 @@ func Parse(sourceName, sourcePath string) (parsedSentences, []string, error) {
 			englishLiteral = parts[3]
 		}
 		orderedKeys[i] = strings.TrimSpace(chinese)
-		dict[strings.TrimSpace(chinese)] = Sentence{
+		key := strings.TrimSpace(chinese)
+		if _, ok := dict[key]; ok {
+			return parsedSentences{}, nil, fmt.Errorf("could not parse sentences, duplicate sentence %s", key)
+		}
+		dict[key] = Sentence{
 			Source:         sourceName,
 			Chinese:        strings.TrimSpace(chinese),
 			ChineseWords:   splitWords(parts[0], pinyin),

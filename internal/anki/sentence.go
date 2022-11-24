@@ -8,6 +8,7 @@ import (
 type HanziWithExample struct {
 	Hanzi   *hanzi.Hanzi
 	Example string
+	IsWord  bool
 }
 
 type Sentence struct {

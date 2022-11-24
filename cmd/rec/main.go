@@ -9,6 +9,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -49,7 +50,7 @@ func main() {
 	_, name := filepath.Split(in)
 	name = strings.TrimSuffix(name, filepath.Ext(name))
 	if outputDir == "" {
-		outputDir = filepath.Join(deckName, "audio")
+		outputDir = filepath.Join("data", "gen", deckName, "audio")
 	}
 	err = os.MkdirAll(outputDir, os.ModePerm)
 	if err != nil && !errors.Is(err, os.ErrExist) {
@@ -87,15 +88,16 @@ func main() {
 
 		query := sentence.Sentence.Chinese
 		queryHash := hash(query)
-		path := filepath.Join(outputDir, deckName+"_"+queryHash)
+		topic := sentence.Tags
+		dir := filepath.Join(outputDir, topic)
+		filename := deckName + "-" + topic + "_" + queryHash
 		if autoDownload {
-			time.Sleep(1 * time.Second)
-			_, err := fetchAudio(ctx, query, path)
+			_, err := fetchAudio(ctx, query, dir, filename)
 			if err != nil {
 				fmt.Printf("could not download audio: %v\n", err)
 			}
 		} else {
-			loop(ctx, query, path)
+			loop(ctx, query, filename)
 		}
 
 		for _, hanzi := range sentence.Decompositions {
@@ -109,15 +111,15 @@ func main() {
 
 			query := hanzi.Hanzi.Ideograph
 			queryHash := hash(query)
-			path := filepath.Join(outputDir, deckName+"_"+queryHash)
+			dir := filepath.Join(outputDir, topic)
+			filename := deckName + "-" + topic + "_" + queryHash
 			if autoDownload {
-				time.Sleep(1 * time.Second)
-				_, err := fetchAudio(ctx, query, path)
+				_, err := fetchAudio(ctx, query, dir, filename)
 				if err != nil {
 					fmt.Printf("could not download audio: %v\n", err)
 				}
 			} else {
-				loop(ctx, query, path)
+				loop(ctx, query, filename)
 			}
 		}
 	}
@@ -138,12 +140,12 @@ func loop(ctx context.Context, query, path string) {
 			break
 		}
 		switch text {
-		case "f":
-			var err error
-			filename, err = fetchAudio(ctx, query, path)
-			if err != nil {
-				fmt.Printf("could not download audio: %v\n", err)
-			}
+		// case "f":
+		// 	var err error
+		// 	filename, err = fetchAudio(ctx, query, path)
+		// 	if err != nil {
+		// 		fmt.Printf("could not download audio: %v\n", err)
+		// 	}
 		case "r":
 			var err error
 			filename, err = record(ctx, path, convertToMP3)
@@ -258,13 +260,17 @@ func hash(s string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func fetchAudio(ctx context.Context, query, path string) (string, error) {
-	filename := filepath.Join("data", "gen", path)
+func fetchAudio(ctx context.Context, query, dir, filename string) (string, error) {
+	if err := os.MkdirAll(dir, os.ModePerm); err != nil {
+		log.Fatal(err)
+	}
 	filename = filename + ".mp3"
-	if _, err := os.Stat(filename); err == nil && !force {
+	path := filepath.Join(dir, filename)
+	if _, err := os.Stat(path); err == nil && !force {
 		fmt.Printf("file exists, skipping. use -f flag to overwrite: %s\n", path)
 		return filename, nil
 	}
+	time.Sleep(1 * time.Second)
 	client, err := texttospeech.NewClient(ctx)
 	if err != nil {
 		return "", err
@@ -297,10 +303,10 @@ func fetchAudio(ctx context.Context, query, path string) (string, error) {
 	}
 
 	// The resp's AudioContent is binary.
-	err = ioutil.WriteFile(filename, resp.AudioContent, 0644)
+	err = ioutil.WriteFile(path, resp.AudioContent, 0644)
 	if err != nil {
 		return "", err
 	}
-	fmt.Printf("Audio content written to file: %v\n", filename)
+	fmt.Printf("Audio content written to file: %v\n", path)
 	return filename, nil
 }

@@ -1,6 +1,6 @@
 {{range .Decompositions}}
 # Note
-model: zh
+model: {{if .IsWord}}zh-hanzi-eng-audio{{else}}zh-hanzi{{end}}
 deck: {{$.DeckName}}
 tags: {{$.Tags}}
 
@@ -15,7 +15,7 @@ tags: {{$.Tags}}
 ## Components
 Components:
 {{components .Hanzi.ComponentsDecompositions}}
-## Kangxi:
+## Kangxi
 Kangxi:
 {{kangxi .Hanzi.ComponentsDecompositions}}
 ## Equivalents
@@ -27,7 +27,7 @@ Example: {{.Example}}
 {{end}}
 
 # Note
-model: zh
+model: zh-hanzi-eng-audio
 deck: {{$.DeckName}}
 tags: {{$.Tags}}
 

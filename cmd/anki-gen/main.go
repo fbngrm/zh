@@ -100,6 +100,7 @@ func main() {
 
 	numSentences := 0
 	results := 3
+	fmt.Printf("generating %d sentences\n", len(sentenceDict))
 	ankiSentences := make([]anki.Sentence, len(sentenceDict))
 	i := 0
 	for _, key := range orderedKeys {
@@ -123,9 +124,10 @@ func main() {
 				continue
 			}
 
-			isWord := len(word) > 4
+			// this means there are at least two hanzi, though, there are single hanzi words as well
+			isMultiHanzi := len(word) > 4
 			depth := 1
-			if isWord {
+			if isMultiHanzi {
 				depth = 2
 			}
 
@@ -134,6 +136,7 @@ func main() {
 				decomposition.Hanzi,
 				sentence.Chinese,
 				depth,
+				true,
 			)
 			ignoreList = updatedIgnoreList
 
@@ -264,7 +267,7 @@ func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
 		return formatted
 	}
 	tplFuncMap["audio"] = func(query string) string {
-		return "[sound:" + deckName + "_" + hash(query) + ".mp3]"
+		return "[sound:" + deckName + "-" + s.Tags + "_" + hash(query) + ".mp3]"
 	}
 	tmpl, err := template.New(deckName + ".tmpl").Funcs(tplFuncMap).ParseFiles(tmplPath)
 	if err != nil {
@@ -324,8 +327,8 @@ func flatten(newHanzi []*hanzi.Hanzi) []*hanzi.Hanzi {
 
 // recursively removes hanzi that are contained in the the provided ignore list.
 // ignore list usually contains blacklisted hanzi and those, already contained in
-// a previously generated deck (logged in ../../lib/<deckname>/ignore).
-func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi, example string, depth int) (map[string]struct{}, []anki.HanziWithExample) {
+// a previously generated deck (logged in data/lib/<deckname>/ignore).
+func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.Hanzi, example string, depth int, isWord bool) (map[string]struct{}, []anki.HanziWithExample) {
 	var filtered []anki.HanziWithExample
 	if depth == 0 {
 		return ignoreList, filtered
@@ -339,11 +342,12 @@ func removeExistingAndFlatten(ignoreList map[string]struct{}, newHanzi []*hanzi.
 			filtered = append(filtered, anki.HanziWithExample{
 				Hanzi:   h,
 				Example: example,
+				IsWord:  isWord,
 			})
 			ignoreList[h.Ideograph] = struct{}{}
 
 			var decompHanzi []anki.HanziWithExample
-			ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions, h.Ideograph, depth-1)
+			ignoreList, decompHanzi = removeExistingAndFlatten(ignoreList, h.ComponentsDecompositions, h.Ideograph, depth-1, false)
 			for _, dh := range decompHanzi {
 				filtered = append(filtered, dh)
 			}
