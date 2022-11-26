@@ -92,7 +92,7 @@ func main() {
 		dir := filepath.Join(outputDir, topic)
 		filename := deckName + "-" + topic + "_" + queryHash
 		if autoDownload {
-			_, err := fetchAudio(ctx, query, dir, filename)
+			_, err := fetchAudio(ctx, query, dir, filename, true)
 			if err != nil {
 				fmt.Printf("could not download audio: %v\n", err)
 			}
@@ -114,7 +114,7 @@ func main() {
 			dir := filepath.Join(outputDir, topic)
 			filename := deckName + "-" + topic + "_" + queryHash
 			if autoDownload {
-				_, err := fetchAudio(ctx, query, dir, filename)
+				_, err := fetchAudio(ctx, query, dir, filename, hanzi.IsWord)
 				if err != nil {
 					fmt.Printf("could not download audio: %v\n", err)
 				}
@@ -260,12 +260,13 @@ func hash(s string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func fetchAudio(ctx context.Context, query, dir, filename string) (string, error) {
+func fetchAudio(ctx context.Context, query, dir, filename string, isWord bool) (string, error) {
 	if err := os.MkdirAll(dir, os.ModePerm); err != nil {
 		log.Fatal(err)
 	}
 	filename = filename + ".mp3"
 	path := filepath.Join(dir, filename)
+
 	if _, err := os.Stat(path); err == nil && !force {
 		fmt.Printf("file exists, skipping. use -f flag to overwrite: %s\n", path)
 		return filename, nil
@@ -307,6 +308,22 @@ func fetchAudio(ctx context.Context, query, dir, filename string) (string, error
 	if err != nil {
 		return "", err
 	}
+
+	// if this is a word, we store it in a separate dir which we use to generate audio loops.
+	// we don't want audio loops from single characters but we want audio for single characters
+	// on the flashcards.
+	if isWord {
+		wordsOnlyDir := filepath.Join(dir, "words_only")
+		if err := os.MkdirAll(wordsOnlyDir, os.ModePerm); err != nil {
+			log.Fatal(err)
+		}
+		wordsOnlyPath := filepath.Join(wordsOnlyDir, filename)
+		err = ioutil.WriteFile(wordsOnlyPath, resp.AudioContent, 0644)
+		if err != nil {
+			return "", err
+		}
+	}
+
 	fmt.Printf("Audio content written to file: %v\n", path)
 	return filename, nil
 }
