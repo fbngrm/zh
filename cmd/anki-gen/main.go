@@ -102,8 +102,7 @@ func main() {
 	results := 3
 	fmt.Printf("generating %d sentences\n", len(sentenceDict))
 	ankiSentences := make([]anki.Sentence, len(sentenceDict))
-	i := 0
-	for _, key := range orderedKeys {
+	for i, key := range orderedKeys {
 		sentence := sentenceDict[key]
 		allDecompositionsForSentence := make([]*hanzi.Hanzi, 0)
 		newDecompositionsForSentence := make([]anki.HanziWithExample, 0)
@@ -114,14 +113,14 @@ func main() {
 
 			decomposition, err := decomposer.Decompose(word, results, numSentences)
 			if err != nil {
-				os.Stderr.WriteString(fmt.Sprintf("error: %v\n", err))
-				continue
+				os.Stderr.WriteString(fmt.Sprintf("error for key [%s]: %v\n", key, err))
+				os.Exit(1)
 			}
 			if len(decomposition.Errs) != 0 {
 				for _, e := range decomposition.Errs {
-					os.Stderr.WriteString(fmt.Sprintf("error: %v\n", e))
+					os.Stderr.WriteString(fmt.Sprintf("error for key [%s]: %v\n", key, e))
 				}
-				continue
+				os.Exit(1)
 			}
 
 			// this means there are at least two hanzi, though, there are single hanzi words as well
