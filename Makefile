@@ -62,9 +62,9 @@ copy-audio:
 	cp $(audio_lib_dir)/*.mp3 $(audio_gen_dir)
 
 .PHONY: concat-audio
-audio_sub_dir=./data/gen/$(source)/audio/$(subdir)
+audio_sub_dir=./data/gen/$(source)/audio/$(subdir)/words_only
 out_dir=/home/f/data/music/zh/$(source)/$(subdir)
-silence=../../../silence.mp3
+silence=../../../../silence.mp3
 concat-audio:
 	echo $(audio_sub_dir)
 	mkdir -p $(out_dir)
