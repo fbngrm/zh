@@ -4,6 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/fgrimme/zh/internal/segmentation"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -40,7 +41,8 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, _, err := Parse(sourceName, sourcePath)
+		parser := NewParser(segmentation.NewSentenceCutter())
+		got, _, err := parser.ParseFromPinyin(sourceName, sourcePath, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -77,7 +79,8 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, _, err := Parse(sourceName, sourcePath)
+		parser := NewParser(segmentation.NewSentenceCutter())
+		got, _, err := parser.ParseFromPinyin(sourceName, sourcePath, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -120,7 +123,8 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, _, err := Parse(sourceName, sourcePath)
+		parser := NewParser(segmentation.NewSentenceCutter())
+		got, _, err := parser.ParseFromPinyin(sourceName, sourcePath, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -155,7 +159,8 @@ func TestSplitWords(t *testing.T) {
 			t.Fail()
 		}
 
-		got, _, err := Parse(sourceName, sourcePath)
+		parser := NewParser(segmentation.NewSentenceCutter())
+		got, _, err := parser.ParseFromPinyin(sourceName, sourcePath, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()

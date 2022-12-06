@@ -74,7 +74,8 @@ func NewDecomposer(dictType string) *Decomposer {
 
 	// example sentences are chosen from the tatoeba ch/en corpus.
 	// for documentation see: https://en.wiki.tatoeba.org/articles/show/main
-	sentenceDict, err := sentences.NewDict("tatoeba", sentenceSrc)
+	parser := sentences.NewParser(segmentation.NewSentenceCutter())
+	sentenceDict, err := sentences.NewDict(parser, "tatoeba", sentenceSrc)
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)

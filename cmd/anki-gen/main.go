@@ -19,6 +19,7 @@ import (
 	"github.com/fgrimme/zh/internal/frequency"
 	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/kangxi"
+	"github.com/fgrimme/zh/internal/segmentation"
 	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
@@ -35,6 +36,7 @@ var ignorePath string
 var blacklistPath string
 var deckName string
 var ignoreChars = []string{"!", "！", "？", "?", "，", ",", ".", "。"}
+var fromPinyin bool
 
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
@@ -42,6 +44,7 @@ func main() {
 	flag.StringVar(&ignorePath, "e", "", "path of ignore file")
 	flag.StringVar(&blacklistPath, "b", "", "path of blacklist file")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
+	flag.BoolVar(&fromPinyin, "p", false, "use pinyin to cut sentences into words")
 	flag.Parse()
 
 	if deckName == "" {
@@ -63,7 +66,16 @@ func main() {
 	re := regexp.MustCompile("[_0-9]")
 	tags := re.ReplaceAllString(filename, "")
 
-	sentenceDict, orderedKeys, err := sentences.Parse(filename, in)
+	// sentenceSegmenter := segmentation.NewSentenceCutter()
+	parser := sentences.NewParser(segmentation.NewSentenceCutter())
+	var sentenceDict map[string]sentences.Sentence
+	var orderedKeys []string
+	var err error
+	if fromPinyin {
+		sentenceDict, orderedKeys, err = parser.Parse(filename, in, false)
+	} else {
+		sentenceDict, orderedKeys, err = parser.ParseFromPinyin(filename, in, false)
+	}
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)

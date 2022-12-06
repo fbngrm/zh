@@ -16,29 +16,33 @@ type Sentence struct {
 	EnglishLiteral string `yaml:"englishLiteral,omitempty" json:"englishLiteral,omitempty"`
 }
 
-type parsedSentences map[string]Sentence
-
-func ReadFile(sourceName, sourcePath string) ([]string, error) {
-	file, err := os.Open(sourcePath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	lines := make([]string, 0)
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		if len(line) > 0 && line[0] == '/' {
-			continue
-		}
-		lines = append(lines, line)
-	}
-	return lines, scanner.Err()
+type Cutter interface {
+	Cut(chinese string) []string
+	CutWithPinyin(chinese, pinyin string) []string
 }
 
-func Parse(sourceName, sourcePath string) (parsedSentences, []string, error) {
-	lines, err := ReadFile(sourceName, sourcePath)
+type Parser struct {
+	cutter Cutter
+}
+
+func NewParser(cutter Cutter) *Parser {
+	return &Parser{
+		cutter: cutter,
+	}
+}
+
+type parsedSentences map[string]Sentence
+
+func (s *Parser) ParseFromPinyin(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
+	return s.parse(sourceName, sourcePath, true, allowDuplicates)
+}
+
+func (s *Parser) Parse(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
+	return s.parse(sourceName, sourcePath, false, allowDuplicates)
+}
+
+func (s *Parser) parse(sourceName, sourcePath string, fromPinyin, allowDuplicates bool) (parsedSentences, []string, error) {
+	lines, err := s.readFile(sourceName, sourcePath)
 	if err != nil {
 		return parsedSentences{}, nil, fmt.Errorf("could not parse sentences %w", err)
 	}
@@ -65,12 +69,22 @@ func Parse(sourceName, sourcePath string) (parsedSentences, []string, error) {
 		orderedKeys[i] = strings.TrimSpace(chinese)
 		key := strings.TrimSpace(chinese)
 		if _, ok := dict[key]; ok {
-			return parsedSentences{}, nil, fmt.Errorf("could not parse sentences, duplicate sentence %s", key)
+			if !allowDuplicates {
+				return parsedSentences{}, nil, fmt.Errorf("could not parse sentences, duplicate sentence %s", key)
+			}
 		}
+
+		var words []string
+		if fromPinyin {
+			words = s.cutter.CutWithPinyin(parts[0], pinyin)
+		} else {
+			words = s.cutter.Cut(parts[0])
+		}
+
 		dict[key] = Sentence{
 			Source:         sourceName,
 			Chinese:        strings.TrimSpace(chinese),
-			ChineseWords:   splitWords(parts[0], pinyin),
+			ChineseWords:   words,
 			Pinyin:         strings.TrimSpace(pinyin),
 			English:        strings.TrimSpace(english),
 			EnglishLiteral: strings.TrimSpace(englishLiteral),
@@ -79,62 +93,21 @@ func Parse(sourceName, sourcePath string) (parsedSentences, []string, error) {
 	return dict, orderedKeys, nil
 }
 
-func splitWords(chinese, pinyin string) []string {
-	pinyinWords := strings.Split(pinyin, " ")
-	// the pinyin is divided into words by whitespaces. we count the numbers (used for tone intonation)
-	// in each words to distinguish how many ideographs the word has. we use these word-lengths to split
-	// the chinese sentence into words.
-	wordLengths := make([]int, 0)
-	for _, word := range pinyinWords {
-		wordLengths = append(wordLengths, 0)
-		lastEntryIndex := len(wordLengths) - 1
-		previousIsAlpha := false
-		for i, char := range word {
-			if 47 < char && char < 58 {
-				wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
-				previousIsAlpha = false
-				continue
-			}
+func (s *Parser) readFile(sourceName, sourcePath string) ([]string, error) {
+	file, err := os.Open(sourcePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-			isPunctuation := char == '!' || char == ',' || char == '.' || char == '?'
-			// if we have a punctuation character, we need to add another word with length 1
-			if isPunctuation {
-				// if the char before punctuation is not a number, we need to increase word length
-				if previousIsAlpha {
-					wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
-				}
-				wordLengths = append(wordLengths, 1)
-				continue
-			}
-
-			isLast := i == len(word)-1
-			// if last char of word is not a number/intonation char, we need to increase length counter
-			if isLast {
-				wordLengths[lastEntryIndex] = wordLengths[lastEntryIndex] + 1
-			}
-			previousIsAlpha = true
+	lines := make([]string, 0)
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if len(line) > 0 && line[0] == '/' {
+			continue
 		}
+		lines = append(lines, line)
 	}
-
-	words := make([]string, len(wordLengths))
-	start := 0
-	for i, length := range wordLengths {
-		word := substr(chinese, start, length)
-		words[i] = word
-		start += length
-	}
-	return words
-}
-
-// NOTE: this isn't multi-Unicode-codepoint aware, like specifying skintone or
-// gender of an emoji: https://unicode.org/emoji/charts/full-emoji-modifiers.html
-func substr(input string, start int, length int) string {
-	asRunes := []rune(input)
-	if start >= len(asRunes) {
-		return ""
-	}
-	if start+length > len(asRunes) {
-		length = len(asRunes) - start
-	}
-	return string(asRunes[start : start+length])
+	return lines, scanner.Err()
 }

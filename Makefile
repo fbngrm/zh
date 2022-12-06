@@ -25,6 +25,16 @@ generate:
 		-b $(source_lib_dir)/blacklist \
 		-d $(source)
 
+.PHONY: generate-from-pinyin
+generate-from-pinyin:
+	go run cmd/anki-gen/main.go \
+		-i $(source_lib_dir)/$(file) \
+		-t ./templates/$(source).tmpl \
+		-e $(source_lib_dir)/ignore \
+		-b $(source_lib_dir)/blacklist \
+		-d $(source) \
+		-p
+
 .PHONY: record
 record:
 	go run cmd/rec/main.go \
