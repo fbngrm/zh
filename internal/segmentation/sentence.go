@@ -26,7 +26,7 @@ func (s *SentenceCutter) Cut(sentence string) []string {
 	return words
 }
 
-func (s *SentenceCutter) CutWithPinyin(chinese, pinyin string) []string {
+func (s *SentenceCutter) SplitSentenceUsingPinyin(chinese, pinyin string) []string {
 	pinyinWords := strings.Split(pinyin, " ")
 	// the pinyin is divided into words by whitespaces. we count the numbers (used for tone intonation)
 	// in each words to distinguish how many ideographs the word has. we use these word-lengths to split

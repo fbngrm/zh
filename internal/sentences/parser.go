@@ -18,7 +18,7 @@ type Sentence struct {
 
 type Cutter interface {
 	Cut(chinese string) []string
-	CutWithPinyin(chinese, pinyin string) []string
+	SplitSentenceUsingPinyin(chinese, pinyin string) []string
 }
 
 type Parser struct {
@@ -33,19 +33,23 @@ func NewParser(cutter Cutter) *Parser {
 
 type parsedSentences map[string]Sentence
 
-func (s *Parser) ParseFromPinyin(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
-	return s.parse(sourceName, sourcePath, true, allowDuplicates)
+func (s *Parser) ParseWithPinyinSplitting(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
+	return s.parseFromFile(sourceName, sourcePath, true, allowDuplicates)
 }
 
-func (s *Parser) Parse(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
-	return s.parse(sourceName, sourcePath, false, allowDuplicates)
+func (s *Parser) ParseWithSentenceCutter(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
+	return s.parseFromFile(sourceName, sourcePath, false, allowDuplicates)
 }
 
-func (s *Parser) parse(sourceName, sourcePath string, fromPinyin, allowDuplicates bool) (parsedSentences, []string, error) {
+func (s *Parser) parseFromFile(sourceName, sourcePath string, splitSentenceUsingPinyin, allowDuplicates bool) (parsedSentences, []string, error) {
 	lines, err := s.readFile(sourceName, sourcePath)
 	if err != nil {
-		return parsedSentences{}, nil, fmt.Errorf("could not parse sentences %w", err)
+		return parsedSentences{}, nil, fmt.Errorf("could not parse sentences from file: %w", err)
 	}
+	return s.Parse(sourceName, splitSentenceUsingPinyin, allowDuplicates, lines)
+}
+
+func (s *Parser) Parse(sourceName string, splitSentenceUsingPinyin, allowDuplicates bool, lines []string) (parsedSentences, []string, error) {
 	dict := make(parsedSentences)
 	orderedKeys := make([]string, len(lines))
 	for i, line := range lines {
@@ -75,8 +79,8 @@ func (s *Parser) parse(sourceName, sourcePath string, fromPinyin, allowDuplicate
 		}
 
 		var words []string
-		if fromPinyin {
-			words = s.cutter.CutWithPinyin(parts[0], pinyin)
+		if splitSentenceUsingPinyin {
+			words = s.cutter.SplitSentenceUsingPinyin(parts[0], pinyin)
 		} else {
 			words = s.cutter.Cut(parts[0])
 		}

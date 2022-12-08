@@ -36,7 +36,7 @@ var ignorePath string
 var blacklistPath string
 var deckName string
 var ignoreChars = []string{"!", "！", "？", "?", "，", ",", ".", "。"}
-var fromPinyin bool
+var splitSentenceUsingPinyin bool
 var fromGrammar bool
 
 func main() {
@@ -45,22 +45,13 @@ func main() {
 	flag.StringVar(&ignorePath, "e", "", "path of ignore file")
 	flag.StringVar(&blacklistPath, "b", "", "path of blacklist file")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
-	flag.BoolVar(&fromPinyin, "p", false, "use pinyin to cut sentences into words")
+	flag.BoolVar(&splitSentenceUsingPinyin, "p", false, "use pinyin to cut sentences into words")
 	flag.BoolVar(&fromGrammar, "g", false, "input is grammar file")
 	flag.Parse()
 
 	if deckName == "" {
 		fmt.Println("need deck name")
 		os.Exit(1)
-	}
-
-	if fromGrammar {
-		b, err := yaml.Marshal(anki.Grammar{})
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-		fmt.Println(string(b))
 	}
 
 	_, filename := filepath.Split(in)
@@ -77,9 +68,17 @@ func main() {
 	re := regexp.MustCompile("[_0-9]")
 	tags := re.ReplaceAllString(filename, "")
 
+	if fromGrammar {
+		b, err := yaml.Marshal(anki.Grammar{})
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		fmt.Println(string(b))
+	}
+
 	ankiSentences, ignoreList := generateSentences(filename, tags)
 	export(ankiSentences, outMarkdown, outYaml, ignoreList)
-
 }
 
 func generateSentences(filename, tags string) ([]anki.Sentence, map[string]struct{}) {
@@ -87,10 +86,10 @@ func generateSentences(filename, tags string) ([]anki.Sentence, map[string]struc
 	var sentenceDict map[string]sentences.Sentence
 	var orderedKeys []string
 	var err error
-	if fromPinyin {
-		sentenceDict, orderedKeys, err = parser.Parse(filename, in, false)
+	if splitSentenceUsingPinyin {
+		sentenceDict, orderedKeys, err = parser.ParseWithPinyinSplitting(filename, in, false)
 	} else {
-		sentenceDict, orderedKeys, err = parser.ParseFromPinyin(filename, in, false)
+		sentenceDict, orderedKeys, err = parser.ParseWithSentenceCutter(filename, in, false)
 	}
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)

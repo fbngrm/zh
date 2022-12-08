@@ -18,3 +18,13 @@ type Sentence struct {
 	Decompositions    []HanziWithExample
 	AllDecompositions []*hanzi.Hanzi
 }
+
+type Grammar struct {
+	DeckName    string
+	Tags        string
+	Header      string
+	Explanation string
+	Syntax      string
+	Examples    []sentences.Sentence
+	Note        string
+}
