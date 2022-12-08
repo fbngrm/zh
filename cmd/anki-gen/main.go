@@ -37,6 +37,7 @@ var blacklistPath string
 var deckName string
 var ignoreChars = []string{"!", "！", "？", "?", "，", ",", ".", "。"}
 var fromPinyin bool
+var fromGrammar bool
 
 func main() {
 	flag.StringVar(&in, "i", "", "input file")
@@ -45,11 +46,21 @@ func main() {
 	flag.StringVar(&blacklistPath, "b", "", "path of blacklist file")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.BoolVar(&fromPinyin, "p", false, "use pinyin to cut sentences into words")
+	flag.BoolVar(&fromGrammar, "g", false, "input is grammar file")
 	flag.Parse()
 
 	if deckName == "" {
 		fmt.Println("need deck name")
 		os.Exit(1)
+	}
+
+	if fromGrammar {
+		b, err := yaml.Marshal(anki.Grammar{})
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		fmt.Println(string(b))
 	}
 
 	_, filename := filepath.Split(in)
@@ -66,7 +77,12 @@ func main() {
 	re := regexp.MustCompile("[_0-9]")
 	tags := re.ReplaceAllString(filename, "")
 
-	// sentenceSegmenter := segmentation.NewSentenceCutter()
+	ankiSentences, ignoreList := generateSentences(filename, tags)
+	export(ankiSentences, outMarkdown, outYaml, ignoreList)
+
+}
+
+func generateSentences(filename, tags string) ([]anki.Sentence, map[string]struct{}) {
 	parser := sentences.NewParser(segmentation.NewSentenceCutter())
 	var sentenceDict map[string]sentences.Sentence
 	var orderedKeys []string
@@ -164,7 +180,10 @@ func main() {
 		}
 		i++
 	}
+	return ankiSentences, ignoreList
+}
 
+func export(ankiSentences []anki.Sentence, outMarkdown, outYaml string, ignoreList map[string]struct{}) {
 	cards := ""
 	for _, sentence := range ankiSentences {
 		formatted, err := formatTemplate(sentence, templatePath)
