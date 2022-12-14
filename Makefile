@@ -25,6 +25,14 @@ generate:
 		-b $(source_lib_dir)/blacklist \
 		-d $(source)
 
+.PHONY: generate-grammar
+generate-grammar:
+	go run cmd/anki-gen/main.go \
+		-i $(source_lib_dir)/$(file) \
+		-t ./templates/$(source)-grammar.tmpl \
+		-d $(source) \
+		-g
+
 .PHONY: generate-from-pinyin
 generate-from-pinyin:
 	go run cmd/anki-gen/main.go \

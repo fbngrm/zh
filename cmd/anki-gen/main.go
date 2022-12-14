@@ -67,21 +67,25 @@ func main() {
 
 	re := regexp.MustCompile("[_0-9]")
 	tags := re.ReplaceAllString(filename, "")
+	tags = strings.Join(strings.Split(tags, "-"), ", ")
 
+	var sentenceDict map[string]sentences.Sentence
+	var orderedKeys []string
 	if fromGrammar {
-		b, err := yaml.Marshal(anki.Grammar{})
+		grammars, err := anki.GrammarFromFile(deckName, tags, in)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Printf("could not parse grammar: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Println(string(b))
+		exportGrammar(grammars, outMarkdown)
+	} else {
+		sentenceDict, orderedKeys = parseSentences(filename)
+		ankiSentences, ignoreList := generateSentences(tags, deckName, sentenceDict, orderedKeys)
+		exportSentences(ankiSentences, outMarkdown, outYaml, ignoreList)
 	}
-
-	ankiSentences, ignoreList := generateSentences(filename, tags)
-	export(ankiSentences, outMarkdown, outYaml, ignoreList)
 }
 
-func generateSentences(filename, tags string) ([]anki.Sentence, map[string]struct{}) {
+func parseSentences(filename string) (map[string]sentences.Sentence, []string) {
 	parser := sentences.NewParser(segmentation.NewSentenceCutter())
 	var sentenceDict map[string]sentences.Sentence
 	var orderedKeys []string
@@ -95,7 +99,14 @@ func generateSentences(filename, tags string) ([]anki.Sentence, map[string]struc
 		fmt.Printf("could not create sentence dict: %v\n", err)
 		os.Exit(1)
 	}
+	return sentenceDict, orderedKeys
+}
 
+func generateSentences(
+	tags, deckName string,
+	sentenceDict map[string]sentences.Sentence,
+	orderedKeys []string,
+) ([]anki.Sentence, map[string]struct{}) {
 	dict, err := cedict.NewDict(cedictSrc)
 	if err != nil {
 		fmt.Printf("could not init cedict: %v\n", err)
@@ -182,10 +193,23 @@ func generateSentences(filename, tags string) ([]anki.Sentence, map[string]struc
 	return ankiSentences, ignoreList
 }
 
-func export(ankiSentences []anki.Sentence, outMarkdown, outYaml string, ignoreList map[string]struct{}) {
+func exportGrammar(grammars []anki.Grammar, outMarkdown string) {
+	cards := ""
+	for _, grammar := range grammars {
+		formatted, err := formatGrammarTemplate(grammar, templatePath)
+		if err != nil {
+			fmt.Printf("could not format grammar: %v\n", err)
+			os.Exit(1)
+		}
+		cards += formatted
+	}
+	writeFile(cards, outMarkdown)
+}
+
+func exportSentences(ankiSentences []anki.Sentence, outMarkdown, outYaml string, ignoreList map[string]struct{}) {
 	cards := ""
 	for _, sentence := range ankiSentences {
-		formatted, err := formatTemplate(sentence, templatePath)
+		formatted, err := formatSentenceTemplate(sentence, templatePath)
 		if err != nil {
 			fmt.Printf("could not format hanzi: %v\n", err)
 			os.Exit(1)
@@ -204,7 +228,20 @@ func export(ankiSentences []anki.Sentence, outMarkdown, outYaml string, ignoreLi
 	writeHanziLog(ignoreList)
 }
 
-func formatTemplate(s anki.Sentence, tmplPath string) (string, error) {
+func formatGrammarTemplate(grammar anki.Grammar, tmplPath string) (string, error) {
+	tmpl, err := template.New(deckName + "-" + "grammar" + ".tmpl").ParseFiles(tmplPath)
+	if err != nil {
+		return "", err
+	}
+
+	buf := new(bytes.Buffer)
+	if err = tmpl.Execute(buf, grammar); err != nil {
+		return "", err
+	}
+	return buf.String(), nil
+}
+
+func formatSentenceTemplate(s anki.Sentence, tmplPath string) (string, error) {
 	tplFuncMap := make(template.FuncMap)
 	listToString := func(list []string) string {
 		if len(list) == 0 {

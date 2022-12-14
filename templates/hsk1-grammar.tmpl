@@ -1,0 +1,19 @@
+# Note
+model: zh-grammar
+deck: {{.DeckName}}
+tags: {{.Tags}}
+
+## Header
+{{.Header}}
+## Explanation
+{{.Explanation}}
+## Syntax
+{{.Syntax}}
+## Note
+{{.Note}}
+## Examples
+{{range .Examples}}
+{{.Ch}}<br />
+{{.Pinyin}}<br />
+{{.Eng}}<br />
+{{end}}

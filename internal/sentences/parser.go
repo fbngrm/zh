@@ -42,7 +42,7 @@ func (s *Parser) ParseWithSentenceCutter(sourceName, sourcePath string, allowDup
 }
 
 func (s *Parser) parseFromFile(sourceName, sourcePath string, splitSentenceUsingPinyin, allowDuplicates bool) (parsedSentences, []string, error) {
-	lines, err := s.readFile(sourceName, sourcePath)
+	lines, err := s.ReadFile(sourcePath)
 	if err != nil {
 		return parsedSentences{}, nil, fmt.Errorf("could not parse sentences from file: %w", err)
 	}
@@ -97,7 +97,7 @@ func (s *Parser) Parse(sourceName string, splitSentenceUsingPinyin, allowDuplica
 	return dict, orderedKeys, nil
 }
 
-func (s *Parser) readFile(sourceName, sourcePath string) ([]string, error) {
+func (s *Parser) ReadFile(sourcePath string) ([]string, error) {
 	file, err := os.Open(sourcePath)
 	if err != nil {
 		return nil, err
