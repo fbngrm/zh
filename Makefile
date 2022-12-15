@@ -82,11 +82,12 @@ copy-audio:
 .PHONY: concat-audio
 audio_sub_dir=./data/gen/$(source)/audio/$(subdir)/words_only
 out_dir=/home/f/data/music/zh/$(source)/$(subdir)
-silence=../../../../silence.mp3
+silence=../../../../silence_64kb.mp3
 concat-audio:
 	echo $(audio_sub_dir)
 	mkdir -p $(out_dir)
-	cd $(audio_sub_dir); for i in *.mp3; do ffmpeg -i "concat:$$i|$(silence)|$$i|$(silence)|$$i|$(silence)|$$i|$(silence)|$$i|$(silence)|$(silence)" -acodec copy $(out_dir)/"$${i%.*}_concat.mp3"; done
+	cd $(audio_sub_dir); for i in *.mp3; do ffmpeg -i "$$i" -filter:a "atempo=0.85" /tmp/"$${i%.*}_slow.mp3"; done
+	cd $(audio_sub_dir); for i in *.mp3; do ffmpeg -i "concat:$$i|$(silence)|/tmp/$${i%.*}_slow.mp3|$(silence)|$$i|$(silence)|/tmp/$${i%.*}_slow.mp3|$(silence)|$$i|$(silence)|$(silence)" -acodec copy $(out_dir)/"$${i%.*}_concat.mp3"; done
 
 .PHONY: remove-noise
 remove-noise:
