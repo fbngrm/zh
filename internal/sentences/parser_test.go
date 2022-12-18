@@ -42,7 +42,7 @@ func TestSplitWords(t *testing.T) {
 		}
 
 		parser := NewParser(segmentation.NewSentenceCutter())
-		got, _, err := parser.ParseWithPinyinSplitting(sourceName, sourcePath, true)
+		got, _, err := parser.ParseFromFile(sourceName, sourcePath, SPLIT_MODE_CUTTER, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -80,7 +80,7 @@ func TestSplitWords(t *testing.T) {
 		}
 
 		parser := NewParser(segmentation.NewSentenceCutter())
-		got, _, err := parser.ParseWithPinyinSplitting(sourceName, sourcePath, true)
+		got, _, err := parser.ParseFromFile(sourceName, sourcePath, SPLIT_MODE_CUTTER, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -124,7 +124,7 @@ func TestSplitWords(t *testing.T) {
 		}
 
 		parser := NewParser(segmentation.NewSentenceCutter())
-		got, _, err := parser.ParseWithPinyinSplitting(sourceName, sourcePath, true)
+		got, _, err := parser.ParseFromFile(sourceName, sourcePath, SPLIT_MODE_CUTTER, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()
@@ -160,7 +160,7 @@ func TestSplitWords(t *testing.T) {
 		}
 
 		parser := NewParser(segmentation.NewSentenceCutter())
-		got, _, err := parser.ParseWithPinyinSplitting(sourceName, sourcePath, true)
+		got, _, err := parser.ParseFromFile(sourceName, sourcePath, SPLIT_MODE_CUTTER, true)
 		if err != nil {
 			t.Logf("unexpected error: %v", err)
 			t.Fail()

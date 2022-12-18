@@ -9,7 +9,7 @@ import (
 type Dict map[string]Sentences
 
 func NewDict(parser *Parser, sourceName, sourcePath string) (Dict, error) {
-	parsedSentences, _, err := parser.ParseWithSentenceCutter(sourceName, sourcePath, true)
+	parsedSentences, _, err := parser.ParseFromFile(sourceName, sourcePath, SPLIT_MODE_CUTTER, true)
 	if err != nil {
 		return nil, err
 	}

@@ -7,6 +7,14 @@ import (
 	"strings"
 )
 
+type splitMode int
+
+const (
+	SPLIT_MODE_WHITESPACE splitMode = iota
+	SPLIT_MODE_PINYIN
+	SPLIT_MODE_CUTTER
+)
+
 type Sentence struct {
 	Source         string
 	Chinese        string
@@ -19,6 +27,7 @@ type Sentence struct {
 type Cutter interface {
 	Cut(chinese string) []string
 	SplitSentenceUsingPinyin(chinese, pinyin string) []string
+	SplitSentenceUsingWhitespaces(chinese string) []string
 }
 
 type Parser struct {
@@ -33,23 +42,15 @@ func NewParser(cutter Cutter) *Parser {
 
 type parsedSentences map[string]Sentence
 
-func (s *Parser) ParseWithPinyinSplitting(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
-	return s.parseFromFile(sourceName, sourcePath, true, allowDuplicates)
-}
-
-func (s *Parser) ParseWithSentenceCutter(sourceName, sourcePath string, allowDuplicates bool) (parsedSentences, []string, error) {
-	return s.parseFromFile(sourceName, sourcePath, false, allowDuplicates)
-}
-
-func (s *Parser) parseFromFile(sourceName, sourcePath string, splitSentenceUsingPinyin, allowDuplicates bool) (parsedSentences, []string, error) {
+func (s *Parser) ParseFromFile(sourceName, sourcePath string, mode splitMode, allowDuplicates bool) (parsedSentences, []string, error) {
 	lines, err := s.ReadFile(sourcePath)
 	if err != nil {
 		return parsedSentences{}, nil, fmt.Errorf("could not parse sentences from file: %w", err)
 	}
-	return s.Parse(sourceName, splitSentenceUsingPinyin, allowDuplicates, lines)
+	return s.Parse(sourceName, mode, allowDuplicates, lines)
 }
 
-func (s *Parser) Parse(sourceName string, splitSentenceUsingPinyin, allowDuplicates bool, lines []string) (parsedSentences, []string, error) {
+func (s *Parser) Parse(sourceName string, mode splitMode, allowDuplicates bool, lines []string) (parsedSentences, []string, error) {
 	dict := make(parsedSentences)
 	orderedKeys := make([]string, len(lines))
 	for i, line := range lines {
@@ -79,15 +80,21 @@ func (s *Parser) Parse(sourceName string, splitSentenceUsingPinyin, allowDuplica
 		}
 
 		var words []string
-		if splitSentenceUsingPinyin {
+		switch mode {
+		case SPLIT_MODE_WHITESPACE:
+			words = s.cutter.SplitSentenceUsingWhitespaces(parts[0])
+		case SPLIT_MODE_PINYIN:
 			words = s.cutter.SplitSentenceUsingPinyin(parts[0], pinyin)
-		} else {
+		case SPLIT_MODE_CUTTER:
 			words = s.cutter.Cut(parts[0])
+		default:
+			return parsedSentences{}, nil, fmt.Errorf("unknown split mode for splitting sentence")
+
 		}
 
 		dict[key] = Sentence{
 			Source:         sourceName,
-			Chinese:        strings.TrimSpace(chinese),
+			Chinese:        strings.Replace(strings.TrimSpace(chinese), " ", "", -1),
 			ChineseWords:   words,
 			Pinyin:         strings.TrimSpace(pinyin),
 			English:        strings.TrimSpace(english),

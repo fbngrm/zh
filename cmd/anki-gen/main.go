@@ -36,7 +36,8 @@ var ignorePath string
 var blacklistPath string
 var deckName string
 var ignoreChars = []string{"!", "！", "？", "?", "，", ",", ".", "。"}
-var splitSentenceUsingPinyin bool
+var splitSentenceUsingPinyin, splitSentenceUsingWhiteSpaces bool
+var dryRun bool
 var fromGrammar bool
 
 func main() {
@@ -46,7 +47,9 @@ func main() {
 	flag.StringVar(&blacklistPath, "b", "", "path of blacklist file")
 	flag.StringVar(&deckName, "d", "", "anki deck name")
 	flag.BoolVar(&splitSentenceUsingPinyin, "p", false, "use pinyin to cut sentences into words")
+	flag.BoolVar(&splitSentenceUsingWhiteSpaces, "w", false, "use whitespaces to cut sentences into words")
 	flag.BoolVar(&fromGrammar, "g", false, "input is grammar file")
+	flag.BoolVar(&dryRun, "dry", false, "dry run")
 	flag.Parse()
 
 	if deckName == "" {
@@ -81,6 +84,9 @@ func main() {
 	} else {
 		sentenceDict, orderedKeys = parseSentences(filename)
 		ankiSentences, ignoreList := generateSentences(tags, deckName, sentenceDict, orderedKeys)
+		if dryRun {
+			os.Exit(0)
+		}
 		exportSentences(ankiSentences, outMarkdown, outYaml, ignoreList)
 	}
 }
@@ -91,9 +97,11 @@ func parseSentences(filename string) (map[string]sentences.Sentence, []string) {
 	var orderedKeys []string
 	var err error
 	if splitSentenceUsingPinyin {
-		sentenceDict, orderedKeys, err = parser.ParseWithPinyinSplitting(filename, in, false)
+		sentenceDict, orderedKeys, err = parser.ParseFromFile(filename, in, sentences.SPLIT_MODE_PINYIN, false)
+	} else if splitSentenceUsingWhiteSpaces {
+		sentenceDict, orderedKeys, err = parser.ParseFromFile(filename, in, sentences.SPLIT_MODE_WHITESPACE, false)
 	} else {
-		sentenceDict, orderedKeys, err = parser.ParseWithSentenceCutter(filename, in, false)
+		sentenceDict, orderedKeys, err = parser.ParseFromFile(filename, in, sentences.SPLIT_MODE_CUTTER, false)
 	}
 	if err != nil {
 		fmt.Printf("could not create sentence dict: %v\n", err)
@@ -152,13 +160,13 @@ func generateSentences(
 			decomposition, err := decomposer.Decompose(word, results, numSentences)
 			if err != nil {
 				os.Stderr.WriteString(fmt.Sprintf("error for key [%s]: %v\n", key, err))
-				os.Exit(1)
+				// os.Exit(1)
 			}
 			if len(decomposition.Errs) != 0 {
 				for _, e := range decomposition.Errs {
 					os.Stderr.WriteString(fmt.Sprintf("error for key [%s]: %v\n", key, e))
 				}
-				os.Exit(1)
+				// os.Exit(1)
 			}
 
 			// this means there are at least two hanzi, though, there are single hanzi words as well

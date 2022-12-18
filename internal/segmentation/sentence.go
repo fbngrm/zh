@@ -26,6 +26,24 @@ func (s *SentenceCutter) Cut(sentence string) []string {
 	return words
 }
 
+func (s *SentenceCutter) SplitSentenceUsingWhitespaces(chinese string) []string {
+	words := make([]string, 0)
+	for _, s := range strings.Split(chinese, " ") {
+		s = strings.Trim(s, "?")
+		s = strings.Trim(s, "!")
+		s = strings.Trim(s, ",")
+		s = strings.Trim(s, ".")
+
+		s = strings.Trim(s, "？")
+		s = strings.Trim(s, "！")
+		s = strings.Trim(s, "，")
+		s = strings.Trim(s, "。")
+
+		words = append(words, s)
+	}
+	return words
+}
+
 func (s *SentenceCutter) SplitSentenceUsingPinyin(chinese, pinyin string) []string {
 	pinyinWords := strings.Split(pinyin, " ")
 	// the pinyin is divided into words by whitespaces. we count the numbers (used for tone intonation)

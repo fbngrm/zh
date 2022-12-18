@@ -16,6 +16,15 @@ clean-blacklist:
 .PHONY: clean
 clean: clean-blacklist clean-ignore
 
+.PHONY: generate-grammar
+generate-grammar:
+	go run cmd/anki-gen/main.go \
+		-i $(source_lib_dir)/$(file) \
+		-t ./templates/$(source)-grammar.tmpl \
+		-d $(source) \
+		-g
+
+# split sentences with sentence cutter
 .PHONY: generate
 generate:
 	go run cmd/anki-gen/main.go \
@@ -25,14 +34,30 @@ generate:
 		-b $(source_lib_dir)/blacklist \
 		-d $(source)
 
-.PHONY: generate-grammar
-generate-grammar:
+# split sentences with whitespaces
+.PHONY: generate-from-whitespaces
+generate-from-whitespaces:
 	go run cmd/anki-gen/main.go \
 		-i $(source_lib_dir)/$(file) \
-		-t ./templates/$(source)-grammar.tmpl \
+		-t ./templates/$(source).tmpl \
+		-e $(source_lib_dir)/ignore \
+		-b $(source_lib_dir)/blacklist \
 		-d $(source) \
-		-g
+		-w
 
+# split sentences with whitespaces
+.PHONY: generate-from-whitespaces-dry
+generate-from-whitespaces-dry:
+	go run cmd/anki-gen/main.go \
+		-i $(source_lib_dir)/$(file) \
+		-t ./templates/$(source).tmpl \
+		-e $(source_lib_dir)/ignore \
+		-b $(source_lib_dir)/blacklist \
+		-d $(source) \
+		-w \
+		-dry
+
+# split sentences with pinyin
 .PHONY: generate-from-pinyin
 generate-from-pinyin:
 	go run cmd/anki-gen/main.go \
