@@ -9,6 +9,7 @@ tags: hsk1, new-practical-chinese-reader-01, lesson_01
 ## Chinese
 琳娜，你好吗？
 ## Pinyin
+lina3 ni3 hao3 ma3？
 ## English
 Lena, how are you?
 ## Audio
@@ -170,6 +171,7 @@ tags: hsk1, new-practical-chinese-reader-01, lesson_01
 ## Chinese
 我很好，你呢？
 ## Pinyin
+wo3 hen3 hao3 ni3 ne5？
 ## English
 I am fine, and you?
 ## Audio
@@ -273,6 +275,7 @@ tags: hsk1, new-practical-chinese-reader-01, lesson_01
 ## Chinese
 也很好。
 ## Pinyin
+ye3 hen3 hao3。
 ## English
 Also very good.
 ## Audio
@@ -323,6 +326,7 @@ tags: hsk1, new-practical-chinese-reader-01, lesson_01
 ## Chinese
 琳娜，你好吗？我很好，你呢？也很好。
 ## Pinyin
+lina3 ni3 hao3 ma3？wo3 hen3 hao3 ni3 ne5？ye3 hen3 hao3。
 ## English
 Lena, how are you? I am fine, and you? Also very good.
 ## Audio
@@ -371,6 +375,7 @@ tags: hsk1, new-practical-chinese-reader-01, lesson_01
 ## Chinese
 你忙吗？
 ## Pinyin
+
 ## English
 Are you busy?
 ## Audio

@@ -166,28 +166,35 @@ func addPinyin(d *Dialog) {
 		os.Exit(1)
 	}
 	for i, sentence := range d.Sentences {
-		for y, word := range sentence.AllWords {
+		pinyin := ""
+		for _, word := range sentence.AllWords {
 			entries, _ := dict[word.Chinese]
 			readings := make([]string, 0)
 			for _, entry := range entries {
 				readings = append(readings, entry.Readings...)
 			}
-			pinyin := "xxx"
 			if len(readings) == 0 {
 				fmt.Println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 				fmt.Printf("no readings found for word \"%s\", please enter pinyin or skip to use %s\n", word.Chinese, pinyin)
-				pinyin = getPinyinFromUser(sentence.Chinese, nil)
+				pinyin += getPinyinFromUser(sentence.Chinese, nil)
+				pinyin += " "
 			}
 			if len(readings) > 1 {
 				fmt.Println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 				fmt.Printf("more than 1 readings found for word \"%s\" please choose\n", word.Chinese)
-				pinyin = getPinyinFromUser(sentence.Chinese, readings)
+				pinyin += getPinyinFromUser(sentence.Chinese, readings)
+				pinyin += " "
 			}
 			if len(readings) == 1 {
-				pinyin = readings[0]
+				pinyin += readings[0]
+				pinyin += " "
 			}
-			d.Sentences[i].AllWords[y].Pinyin = pinyin
 		}
+		p := strings.Trim(pinyin, " ")
+		r, _ := utf8.DecodeLastRuneInString(sentence.Chinese)
+		p += string(r)
+		d.Sentences[i].Pinyin = p
+		d.Pinyin += p
 	}
 
 	// dict, err := cedict.NewDict(cedictSrc)
