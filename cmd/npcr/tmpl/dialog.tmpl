@@ -1,0 +1,20 @@
+{{ template "sentences.tmpl" .Sentences }}
+# Note
+model: ch-en-audio
+deck: {{ deckName }}
+tags: {{ tags }}
+
+## Chinese
+{{ removeSpaces .Chinese}}
+## Pinyin
+## English
+{{ .English }}
+## Audio
+{{ audio .Chinese }}
+## Components
+{{ range .Sentences }}
+{{ range .AllWords }}
+{{ removeSpaces .Chinese }}: {{ .English }}
+{{ end }}
+{{ end }}
+## Examples

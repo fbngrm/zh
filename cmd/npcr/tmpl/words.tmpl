@@ -1,0 +1,26 @@
+{{ range . }}
+# Note
+{{ if not .IsSingleRune }}
+model: ch-en-audio
+{{ else }}
+model: ch-en
+{{ end }}
+deck: {{ deckName }}
+tags: {{ tags }}
+
+## Chinese
+{{ removeSpaces .Chinese }}
+## Pinyin
+{{ .Pinyin }}
+## English
+{{ .English }}
+## Audio
+{{ audio .Chinese }}
+## Components
+{{ range .AllChars }}
+{{ removeSpaces .Chinese }}: {{ .English }}
+{{ end }}
+## Examples
+
+{{ template "chars.tmpl" .NewChars }}
+{{ end }}

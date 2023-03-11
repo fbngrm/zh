@@ -1,0 +1,298 @@
+deck: new-practical-chinese-reader-01
+tags: []
+chinese: 哥哥，你 要 咖啡 吗？ 我 要 咖啡。 我 也 要 咖啡。 好，我们 都 和 咖啡。
+english: Brother, would you like coffee? I want coffee. I want coffee too. Well, we all have coffee.
+audio: 9fa30d5df599558b200698ae4ffc78f8e535c674.mp3
+sentences:
+    - chinese: 哥哥，你 要 咖啡 吗？
+      english: Brother, would you like coffee?
+      audio: d2f4f6ed56649c243d27aafc893bd858fecbfcae.mp3
+      newWords:
+        - chinese: 哥哥
+          english: elder brother
+          audio: b91fac808bdeb79ced0ea6af49c3c4c6883a4b6a.mp3
+          newChars:
+            - chinese: 哥
+              english: elder brother
+              audio: cdfd26daa23a845cb7eb28453ad3a439d19195b4.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 哥
+              english: elder brother
+              audio: ""
+              isSingleRune: true
+            - chinese: 哥
+              english: elder brother
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 要
+          english: want
+          audio: 93e27107a133fb3ec777db55264b19f9b3fce67a.mp3
+          newChars: []
+          allChars:
+            - chinese: 要
+              english: want
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 咖啡
+          english: coffee
+          audio: db42244090b714eacd2860b1ba546d3c569d019c.mp3
+          newChars:
+            - chinese: 咖
+              english: coffee
+              audio: 3439a0fcc4046809c4e26f15cb38899e58484af0.mp3
+              isSingleRune: true
+            - chinese: 啡
+              english: coffee
+              audio: 4b15cfa5dfd6353848b41d8e3ab51bb027d15fcf.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 咖
+              english: coffee
+              audio: ""
+              isSingleRune: true
+            - chinese: 啡
+              english: coffee
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      allWords:
+        - chinese: 哥哥
+          english: elder brother
+          audio: b91fac808bdeb79ced0ea6af49c3c4c6883a4b6a
+          newChars: []
+          allChars:
+            - chinese: 哥
+              english: elder brother
+              audio: ""
+              isSingleRune: true
+            - chinese: 哥
+              english: elder brother
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 你
+          english: you
+          audio: 5630b886f9cd31702e7c1606eb1f62ab0c759063
+          newChars: []
+          allChars:
+            - chinese: 你
+              english: you
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 要
+          english: want
+          audio: 93e27107a133fb3ec777db55264b19f9b3fce67a
+          newChars: []
+          allChars:
+            - chinese: 要
+              english: want
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 咖啡
+          english: coffee
+          audio: db42244090b714eacd2860b1ba546d3c569d019c
+          newChars: []
+          allChars:
+            - chinese: 咖
+              english: coffee
+              audio: ""
+              isSingleRune: true
+            - chinese: 啡
+              english: coffee
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 吗
+          english: Question particle for yes/no questions
+          audio: 8c49e4b3edb7f0239ec632f9766042bb19569fd1
+          newChars: []
+          allChars:
+            - chinese: 吗
+              english: Question particle for yes/no questions
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 我 要 咖啡。
+      english: I want coffee.
+      audio: 6cc554abf8db26153d9f32fe522ef195ef403dbb.mp3
+      newWords: []
+      allWords:
+        - chinese: 我
+          english: I
+          audio: 34f201bc507e33caaef736de328bf041234d1138
+          newChars: []
+          allChars:
+            - chinese: 我
+              english: I
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 要
+          english: want
+          audio: 93e27107a133fb3ec777db55264b19f9b3fce67a
+          newChars: []
+          allChars:
+            - chinese: 要
+              english: want
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 咖啡
+          english: coffee
+          audio: db42244090b714eacd2860b1ba546d3c569d019c
+          newChars: []
+          allChars:
+            - chinese: 咖
+              english: coffee
+              audio: ""
+              isSingleRune: true
+            - chinese: 啡
+              english: coffee
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      isSingleRune: false
+    - chinese: 我 也 要 咖啡。
+      english: I want coffee too.
+      audio: d98a7bee147c0d245c191e675a7c91efb7f7a842.mp3
+      newWords: []
+      allWords:
+        - chinese: 我
+          english: I
+          audio: 34f201bc507e33caaef736de328bf041234d1138
+          newChars: []
+          allChars:
+            - chinese: 我
+              english: I
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 也
+          english: also
+          audio: db73d8577b4b93bdb84cbe17bfe2ce57b32a3afc
+          newChars: []
+          allChars:
+            - chinese: 也
+              english: also
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 要
+          english: want
+          audio: 93e27107a133fb3ec777db55264b19f9b3fce67a
+          newChars: []
+          allChars:
+            - chinese: 要
+              english: want
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 咖啡
+          english: coffee
+          audio: db42244090b714eacd2860b1ba546d3c569d019c
+          newChars: []
+          allChars:
+            - chinese: 咖
+              english: coffee
+              audio: ""
+              isSingleRune: true
+            - chinese: 啡
+              english: coffee
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      isSingleRune: false
+    - chinese: 好，我们 都 和 咖啡。
+      english: Well, we all have coffee.
+      audio: 76097c33828356268540c989745d3fb31b9e8ab3.mp3
+      newWords:
+        - chinese: 我们
+          english: us
+          audio: 0805949359741ce14fe90402b25e2e023f449748.mp3
+          newChars: []
+          allChars:
+            - chinese: 我
+              english: I
+              audio: ""
+              isSingleRune: true
+            - chinese: 们
+              english: they
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 和
+          english: and
+          audio: 9a3eb340971ffc2dd9cf4da3994078519f53a568.mp3
+          newChars: []
+          allChars:
+            - chinese: 和
+              english: and
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      allWords:
+        - chinese: 好
+          english: good
+          audio: 27e4fe4c3fe24958872b1402e401d5e97cfb582d
+          newChars: []
+          allChars:
+            - chinese: 好
+              english: good
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 我们
+          english: us
+          audio: 0805949359741ce14fe90402b25e2e023f449748
+          newChars: []
+          allChars:
+            - chinese: 我
+              english: I
+              audio: ""
+              isSingleRune: true
+            - chinese: 们
+              english: they
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 都
+          english: All
+          audio: d51dd8d130ce462e444239d77070d038fb8e920a
+          newChars: []
+          allChars:
+            - chinese: 都
+              english: All
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 和
+          english: and
+          audio: 9a3eb340971ffc2dd9cf4da3994078519f53a568
+          newChars: []
+          allChars:
+            - chinese: 和
+              english: and
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 咖啡
+          english: coffee
+          audio: db42244090b714eacd2860b1ba546d3c569d019c
+          newChars: []
+          allChars:
+            - chinese: 咖
+              english: coffee
+              audio: ""
+              isSingleRune: true
+            - chinese: 啡
+              english: coffee
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      isSingleRune: false

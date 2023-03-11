@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/zh"
+	"github.com/fgrimme/zh/lib/hanzi"
 	"github.com/fgrimme/zh/pkg/gcp/translate"
 )
 

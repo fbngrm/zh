@@ -1,0 +1,504 @@
+deck: new-practical-chinese-reader-01
+tags: []
+chinese: 陆雨平，你 好 吗？ 我 很 好。 你 爸爸， 妈妈 好 吗？ 他们 都 很 好。 你 忙 吗？ 我 不 忙。 你 男 朋友 呢？ 他 很 忙。
+english: Lu Yuping, how are you? I am fine. How are your father and mother? They are doing well. Are you busy? I am not busy. Where is your boyfriend? He is very busy.
+audio: 9c6097d2530826e2da173c647aa24a55164f6a8c.mp3
+sentences:
+    - chinese: 陆雨平，你 好 吗？
+      english: Lu Yuping, how are you?
+      audio: 1635c3da547acee5e8adedc8cb9a7df2581aed90.mp3
+      newWords:
+        - chinese: 陆雨平
+          english: Lu Yuping
+          audio: 2ab73e0fa61002650591e831a8472148d049130b.mp3
+          newChars:
+            - chinese: 陆
+              english: land
+              audio: 87644e683b2becffd3bb14f991891f18ec0f2274.mp3
+              isSingleRune: true
+            - chinese: 平
+              english: flat
+              audio: 3c9abaf959cc289cf16f79f21a331d41dcd9a805.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 陆
+              english: land
+              audio: ""
+              isSingleRune: true
+            - chinese: 雨
+              english: rain
+              audio: ""
+              isSingleRune: true
+            - chinese: 平
+              english: flat
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      allWords:
+        - chinese: 陆雨平
+          english: Lu Yuping
+          audio: 2ab73e0fa61002650591e831a8472148d049130b
+          newChars: []
+          allChars:
+            - chinese: 陆
+              english: land
+              audio: ""
+              isSingleRune: true
+            - chinese: 雨
+              english: rain
+              audio: ""
+              isSingleRune: true
+            - chinese: 平
+              english: flat
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 你
+          english: you
+          audio: 5630b886f9cd31702e7c1606eb1f62ab0c759063
+          newChars: []
+          allChars:
+            - chinese: 你
+              english: you
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 好
+          english: good
+          audio: 27e4fe4c3fe24958872b1402e401d5e97cfb582d
+          newChars: []
+          allChars:
+            - chinese: 好
+              english: good
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 吗
+          english: Question particle for yes/no questions
+          audio: 8c49e4b3edb7f0239ec632f9766042bb19569fd1
+          newChars: []
+          allChars:
+            - chinese: 吗
+              english: Question particle for yes/no questions
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 我 很 好。
+      english: I am fine.
+      audio: 2359f4eb3128d575462a8035454b78048c13eca8.mp3
+      newWords: []
+      allWords:
+        - chinese: 我
+          english: I
+          audio: 34f201bc507e33caaef736de328bf041234d1138
+          newChars: []
+          allChars:
+            - chinese: 我
+              english: I
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 很
+          english: very
+          audio: 74a04cc4bf3ac133a6abd449c12c878eb50b0f69
+          newChars: []
+          allChars:
+            - chinese: 很
+              english: very
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 好
+          english: good
+          audio: 27e4fe4c3fe24958872b1402e401d5e97cfb582d
+          newChars: []
+          allChars:
+            - chinese: 好
+              english: good
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 你 爸爸， 妈妈 好 吗？
+      english: How are your father and mother?
+      audio: 835775ebba6f214f2a74710c9c6dd9c9a4285dd4.mp3
+      newWords:
+        - chinese: 爸爸
+          english: dad
+          audio: c86d1645007ffe6d7857b631f8ad8387b574c763.mp3
+          newChars:
+            - chinese: 爸
+              english: dad
+              audio: a732e56e22fb59b8879554d3b091aa7017ad6a9f.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 爸
+              english: dad
+              audio: ""
+              isSingleRune: true
+            - chinese: 爸
+              english: dad
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 妈妈
+          english: Mother
+          audio: 7d3b2b0ebcdcee0eb7b19f18d60f35fda944b39c.mp3
+          newChars:
+            - chinese: 妈
+              english: mom
+              audio: e3918a99aa057ec83dcdc83e42860f1b76dccf71.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 妈
+              english: mom
+              audio: ""
+              isSingleRune: true
+            - chinese: 妈
+              english: mom
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      allWords:
+        - chinese: 你
+          english: you
+          audio: 5630b886f9cd31702e7c1606eb1f62ab0c759063
+          newChars: []
+          allChars:
+            - chinese: 你
+              english: you
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 爸爸
+          english: dad
+          audio: c86d1645007ffe6d7857b631f8ad8387b574c763
+          newChars: []
+          allChars:
+            - chinese: 爸
+              english: dad
+              audio: ""
+              isSingleRune: true
+            - chinese: 爸
+              english: dad
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 妈妈
+          english: Mother
+          audio: 7d3b2b0ebcdcee0eb7b19f18d60f35fda944b39c
+          newChars: []
+          allChars:
+            - chinese: 妈
+              english: mom
+              audio: ""
+              isSingleRune: true
+            - chinese: 妈
+              english: mom
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 好
+          english: good
+          audio: 27e4fe4c3fe24958872b1402e401d5e97cfb582d
+          newChars: []
+          allChars:
+            - chinese: 好
+              english: good
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 吗
+          english: Question particle for yes/no questions
+          audio: 8c49e4b3edb7f0239ec632f9766042bb19569fd1
+          newChars: []
+          allChars:
+            - chinese: 吗
+              english: Question particle for yes/no questions
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 他们 都 很 好。
+      english: They are doing well.
+      audio: 2f906d1eee99a6284ece74f122a4e266368ebd05.mp3
+      newWords:
+        - chinese: 他们
+          english: them
+          audio: 977b5d627b37b8d42bc74ea4edb8c2e8ec021a0c.mp3
+          newChars:
+            - chinese: 他
+              english: he
+              audio: e31b569a0f1d9ff0c78f766cae3732af1be502da.mp3
+              isSingleRune: true
+            - chinese: 们
+              english: they
+              audio: 91c76e0b5a827e4bfd9ff8e70d5932e26daaf155.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 他
+              english: he
+              audio: ""
+              isSingleRune: true
+            - chinese: 们
+              english: they
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 都
+          english: All
+          audio: d51dd8d130ce462e444239d77070d038fb8e920a.mp3
+          newChars: []
+          allChars:
+            - chinese: 都
+              english: All
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      allWords:
+        - chinese: 他们
+          english: them
+          audio: 977b5d627b37b8d42bc74ea4edb8c2e8ec021a0c
+          newChars: []
+          allChars:
+            - chinese: 他
+              english: he
+              audio: ""
+              isSingleRune: true
+            - chinese: 们
+              english: they
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 都
+          english: All
+          audio: d51dd8d130ce462e444239d77070d038fb8e920a
+          newChars: []
+          allChars:
+            - chinese: 都
+              english: All
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 很
+          english: very
+          audio: 74a04cc4bf3ac133a6abd449c12c878eb50b0f69
+          newChars: []
+          allChars:
+            - chinese: 很
+              english: very
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 好
+          english: good
+          audio: 27e4fe4c3fe24958872b1402e401d5e97cfb582d
+          newChars: []
+          allChars:
+            - chinese: 好
+              english: good
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 你 忙 吗？
+      english: Are you busy?
+      audio: 22cc0b95eb9e52071cd990999ed22f5fdb24e19a.mp3
+      newWords: []
+      allWords:
+        - chinese: 你
+          english: you
+          audio: 5630b886f9cd31702e7c1606eb1f62ab0c759063
+          newChars: []
+          allChars:
+            - chinese: 你
+              english: you
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 忙
+          english: busy
+          audio: cc5c537e83ac25891d2a8edca67fb05553e8f1fa
+          newChars: []
+          allChars:
+            - chinese: 忙
+              english: busy
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 吗
+          english: Question particle for yes/no questions
+          audio: 8c49e4b3edb7f0239ec632f9766042bb19569fd1
+          newChars: []
+          allChars:
+            - chinese: 吗
+              english: Question particle for yes/no questions
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 我 不 忙。
+      english: I am not busy.
+      audio: dfb3d9721102830214f32fabcc7c05e7aee940da.mp3
+      newWords:
+        - chinese: 不
+          english: "No"
+          audio: 8fa7401e9077e3abfd81e15b9ffa8fb30893b969.mp3
+          newChars: []
+          allChars:
+            - chinese: 不
+              english: "No"
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      allWords:
+        - chinese: 我
+          english: I
+          audio: 34f201bc507e33caaef736de328bf041234d1138
+          newChars: []
+          allChars:
+            - chinese: 我
+              english: I
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 不
+          english: "No"
+          audio: 8fa7401e9077e3abfd81e15b9ffa8fb30893b969
+          newChars: []
+          allChars:
+            - chinese: 不
+              english: "No"
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 忙
+          english: busy
+          audio: cc5c537e83ac25891d2a8edca67fb05553e8f1fa
+          newChars: []
+          allChars:
+            - chinese: 忙
+              english: busy
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 你 男 朋友 呢？
+      english: Where is your boyfriend?
+      audio: a4b371a3edaa1a3cccbddf43da8480a243da8a74.mp3
+      newWords:
+        - chinese: 男
+          english: male
+          audio: 51625d909cf361d830ec25e94d9e5a02abb75302.mp3
+          newChars: []
+          allChars:
+            - chinese: 男
+              english: male
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 朋友
+          english: friend
+          audio: d490b5fd608ecbf4d4ca4d6bfeca63819e2f79a1.mp3
+          newChars:
+            - chinese: 朋
+              english: friend
+              audio: 01fd270dc700310f579280d9a60289506ddcff1c.mp3
+              isSingleRune: true
+            - chinese: 友
+              english: friend
+              audio: 6cca7a3ec0671effbffa56e5bf00239fd6998802.mp3
+              isSingleRune: true
+          allChars:
+            - chinese: 朋
+              english: friend
+              audio: ""
+              isSingleRune: true
+            - chinese: 友
+              english: friend
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+      allWords:
+        - chinese: 你
+          english: you
+          audio: 5630b886f9cd31702e7c1606eb1f62ab0c759063
+          newChars: []
+          allChars:
+            - chinese: 你
+              english: you
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 男
+          english: male
+          audio: 51625d909cf361d830ec25e94d9e5a02abb75302
+          newChars: []
+          allChars:
+            - chinese: 男
+              english: male
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 朋友
+          english: friend
+          audio: d490b5fd608ecbf4d4ca4d6bfeca63819e2f79a1
+          newChars: []
+          allChars:
+            - chinese: 朋
+              english: friend
+              audio: ""
+              isSingleRune: true
+            - chinese: 友
+              english: friend
+              audio: ""
+              isSingleRune: true
+          isSingleRune: false
+        - chinese: 呢
+          english: particle indicating that a previously asked question is to be applied to the preceding word ("What about ...?", "And ...?")
+          audio: dcf66dcd6087fd64f27243d3abe790b8dceef210
+          newChars: []
+          allChars:
+            - chinese: 呢
+              english: particle indicating that a previously asked question is to be applied to the preceding word ("What about ...?", "And ...?")
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false
+    - chinese: 他 很 忙。
+      english: He is very busy.
+      audio: c7d8a53ca4417009a1281222e5e430da9160c906.mp3
+      newWords: []
+      allWords:
+        - chinese: 他
+          english: he
+          audio: e31b569a0f1d9ff0c78f766cae3732af1be502da
+          newChars: []
+          allChars:
+            - chinese: 他
+              english: he
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 很
+          english: very
+          audio: 74a04cc4bf3ac133a6abd449c12c878eb50b0f69
+          newChars: []
+          allChars:
+            - chinese: 很
+              english: very
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+        - chinese: 忙
+          english: busy
+          audio: cc5c537e83ac25891d2a8edca67fb05553e8f1fa
+          newChars: []
+          allChars:
+            - chinese: 忙
+              english: busy
+              audio: ""
+              isSingleRune: true
+          isSingleRune: true
+      isSingleRune: false

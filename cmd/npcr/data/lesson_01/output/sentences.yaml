@@ -1,0 +1,51 @@
+- chinese: 你 忙 吗？
+  pinyin: ""
+  english: Are you busy?
+  audio: 22cc0b95eb9e52071cd990999ed22f5fdb24e19a.mp3
+  newWords:
+    - chinese: 忙
+      pinyin: ""
+      english: busy
+      audio: cc5c537e83ac25891d2a8edca67fb05553e8f1fa.mp3
+      newChars: []
+      allChars:
+        - chinese: 忙
+          english: busy
+          audio: ""
+          isSingleRune: true
+      isSingleRune: true
+  allWords:
+    - chinese: 你
+      pinyin: ""
+      english: you
+      audio: 5630b886f9cd31702e7c1606eb1f62ab0c759063
+      newChars: []
+      allChars:
+        - chinese: 你
+          english: you
+          audio: ""
+          isSingleRune: true
+      isSingleRune: true
+    - chinese: 忙
+      pinyin: ""
+      english: busy
+      audio: cc5c537e83ac25891d2a8edca67fb05553e8f1fa
+      newChars: []
+      allChars:
+        - chinese: 忙
+          english: busy
+          audio: ""
+          isSingleRune: true
+      isSingleRune: true
+    - chinese: 吗
+      pinyin: ""
+      english: Question particle for yes/no questions
+      audio: 8c49e4b3edb7f0239ec632f9766042bb19569fd1
+      newChars: []
+      allChars:
+        - chinese: 吗
+          english: Question particle for yes/no questions
+          audio: ""
+          isSingleRune: true
+      isSingleRune: true
+  isSingleRune: false

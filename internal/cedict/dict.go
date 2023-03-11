@@ -3,7 +3,7 @@ package cedict
 import (
 	"fmt"
 
-	"github.com/fgrimme/zh/internal/hanzi"
+	"github.com/fgrimme/zh/lib/hanzi"
 )
 
 var ErrIndexOutOfBounds = "cedict index %d out of bounds %d"
@@ -11,7 +11,7 @@ var ErrIndexOutOfBounds = "cedict index %d out of bounds %d"
 type Dict []*hanzi.Hanzi
 
 func NewDict(src string) (Dict, error) {
-	parsedEntries, err := parse(src)
+	parsedEntries, err := Parse(src)
 	if err != nil {
 		return nil, err
 	}

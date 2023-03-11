@@ -13,8 +13,8 @@ import (
 )
 
 func main() {
-	in := "/home/f/data/rslsync/ocr/17 texts"
-	out := "/home/f/work/src/github.com/fbngrm/zh/data/lib/hsk1/ocr/17 texts"
+	in := "/home/f/data/rslsync/ocr/24 text"
+	out := "/home/f/work/src/github.com/fbngrm/zh/data/lib/hsk1/ocr/24 text"
 	err := os.MkdirAll(out, os.ModePerm)
 	if err != nil {
 		log.Fatal(err)

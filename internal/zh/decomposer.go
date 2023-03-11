@@ -8,12 +8,12 @@ import (
 	"github.com/fgrimme/zh/internal/cedict"
 	"github.com/fgrimme/zh/internal/cjkvi"
 	"github.com/fgrimme/zh/internal/frequency"
-	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/hsk"
 	"github.com/fgrimme/zh/internal/kangxi"
 	"github.com/fgrimme/zh/internal/segmentation"
 	"github.com/fgrimme/zh/internal/sentences"
 	"github.com/fgrimme/zh/internal/unihan"
+	"github.com/fgrimme/zh/lib/hanzi"
 	"github.com/fgrimme/zh/pkg/finder"
 	"github.com/fgrimme/zh/pkg/search"
 )

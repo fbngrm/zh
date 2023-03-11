@@ -3,8 +3,8 @@ package anki
 import (
 	"io/ioutil"
 
-	"github.com/fgrimme/zh/internal/hanzi"
 	"github.com/fgrimme/zh/internal/sentences"
+	"github.com/fgrimme/zh/lib/hanzi"
 	"gopkg.in/yaml.v2"
 )
 

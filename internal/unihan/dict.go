@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"unicode/utf8"
 
-	"github.com/fgrimme/zh/internal/hanzi"
+	"github.com/fgrimme/zh/lib/hanzi"
 )
 
 var ErrIndexOutOfBounds = "unihan index %d out of bounds %d"
