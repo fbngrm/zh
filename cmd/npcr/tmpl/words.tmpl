@@ -11,7 +11,8 @@ tags: {{ tags }}
 ## Chinese
 {{ removeSpaces .Chinese }}
 ## Pinyin
-{{ .Pinyin }}
+{{ join .Pinyin }}
+<br>
 ## English
 {{ .English }}
 ## Audio
