@@ -1,11 +1,11 @@
-data_dir=./data/$(lesson)
-audio_dir=./data/$(lesson)/audio
+data_dir=./data/$(deck)/$(lesson)
+audio_dir=./data/$(deck)/$(lesson)/audio
 
 .PHONY: gen
 gen:
 	rm -r -f $(data_dir)/output/
 	mkdir $(data_dir)/output/
-	go run cmd/main.go -l $(lesson)
+	go run cmd/main.go -l $(lesson) -d $(deck)
 
 .PHONY: add
 add:
@@ -23,6 +23,13 @@ sync: gen add cp-audio
 	apy check-media
 	apy sync
 	@echo "don't forget to commit ignore file!"
+
+.PHONY: new
+new:
+	mkdir -p $(data_dir)
+	touch  $(data_dir)/dialog
+	touch  $(data_dir)/sentences
+	touch  $(data_dir)/words
 
 # .PHONY: commit-ignore
 # ignore_path=$(data_dir)/../ignore
@@ -45,10 +52,10 @@ sync: gen add cp-audio
 # .PHONY: reset
 # reset: reset-ignore reset-files
 
-.PHONY: concat-audio
-out_dir=$(audio_dir)/concat/
-silence=./data/new-practical-chinese-reader/audio/silence_64kb.mp3
-concat-audio:
+.PHONY: audio
+out_dir=../../../../data//$(deck)/$(lesson)/audio/concat
+silence=../../../../data/silence_64kb.mp3
+audio:
 	mkdir -p $(out_dir)
 	cd $(audio_dir); for i in *.mp3; do ffmpeg -i "$$i" -filter:a "atempo=0.85" /tmp/"$${i%.*}_slow.mp3"; done
 	cd $(audio_dir); for i in *.mp3; do ffmpeg -i "concat:$$i|$(silence)|/tmp/$${i%.*}_slow.mp3|$(silence)|$$i|$(silence)|/tmp/$${i%.*}_slow.mp3|$(silence)|$$i|$(silence)|$(silence)" -acodec copy $(out_dir)/"$${i%.*}_concat.mp3"; done
