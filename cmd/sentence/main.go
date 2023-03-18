@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/fgrimme/zh/internal/hsk"
-	"github.com/fgrimme/zh/internal/sentences"
+	"github.com/fbngrm/zh/internal/hsk"
+	"github.com/fbngrm/zh/internal/sentences"
 	"golang.org/x/exp/slices"
 )
 

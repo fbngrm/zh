@@ -19,7 +19,7 @@ import (
 	"time"
 
 	texttospeech "cloud.google.com/go/texttospeech/apiv1"
-	"github.com/fgrimme/zh/internal/anki"
+	"github.com/fbngrm/zh/internal/anki"
 	texttospeechpb "google.golang.org/genproto/googleapis/cloud/texttospeech/v1"
 	"gopkg.in/yaml.v2"
 )

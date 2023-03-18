@@ -5,6 +5,7 @@ go 1.18
 require (
 	cloud.google.com/go/texttospeech v1.3.0
 	cloud.google.com/go/translate v1.3.0
+	cloud.google.com/go/vision v1.2.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/fatih/structs v1.1.0
 	github.com/sahilm/fuzzy v0.1.0
@@ -20,7 +21,6 @@ require (
 require (
 	cloud.google.com/go v0.104.0 // indirect
 	cloud.google.com/go/compute v1.10.0 // indirect
-	cloud.google.com/go/vision v1.2.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect

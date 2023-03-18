@@ -3,7 +3,7 @@ package cedict
 import (
 	"fmt"
 
-	"github.com/fgrimme/zh/lib/hanzi"
+	"github.com/fbngrm/zh/lib/hanzi"
 )
 
 var ErrIndexOutOfBounds = "cedict index %d out of bounds %d"

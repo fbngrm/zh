@@ -3,7 +3,7 @@ package cedict_test
 import (
 	"testing"
 
-	"github.com/fgrimme/zh/internal/cedict"
+	"github.com/fbngrm/zh/lib/cedict"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 )

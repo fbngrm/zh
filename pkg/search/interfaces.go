@@ -1,6 +1,6 @@
 package search
 
-import "github.com/fgrimme/zh/pkg/finder"
+import "github.com/fbngrm/zh/pkg/finder"
 
 type Finder interface {
 	SetSearchMode(query string)

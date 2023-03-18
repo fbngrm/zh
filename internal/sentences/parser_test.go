@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/fgrimme/zh/internal/segmentation"
+	"github.com/fbngrm/zh/internal/segmentation"
 	"github.com/stretchr/testify/assert"
 )
 
