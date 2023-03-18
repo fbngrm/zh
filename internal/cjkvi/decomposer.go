@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fgrimme/zh/pkg/encoding"
+	"github.com/fbngrm/zh/pkg/encoding"
 )
 
 type IDSDecomposer struct {

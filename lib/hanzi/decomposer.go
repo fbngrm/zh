@@ -6,9 +6,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/fgrimme/zh/internal/kangxi"
-	encoding "github.com/fgrimme/zh/pkg/encoding"
+	"github.com/fbngrm/zh/internal/cjkvi"
+	"github.com/fbngrm/zh/internal/kangxi"
+	encoding "github.com/fbngrm/zh/pkg/encoding"
 )
 
 type Decomposer struct {

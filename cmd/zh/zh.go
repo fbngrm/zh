@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fgrimme/zh/internal/zh"
-	"github.com/fgrimme/zh/lib/hanzi"
-	"github.com/fgrimme/zh/pkg/gcp/translate"
+	"github.com/fbngrm/zh/internal/zh"
+	"github.com/fbngrm/zh/lib/hanzi"
+	"github.com/fbngrm/zh/pkg/gcp/translate"
 )
 
 var query string

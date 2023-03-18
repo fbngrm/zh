@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/fatih/structs"
-	"github.com/fgrimme/zh/internal/sentences"
+	"github.com/fbngrm/zh/internal/sentences"
 )
 
 type Hanzi struct {

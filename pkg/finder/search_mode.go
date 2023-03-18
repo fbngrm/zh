@@ -1,6 +1,6 @@
 package finder
 
-import "github.com/fgrimme/zh/pkg/encoding"
+import "github.com/fbngrm/zh/pkg/encoding"
 
 type searchMode int
 

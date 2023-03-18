@@ -1,9 +1,9 @@
 package hanzi
 
 import (
-	"github.com/fgrimme/zh/internal/cjkvi"
-	"github.com/fgrimme/zh/internal/sentences"
-	"github.com/fgrimme/zh/pkg/finder"
+	"github.com/fbngrm/zh/internal/cjkvi"
+	"github.com/fbngrm/zh/internal/sentences"
+	"github.com/fbngrm/zh/pkg/finder"
 )
 
 type Searcher interface {

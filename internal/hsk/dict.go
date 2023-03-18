@@ -3,7 +3,7 @@ package hsk
 import (
 	"fmt"
 
-	"github.com/fgrimme/zh/lib/hanzi"
+	"github.com/fbngrm/zh/lib/hanzi"
 )
 
 var ErrIndexOutOfBounds = "hsk index %d out of bounds %d"
