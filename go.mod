@@ -1,4 +1,4 @@
-module github.com/fgrimme/zh
+module github.com/fbngrm/zh
 
 go 1.18
 
