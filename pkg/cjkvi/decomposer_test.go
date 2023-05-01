@@ -3,7 +3,7 @@ package cjkvi_test
 import (
 	"testing"
 
-	"github.com/fbngrm/zh/internal/cjkvi"
+	"github.com/fbngrm/zh/pkg/cjkvi"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v2"
 )
