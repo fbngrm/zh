@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fbngrm/zh/internal/cjkvi"
 	"github.com/fbngrm/zh/internal/sentences"
 	"github.com/fbngrm/zh/lib/cedict"
 	"github.com/fbngrm/zh/lib/hanzi"
+	"github.com/fbngrm/zh/pkg/cjkvi"
 	"github.com/fbngrm/zh/pkg/finder"
 	"github.com/fbngrm/zh/pkg/search"
 	"github.com/stretchr/testify/assert"

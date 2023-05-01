@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fbngrm/zh/internal/cjkvi"
 	"github.com/fbngrm/zh/internal/frequency"
 	"github.com/fbngrm/zh/internal/hsk"
-	"github.com/fbngrm/zh/internal/kangxi"
 	"github.com/fbngrm/zh/internal/segmentation"
 	"github.com/fbngrm/zh/internal/sentences"
 	"github.com/fbngrm/zh/internal/unihan"
 	"github.com/fbngrm/zh/lib/cedict"
 	"github.com/fbngrm/zh/lib/hanzi"
+	"github.com/fbngrm/zh/pkg/cjkvi"
 	"github.com/fbngrm/zh/pkg/finder"
+	"github.com/fbngrm/zh/pkg/kangxi"
 	"github.com/fbngrm/zh/pkg/search"
 )
 

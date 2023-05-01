@@ -1,8 +1,8 @@
 package hanzi
 
 import (
-	"github.com/fbngrm/zh/internal/cjkvi"
 	"github.com/fbngrm/zh/internal/sentences"
+	"github.com/fbngrm/zh/pkg/cjkvi"
 	"github.com/fbngrm/zh/pkg/finder"
 )
 
