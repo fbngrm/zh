@@ -1,0 +1,31 @@
+Copyright (c) 2021–2026 Fabian Grimme. All rights reserved.
+
+This repository and its contents (source code, data, text, audio recordings and
+other media) are proprietary. No part of them may be copied, reproduced, modified,
+distributed, published or otherwise used, in whole or in part, without prior written
+permission from the copyright holder.
+
+Making this repository publicly viewable, including through GitHub Pages, does not
+grant any license. Beyond what GitHub's Terms of Service allow (viewing and forking
+on GitHub), no rights are granted.
+
+For permission requests, see the contact details at
+https://fbngrm.github.io/privacy/privacy.html.
+
+Third-party material
+--------------------
+
+Third-party material in this repository is not covered by this notice; it keeps its
+own license, and its rights stay with its owners.
+
+It includes:
+
+- CC-CEDICT (`lib/cedict/`), by MDBG and contributors: Creative Commons Attribution-ShareAlike 4.0, https://cc-cedict.org/wiki/
+- cjk-decomp (`lib/cjk/`)
+- cjkvi-ids (`lib/cjkvi/`), based on the CHISE IDS database: GNU General Public License v2, https://github.com/cjkvi/cjkvi-ids
+- HSK word lists (`lib/hsk/`), from the syllabus by the Center for Language Education and Cooperation / Chinese Testing International
+- Tatoeba sentences (`lib/sentences/`), by the Tatoeba contributors: Creative Commons Attribution 2.0 France, https://tatoeba.org
+- Unicode Unihan database (`lib/unihan/`), Unicode, Inc.: Unicode License, https://www.unicode.org/license.txt
+- BCC corpus word frequencies (`lib/word_frequencies/`), Beijing Language and Culture University
+
+Any other third-party material keeps its own license as stated in its source.
