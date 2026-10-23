@@ -20,12 +20,12 @@ own license, and its rights stay with its owners.
 
 It includes:
 
-- CC-CEDICT (`lib/cedict/`), by MDBG and contributors: Creative Commons Attribution-ShareAlike 4.0, https://cc-cedict.org/wiki/
-- cjk-decomp (`lib/cjk/`)
-- cjkvi-ids (`lib/cjkvi/`), based on the CHISE IDS database: GNU General Public License v2, https://github.com/cjkvi/cjkvi-ids
-- HSK word lists (`lib/hsk/`), from the syllabus by the Center for Language Education and Cooperation / Chinese Testing International
-- Tatoeba sentences (`lib/sentences/`), by the Tatoeba contributors: Creative Commons Attribution 2.0 France, https://tatoeba.org
-- Unicode Unihan database (`lib/unihan/`), Unicode, Inc.: Unicode License, https://www.unicode.org/license.txt
-- BCC corpus word frequencies (`lib/word_frequencies/`), Beijing Language and Culture University
+- CC-CEDICT (`lib/cedict/cedict_1_0_ts_utf-8_mdbg.txt`), © MDBG and CC-CEDICT contributors, licensed under Creative Commons Attribution-ShareAlike 4.0 International (https://creativecommons.org/licenses/by-sa/4.0/). Source: https://cc-cedict.org/wiki/. Release of 2022-05-21; the file header carries the original notice.
+- cjk-decomp 0.4.0 (`lib/cjk/`), CJK Decomposition Data by Gavin Grover, used under the Apache License 2.0 (one of the licenses it is offered under): `licenses/cjk-decomp-Apache-2.0.txt`. Source: https://github.com/amake/cjk-decomp.
+- cjkvi-ids (`lib/cjkvi/ids.txt`), © 2014-2017 CJKVI Database, based on the CHISE IDS Database (http://www.chise.org/), licensed under the GNU General Public License v2: `licenses/cjkvi-ids-GPL-2.0.txt`. Source: https://github.com/cjkvi/cjkvi-ids. The file is identical to upstream.
+- HSK word lists (`lib/hsk/`), from the syllabus by the Center for Language Education and Cooperation / Chinese Testing International; rights stay with their owners.
+- Tatoeba sentences (`lib/sentences/`), by the Tatoeba contributors (https://tatoeba.org), licensed under Creative Commons Attribution 2.0 France (https://creativecommons.org/licenses/by/2.0/fr/).
+- Unicode Unihan database 13.0.0 (`lib/unihan/`), © Unicode, Inc., under the Unicode License: `licenses/Unihan-Unicode-License.txt`. Source: https://www.unicode.org/charts/unihan.html.
+- BCC corpus word frequencies (`lib/word_frequencies/`), Beijing Language and Culture University (BLCU). No license was found for this list; rights stay with BLCU.
 
 Any other third-party material keeps its own license as stated in its source.
